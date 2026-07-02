@@ -224,7 +224,7 @@ All slide images live in `public/images/<workshop-folder-name>/`.
 
 - The `*-workshop.md` is the **source of truth**; PPTX files are gitignored
 - Run `npm run convert:pptx -- <folder>` to extract images and generate the Slidev file
-- After conversion, replace placeholder `<!-- Presenter notes -->` with talk-track from `presenter.md` (and supporting workshop content where needed)
+- After conversion, replace every `<!-- TODO: author presenter notes ... -->` placeholder by **opening each rendered slide image** and writing talk-track bullets that cover every panel shown (2-3 bullets per topic on two-topic slides), plus one audience hook from `presenter.md`. See the mandatory post-conversion checklist in `.github/instructions/slidev.instructions.md`. The converter does **not** infer notes from the workshop file — NotebookLM merges topics onto single images, so there is no reliable 1:1 mapping.
 - Python deps: `pip install python-pptx Pillow`
 
 ## Content Guidelines
