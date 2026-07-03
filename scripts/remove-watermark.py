@@ -1,6 +1,6 @@
-"""Remove the 'NotebookLM' watermark from full-bleed slide images.
+"""Remove the generator watermark from full-bleed slide images.
 
-The watermark sits in the bottom-right of every 1376x768 NotebookLM-exported
+The watermark sits in the bottom-right of every 1376x768 PPTX-exported
 slide. This script overwrites the watermark region with a slice of pixels
 copied from immediately above it, which preserves any underlying background
 color or texture (solid, cream, graph paper, dark navy, etc.).
@@ -17,7 +17,7 @@ from PIL import Image
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "public", "images")
 
-# Slides exported from NotebookLM are 1376x768. Only those carry the watermark.
+# Slides exported at 1376x768 can carry the watermark.
 TARGET_SIZE = (1376, 768)
 
 # Watermark bounding box (generous margin around the glyphs).

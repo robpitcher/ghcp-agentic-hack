@@ -1,6 +1,6 @@
 # GitHub Copilot Developer Training — Capstone Hack
 
-> **NotebookLM generation instructions**:
+> **Slide generation instructions**:
 >
 > - Brand the deck with GitHub and Microsoft visual identity.
 > - Use corporate minimal styling: clean layouts, restrained color, high readability, and light backgrounds for all slide types (cover, section, content, comparison, summary).
@@ -23,7 +23,7 @@
 > - Do not move a topic across section boundaries.
 > - **Treat workshop wording as authoritative — do not summarize, paraphrase, or reword away meaning.** Minor connector-word edits are allowed only to improve flow.
 > - **Reproduce code blocks, prompts, commands, and numeric values verbatim** — never truncate or rewrite them.
-> - **Do not add content that is not in the source**: no NotebookLM-authored intro, recap, agenda, transitions, or marketing phrasing.
+> - **Do not add content that is not in the source**: no AI-authored intro, recap, agenda, transitions, or marketing phrasing.
 > - Do not introduce concepts, tools, commands, workflows, named features, or examples that are not present in this source file.
 > - Do not use or infer content from other workshop modules.
 > - Preserve the section order and numbering exactly as written.

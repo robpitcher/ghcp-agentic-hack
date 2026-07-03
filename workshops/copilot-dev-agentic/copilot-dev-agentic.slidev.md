@@ -2,7 +2,7 @@
 theme: ../../themes/github
 title: "Copilot Dev Agentic"
 info: |
-  Generated from NotebookLM presentation for copilot-dev-agentic
+  Generated from AI slide generator presentation for copilot-dev-agentic
 ghFooterTitle: "Copilot Dev Agentic"
 ghFooterLabel: ""
 drawings:

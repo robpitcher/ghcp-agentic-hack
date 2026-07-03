@@ -2,7 +2,7 @@
 
 ## Overview
 
-This lab extends the **Copilot Quest** Stage 5-6 Workflow Kit into the **Orchestration Package**. Exercises focus on orchestration architecture, governance controls, deployment decisions, and Day 2 execution planning so the earlier game kit becomes a reusable Stage 7-8 release artifact.
+This lab extends the **Copilot Quest** Stage 5-6 Workflow Kit into the **Orchestration Package**. Exercises now mirror the Advanced module order: orchestration and trusted discovery, governed integration surfaces, then debugging, deployment, and Day 2 readiness.
 
 - **Total time**: ~30 minutes
 - **Prerequisites**:
@@ -10,68 +10,99 @@ This lab extends the **Copilot Quest** Stage 5-6 Workflow Kit into the **Orchest
   - Access to a project suitable for advanced experimentation
   - Permission to test approved integrations only
 
-## Exercise 1: Stage 7 Orchestration Architecture Plan
+## Exercise 1: Stage 7 Orchestration and Discovery Plan
 
-**⏱️ Time**: 10 min  
-**📋 Objective**: Design a Stage 7 multi-agent architecture and identify where parallel delegation is justified
+**⏱️ Time**: 10 min
+**📋 Objective**: Choose between multiagents, subagents, and fleet-style execution while adding a trusted-discovery review step
 
-1. Choose one medium-scope scenario that could realistically be handed to a multi-agent team from Module 2 (for example: add hints, daily puzzle mode, or a scoreboard to Copilot Quest).
-2. Define at least three agent roles (orchestrator, implementer, validator/reviewer).
-3. Mark which tasks can run in parallel and which must remain sequential.
-4. Add one explicit off-ramp for conflicting agent output and one escalation owner.
-5. Save the result as the first page of your Copilot Quest orchestration package.
+**Warm-up (try this now)**:
 
-**🛡️ Safety checkpoint**: Assign ownership for final merge decisions and preserve human approval before side-effecting actions.
+```text
+For a Copilot Quest scoreboard scenario, decide whether one agent, subagents, multiagents, or fleet-style execution is appropriate. Name the owner, boundaries, review evidence, and one merge-control rule.
+```
+
+Expected result: You have a safe orchestration choice before designing the full package.
+
+1. Choose one medium-scope scenario that could realistically extend Copilot Quest, such as hints, daily puzzle mode, or a scoreboard.
+2. Decide whether the work should use one agent, subagents, multiagents, or fleet-style parallel execution.
+3. If you choose subagents or multiagents, define scoped prompts, minimal permissions, expected outputs, and audit evidence for each delegated role.
+4. If you choose fleet-style execution, prove the tasks are independent and explain why parallelism saves net time or AICs.
+5. Add one quick-look resource from Brady Gaster's Squad or the Awesome Copilot skills catalog as discovery input, then document credibility and enterprise-compatibility checks before reuse.
+6. Save the result as the first page of your Copilot Quest orchestration package.
+
+**🛡️ Safety checkpoint**: Assign ownership for final merge decisions, preserve human approval before side-effecting actions, and treat curated resources as review inputs rather than automatic approvals.
 
 ### ✅ Success Criteria
 
-- ✅ Produced a role-based multi-agent decomposition
-- ✅ Identified valid parallel delegation tasks
-- ✅ Added at least one conflict/off-ramp rule and escalation owner
+- ✅ Chose one safe orchestration pattern with rationale
+- ✅ Defined ownership, boundaries, output expectations, and merge controls
+- ✅ Identified when fleet-style parallelism is or is not justified
+- ✅ Added a resource-vetting step for Squad or the Awesome Copilot skills catalog
 - ✅ Captured the scenario as an orchestration-package artifact
 
-## Exercise 2: Stage 7 Governance Controls and Stage 8 Debug Readiness
+## Exercise 2: Stage 7 Integration Due-Diligence Matrix
 
-**⏱️ Time**: 10 min  
-**📋 Objective**: Compare Stage 7 integration choices, draft one practical GitHub agentic workflow example, and define a Stage 8 debug-first response
+**⏱️ Time**: 10 min
+**📋 Objective**: Compare hooks, Extension Marketplace, MCP, API/CLI, and plugins for one bounded scenario
 
-1. Pick one bounded task and solve it once with CLI/API style, once with MCP or extension style (for example: fetch the word list or update the scoreboard).
-2. Document tradeoffs in setup cost, observability, governance, and control.
-3. Draft one GitHub agentic workflow example your team could run (for example: issue triage -> assign coding agent -> open PR -> human review gate -> merge).
-4. Simulate one failure case and capture a Stage 8 debug-first response plan.
-5. Add one hook/checkpoint your team would enforce before deployment approval.
-6. Fold the resulting checklist and workflow example into the orchestration package so it travels with the Copilot Quest workflow.
+**Warm-up (try this now)**:
 
-**🛡️ Safety checkpoint**: Use only approved tools/endpoints, avoid sensitive data in prompts/logs, and document trust boundaries.
+```text
+For a bounded Copilot Quest task, compare hooks, Extension Marketplace, MCP, API/CLI, and plugins. Recommend the simplest safe integration surface based on permissions, observability, data scope, enterprise review, and rollback.
+```
+
+Expected result: You have a conceptual integration recommendation without configuring any real server, extension, or plugin.
+
+1. Pick one bounded task, such as fetching a word list, updating the scoreboard, or validating a generated answer.
+2. Fill a five-row matrix for hooks, Extension Marketplace, MCP, API/CLI, and plugins.
+3. For each row, document permissions, data scope, observability, provenance or publisher trust, validation path, and rollback option.
+4. Keep MCP conceptual: describe tool/context boundaries and security review needs without configuring a specific server.
+5. Choose the simplest safe surface and explain why the other options add unnecessary risk or overhead.
+6. Add one enforceable hook/checkpoint your team would require before accepting changes.
+
+**🛡️ Safety checkpoint**: Use only approved tools/endpoints, avoid sensitive data in prompts/logs, and document trust boundaries before enabling extensions, plugins, or MCP servers.
 
 ### ✅ Success Criteria
 
-- ✅ Compared two integration paths on the same objective
-- ✅ Drafted one concrete GitHub agentic workflow example with a human review gate
-- ✅ Documented one debug protocol for repeat failures
-- ✅ Defined one enforceable policy hook/checkpoint tied to release approval
-- ✅ Stored the checklist in the package for reuse
+- ✅ Compared all five integration surfaces in the required order
+- ✅ Included marketplace publisher trust and plugin supply-chain checks
+- ✅ Described MCP as a governed concept without a server walkthrough
+- ✅ Selected the simplest safe surface with rationale
+- ✅ Defined one enforceable hook/checkpoint tied to acceptance or release approval
 
-## Exercise 3: Stage 8 Deployment Decision and Day 2 Hack Plan
+## Exercise 3: Stage 8 Debug, Deploy, and Day 2 Hack Plan
 
-**⏱️ Time**: 10 min  
-**📋 Objective**: Produce a Stage 8 deployment decision package and Day 2 hack execution plan
+**⏱️ Time**: 10 min
+**📋 Objective**: Produce a Stage 8 package covering minimal debugging, deployment path choice, and Day 2 hack execution
 
-1. Draft a deploy checklist for a custom agent package (capabilities, permissions, tests, rollback, owner sign-off).
-2. Reference one distribution path (repo release, marketplace, or APM-ready package flow) and justify why it fits.
-3. Build a Day 2 hack proposal with:
+**Warm-up (try this now)**:
+
+```text
+Write a five-item Day 2 go/no-go gate: minimal repro status, permissions, tests, rollback, and owner sign-off.
+```
+
+Expected result: You have a lightweight readiness checklist to expand into the full decision package.
+
+1. Simulate one failed chat or agent run and write the smallest safe repro prompt that narrows context, tool-call order, permissions, or instruction conflicts.
+2. Draft a deploy checklist for a custom agent package: capabilities, permissions, provenance, tests, version owner, rollback, and support expectations.
+3. Choose one distribution or packaging path — GitHub Repo, Marketplace, or Agent Package Manager (APM) — and justify why it fits the audience and governance model.
+4. Build a Day 2 hack proposal with:
+
    - One core objective
-   - One Stage 7 orchestration capability and one Stage 8 readiness gate
+   - One explicit non-goal
+   - One model or agent strategy
+   - One success criterion
    - One fallback if integration fails
-4. Treat the result as the deployable capstone for the full Copilot Quest build.
 
-**🛡️ Safety checkpoint**: No deployment without documented permissions, governance sign-off, and rollback plan.
+5. Treat the result as the deployable capstone for the full Copilot Quest build.
+
+**🛡️ Safety checkpoint**: No deployment or demo without documented permissions, provenance checks, governance sign-off, and rollback plan.
 
 ### ✅ Success Criteria
 
-- ✅ Produced a deploy-readiness checklist
-- ✅ Included one viable distribution/deployment pathway with rationale
-- ✅ Delivered a scoped Day 2 plan with fallback strategy and release gate
+- ✅ Produced a minimal debug protocol with narrowed context
+- ✅ Included GitHub Repo, Marketplace, or Agent Package Manager (APM) as the selected distribution or packaging pathway
+- ✅ Delivered a scoped Day 2 plan with model strategy, fallback, and release gate
 - ✅ Produced a capstone artifact that closes the module sequence
 
 *Hands-on lab for Module 3: Advanced Content Refresh (Stage 7-8) — GitHub Copilot Developer Training*

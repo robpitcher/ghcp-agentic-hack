@@ -2,7 +2,7 @@
 theme: ../../themes/github
 title: "Copilot Dev Foundations"
 info: |
-  Generated from NotebookLM presentation for copilot-dev-foundations
+  Generated from AI slide generator presentation for copilot-dev-foundations
 ghFooterTitle: "Copilot Dev Foundations"
 ghFooterLabel: ""
 drawings:

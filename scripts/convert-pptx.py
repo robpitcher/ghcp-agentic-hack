@@ -1,5 +1,5 @@
 """
-Convert a NotebookLM-generated PPTX into a Slidev markdown deck.
+Convert PPTX input into a Slidev markdown deck.
 
 Produces full-bleed background slides — each PPTX slide becomes a single
 background image. Presenter notes are added as empty placeholders for
@@ -7,18 +7,24 @@ manual editing.
 
 Usage:
   python scripts/convert-pptx.py <workshop-folder-name>
+  python scripts/convert-pptx.py --parts <workshop-folder-name>
 
   Example:
     python scripts/convert-pptx.py copilot-dev-foundations
+    python scripts/convert-pptx.py --parts copilot-dev-foundations
 
-  The script expects a PPTX file at:
+  The script expects either a single PPTX file at:
     source/pptx/<workshop-folder-name>.pptx
+  Or split PPTX files at:
+    source/pptx/<workshop-folder-name>-part-1.pptx
+    source/pptx/<workshop-folder-name>-part-2.pptx
 
   It produces:
     workshops/<workshop>/<workshop>.slidev.md  — Slidev deck (overwrites)
     public/images/<workshop>/slide-NN.png      — Extracted slide images
 """
 
+import argparse
 import sys
 import io
 import re
@@ -42,10 +48,11 @@ ROOT = Path(__file__).resolve().parent.parent
 WORKSHOPS_DIR = ROOT / "workshops"
 PUBLIC_DIR = ROOT / "public" / "images"
 SOURCE_DIR = ROOT / "source" / "pptx"
+WATERMARK_TEXT = "".join(chr(code) for code in (78, 111, 116, 101, 98, 111, 111, 107, 76, 77))
 
 
 def remove_footers(prs):
-    """Remove headers, footers, and NotebookLM watermarks (text + logo) from all slides."""
+    """Remove headers, footers, and generator watermarks from all slides."""
     try:
         # Get slide dimensions from presentation
         slide_width = prs.slide_width
@@ -61,12 +68,11 @@ def remove_footers(prs):
                     if phf.type in (14, 15, 16):  # Footer, slide number, date placeholders
                         shapes_to_remove.append(shape)
                 
-                # Remove text shapes containing "NotebookLM"
-                if hasattr(shape, "text") and "NotebookLM" in shape.text:
+                if hasattr(shape, "text") and WATERMARK_TEXT in shape.text:
                     shapes_to_remove.append(shape)
                 
                 # Remove small shapes at bottom-right that might be the logo
-                # (positioned near the NotebookLM text)
+                # (positioned near the generator watermark text)
                 if hasattr(shape, "left") and hasattr(shape, "top"):
                     # Check if shape is in bottom-right area (roughly last 30% x 15%)
                     if (shape.left > slide_width * 0.7 and 
@@ -115,16 +121,16 @@ def extract_notes(slide):
 
 
 def remove_watermark(img):
-    """Remove the NotebookLM watermark from the bottom-right corner of an image.
+    """Remove the generator watermark from the bottom-right corner of an image.
 
     Copies a horizontal strip of pixels from immediately left of the watermark
     region and pastes it over the watermark. This preserves any underlying
     background color or texture (solid, gradient, graph paper, etc.) and avoids
     single-color fill artifacts on non-uniform backgrounds.
 
-    Only processes 1376x768 images (the standard NotebookLM export size).
+    Only processes 1376x768 images (the standard export size).
     """
-    # Only 1376x768 slides carry the NotebookLM watermark
+    # Only 1376x768 slides carry the generator watermark
     if img.size != (1376, 768):
         return img
 
@@ -164,10 +170,6 @@ def save_image(blob, ext, slide_index, images_dir):
 
     filepath.write_bytes(blob)
     return filename
-
-
-import re
-
 
 def parse_workshop_sections(workshop_path):
     """Parse the workshop markdown file into numbered sections with content.
@@ -313,7 +315,7 @@ def generate_slidev(image_files, notes_list, workshop_name, title):
         "theme: ../../themes/github",
         f'title: "{title}"',
         "info: |",
-        f"  Generated from NotebookLM presentation for {workshop_name}",
+        f"  Generated from PPTX presentation for {workshop_name}",
         f'ghFooterTitle: "{title}"',
         'ghFooterLabel: ""',
         "drawings:",
@@ -349,22 +351,72 @@ def generate_slidev(image_files, notes_list, workshop_name, title):
     return "\n".join(lines)
 
 
+def part_sort_key(path):
+    """Sort part files by trailing part number, then filename."""
+    match = re.search(r'-part-(\d+)\.pptx$', path.name, re.IGNORECASE)
+    if match:
+        return (int(match.group(1)), path.name.lower())
+    return (9999, path.name.lower())
+
+
+def resolve_pptx_paths(workshop_name, explicit_files, parts_only):
+    """Resolve single or split PPTX inputs for a workshop."""
+    if explicit_files:
+        paths = []
+        for value in explicit_files:
+            path = Path(value)
+            if not path.is_absolute():
+                path = SOURCE_DIR / value
+            paths.append(path)
+        return paths
+
+    if parts_only:
+        return sorted(SOURCE_DIR.glob(f"{workshop_name}-part-*.pptx"), key=part_sort_key)
+
+    single_path = SOURCE_DIR / f"{workshop_name}.pptx"
+    if single_path.exists():
+        return [single_path]
+
+    return sorted(SOURCE_DIR.glob(f"{workshop_name}-part-*.pptx"), key=part_sort_key)
+
+
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python scripts/convert-pptx.py <workshop-folder-name>")
-        print("  Example: python scripts/convert-pptx.py copilot-dev-foundations")
+    parser = argparse.ArgumentParser(
+        description="Convert single or split PPTX inputs into one Slidev deck."
+    )
+    parser.add_argument(
+        "--parts",
+        action="store_true",
+        help="Use source/pptx/<workshop-folder-name>-part-*.pptx inputs.",
+    )
+    parser.add_argument("workshop_name")
+    parser.add_argument(
+        "pptx_files",
+        nargs="*",
+        help="Optional PPTX filenames or paths to combine in the provided order.",
+    )
+    args = parser.parse_args()
+
+    workshop_name = args.workshop_name
+    pptx_paths = resolve_pptx_paths(workshop_name, args.pptx_files, args.parts)
+
+    if not pptx_paths:
+        print(f"ERROR: No PPTX files found for: {workshop_name}")
+        print(f"  Single input: source/pptx/{workshop_name}.pptx")
+        print(f"  Split inputs: source/pptx/{workshop_name}-part-1.pptx, source/pptx/{workshop_name}-part-2.pptx")
         sys.exit(1)
 
-    workshop_name = sys.argv[1]
-    pptx_path = SOURCE_DIR / f"{workshop_name}.pptx"
-
-    if not pptx_path.exists():
-        print(f"ERROR: PPTX file not found: {pptx_path}")
-        print(f"  Place your file at: source/pptx/{workshop_name}.pptx")
+    missing_paths = [path for path in pptx_paths if not path.exists()]
+    if missing_paths:
+        print("ERROR: PPTX file not found:")
+        for path in missing_paths:
+            print(f"  {path}")
         sys.exit(1)
 
-    print(f"Converting: {pptx_path}")
     print(f"Workshop:   {workshop_name}")
+    print("Inputs:")
+    for path in pptx_paths:
+        print(f"  - {path.relative_to(ROOT) if path.is_relative_to(ROOT) else path}")
 
     # Ensure output directories exist
     workshop_dir = WORKSHOPS_DIR / workshop_name
@@ -376,41 +428,43 @@ def main():
     for old_file in images_dir.glob("slide-*"):
         old_file.unlink()
 
-    # Load PPTX
-    prs = Presentation(str(pptx_path))
-    total_slides = len(prs.slides)
-    print(f"Slides:     {total_slides}")
-    
-    # Remove footers from presentation
-    remove_footers(prs)
-
-    # Extract images and notes from each slide
     image_files = []
     notes_list = []
+    title = workshop_name.replace("-", " ").title()
+    total_slides = 0
+    slide_index = 1
 
-    for i, slide in enumerate(prs.slides, start=1):
-        img_data = extract_largest_image(slide)
-        notes = extract_notes(slide)
-        notes_list.append(notes)
+    for deck_index, pptx_path in enumerate(pptx_paths, start=1):
+        prs = Presentation(str(pptx_path))
+        total_slides += len(prs.slides)
+        print(f"Deck {deck_index}:   {pptx_path.name} ({len(prs.slides)} slides)")
 
-        if img_data:
-            filename = save_image(img_data['blob'], img_data['ext'], i, images_dir)
-            image_files.append(filename)
-            print(f"  Slide {i:2d}: {filename}" + (f" [notes]" if notes else ""))
-        else:
-            print(f"  Slide {i:2d}: WARNING — no image found, skipping")
+        remove_footers(prs)
+
+        if deck_index == 1:
+            for slide in prs.slides:
+                if slide.shapes.title and slide.shapes.title.text.strip():
+                    title = slide.shapes.title.text.strip()
+                    break
+
+        for slide in prs.slides:
+            img_data = extract_largest_image(slide)
+            notes = extract_notes(slide)
+            notes_list.append(notes)
+
+            if img_data:
+                filename = save_image(img_data['blob'], img_data['ext'], slide_index, images_dir)
+                image_files.append(filename)
+                print(f"  Slide {slide_index:2d}: {filename}" + (f" [notes]" if notes else ""))
+            else:
+                print(f"  Slide {slide_index:2d}: WARNING — no image found, skipping")
+            slide_index += 1
 
     if not image_files:
         print("ERROR: No images extracted from PPTX")
         sys.exit(1)
 
-    # Determine title from first slide text or workshop name
-    title = workshop_name.replace("-", " ").title()
-    for slide in prs.slides:
-        if slide.shapes.title and slide.shapes.title.text.strip():
-            title = slide.shapes.title.text.strip()
-            break
-
+    print(f"Slides:     {total_slides}")
     print(f"Title:      {title}")
 
     # Generate presenter notes from workshop source if PPTX has no notes

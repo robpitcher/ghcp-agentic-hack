@@ -1,6 +1,6 @@
 # Module 1: Foundations — Workshop Guide
 
-> **NotebookLM generation instructions**:
+> **Slide generation instructions**:
 >
 > - Brand the deck with GitHub and Microsoft visual identity.
 > - Use corporate minimal styling: clean layouts, restrained color, high readability, and light backgrounds for all slide types (cover, section, content, comparison, summary).
@@ -14,7 +14,7 @@
 >   - 1 lab transition slide for each `### 🔬 LAB` marker, in source order
 >   - 1 wrap-up slide from final-section outcomes, when a wrap-up section exists
 >   - 1 next-module handoff slide from final-section handoff wording, when a handoff is present
-> - Ignore marker examples inside this NotebookLM instruction block when counting `Slide topic` and `### 🔬 LAB` markers.
+> - Ignore marker examples inside this AI slide generator instruction block when counting `Slide topic` and `### 🔬 LAB` markers.
 > - The planned deck for this module is 27 slides: 1 title slide, 1 Session Agenda slide, 19 source `Slide topic` slides, 4 lab transition slides, 1 wrap-up slide, and 1 Module 2 handoff slide.
 > - Do not generate separate Workshop Overview or Learning Objectives slides. Use any summary or objectives text only as source context for the title, agenda, or presenter notes.
 > - Count the planned slides before generating. If the planned deck is 21 slides or fewer, generate one complete deck.
@@ -25,7 +25,7 @@
 > - Do not move a topic across section boundaries.
 > - **Treat workshop wording as authoritative — do not summarize, paraphrase, or reword away meaning.** Minor connector-word edits are allowed only to improve flow.
 > - **Reproduce code blocks, prompts, commands, and numeric values verbatim** — never truncate or rewrite them.
-> - **Do not add content that is not in the source**: no NotebookLM-authored intro, recap, agenda, transitions, or marketing phrasing.
+> - **Do not add content that is not in the source**: no AI-authored intro, recap, agenda, transitions, or marketing phrasing.
 > - Do not introduce concepts, tools, commands, workflows, named features, or examples that are not present in this source file.
 > - Do not use or infer content from other workshop modules.
 > - Preserve the section order and numbering exactly as written.

@@ -6,7 +6,8 @@
     "dev:site": "astro dev --root site",
     "build:site": "astro build --root site",
     "build:all": "node scripts/build-site.mjs",
-    "convert:pptx": "python scripts/convert-pptx.py"
+    "convert:pptx": "python scripts/convert-pptx.py",
+    "convert:pptx:parts": "python scripts/convert-pptx.py --parts"
   },
   "dependencies": {
     "@slidev/cli": "^52.16.0"

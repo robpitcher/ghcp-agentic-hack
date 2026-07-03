@@ -2,40 +2,37 @@
 
 ## Discussion Guide by Section
 
-### 1. How Copilot Uses Instructions, Memory, and Context (12 min)
+### 1. Instructions, Memory, Context Hierarchy, and Strong Prompts (20 min)
 
 - Which team rules should be codified in instructions this week so people stop repeating them in chat every session?
-- What is a good example of something that belongs in memory, such as a preferred test command or repo convention, instead of in an instruction file?
 - What should never be persisted to memory in your environment, even if it would be convenient?
-- Where do teams confuse convenience with governance when deciding what Copilot should remember or reuse?
+- When a remembered preference conflicts with repository instructions, how should the team explain the precedence rule to developers?
+- Which strong-prompt field is most often missing in your team today: Task, Scope, Constraints, Definition of Done, or Off-Ramp?
+- How could adding an explicit off-ramp reduce retries, review burden, or unsafe continuation?
 
-### 2. Instructions, Memory, and Skill Design (28 min)
+### 2. Agents, Skills, and the Ask/Plan/Agent Decision Matrix (25 min)
 
-- If your team says "always add tests for behavior changes," where should that guidance live: instructions, memory, or a reusable skill, and why?
-- Which skill-contract element is most frequently omitted by your team: scope, constraints, definition of done, or the off-ramp?
-- What instruction should be global versus folder-scoped in one of your real repositories?
-- What is an example of a stable reusable fact that belongs in memory but should not be rewritten into every skill?
-- What is an example of an acceptance gate you would want in a delegated skill, such as stopping on failed tests or asking before dependency changes?
+- What makes an agent different from a strong prompt or a skill in terms of action, observation, and adaptation?
+- Which skill in your environment would need a trust review because it reaches external systems, changes dependencies, or uses privileged tools?
+- If your team says "always add tests for behavior changes," where should that guidance live: instructions, memory, prompt, or skill, and why?
+- Which skill-contract element is most frequently omitted by your team: target scope, task, constraints, definition of done, or off-ramp?
+- What is a real task that should stay in Ask mode, one that should move to Plan mode, and one that justifies Agent mode?
 
-### 3. Agent, Skill, and Loop Mechanics (28 min)
+### 3. Agentic Loops and Tool Control Points (25 min)
 
-- Which workflows in your team are over-delegated today and would be faster with direct tools or skills?
+- Which workflows in your team are over-delegated today and would be faster with Ask, Plan, or direct tools?
 - What kinds of work genuinely benefit from an agentic loop because they involve branching choices or multi-step evidence gathering?
+- What loop stop condition should be set before an agent starts changing code or using tools?
+- Which tools in your environment need confirmation, logging, constrained parameters, or separate approval before use?
 - What minimum evidence should an agent produce before acceptance: tests, diffs, rationale, logs, unresolved risks, or something else?
-- Where should verification always remain human-led, even if the agent appears confident?
-- What is one handoff artifact your team should standardize so downstream reviewers can trust what happened during execution?
 
-### 4. Tool Strategy, Background/Cloud Agents, and Scaling Controls (22 min)
+### 4. Background/Cloud Agents, `/init`, Instruction Layering, and Optimization Controls (20 min)
 
-- Which task classes should always remain local because they involve sensitive context, fast iteration, or direct supervision?
+- Which task classes should remain local because they involve sensitive context, fast iteration, or direct supervision?
 - What is a good example of work that should move to a background task or cloud agent because it is long-running or parallelizable?
-- What controls must exist before cloud delegation is allowed in your environment?
 - Where can `/init` reduce setup churn most for your team by turning repeated scaffolding into a reusable pattern?
-
-### 5. Wrap-up and Advanced Handoff (10 min)
-
-- Which intermediate control should become a team default immediately: stronger skills, tighter tool scope, better handoffs, or explicit approval gates?
+- Which instruction layer should own non-negotiable safeguards so local prompt variation cannot bypass them?
+- Which optimization control should become a team default immediately: model routing, context budgeting, permission boundaries, validation cadence, or explicit approval gates?
 - What readiness gap remains before scaling to advanced orchestration in your environment?
-- What evidence would convince you that a workflow is ready to move from controlled delegation to broader orchestration?
 
 *Presenter note discussion guide extracted from workshop discussion point sections for Slidev talk track development.*

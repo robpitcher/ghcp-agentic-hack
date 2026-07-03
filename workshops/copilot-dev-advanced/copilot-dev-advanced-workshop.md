@@ -1,6 +1,6 @@
 # Module 3: Advanced — Workshop Guide
 
-> **NotebookLM generation instructions**:
+> **Slide generation instructions**:
 >
 > - Brand the deck with GitHub and Microsoft visual identity.
 > - Use corporate minimal styling: clean layouts, restrained color, high readability, and light backgrounds for all slide types (cover, section, content, comparison, summary).
@@ -16,19 +16,25 @@
 >   - 1 next-module handoff slide from final-section handoff wording, when a handoff is present
 > - Do not generate separate Workshop Overview or Learning Objectives slides. Use any summary or objectives text only as source context for the title, agenda, or presenter notes.
 > - Count the planned slides before generating. If the planned deck is 21 slides or fewer, generate one complete deck.
+> - Before generating visuals, produce a slide manifest with one row per planned slide: slide number, source marker, source line/topic, slide type, and exact source title.
+> - Use the slide manifest as the generation checklist. The final deck must match the manifest exactly in count, order, title wording, topic wording, lab placement, and callout category.
 > - If the planned deck exceeds 21 slides, split it into two decks at a natural section boundary. Do not compress the material into 21 slides.
 > - A 21-slide output is incomplete when the planned deck exceeds 21 slides or when any `Slide topic`, lab transition, prompt/code block, table row, wrap-up outcome, or handoff point is missing.
 > - Generate dedicated slides for the title and `## Session Agenda`; do not skip, merge, or reorder these.
+> - Do not create unmarked recap, section-divider, anti-pattern, synthesis, wrap-up, or handoff slides unless the source contains an explicit marker for that slide.
 > - Do not merge two `Slide topic` markers onto one slide, even if the content appears related.
 > - Do not move a topic across section boundaries.
+> - Use the exact source heading for every slide title. Do not paraphrase, shorten, rename, or replace titles with generic labels.
 > - **Treat workshop wording as authoritative — do not summarize, paraphrase, or reword away meaning.** Minor connector-word edits are allowed only to improve flow.
 > - **Reproduce code blocks, prompts, commands, and numeric values verbatim** — never truncate or rewrite them.
-> - **Do not add content that is not in the source**: no NotebookLM-authored intro, recap, agenda, transitions, or marketing phrasing.
+> - Preserve terminology exactly as written, including **AIC**, **AI Safety Moment**, **Usage Optimization**, **MCP**, **API/CLI**, **Extension Marketplace**, **Agent Package Manager (APM)**, and named feature labels.
+> - **Do not add content that is not in the source**: no AI-authored intro, recap, agenda, transitions, or marketing phrasing.
 > - Do not introduce concepts, tools, commands, workflows, named features, or examples that are not present in this source file.
 > - Do not use or infer content from other workshop modules.
 > - Preserve the section order and numbering exactly as written.
 > - Render **AI Safety Moment** and **Usage Optimization** callouts in distinct badged content boxes, keeping their wording verbatim so the tip category is instantly recognizable.
 > - Preserve prompt and code blocks verbatim on the corresponding "Show me" and "Now you try" slides.
+> - Generate 3-5 sentence speaker notes for every slide from the matching source marker only. Reject and regenerate any slide whose notes are generic, clipped, truncated, or not mapped to one manifest row.
 > - If content does not fit on one slide, reduce visual decoration; do not summarize, drop rows, or combine topics.
 > - Control slide layout deliberately so content stays readable and structured on-slide.
 > - Generate visual imagery that directly represents the slide wording and reinforces its meaning.
@@ -50,7 +56,7 @@
 
 ## Recap: Optimizing AI Usage
 
-Before diving into advanced orchestration, recap the efficiency and optimization learnings that frame every decision in this module. These six strategies — drawn from GitHub's optimizing AI usage guidance — maximize quality while reducing token consumption and AI credit cost. **Learn more**: <https://docs.github.com/en/copilot/tutorials/optimize-ai-usage>
+Before diving into advanced orchestration, recap the efficiency and optimization learnings that frame every decision in this module. These six strategies — drawn from GitHub's optimizing AI usage guidance — maximize quality while reducing token consumption and AIC cost. **Learn more**: <https://docs.github.com/en/copilot/tutorials/optimize-ai-usage>
 
 | # | Strategy | What it covers |
 |---|----------|----------------|
@@ -82,7 +88,7 @@ Before diving into advanced orchestration, recap the efficiency and optimization
 - **Slide topic (1 slide): Multiagents (what they are & when to use them) + Brady Gaster's Squad quick look** — multiagents coordinate multiple AI workers or roles around a shared objective when the work can be separated by ownership, evidence, and merge control. Use them for independent research, implementation, validation, or review lanes; avoid them when one focused workflow can finish safely. Include a quick look at Brady Gaster's Squad as an ecosystem example of multi-agent coordination and squad-style framing without treating it as a required dependency. **AI Safety Moment**: orchestration needs named ownership, bounded responsibilities, and explicit merge controls so parallel work does not create silent conflicts. **Learn more**: <https://github.com/bradygaster/squad>
 - **Slide topic (1 slide): Awesome Copilot List** — use curated Copilot resource lists as discovery aids for skills, examples, prompts, and ecosystem ideas, not as automatic enterprise approvals. Point learners to the Awesome Copilot skills catalog for exploration while separating discovery from governance review. **AI Safety Moment**: vet curated resources for source credibility, license posture, data handling, and enterprise compatibility before reuse. **Learn more**: <https://awesome-copilot.github.com/skills/>
 - **Slide topic (1 slide): Subagents** — subagents are scoped delegation units with narrow prompts, limited context, clear output contracts, and acceptance checks. They work best when a larger task can be decomposed into auditable slices such as research, test-writing, documentation review, or validation. **AI Safety Moment**: use scoped prompts and minimal permissions per subagent, and keep outputs attributable for auditability.
-- **Slide topic (1 slide): Fleet** — fleet-style execution means running many independent tasks or agents in parallel when the branches do not block one another. Reserve it for high-volume work such as similar refactors, broad issue triage, or many independent checks where coordination overhead is lower than the time and AI-credit savings. **Usage Optimization**: reserve fleet/parallel execution for high-volume independent tasks where parallelism yields net AIC/time savings.
+- **Slide topic (1 slide): Fleet** — fleet-style execution means running many independent tasks or agents in parallel when the branches do not block one another. Reserve it for high-volume work such as similar refactors, broad issue triage, or many independent checks where coordination overhead is lower than the time and AIC savings. **Usage Optimization**: reserve fleet/parallel execution for high-volume independent tasks where parallelism yields net AIC/time savings.
 
 ### 🛡️ Safety Moment
 
@@ -95,7 +101,7 @@ Before diving into advanced orchestration, recap the efficiency and optimization
 - **Show me — choose multiagent, subagent, or fleet** — facilitator demonstrates a decision prompt that compares decomposition, ownership, review evidence, and cost before choosing the smallest safe orchestration pattern.
 
   ```text
-  For this Copilot Quest scenario, decide whether to use one agent, subagents, multiagents, or fleet-style parallel execution. Explain the ownership model, boundaries, review evidence, and why the choice saves time or AI credits without weakening merge control.
+  For this Copilot Quest scenario, decide whether to use one agent, subagents, multiagents, or fleet-style parallel execution. Explain the ownership model, boundaries, review evidence, and why the choice saves time or AICs without weakening merge control.
   ```
 
 - **Now you try — vet one discovery resource** — attendees repeat the decision step, then add one curated resource or skill idea and document what enterprise review would be required before adoption.
@@ -155,7 +161,7 @@ Before diving into advanced orchestration, recap the efficiency and optimization
 ### Key Points
 
 - **Slide topic (1 slide): Debugging Chat and Agents** — advanced debugging inspects context composition, tool-call order, instruction conflicts, permission failures, and loop dynamics before changing architecture. Start with the smallest reproducible prompt, add only the context needed to prove or disprove the issue, and avoid broad reruns. **Usage Optimization**: minimal repro prompts and narrowed context avoid expensive trial-and-error.
-- **Slide topic (1 slide): Deploying Your Agents** — choose the distribution path based on audience, governance, maintainership, and provenance. Name and compare the paths explicitly: GitHub Repo for source-controlled internal sharing, Marketplace for broader discoverability where approved, and Agent Package Manager for package-based distribution flows. **AI Safety Moment**: deployment requires policy compliance, permission review, provenance checks, documented ownership, and rollback planning.
+- **Slide topic (1 slide): Deploying Your Agents** — choose the distribution path based on audience, governance, maintainership, and provenance. Name and compare the paths explicitly: GitHub Repo for source-controlled internal sharing, Marketplace for broader discoverability where approved, and Agent Package Manager (APM) as an ecosystem packaging option for reproducible agent, skill, prompt, plugin, and MCP configuration distribution. **AI Safety Moment**: deployment requires policy compliance, permission review, provenance checks, documented ownership, and rollback planning.
 - **Slide topic (1 slide): Preparing for Day 2 Hack** — predefine a narrow scope, model strategy, success criteria, fallback path, and final demo gate before the hack begins. The strongest plan identifies what will not be attempted, which model or agent pattern will be used, and how the team will prove the outcome safely. **Usage Optimization**: predefine scope, model strategy, and success criteria to reduce churn during the hack.
 
 ### 🛡️ Safety Moment
@@ -169,7 +175,7 @@ Before diving into advanced orchestration, recap the efficiency and optimization
 - **Show me — create a minimal debug and deployment brief** — facilitator demonstrates a prompt that turns a failed run into a minimal repro, deployment path recommendation, and Day 2 success gate.
 
   ```text
-  Review this failed agent run. Identify the likely context, tool-call order, permission, or instruction-conflict issue. Then propose the smallest safe repro prompt, recommend GitHub Repo, Marketplace, or Agent Package Manager as the distribution path, and define one Day 2 success criterion.
+  Review this failed agent run. Identify the likely context, tool-call order, permission, or instruction-conflict issue. Then propose the smallest safe repro prompt, recommend GitHub Repo, Marketplace, or Agent Package Manager (APM) as the distribution or packaging path, and define one Day 2 success criterion.
   ```
 
 - **Now you try — vary the failure and deployment audience** — attendees repeat the same step, then change the failure signal and intended audience before finalizing their lab artifact.
