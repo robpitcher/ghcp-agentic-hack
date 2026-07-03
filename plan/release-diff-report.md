@@ -27,7 +27,7 @@
 
 The curriculum shifted from a **feature-centric** structure to a **workflow-and-safety-centric** structure. Key themes:
 
-1. **New source-of-truth workshop guides** — 3 new `-workshop.md` files serve as authoritative content designed for NotebookLM slide generation
+1. **New source-of-truth workshop guides** — 3 new `-workshop.md` files serve as authoritative content designed for slide-generation tool slide generation
 2. **Slide decks completely rewritten** — Agentic and Advanced decks replaced with new content matching the workshop guides
 3. **Foundations deck rebuilt** — PPTX images replaced; rendering pipeline changed from `background:` to `<img>` tags
 4. **AI Safety sprinkled throughout** — 14 safety checkpoints added across all LABs, GHAS nudges in slides
@@ -69,7 +69,7 @@ workshops/copilot-dev-foundations.slidev.md        | 114 ++-
 
 - Source-of-truth workshop guide for Module 1: Foundations
 - Covers: Copilot chat modes, custom instructions, model selection, GitHub Copilot CLI
-- Designed to be fed into NotebookLM for visual slide deck generation
+- Designed to be fed into slide-generation tool for visual slide deck generation
 
 #### `workshops/copilot-dev-agentic/copilot-dev-agentic-workshop.md` (NEW)
 

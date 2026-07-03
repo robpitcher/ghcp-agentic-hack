@@ -51,22 +51,22 @@ Each module folder typically contains:
 
 1. Edit the module files in `workshops/<module>/`.
 2. Keep slides and lab aligned when either one changes (sections, tables, diagrams, ordering).
-3. Rebuild and preview:
+3. Follow the content conventions:
+   - **Show, then do**: each hands-on beat gets an explicit slide pointer (`Slide topic (1 slide): Show me …` / `Now you try …`) so developers know which slide to follow.
+   - **MCP is conceptual**: teach what MCP is and why it matters for agentic developers; do not demo a specific MCP server.
+   - **Enterprise skills stay in the separate skills library** (`workshops/<workshop>/skills/<slug>/SKILL.md`), not baked into module content.
+   - **Keep the hardened slide-generation instruction header** at the top of each `*-workshop.md` intact.
+4. Rebuild and preview:
 
 ```bash
 npm run build:all
 ```
 
-4. Spot-check module links from the landing page and workshop page.
+5. Spot-check module links from the landing page and workshop page.
 
 ## Add a new module to an existing workshop
 
-You must update Astro metadata in **two places**:
-
-1. `site/pages/index.astro`
-2. `site/pages/[workshop]/index.astro`
-
-Add the same module object in both `workshopMeta` maps:
+Workshop and module metadata is centralized in `site/data/workshops.ts`. Add the module to the correct workshop's `modules` array there (do not duplicate metadata in the Astro pages):
 
 - `folder`: exact folder name in `workshops/`
 - `label`: display name
@@ -86,7 +86,49 @@ npm run build:all
 | `npm run build:all` | Build all Slidev decks, Astro site, and merged output in `dist/site/` |
 | `npm run build:site` | Build Astro site only |
 | `npm run dev:site` | Astro dev server for site development |
+| `npm run test:labs` | Run safe Playwright lab usability checks used by CI |
+| `npm run test:labs:participant` | Run opt-in participant-mode lab checks against local VS Code and Copilot CLI |
 | `npm run convert:pptx -- <workshop-folder-name>` | Convert PPTX into slide images + `.slidev.md` deck |
+| `npm run convert:pptx:parts -- <workshop-folder-name>` | Combine `-part-*` PPTX files into one Slidev deck |
+
+## Lab usability and participant execution tests
+
+The deployment workflow runs `npm run test:labs` on branch pushes. These tests are safe for CI: they build and preview the Astro lab pages, navigate them like a participant, verify exercise anchors, and confirm every copyable command or prompt block renders and copies correctly.
+
+Live participant execution is intentionally opt-in and only runs when you execute it manually:
+
+```bash
+npm run test:labs:participant
+```
+
+Use this on a workstation configured like a hackathon participant machine. It checks that `code` and `copilot` are installed, verifies the VS Code Copilot extensions are present, executes terminal command blocks, and sends lab prompt blocks through Copilot CLI prompt mode. This may consume Copilot usage and depends on your local authentication, so it is not part of the automatic branch-push deployment loop.
+
+## PPTX conversion workflow
+
+Small classes can use one source file and one PPTX:
+
+```text
+source/pptx/<workshop-folder-name>.pptx
+```
+
+```bash
+npm run convert:pptx -- <workshop-folder-name>
+```
+
+Larger classes can split the source into generation packets, export one PPTX per part, and combine them during conversion:
+
+```text
+workshops/<workshop-folder-name>/<workshop-folder-name>-workshop-part-1.md
+workshops/<workshop-folder-name>/<workshop-folder-name>-workshop-part-2.md
+source/pptx/<workshop-folder-name>-part-1.pptx
+source/pptx/<workshop-folder-name>-part-2.pptx
+```
+
+```bash
+npm run convert:pptx:parts -- <workshop-folder-name>
+```
+
+If the single PPTX is not present, `npm run convert:pptx -- <workshop-folder-name>` also auto-detects `-part-*` files and combines them in numeric order.
 
 ## Draft workshops
 

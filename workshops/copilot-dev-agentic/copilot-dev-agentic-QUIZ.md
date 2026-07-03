@@ -10,115 +10,151 @@
 - D) Instructions are only useful for cloud agents
 
 <!--answer: B-->
-<!--explanation: The workshop frames instructions as the durable rulebook for coding standards, review expectations, architecture boundaries, and safety rules.-->
+<!--explanation: The workshop frames instructions as durable guidance for coding standards, review gates, architecture boundaries, allowed tools, and safety rules.-->
 
 ---
 
-### 2. A team rule says behavior changes must include tests, the repo already has a preferred test command, and your repeatable workflow defines how to run, review, and stop safely. Which mapping is correct?
+### 2. Which content should never be stored in memory?
 
-- A) Instruction = preferred test command, Memory = stop condition, Skill = team rule
-- B) Instruction = team rule, Memory = preferred test command, Skill = repeatable execution workflow
-- C) Instruction = repeatable workflow, Memory = team rule, Skill = preferred test command
-- D) Instruction = private one-off note, Memory = every prior chat, Skill = unrestricted autonomy
+- A) A stable non-sensitive preferred test command
+- B) A repository convention that applies across sessions
+- C) Secrets, regulated data, credentials, or customer identifiers
+- D) A harmless formatting preference
+
+<!--answer: C-->
+<!--explanation: Memory is for durable, non-sensitive context. Sensitive, regulated, confidential, personal, or secret data must not be persisted.-->
+
+---
+
+### 3. If memory conflicts with repository instructions, which source should win?
+
+- A) Memory, because it is more personalized
+- B) The most recent chat message, regardless of policy
+- C) Durable instructions and higher-precedence policy guidance
+- D) Whichever source is shorter
+
+<!--answer: C-->
+<!--explanation: The context hierarchy teaches that durable policy in instructions overrides remembered preferences and convenience context.-->
+
+---
+
+### 4. Which fields belong in the strong-prompt anatomy taught in this module?
+
+- A) Mood, persona, transcript length, and every available tool
+- B) Task, Scope, Constraints, Definition of Done, and Off-Ramp
+- C) Model name, theme color, billing code, and chat title
+- D) Memory, cloud agent, pull request, and deployment slot
 
 <!--answer: B-->
-<!--explanation: Section 2 teaches that broad team rules belong in instructions, stable reusable facts can live in memory, and repeatable execution patterns belong in skills.-->
+<!--explanation: A strong prompt names the work, boundaries, constraints, success criteria, and when Copilot should stop or escalate.-->
 
 ---
 
-### 3. Which skill elements most directly reduce over-execution risk?
+### 5. What is an agent in this module?
 
-- A) A longer chat history and broader context
-- B) Definition of done and an explicit off-ramp
-- C) Listing every available tool first
-- D) Avoiding constraints so the model can explore
+- A) A bounded worker that can plan, act, observe, and adapt over multiple steps
+- B) A static markdown file with no ability to take action
+- C) A replacement for human review gates
+- D) A memory store for sensitive data
+
+<!--answer: A-->
+<!--explanation: The module defines agents as action-capable systems that need oversight, stop conditions, escalation paths, and review.-->
+
+---
+
+### 6. What is a skill?
+
+- A) A reusable trusted capability package for recurring work with scope, constraints, expected outputs, and acceptance gates
+- B) A private secret store for credentials
+- C) A reason to bypass instructions and review gates
+- D) A one-off chat message that should never be reviewed
+
+<!--answer: A-->
+<!--explanation: Skills package repeatable workflow guidance and must be reviewed before enabling capabilities that affect tools, external systems, dependencies, or privileged work.-->
+
+---
+
+### 7. Which Ask/Plan/Agent mapping is correct?
+
+- A) Ask = high-risk autonomous execution, Plan = no review, Agent = one-line explanation
+- B) Ask = low-complexity direct help, Plan = medium-complexity decomposition for approval, Agent = high-complexity multi-step work with checkpoints
+- C) Ask = production deployment, Plan = secret storage, Agent = markdown formatting only
+- D) Ask, Plan, and Agent should all be used for every task
 
 <!--answer: B-->
-<!--explanation: The workshop emphasizes that strong skill contracts need stop boundaries, success criteria, and escalation paths.-->
+<!--explanation: The decision matrix maps task complexity to the lightest effective mode so teams avoid unnecessary autonomous flows.-->
 
 ---
 
-### 4. When should direct tools or skills usually be preferred over agents?
+### 8. What makes an agentic loop safer and more efficient?
 
-- A) For deterministic, low-branching tasks with clear expected outputs
-- B) For every ambiguous, cross-repo architecture decision
-- C) Never; delegation is always superior
-- D) Only after a multi-agent planning pass
-
-<!--answer: A-->
-<!--explanation: The workshop explicitly distinguishes simple, concrete tasks from adaptive workflows that justify agents.-->
-
----
-
-### 5. Which Module 1 artifact is most directly meant to be extended into Module 2's Stage 5 skill work?
-
-- A) The Stage 3 reusable checklist or prompt asset, strengthened with Stage 4 guardrails
-- B) The full raw chat transcript from every earlier exercise
-- C) A new unrestricted agent with no inherited boundaries
-- D) Only a browser bookmark with no workflow notes
-
-<!--answer: A-->
-<!--explanation: Module 1 produces a reusable checklist or prompt asset in Stage 3 and a guarded custom-agent starter in Stage 4; Module 2 builds on those artifacts when turning a starter workflow into a structured skill.-->
-
----
-
-### 6. What most clearly distinguishes a multi-agent workflow from a simple delegated task?
-
-- A) It adds role-based handoffs with explicit inputs, outputs, and validation checks
-- B) It removes the need for human ownership
-- C) It works best when all agents share unrestricted permissions
-- D) It replaces evidence with confidence
-
-<!--answer: A-->
-<!--explanation: Module 2 treats multi-agent work as role-based orchestration with concrete handoff contracts and validation boundaries.-->
-
----
-
-### 7. Which guardrail best reduces blind acceptance risk in a handoff workflow?
-
-- A) Giving every role the same unrestricted tools
-- B) Separating implementation and verification responsibilities
-- C) Skipping handoff documentation to save time
-- D) Auto-accepting the first plausible output
+- A) Unlimited iterations with no evidence requirements
+- B) Short bounded loops with termination criteria, checkpoints, and verification evidence
+- C) Skipping observation so the agent can move faster
+- D) Allowing every tool without logging
 
 <!--answer: B-->
-<!--explanation: Independent verification reduces confirmation bias and forces evidence to travel with the handoff.-->
+<!--explanation: Bounded loops reduce token burn, tool churn, review burden, and runaway retries while keeping evidence visible.-->
 
 ---
 
-### 8. In a handoff contract, which item is essential?
+### 9. Why are tools treated as control points?
 
-- A) Personal preference notes unrelated to the task
-- B) Expected output format and validation criteria
-- C) Every historical chat message in full
-- D) Fewer constraints so creativity stays high
-
-<!--answer: B-->
-<!--explanation: Clear expected outputs and validation checks make handoffs testable, reviewable, and less ambiguous.-->
-
----
-
-### 9. Which statement best describes readiness for broader operational scale?
-
-- A) Scale only after auditability, policy compliance, and rollback paths are proven
-- B) Skip governance checks if the output quality looks high
-- C) Promote any successful experiment directly to production
-- D) Replace review checkpoints with larger models
+- A) They turn reasoning into auditable actions across files, terminals, tests, repositories, or external systems
+- B) They are always lower risk than plain text answers
+- C) They remove the need for constrained parameters
+- D) They should never be logged
 
 <!--answer: A-->
-<!--explanation: The lab and workshop both emphasize that scaling requires control evidence, not just isolated success.-->
+<!--explanation: Tool invocation creates real actions, so high-risk tools need confirmation, logging, constrained parameters, least privilege, and visible results.-->
 
 ---
 
-### 10. What is the best reason to run a background task or cloud agent?
+### 10. What is the best reason to use a background or cloud agent?
 
 - A) To skip review and finish faster
-- B) To handle long-running work while other independent work continues
+- B) To handle genuinely long-running, parallelizable work with an appropriate environment, permissions, and review path
 - C) To avoid defining scope and constraints
 - D) To remove the need for verification
 
 <!--answer: B-->
-<!--explanation: The workshop recommends background or cloud execution for genuinely long-running, parallelizable work that still remains observable and reviewable.-->
+<!--explanation: The workshop recommends background or cloud execution only when work is long-running or parallelizable and remains observable and reviewable.-->
+
+---
+
+### 11. What is the primary optimization value of `/init`?
+
+- A) It stores secrets in memory automatically
+- B) It standardizes scaffolding and setup guidance so teams reduce repeated prompting and inconsistent starts
+- C) It bypasses repository instructions
+- D) It replaces validation tests
+
+<!--answer: B-->
+<!--explanation: `/init` turns repeated setup and starter guidance into reusable scaffolding that teams can review, version, and refine.-->
+
+---
+
+### 12. What does the instruction layering stack protect against?
+
+- A) Local prompt variance bypassing organization or repository safeguards
+- B) Having any review gates at all
+- C) Using repository instructions for durable policy
+- D) Remembering harmless non-sensitive preferences
+
+<!--answer: A-->
+<!--explanation: Organization and repository layers help keep safeguards, review gates, and allowed-tool boundaries durable across people, folders, and sessions.-->
+
+---
+
+### 13. Which set best represents optimization controls for safe and efficient AI workflows?
+
+- A) Model routing, context budgeting, permission boundaries, and validation cadence
+- B) Bigger prompts, fewer tests, no logs, and unrestricted tools
+- C) Memory for all data, cloud agents for every task, and no off-ramp
+- D) Only choosing the newest model
+
+<!--answer: A-->
+<!--explanation: The capstone controls tune speed, quality, cost, and safety while keeping validation and permission boundaries explicit.-->
 
 ---
 

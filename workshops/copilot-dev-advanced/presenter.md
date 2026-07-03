@@ -2,33 +2,30 @@
 
 ## Discussion Prompts by Section
 
-### 1. Orchestration Decision Patterns for Advanced Delivery (18 min)
+### 1. Orchestration and Trusted Discovery (35 min)
 
-- Which team workflows actually justify orchestration overhead?
-- Where should orchestration stop and human synthesis take over?
-- What evidence should be required to accept delegated outputs?
+- What work in your team is truly separable enough for multiagents, and what should remain a single focused workflow?
+- Where should a coordinator or human owner retain final merge control when subagents or fleet-style execution are used?
+- How would you vet Brady Gaster's Squad, the Awesome Copilot skills catalog, or another curated resource before enterprise adoption?
+- What evidence proves that fleet-style parallelism saves net time or AICs after review and merge costs?
 
-### 2. Governance-First Integration Surfaces (22 min)
+### 2. Governed Integration Surfaces (40 min)
 
-- Which integration surface is your highest enterprise risk today?
-- What approval model should govern API, MCP, and extension onboarding?
-- How can teams reduce integration complexity while preserving capability?
+- Which integration surface creates the largest trust-boundary change: hooks, Extension Marketplace, MCP, API/CLI, or plugins?
+- What publisher, provenance, permission, data-scope, and rollback checks should be required before enabling extensions or plugins?
+- When is API/CLI safer and simpler than MCP or a plugin for the same task?
+- How can hooks enforce non-negotiable validation without turning every workflow into a heavy release process?
 
-### 3. Debugging and Deployment Readiness Operations (20 min)
+### 3. Operations and Day 2 Readiness (35 min)
 
-- What is your minimum deploy-readiness checklist for an internal agent?
-- Which failures require immediate rollback versus iterative tuning?
-- Which deploy-readiness gate catches the highest-risk failures early?
+- What evidence do you inspect first when chat or agent behavior surprises you?
+- Which distribution or packaging path fits your first internal agent: GitHub Repo, Marketplace, or Agent Package Manager (APM)?
+- What permission, provenance, and rollback gates must pass before sharing the agent beyond the build team?
+- What Day 2 scope, model strategy, success criterion, and fallback path will keep the hack demo safe and achievable?
 
-### 4. Day 2 Hack Preparation and Execution Strategy (10 min)
+### Knowledge Check (5 min)
 
-- What is the strongest one-day objective your team can complete safely?
-- Which advanced capability gives the highest ROI for your first pilot?
-- What gate will determine go/no-go for final demo submission?
-
-### 5. Wrap-up and Lab Handoff (10 min)
-
-- Which advanced practice is ready for production-adjacent pilot use?
-- What governance gap must be closed before broader rollout?
+- Which required Advanced topic is least familiar to the room, and what governance question should teams answer before using it?
+- Which Usage Optimization callout changes how learners will plan Day 2 work?
 
 *Presenter note prompts extracted from workshop discussion point sections for Slidev talk track development.*

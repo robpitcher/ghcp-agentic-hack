@@ -6,13 +6,17 @@
     "dev:site": "astro dev --root site",
     "build:site": "astro build --root site",
     "build:all": "node scripts/build-site.mjs",
-    "convert:pptx": "python scripts/convert-pptx.py"
+    "test:labs": "playwright test tests/lab-usability.spec.ts",
+    "test:labs:participant": "playwright test tests/lab-participant.spec.ts",
+    "convert:pptx": "python scripts/convert-pptx.py",
+    "convert:pptx:parts": "python scripts/convert-pptx.py --parts"
   },
   "dependencies": {
     "@slidev/cli": "52.15.2"
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^7.2.0",
+    "@playwright/test": "^1.61.1",
     "astro": "^7.0.3",
     "dotenv": "^17.4.2",
     "github-markdown-css": "^5.9.0",
