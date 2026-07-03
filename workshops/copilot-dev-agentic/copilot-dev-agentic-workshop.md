@@ -1,102 +1,179 @@
 # Module 2: Intermediate (Agentic) — Workshop Guide
 
 > **NotebookLM generation instructions**:
+>
 > - Brand the deck with GitHub and Microsoft visual identity.
-> - Use corporate minimal styling: clean layouts, restrained color use, and high readability with light background.
-> - Use light backgrounds for all slide styling (cover, section, content, comparison, and summary slides).
+> - Use corporate minimal styling: clean layouts, restrained color, high readability, and light backgrounds for all slide types (cover, section, content, comparison, summary).
 > - Keep slides professional and uncluttered, with clear hierarchy and consistent typography.
-> - Render **AI Safety Moment** and **Usage Optimization** callouts in distinct content boxes with a consistent badge icon per type so the tip category is instantly recognizable.
-> - Generate dedicated slides for the workshop title (`# Module ...`), `## Workshop Overview`, and `### Learning Objectives`; do not skip or merge these sections.
-> - Do not summarize away source meaning: treat workshop wording as authoritative and keep the exact messaging wherever possible. Minor connector-word edits are allowed only to improve flow and readability.
-> - Control slide layout deliberately so content remains readable and properly structured on-slide.
-> - Generate visual imagery that directly represents the slide wording and reinforces the intended meaning.
+> - **Honor every `Slide topic (N slide)` marker exactly**: produce N slides for that topic, one topic per slide. Never merge two topics onto one slide, and never split one topic across extra slides.
+> - **Generate one slide per bullet-grouped topic and preserve every bullet and table row.** Do not drop, collapse, or condense list items or comparison rows.
+> - Before generating slides, build the deck from this exact contract:
+>   - 1 title slide from the H1
+>   - 1 `## Session Agenda` slide
+>   - 1 slide for each `Slide topic (1 slide)` marker, in source order
+>   - 1 lab transition slide for each `### 🔬 LAB` marker, in source order
+>   - 1 wrap-up slide from final-section outcomes, when a wrap-up section exists
+>   - 1 next-module handoff slide from final-section handoff wording, when a handoff is present
+> - Do not generate separate Workshop Overview or Learning Objectives slides. Use any summary or objectives text only as source context for the title, agenda, or presenter notes.
+> - Count the planned slides before generating. If the planned deck is 21 slides or fewer, generate one complete deck.
+> - If the planned deck exceeds 21 slides, split it into two decks at a natural section boundary. Do not compress the material into 21 slides.
+> - A 21-slide output is incomplete when the planned deck exceeds 21 slides or when any `Slide topic`, lab transition, prompt/code block, table row, wrap-up outcome, or handoff point is missing.
+> - Generate dedicated slides for the title and `## Session Agenda`; do not skip, merge, or reorder these.
+> - Do not merge two `Slide topic` markers onto one slide, even if the content appears related.
+> - Do not move a topic across section boundaries.
+> - **Treat workshop wording as authoritative — do not summarize, paraphrase, or reword away meaning.** Minor connector-word edits are allowed only to improve flow.
+> - **Reproduce code blocks, prompts, commands, and numeric values verbatim** — never truncate or rewrite them.
+> - **Do not add content that is not in the source**: no NotebookLM-authored intro, recap, agenda, transitions, or marketing phrasing.
+> - Do not introduce concepts, tools, commands, workflows, named features, or examples that are not present in this source file.
+> - Do not use or infer content from other workshop modules.
+> - Preserve the section order and numbering exactly as written.
+> - Render **AI Safety Moment** and **Usage Optimization** callouts in distinct badged content boxes, keeping their wording verbatim so the tip category is instantly recognizable.
+> - Preserve prompt and code blocks verbatim on the corresponding "Show me" and "Now you try" slides.
+> - If content does not fit on one slide, reduce visual decoration; do not summarize, drop rows, or combine topics.
+> - Control slide layout deliberately so content stays readable and structured on-slide.
+> - Generate visual imagery that directly represents the slide wording and reinforces its meaning.
 
-**Duration**: 2 hours 10 minutes (130 min: 100 min content + 30 min lab)  
-**Format**: Presentation + Hands-On  
-**Audience**: Developers who completed Foundations  
+**Duration**: 2 hours (120 min: ~90 min content + 30 min lab)
+**Format**: Presentation + Hands-On
+**Audience**: Developers who completed Foundations
 **Prerequisites**: Module 1 completion and familiarity with Ask/Plan/Agent mode
 
-## Workshop Overview
+**Module summary**: This Intermediate module maps directly to the Agentic operating layer: standing instructions, memory behavior, strong prompts, skills, tool choices, and controlled execution loops. It explicitly builds on Foundations by turning the Stage 3 reusable checklist or prompt asset and the Stage 4 delegation guardrails into more repeatable Stage 5 and Stage 6 workflows. The emphasis is not just getting answers, but designing repeatable, auditable workflows where autonomy is deliberate. Learners finish with a practical framework for when to ask directly, when to plan, when to use an agent, and how to keep cost and risk in balance.
 
-This Intermediate module maps directly to the Agentic operating layer: standing instructions, memory behavior, skill design, tool choices, and controlled execution loops. It explicitly builds on Foundations by turning the Stage 3 reusable checklist or prompt asset and the Stage 4 delegation guardrails into more repeatable Stage 5 and Stage 6 workflows. The emphasis is not just getting answers, but designing repeatable, auditable workflows where autonomy is deliberate. Learners finish with a practical framework for when to stay deterministic, when to delegate, and how to keep cost and risk in balance.
-
-### Learning Objectives
+**Learning objectives**:
 
 - Build instruction and memory strategies that reduce drift across sessions
-- Design strong skills with explicit scope, constraints, and off-ramps
+- Separate durable instructions, safe memory, strong prompts, and reusable skills
 - Explain agents, skills, tools, and the anatomy of the agentic loop
-- Choose between direct tools, background agents, and cloud agents intentionally
+- Choose Ask, Plan, Agent, direct tools, background agents, and cloud agents intentionally
 - Use `/init`, instruction layering, and optimization controls for repeatable delivery
 
 ## Session Agenda
 
 | Section | Topic | Time |
 |---------|-------|------|
-| 1 | How Copilot uses instructions, memory, and context | 12 min |
-| 2 | Instructions, memory, and skill design | 28 min |
-| 3 | Agent, skill, and loop mechanics | 28 min |
-| 4 | Tool strategy, background/cloud agents, and scaling controls | 22 min |
-| 5 | Wrap-up and Advanced handoff | 10 min |
+| 1 | Instructions, memory, context hierarchy, and strong prompts | 20 min |
+| 2 | Agents, skills, and the Ask/Plan/Agent decision matrix | 25 min |
+| 3 | Agentic loops and tool control points | 25 min |
+| 4 | Background/cloud agents, `/init`, instruction layering, and optimization controls | 20 min |
 | — | Hands-on labs across three exercises | 30 min |
+| **Total** | **Intermediate module** | **120 min** |
 
-## 1. How Copilot Uses Instructions, Memory, and Context (12 min)
-
-### Key Points
-
-- **Slide topic (1 slide): Instructions** — show instructions as standing guidelines that define how Copilot should behave in a team, using familiar examples such as coding standards, review expectations, architecture boundaries, and security rules stored in versioned files. Emphasize that good instructions reduce repeated ad hoc requests and make outputs more predictable from session to session. **AI Safety Moment**: encode non-negotiable policy in instructions, not chat.
-- **Slide topic (1 slide): Memory** — explain memory as the continuity layer that carries forward stable facts and preferences, such as preferred testing commands or repository conventions, when that context does not belong in policy files. Contrast useful operational memory with risky content such as secrets, regulated data, or one-off sensitive details. **AI Safety Moment**: do not persist sensitive or regulated data.
-- **Slide topic (1 slide): Context hierarchy — memory versus instructions** — walk through how the current task request, scoped instructions, repository guidance, and memory interact during a real task so learners can see which source should win when guidance conflicts. Make clear that memory should complement instructions by adding reusable context, not replace durable standards. **Usage Optimization**: place durable standards in instructions and reserve memory for reusable context that should survive across sessions.
-- **Slide topic (1 slide): Instruction layering stack** — explain the precedence model across organization guidance, repository instructions, scoped files, user settings, and the current task request, including why the same task can behave differently in different folders or repositories. Help learners see the stack as a practical debugging tool for inconsistent agent behavior.
-
-## 2. Instructions, Memory, and Skill Design (28 min)
+## 1. Instructions, Memory, Context Hierarchy, and Strong Prompts (20 min)
 
 ### Key Points
 
-- **Slide topic (1 slide): What belongs in instructions, memory, and skills?** — define the role of each layer with human examples learners can relate to: instructions hold team rules such as review expectations or security boundaries, memory stores stable reusable facts such as preferred test commands or repository conventions, and skills capture repeatable task patterns such as a safe refactor or bug-fix flow. Use this as the bridge from Foundations: the Stage 3 checklist becomes more reusable here, while the Stage 4 guardrails continue to shape what the skill is allowed to do. Give learners a simple litmus test: if it should apply broadly, it is probably an instruction; if it is a reusable fact, it may belong in memory; if it describes how to do work repeatedly, it is a skill.
-- **Slide topic (1 slide): One example across all three layers** — walk through one concrete example, such as adding test coverage for a changed component, and show how the same workflow is split across layers: the instruction says tests are required, memory recalls the team command or folder pattern, and the skill defines the repeatable execution steps and stop conditions. This helps learners see that the layers complement each other instead of competing.
-- **Slide topic (1 slide): Anatomy of a well-scoped skill** — break down a skill into target scope, task, constraints, definition of done, and off-ramp, then explain what failure looks like when one of those parts is missing. Give relatable examples such as a refactor skill that lacks file boundaries or a bug-fix skill with no acceptance criteria. **Usage Optimization**: well-scoped skills reduce retries.
-- **Slide topic (1 slide): Decision test for safer execution** — show how explicit acceptance gates, escalation paths, and stop conditions help a team decide whether guidance belongs in instructions, memory, a reusable skill, or just the current task request. Learners should see how phrases like "stop if tests fail" or "ask before changing dependencies" create safer delegated execution and reduce rework. **Usage Optimization**: lower AIC with fewer rework turns.
-- **Slide topic (1 slide): Lab transition — Exercise 1** — frame the lab as a chance to classify guidance into instructions, memory, and skill design before turning it into a real CLI workflow with explicit success criteria, stop conditions, and verification steps.
+- **Slide topic (1 slide): Instructions** — show instructions as standing guidelines that define how Copilot should behave in a team, using familiar examples such as coding standards, review expectations, architecture boundaries, and security rules stored in versioned files. Emphasize that good instructions reduce repeated ad hoc requests and make outputs more predictable from session to session. **AI Safety Moment**: encode non-negotiable guardrails in instructions, including no secret exposure, required review gates before acceptance or merge, and allowed tools or tool boundaries for the workflow.
+- **Slide topic (1 slide): Memory** — explain memory as the continuity layer that carries forward stable facts and preferences, such as preferred testing commands or repository conventions, when that context does not belong in policy files. Contrast useful operational memory with risky content such as secrets, regulated data, customer identifiers, credentials, or one-off sensitive details. **AI Safety Moment**: store only durable, non-sensitive working preferences; never persist sensitive, regulated, confidential, personal, or secret data.
+- **Slide topic (1 slide): Context Hierarchy: Memory vs Instructions** — walk through how the current task request, scoped instructions, repository guidance, and memory interact during a real task so learners can see which source should win when guidance conflicts. Make clear that memory should complement instructions by adding reusable context, not replace durable standards. **AI Safety Moment**: durable policy in instructions overrides remembered preferences, and convenience memories must not bypass repository, organization, security, or review requirements.
+- **Slide topic (1 slide): Anatomy of a Strong Prompt (Task, Scope, Constraints, Definition of Done, Off-Ramp)** — separate prompt anatomy from skill anatomy by showing a strong prompt as a one-time or task-specific request with five fields: the task to perform, the scope to touch, the constraints to honor, the definition of done, and the off-ramp for uncertainty or failure. Use examples such as limiting file changes, naming the smallest test to run, requiring a summary of evidence, and stopping before dependency changes. **Usage Optimization**: structured prompts reduce retries and AIC because Copilot receives the objective, boundaries, success criteria, and stop condition up front.
 
-### 🔬 LAB: Exercise 1 — Stage 5 CLI Power-User Skill Contract
+### 🛡️ Safety Moment
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 1 (10 min) classifying guidance into instructions, memory, and a structured skill contract before running the task with explicit acceptance gates.
+- Treat instructions as the correct home for non-negotiable rules, not as optional chat suggestions.
+- Keep memory useful but low-risk: stable preferences are acceptable, sensitive or regulated data is not.
+- Resolve conflicts by following the highest durable policy source before convenience or remembered context.
 
-## 3. Agent, Skill, and Loop Mechanics (28 min)
+## 2. Agents, Skills, and the Ask/Plan/Agent Decision Matrix (25 min)
 
 ### Key Points
 
-- **Slide topic (1 slide): What is an agent** — define an agent as a bounded worker that can plan, act, observe results, and adapt over multiple steps to complete an objective such as fixing a bug, preparing a summary, or investigating a failing test. Emphasize that the value comes from iterative execution, not just better text generation. **AI Safety Moment**: action-capable systems need explicit oversight and stop conditions.
-- **Slide topic (1 slide): Runtime decision model — human, tool, or agent?** — compare simple deterministic tasks, like locating a symbol or editing a known file, with adaptive tasks that involve branching choices, ambiguous evidence, or multiple checkpoints. Position skills as the reusable patterns that shape execution, but keep the runtime focus on deciding whether the work should stay human-led, move through direct tools, or justify a multi-step agent loop. Tie this back to Foundations by showing that Module 1 introduced guarded delegation, while this section extends it into explicit runtime handoffs and evidence-driven execution choices. **Usage Optimization**: avoid over-delegating simple tasks that are faster and cheaper with direct skills and tools.
-- **Slide topic (1 slide): Anatomy of an agentic loop** — describe the control cycle of request, decide, act, observe, and correct, including where humans should inspect outputs, verify evidence, and stop runaway behavior. Make explicit where loop boundaries should be set before execution begins so learners can see that oversight is designed in, not added after something goes wrong. **Usage Optimization**: bounded loops with termination criteria reduce token burn.
-- **Slide topic (1 slide): Verification artifacts and handoff evidence** — elaborate on what good runtime evidence looks like before a handoff or acceptance step: diffs, test results, rationale, logs, unresolved risks, and a clear statement of what changed. This gives learners a concrete checklist for deciding whether an agent completed useful work or simply produced plausible-looking output. **AI Safety Moment**: require evidence before trust.
-- **Slide topic (1 slide): What are tools and when to use a tool** — present tools as the bridge from reasoning to action across files, terminals, and external systems, and explain that they are best for concrete, auditable operations with visible inputs and outputs. Include examples such as searching code, running tests, or editing a known file directly instead of spawning a larger workflow. **AI Safety Moment**: require constrained parameters and traceability for risky tools.
-- **Slide topic (1 slide): Lab transition — Exercise 2** — position the lab as a practical handoff exercise where learners decide what stays human-led, what gets delegated, and what evidence must travel with the handoff.
+- **Slide topic (1 slide): What Is an Agent?** — define an agent as a bounded worker that can plan, act, observe results, and adapt over multiple steps to complete an objective such as fixing a bug, preparing a summary, or investigating a failing test. Emphasize that the value comes from iterative execution, tool use, and evidence gathering, not just better text generation. **AI Safety Moment**: action-capable systems need explicit oversight, stop conditions, escalation paths, and human review before high-impact changes are accepted.
+- **Slide topic (1 slide): What Is a Skill?** — define a skill as a reusable, trusted capability package that teaches Copilot how to perform a recurring task with specific scope, constraints, expected outputs, and acceptance gates. Position skills as privileged workflow guidance because they can steer repeated tool use and handoffs across sessions or teams. **AI Safety Moment**: review skill content and trust boundaries before enabling capabilities that reach external systems, change dependencies, touch production-like resources, or use elevated tools.
+- **Slide topic (1 slide): When to Use One or the Other?** — reframe the choice as an Ask/Plan/Agent complexity decision matrix instead of a vague human/tool/agent runtime preference. Use Ask for low-complexity questions or deterministic edits with clear context, Plan for medium-complexity work that needs decomposition and human approval before execution, and Agent for high-complexity, multi-step work with branching evidence, tool use, and checkpoints. **Usage Optimization**: map task complexity to Ask, Plan, or Agent so teams avoid overusing expensive autonomous flows when a direct answer or reviewed plan is enough.
+
+| Complexity | Mode | Best fit | Guardrail |
+|------------|------|----------|-----------|
+| Low | Ask | Explain, locate, summarize, or edit a known small target | Keep scope narrow and verify the answer |
+| Medium | Plan | Break down a task, compare options, or prepare an execution checklist | Approve the plan before code or tool actions |
+| High | Agent | Investigate, implement, test, and adapt across multiple steps | Require checkpoints, evidence, and stop conditions |
+
+### 🛡️ Safety Moment
+
+- Agents are action-capable, so they need stop criteria before they begin.
+- Skills are reusable capability contracts, so review them like any other privileged workflow asset.
+- The Ask/Plan/Agent choice should reduce risk and overhead, not simply maximize autonomy.
+
+### 🖥️ Demo: Build a Strong Prompt and Skill Contract
+
+- **Show me — classify guidance into prompt fields and a skill contract** — facilitator demonstrates the prompt below and states the expected result: one strong-prompt field set, one instruction candidate, one memory candidate, and one reusable skill contract boundary.
+
+  ```text
+  Classify this task guidance into a strong prompt, instruction, memory, and skill contract fields: "When changing guess validation, keep changes scoped, run the smallest relevant test, stop if tests fail, and ask before changing dependencies."
+  ```
+
+- **Now you try — vary the off-ramp and acceptance gate** — attendees repeat the same step, then apply one small variation by changing the off-ramp or acceptance gate before the lab.
+
+### 💡 Optimization Tip: Prompt First, Skill When Repeated
+
+Start with a strong prompt when the work is one-off or exploratory. Promote the pattern into a skill only when the same task, scope, constraints, definition of done, and off-ramp are reused often enough to justify a trusted capability package.
+
+### 🔬 LAB: Exercise 1 — Strong Prompt and Stage 5 Skill Contract
+
+> **Instructor**: Pause here for hands-on practice. Students complete Exercise 1 (10 min) by separating prompt anatomy from skill design, then creating a Stage 5 skill contract with explicit acceptance gates.
+
+## 3. Agentic Loops and Tool Control Points (25 min)
+
+### Key Points
+
+- **Slide topic (1 slide): The Anatomy of an Agentic Loop** — describe the control cycle of request, decide, act, observe, and correct, including where humans should inspect outputs, verify evidence, and stop runaway behavior. Make explicit where loop boundaries should be set before execution begins so learners can see that oversight is designed in, not added after something goes wrong. **Usage Optimization**: short bounded loops with termination criteria reduce token burn, tool churn, review burden, and runaway retries.
+- **Slide topic (1 slide): What Are Tools? When to Use a Tool?** — present tools as the bridge from reasoning to action across files, terminals, tests, repositories, and external systems, and explain that they are best for concrete, auditable operations with visible inputs and outputs. Include examples such as searching code, running tests, editing a known file, or querying a system directly instead of spawning a larger workflow. **AI Safety Moment**: tool invocation is a control point; high-risk tools need confirmation, logging, constrained parameters, least privilege, and visible results before trust.
+
+### 🛡️ Safety Moment
+
+- Treat every tool call as an auditable action, not invisible model reasoning.
+- Bound loops before execution by defining maximum scope, checkpoints, evidence, and stop conditions.
+- Require separate verification evidence before accepting agent output.
+
+### 🖥️ Demo: Define a Bounded Agent Handoff
+
+- **Show me — define a handoff artifact** — facilitator demonstrates the prompt below and states the expected result: a bounded role handoff with inputs, outputs, validation checks, loop checkpoints, and evidence.
+
+  ```text
+  Define a two-role agent handoff for implementing guess feedback and verifying edge cases. Include each role's inputs, outputs, validation checks, loop checkpoints, and the artifact that must be handed off.
+  ```
+
+- **Now you try — add a verifier variation** — attendees repeat the same step, then apply one small variation by changing the verifier's required evidence before the lab.
+
+### 💡 Optimization Tip: Prefer Short Loops With Evidence
+
+Short loops keep autonomy useful without making review expensive. Ask the agent to stop after a bounded milestone, report evidence, and wait for approval before broadening scope or using higher-risk tools.
 
 ### 🔬 LAB: Exercise 2 — Stage 6 Multi-Agent Handoff Drill
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 2 (10 min) by running a role-based handoff with explicit loop checkpoints.
+> **Instructor**: Pause here for hands-on practice. Students complete Exercise 2 (10 min) by running a role-based handoff with explicit loop checkpoints, tool boundaries, and verification evidence.
 
-## 4. Tool Strategy, Background/Cloud Agents, and Scaling Controls (22 min)
+## 4. Background/Cloud Agents, `/init`, Instruction Layering, and Optimization Controls (20 min)
 
 ### Key Points
 
-- **Slide topic (1 slide): Background and cloud agents — when to use them** — explain the tradeoffs between local synchronous work, background tasks, and cloud agents by using relatable scenarios such as long-running builds, parallel research, or isolated execution with different dependencies. Help learners choose based on duration, observability, environment needs, and whether they still have meaningful parallel work to do. **Usage Optimization**: use async or cloud paths only for genuinely long-running, parallelizable tasks.
-- **Slide topic (1 slide): Boilerplate with `/init`** — show `/init` as a practical accelerator for creating reusable setup patterns, starter guidance, or repo scaffolding that teams would otherwise keep rewriting by hand. **Usage Optimization**: start from reusable templates to reduce setup churn.
-- **Slide topic (1 slide): Optimization controls** — make model routing, context budgeting, permission boundaries, and validation cadence feel like operational dials teams can tune for speed, quality, and cost rather than abstract settings. Explain how the wrong defaults create drift, overspending, or unsafe autonomy.
-- **Slide topic (1 slide): Best practices for safe and efficient AI workflows** — combine least-privilege execution, explicit approval gates, narrow scope, and regular verification into a simple operating posture teams can reuse across repositories and sessions. **AI Safety Moment**: no scale-up without control evidence.
-- **Slide topic (1 slide): Lab transition — Exercise 3** — frame the lab as a mapping exercise where learners connect execution choices to guardrails, readiness checks, and scale-up criteria before broader rollout.
+- **Slide topic (1 slide): Background & Cloud Agents — When to Use** — explain the tradeoffs between local synchronous work, background tasks, and cloud agents by using relatable scenarios such as long-running builds, parallel research, or isolated execution with different dependencies. Help learners choose based on duration, observability, environment needs, data sensitivity, and whether they still have meaningful parallel work to do. **Usage Optimization**: use background or cloud agents only for long-running, parallelizable work where the environment, permissions, and review path are appropriate.
+- **Slide topic (1 slide): Boilerplate with `/init`** — show `/init` as a practical accelerator for creating reusable setup patterns, starter guidance, or repository scaffolding that teams would otherwise keep rewriting by hand. Tie it to instructions and skills by showing how generated boilerplate becomes safer when teams review, version, and refine it instead of pasting the same setup prompt repeatedly. **Usage Optimization**: standardized scaffolding reduces repeated prompting, setup churn, and inconsistent project starts.
+- **Slide topic (1 slide): The Instruction Layering Stack** — explain the precedence model across organization guidance, repository instructions, scoped files, user settings, memory, and the current task request, including why the same task can behave differently in different folders or repositories. Help learners see the stack as a practical debugging tool for inconsistent agent behavior and as a governance control for scale. **AI Safety Moment**: organization and repository layers keep local prompt variance from bypassing safeguards, review gates, and allowed-tool boundaries.
+- **Slide topic (1 slide): Optimization Controls — Best Practices for Safe & Efficient AI Workflows** — make model routing, context budgeting, permission boundaries, and validation cadence feel like operational dials teams can tune for speed, quality, cost, and safety rather than abstract settings. Combine least-privilege execution, explicit approval gates, narrow scope, and regular verification into a simple operating posture teams can reuse across repositories and sessions. **Usage Optimization**: use model routing, context budgeting, and validation cadence as a capstone control set for safe, efficient AI workflows.
+
+### 🛡️ Safety Moment
+
+- Do not move sensitive work to background or cloud execution unless data, permissions, logs, and review gates are approved.
+- Use instruction layering to make safeguards durable across people, folders, and sessions.
+- Treat optimization controls as operational safeguards, not just cost settings.
+
+### 🖥️ Demo: Map Readiness Controls
+
+- **Show me — map readiness controls** — facilitator demonstrates the prompt below and states the expected result: one execution mode decision, one readiness score, one blocking gap, and one guardrail location.
+
+  ```text
+  Evaluate this Stage 6 workflow for Stage 7 readiness across auditability, policy compliance, rollback path, execution mode, and validation cadence. Identify one blocking gap and one lightweight guardrail location.
+  ```
+
+- **Now you try — change the guardrail location** — attendees repeat the same step, then apply one small variation by moving the guardrail to instructions, tool permissions, hooks, review steps, or `/init` scaffolding before the lab.
+
+### 💡 Optimization Tip: Scale Only What Is Observable
+
+Background and cloud agents help when work is long-running or parallelizable, but they create value only when the workflow remains observable. Pair any scale-up with instruction layering, permission boundaries, validation cadence, and evidence that a reviewer can inspect.
 
 ### 🔬 LAB: Exercise 3 — Stage 6 to Stage 7 Guardrail Mapping
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 3 (10 min) mapping an execution workflow to guardrail and readiness criteria.
-
-## 5. Wrap-up and Advanced Handoff (10 min)
-
-### Key Points
-
-- **Slide topic (1 slide): Intermediate module outcome** — restate that the purpose of this module is to help teams move from ad hoc requests to reproducible control systems that work across people, sessions, and repositories. Learners should leave with a clearer operating model, not just a list of tips.
-- **Slide topic (1 slide): Quality equation for agentic workflows** — summarize the formula for reliable outcomes: clear skill contracts, scoped tool access, explicit verification loops, and governance-aware execution choices. Make the point that better autonomy depends on better controls.
-- **Slide topic (1 slide): Transition to Advanced** — position Module 3 as the next step where these same foundations are applied to multiagent orchestration, integration governance, debugging, and deployment-ready operations.
+> **Instructor**: Pause here for hands-on practice. Students complete Exercise 3 (10 min) mapping background/cloud choices, `/init` scaffolding, instruction layering, and optimization controls to readiness criteria.
 
 *Workshop guide for Module 2: Intermediate (Agentic) — GitHub Copilot Developer Training*

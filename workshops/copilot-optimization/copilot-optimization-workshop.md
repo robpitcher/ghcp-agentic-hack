@@ -1,15 +1,37 @@
 # Copilot Usage Optimization — Workshop Guide
 
 > **NotebookLM generation instructions**:
+>
 > - Brand the deck with GitHub and Microsoft visual identity.
-> - Use corporate minimal styling: clean layouts, restrained color use, and high readability.
-> - Keep slides professional and uncluttered, with clear hierarchy and consistent typography with light background.
-> - Use light backgrounds for all slide styling (cover, section, content, comparison, and summary slides).
-> - Render **AI Safety Moment** and **Usage Optimization** callouts in distinct content boxes with a consistent badge icon per type so the tip category is instantly recognizable.
-> - Generate dedicated slides for the workshop title (`# Copilot ...`), `## Workshop Overview`, and `### Learning Objectives`; do not skip or merge these sections.
-> - Do not summarize away source meaning: treat workshop wording as authoritative and keep the exact messaging wherever possible. Minor connector-word edits are allowed only to improve flow and readability.
-> - Control slide layout deliberately so content remains readable and properly structured on-slide.
-> - Generate visual imagery that directly represents the slide wording and reinforces the intended meaning.
+> - Use corporate minimal styling: clean layouts, restrained color, high readability, and light backgrounds for all slide types (cover, section, content, comparison, summary).
+> - Keep slides professional and uncluttered, with clear hierarchy and consistent typography.
+> - **Honor every `Slide topic (N slide)` marker exactly**: produce N slides for that topic, one topic per slide. Never merge two topics onto one slide, and never split one topic across extra slides.
+> - **Generate one slide per bullet-grouped topic and preserve every bullet and table row.** Do not drop, collapse, or condense list items or comparison rows.
+> - Before generating slides, build the deck from this exact contract:
+>   - 1 title slide from the H1
+>   - 1 `## Session Agenda` slide
+>   - 1 slide for each `Slide topic (1 slide)` marker, in source order
+>   - 1 lab transition slide for each `### 🔬 LAB` marker, in source order
+>   - 1 wrap-up slide from final-section outcomes, when a wrap-up section exists
+>   - 1 next-module handoff slide from final-section handoff wording, when a handoff is present
+> - Do not generate separate Workshop Overview or Learning Objectives slides. Use any summary or objectives text only as source context for the title, agenda, or presenter notes.
+> - Count the planned slides before generating. If the planned deck is 21 slides or fewer, generate one complete deck.
+> - If the planned deck exceeds 21 slides, split it into two decks at a natural section boundary. Do not compress the material into 21 slides.
+> - A 21-slide output is incomplete when the planned deck exceeds 21 slides or when any `Slide topic`, lab transition, prompt/code block, table row, wrap-up outcome, or handoff point is missing.
+> - Generate dedicated slides for the title and `## Session Agenda`; do not skip, merge, or reorder these.
+> - Do not merge two `Slide topic` markers onto one slide, even if the content appears related.
+> - Do not move a topic across section boundaries.
+> - **Treat workshop wording as authoritative — do not summarize, paraphrase, or reword away meaning.** Minor connector-word edits are allowed only to improve flow.
+> - **Reproduce code blocks, prompts, commands, and numeric values verbatim** — never truncate or rewrite them.
+> - **Do not add content that is not in the source**: no NotebookLM-authored intro, recap, agenda, transitions, or marketing phrasing.
+> - Do not introduce concepts, tools, commands, workflows, named features, or examples that are not present in this source file.
+> - Do not use or infer content from other workshop modules.
+> - Preserve the section order and numbering exactly as written.
+> - Render **AI Safety Moment** and **Usage Optimization** callouts in distinct badged content boxes, keeping their wording verbatim so the tip category is instantly recognizable.
+> - Preserve prompt and code blocks verbatim on the corresponding "Show me" and "Now you try" slides.
+> - If content does not fit on one slide, reduce visual decoration; do not summarize, drop rows, or combine topics.
+> - Control slide layout deliberately so content stays readable and structured on-slide.
+> - Generate visual imagery that directly represents the slide wording and reinforces its meaning.
 
 **Duration**: 60 minutes (single session, presentation-only)  
 **Format**: Presentation  
@@ -37,11 +59,9 @@
 - **Instruction-file familiarity** — can author and maintain repository instruction files to encode conventions instead of re-prompting them
 - **Telemetry literacy** — can read session and monthly usage views to spot inefficiencies such as broad prompts and repeated retries
 
-## Workshop Overview
+**Module summary**: This standalone workshop consolidates GitHub Copilot usage-optimization practices into one focused session on getting the most quality per credit. It treats tokens, AI Consumption (AIC), and usage-based billing as first-class engineering concerns, then works outward through context economics, model routing, prompt and scope discipline, agentic efficiency, and sustained measurement. The goal is a repeatable operating model where developers consistently choose the cheapest path that still meets the quality bar — trimming context noise, routing tasks to right-sized models, bounding agentic loops, and using telemetry as tuning feedback. Every section pairs a cost lever with an AI Safety Moment so optimization never undercuts accountability or review gates.
 
-This standalone workshop consolidates GitHub Copilot usage-optimization practices into one focused session on getting the most quality per credit. It treats tokens, AI Consumption (AIC), and usage-based billing as first-class engineering concerns, then works outward through context economics, model routing, prompt and scope discipline, agentic efficiency, and sustained measurement. The goal is a repeatable operating model where developers consistently choose the cheapest path that still meets the quality bar — trimming context noise, routing tasks to right-sized models, bounding agentic loops, and using telemetry as tuning feedback. Every section pairs a cost lever with an AI Safety Moment so optimization never undercuts accountability or review gates.
-
-### Learning Objectives
+**Learning objectives**:
 
 - Explain how tokens, AIC, and usage-based billing connect day-to-day workflow choices to cost
 - Apply context window hygiene — front-load context once, detect context rot, and re-scope deliberately

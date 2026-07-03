@@ -2,31 +2,32 @@
 
 ## Discussion Prompts by Section
 
-### 1. Foundations Baseline: Surfaces, Trust, and Interaction Fundamentals (24 min)
+### 1. Foundations Baseline: Surfaces, Chat, CLI, and Enterprise Trust (18 min)
 
 - Which Copilot surface gives your team the highest productivity today, and why?
-- What review gate is most commonly skipped under delivery pressure?
-- Where do new users most often misunderstand privacy boundaries?
+- Where do new users most often misunderstand cross-surface context or privacy boundaries?
+- Which enterprise control should be explained before developers use cloud, app, or terminal workflows?
 
-### 2. Guided Workflows: VS Code Chat, CLI Controls, and Mode Selection (30 min)
+### 2. Guided Workflows: Inline Assistance and Built-in Copilot Experiences (20 min)
 
-- Which task types are best handled in CLI versus editor chat?
+- Which tasks should stay with inline completions or inline chat instead of moving to Agent mode?
 - Where does your team overuse Agent mode for simple work?
-- Which CLI control should be standardized first (`/settings`, `/chronicle`, or `/security-review`)?
+- What review gate should always accompany a move from Ask or Plan into Agent?
 
-### 3. Tokenomics, Billing Controls, and Model-Routing Decisions (30 min)
+### 3. Tokenomics, GitHub AI Credits, Usage Visibility, and Model Routing (24 min)
 
-- Which recurring tasks are currently overpaying on model choice?
+- Which recurring tasks are currently overpaying because of broad context or model choice?
 - How should teams balance speed, quality, and spend under deadlines?
-- Where should Auto mode be the default versus manual model selection?
+- Where should Auto mode be the default versus manual selection of fast/general-purpose or deep-reasoning models?
+- Where can developers see real usage signals, warnings, limits, and model cost indicators before changing models?
 
-### 4. Context Windows, Autonomy Spectrum, and AI Development Harness (20 min)
+### 4. Context Windows, Autonomy Spectrum, and Custom Agents (18 min)
 
-- Which workflows should remain human-first even with mature tooling?
-- What should trigger escalation to larger context windows or higher reasoning?
-- Which sandbox or governance control gives your team the best safety-to-speed ratio?
+- What signs tell your team that context rot is affecting answer quality?
+- Which workflows should remain human-first even when custom agents are available?
+- What least-privilege rule should every custom-agent starter include?
 
-### 5. Wrap-up and Module 2 Handoff (16 min)
+### 5. Wrap-up and Module 2 Handoff (10 min)
 
 - Which Foundations practice should become mandatory in your team this month?
 - What baseline policy should be codified before scaling autonomy?

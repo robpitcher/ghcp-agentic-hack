@@ -136,9 +136,26 @@ The workshop file is the **authoritative content** for each module. It serves tw
 - Discussion prompts should live in `presenter.md` so they can be used directly as Slidev talk track
 - Diagrams described in text or Unicode box-drawing translate to visual diagrams on slides
 
+#### Required NotebookLM Anti-Drift Header
+
+Every `*-workshop.md` must open (immediately under the H1) with a `> **NotebookLM generation instructions**:` blockquote that keeps NotebookLM from summarizing, merging, or dropping source material. Treat this block as a fixed header that survives all content edits — never delete or weaken it when rewriting sections. It must instruct NotebookLM to:
+
+- Honor every `Slide topic (N slide)` marker exactly — one topic per slide, never merge two topics or split one across extra slides
+- Preserve every bullet and table row; do not drop, collapse, or condense them
+- Treat workshop wording as authoritative — no summarizing, paraphrasing, or rewording away meaning (connector-word edits only)
+- Reproduce code blocks, prompts, commands, and numeric values verbatim
+- Add no NotebookLM-authored intro, recap, agenda, transitions, or marketing phrasing
+- Preserve section order and numbering exactly
+- Render **AI Safety Moment** and **Usage Optimization** callouts in distinct badged boxes with their wording verbatim
+- Generate dedicated title and `## Session Agenda` slides; do not generate separate Workshop Overview or Learning Objectives slides
+- Count the planned slides before generating; if the deck would exceed 21 slides, split it into two decks at a natural section boundary rather than compressing, merging, or dropping source content
+- Treat any 21-slide output as incomplete when the planned deck exceeds 21 slides or when any slide topic, lab transition, prompt/code block, table row, or wrap-up outcome is missing
+
+Because the workshop content relies on this header, use explicit `Slide topic (N slide)` markers in the `### Key Points` bullets so NotebookLM has an unambiguous slide-count contract to honor.
+
 #### File Structure
 
-- **Header**: H1 title → bold metadata fields (`Duration`, `Format`, `Audience`, `Prerequisites`) → `## Workshop Overview` → `### Learning Objectives`
+- **Header**: H1 title → NotebookLM anti-drift header → bold metadata fields (`Duration`, `Format`, `Audience`, `Prerequisites`) → module summary and learning objectives as source context → `## Session Agenda`
 - **Agenda**: `## Session Agenda` with a table mapping sections to topics and time
 - **Sections**: `## N. Section Title (XX min)` (H2, numbered, with time in parentheses)
 
@@ -153,6 +170,17 @@ Each numbered section follows this pattern (in order):
 | `### 🖥️ Demo: Title` | ✅ Yes (sections 2+) | Numbered steps the instructor performs live |
 | `### 💡 Optimization Tip: Title` | ✅ Yes (sections 2+) | Token/usage/quality optimization advice from the usage plan |
 | `### 🔬 LAB: Exercise N — Title` | ✅ Yes (sections 2+) | Instructor pause indicator — references the matching LAB exercise |
+
+#### Show-Then-Do Pattern with Slide Pointers
+
+Sections should follow a "show, then do" rhythm: a short facilitator demonstration, a guided repeat, then a small "try this now" variation before the open-ended lab. Give every show/do step an explicit on-slide pointer so developers know exactly which slide drives each hands-on beat. Use `Slide topic (1 slide)` markers labeled for their role, for example:
+
+```markdown
+- **Slide topic (1 slide): Show me — <task>** — facilitator demonstrates <exact prompt/command> and the expected result.
+- **Slide topic (1 slide): Now you try — <task>** — attendees repeat the same step, then apply one small variation.
+```
+
+Keep the demonstrated prompts/commands in fenced code blocks so they render with a copy button and are reproduced verbatim on-slide.
 
 #### LAB Indicator Format
 
@@ -234,6 +262,8 @@ All slide images live in `public/images/<workshop-folder-name>/`.
 - Prefer tables and bullets over prose paragraphs
 - Use `**bold**` for key terms on first use; backtick formatting for commands, paths, config values
 - Do not invent GitHub features — only document what actually exists
+- **MCP is taught as a concept, not a server**: explain what MCP is, how it exposes tools/context to agents, and what it means for agentic developers and governance. Do not demonstrate, configure, or depend on any specific MCP server (no Confluence, Jira, or Perforce walkthroughs).
+- **Keep enterprise/domain examples in the separate skills library**, not baked into module content. Modules stay generic and reusable; domain relevance lives in standalone `workshops/<workshop>/skills/<slug>/SKILL.md` skills registered in `site/data/workshops.ts`.
 - Store section discussion prompts in `presenter.md` instead of `*-workshop.md`
 - Slide presenter notes provide talk-track guidance, not repeat slide content
 

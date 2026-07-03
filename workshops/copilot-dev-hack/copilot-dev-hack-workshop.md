@@ -1,5 +1,38 @@
 # GitHub Copilot Developer Training — Capstone Hack
 
+> **NotebookLM generation instructions**:
+>
+> - Brand the deck with GitHub and Microsoft visual identity.
+> - Use corporate minimal styling: clean layouts, restrained color, high readability, and light backgrounds for all slide types (cover, section, content, comparison, summary).
+> - Keep slides professional and uncluttered, with clear hierarchy and consistent typography.
+> - **Honor every `Slide topic (N slide)` marker exactly**: produce N slides for that topic, one topic per slide. Never merge two topics onto one slide, and never split one topic across extra slides.
+> - **Generate one slide per bullet-grouped topic and preserve every bullet and table row.** Do not drop, collapse, or condense list items or comparison rows.
+> - Before generating slides, build the deck from this exact contract:
+>   - 1 title slide from the H1
+>   - 1 `## Session Agenda` slide
+>   - 1 slide for each `Slide topic (1 slide)` marker, in source order
+>   - 1 lab transition slide for each `### 🔬 LAB` marker, in source order
+>   - 1 wrap-up slide from final-section outcomes, when a wrap-up section exists
+>   - 1 next-module handoff slide from final-section handoff wording, when a handoff is present
+> - Do not generate separate Workshop Overview or Learning Objectives slides. Use any summary or objectives text only as source context for the title, agenda, or presenter notes.
+> - Count the planned slides before generating. If the planned deck is 21 slides or fewer, generate one complete deck.
+> - If the planned deck exceeds 21 slides, split it into two decks at a natural section boundary. Do not compress the material into 21 slides.
+> - A 21-slide output is incomplete when the planned deck exceeds 21 slides or when any `Slide topic`, lab transition, prompt/code block, table row, wrap-up outcome, or handoff point is missing.
+> - Generate dedicated slides for the title and `## Session Agenda`; do not skip, merge, or reorder these.
+> - Do not merge two `Slide topic` markers onto one slide, even if the content appears related.
+> - Do not move a topic across section boundaries.
+> - **Treat workshop wording as authoritative — do not summarize, paraphrase, or reword away meaning.** Minor connector-word edits are allowed only to improve flow.
+> - **Reproduce code blocks, prompts, commands, and numeric values verbatim** — never truncate or rewrite them.
+> - **Do not add content that is not in the source**: no NotebookLM-authored intro, recap, agenda, transitions, or marketing phrasing.
+> - Do not introduce concepts, tools, commands, workflows, named features, or examples that are not present in this source file.
+> - Do not use or infer content from other workshop modules.
+> - Preserve the section order and numbering exactly as written.
+> - Render **AI Safety Moment** and **Usage Optimization** callouts in distinct badged content boxes, keeping their wording verbatim so the tip category is instantly recognizable.
+> - Preserve prompt and code blocks verbatim on the corresponding "Show me" and "Now you try" slides.
+> - If content does not fit on one slide, reduce visual decoration; do not summarize, drop rows, or combine topics.
+> - Control slide layout deliberately so content stays readable and structured on-slide.
+> - Generate visual imagery that directly represents the slide wording and reinforces its meaning.
+
 **Duration**: 60 minutes
 **Format**: Hands-on hackathon with 5 scenario options
 **Audience**: Developers, engineers (completed Modules 1-3)
@@ -7,11 +40,10 @@
 
 ---
 
-## Workshop Overview
-
-This capstone module is hands-on: attendees build and validate a custom Copilot agent in real time. This is not a lecture or passive learning—it is practical problem-solving. Attendees choose from 5 business problem scenarios (Code Review, Test Generation, Documentation, Bug Triage, or Bring Your Own) and have 40 minutes to create an agent prototype that addresses that problem. They test it, refine it, and demo outcomes to the group.
+**Module summary**: This capstone module is hands-on: attendees build and validate a custom Copilot agent in real time. This is not a lecture or passive learning—it is practical problem-solving. Attendees choose from 5 business problem scenarios (Code Review, Test Generation, Documentation, Bug Triage, or Bring Your Own) and have 40 minutes to create an agent prototype that addresses that problem. They test it, refine it, and demo outcomes to the group.
 
 By the end, attendees walk out with:
+
 1. A working custom Copilot agent prototype or validated first iteration
 2. Agent instructions saved in their repository
 3. Evidence from at least one realistic test case
@@ -23,7 +55,7 @@ This module assumes Modules 1-3 are complete (attendees understand Copilot basic
 
 ---
 
-## Learning Objectives
+**Learning objectives**:
 
 By the end of this module, attendees will be able to:
 
@@ -38,6 +70,16 @@ By the end of this module, attendees will be able to:
 ✅ **Ship and share** a working agent with their team
 
 ✅ **Iterate and improve** agents based on team feedback and real-world usage
+
+---
+
+## Session Agenda
+
+| Time | Topic |
+|------|-------|
+| 10 min | Planning: warm-up, scenario choice, and success criteria |
+| 40 min | Building: project setup, custom instructions, agent creation, and testing |
+| 10 min | Demo and feedback: show outcomes, discuss improvements, and close |
 
 ---
 
