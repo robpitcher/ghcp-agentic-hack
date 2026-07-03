@@ -117,6 +117,15 @@ for (const deckPath of decks) {
     mkdirSync(dirname(target), { recursive: true })
     cpSync(slidevOut, target, { recursive: true })
 
+    const imagesDir = resolve(target, 'images')
+    if (existsSync(imagesDir)) {
+      for (const entry of readdirSync(imagesDir, { withFileTypes: true })) {
+        if (entry.name !== workshopName) {
+          rmSync(resolve(imagesDir, entry.name), { recursive: true, force: true })
+        }
+      }
+    }
+
     // Create SPA fallback copies for slide routes (/1, /2, ... /N)
     const indexHtml = resolve(target, 'index.html')
     if (existsSync(indexHtml)) {
