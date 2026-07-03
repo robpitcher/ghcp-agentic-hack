@@ -197,22 +197,13 @@ background: /images/copilot-dev-foundations/slide-21-eb54cdd5.png
 Use the autonomy spectrum to show that delegation should grow only as reversibility, confidence, and review controls improve. Suggestion-only support, reviewed planning, and constrained execution are different risk postures. Ask learners where they would draw the approval line for tasks that touch dependencies, security, or shared infrastructure.
 -->
 
----
-layout: image-full
-background: /images/copilot-dev-foundations/slide-22-17e83e80.png
----
-
-<!--
-Define a custom agent as a scoped assistant configuration with a purpose, instructions, and limited tools. The value is repeatability: teams can encode a safe pattern once instead of rewriting the same prompt in every session. Stress that custom agents should start with least privilege, explicit stop conditions, and review requirements.
--->
-
----
+--- 
 layout: image-full
 background: /images/copilot-dev-foundations/slide-23-50b14454.png
 ---
 
 <!--
-Use the guardrail starter prompt to show what a safe delegation contract looks like. It should name purpose, allowed scope, approval rules, and an escalation off-ramp before any tool access is granted. Ask the room what permission they would remove first if the agent only needs to suggest a single-file change.
+Use the guardrail checklist prompt to show what a safe delegation contract looks like. It should name purpose, allowed scope, approval rules, and an escalation off-ramp before any tool access is granted. Ask the room what permission they would remove first if the agent only needs to suggest a single-file change.
 -->
 
 ---
@@ -221,7 +212,7 @@ background: /images/copilot-dev-foundations/slide-24-ca838063.png
 ---
 
 <!--
-The practice step is about tightening boundaries, not making the agent more impressive. Learners should remove one unnecessary permission or add one ambiguity stop rule so the agent knows when to pause. Reinforce that narrower tools and clearer stop rules reduce blast radius while preserving usefulness.
+The practice step is about tightening boundaries, not making the agent more impressive. Learners should remove one unnecessary permission or add one ambiguity stop rule so the future agent knows when to pause. Reinforce that narrower tools and clearer stop rules reduce blast radius while preserving usefulness.
 -->
 
 ---
@@ -230,7 +221,7 @@ background: /images/copilot-dev-foundations/slide-25-285186c6.png
 ---
 
 <!--
-This final lab consolidates custom-agent guardrails with the least-privilege habit from the whole module. Learners should create a constrained starter, apply it to one low-risk delegated task, and identify the human review gate. Close the lab by asking them to name one boundary that would make the agent stop instead of continuing.
+This final lab consolidates custom-agent guardrails with the least-privilege habit from the whole module. Learners should draft a constrained guardrail checklist and prepare the Module 2 handoff without creating agent or skill files yet. Close the lab by asking them to name one boundary that would make a future agent stop instead of continuing.
 -->
 
 ---

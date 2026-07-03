@@ -73,6 +73,15 @@ Define an agent as a bounded worker that can plan, act, observe results, and ada
 
 ---
 layout: image-full
+background: /images/copilot-dev-agentic/slide-custom-agent-17e83e80.png
+---
+
+<!--
+Define a custom agent as a scoped assistant configuration with a purpose, instructions, and limited tools. The value is repeatability: teams can encode a safe pattern once instead of rewriting the same prompt in every session. Connect this to the Agentic lab where learners create `.github/agents/copilot-quest-implementer.agent.md` with explicit scope, stop conditions, and review requirements.
+-->
+
+---
+layout: image-full
 background: /images/copilot-dev-agentic/slide-08-bf050940.png
 ---
 
@@ -95,7 +104,7 @@ background: /images/copilot-dev-agentic/slide-10-ca9ee9f2.png
 ---
 
 <!--
-This lab turns the first section into a concrete contract. Learners should write a strong prompt and a stage 5 skill contract with task, scope, constraints, definition of done, and stop conditions. Encourage them to test whether another developer could review the artifact without additional verbal explanation.
+This lab turns the first section into a concrete repo-local skill artifact. Learners should write a strong prompt and create `.github/skills/copilot-quest-guessing/SKILL.md` with task, scope, constraints, definition of done, and stop conditions. Encourage them to test whether another developer could review the artifact without additional verbal explanation.
 -->
 
 ---
@@ -122,7 +131,7 @@ background: /images/copilot-dev-agentic/slide-13-0df2a2a8.png
 ---
 
 <!--
-Use this lab to practice handoff discipline. Learners should decompose a task into scoped roles or steps, define what evidence each agent or worker must return, and decide where human review happens. The success measure is not speed alone; it is whether the handoff can be audited and stopped safely.
+Use this lab to practice custom-agent creation and handoff discipline. Learners should create `.github/agents/copilot-quest-implementer.agent.md`, decompose a task into scoped roles or steps, define what evidence each agent or worker must return, and decide where human review happens. The success measure is not speed alone; it is whether the handoff can be audited and stopped safely.
 -->
 
 ---

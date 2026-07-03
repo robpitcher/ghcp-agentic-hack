@@ -21,11 +21,11 @@
 - Where should Auto mode be the default versus manual selection of fast/general-purpose or deep-reasoning models?
 - Where can developers see real usage signals, warnings, limits, and model cost indicators before changing models?
 
-### 4. Context Windows, Autonomy Spectrum, and Custom Agents (18 min)
+### 4. Context Windows, Autonomy Spectrum, and Delegation Guardrails (18 min)
 
 - What signs tell your team that context rot is affecting answer quality?
 - Which workflows should remain human-first even when custom agents are available?
-- What least-privilege rule should every custom-agent starter include?
+- What least-privilege rule should every custom-agent guardrail checklist include before Module 2 artifact creation?
 
 ### 5. Wrap-up and Module 2 Handoff (10 min)
 
