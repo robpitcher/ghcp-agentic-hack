@@ -252,12 +252,9 @@ All slide images live in `public/images/<workshop-folder-name>/`.
 *-workshop.md split into part packets → part PPTX files → convert-pptx.py --parts → one .slidev.md deck
 ```
 
-- The `*-workshop.md` is the **source of truth**; PPTX files are gitignored.
-- Use one source packet and one PPTX when the planned deck fits within the slide cap.
-- Split larger workshop sources into part packets at natural section boundaries; name source packets `workshops/<folder>/<folder>-workshop-part-1.md`, `workshops/<folder>/<folder>-workshop-part-2.md`, and so on.
-- Name resulting PPTX files `source/pptx/<folder>-part-1.pptx`, `source/pptx/<folder>-part-2.pptx`, and so on.
-- Run `npm run convert:pptx -- <folder>` for a single PPTX, or `npm run convert:pptx:parts -- <folder>` to combine split PPTX files into one Slidev deck.
-- After conversion, replace placeholder `<!-- Presenter notes -->` with talk-track from `presenter.md` (and supporting workshop content where needed)
+- The `*-workshop.md` is the **source of truth**; PPTX files are gitignored
+- Run `npm run convert:pptx -- <folder>` to extract images and generate the Slidev file
+- After conversion, replace every `<!-- TODO: author presenter notes ... -->` placeholder by **opening each rendered slide image** and writing talk-track bullets that cover every panel shown (2-3 bullets per topic on two-topic slides), plus one audience hook from `presenter.md`. See the mandatory post-conversion checklist in `.github/instructions/slidev.instructions.md`. The converter does **not** infer notes from the workshop file — NotebookLM merges topics onto single images, so there is no reliable 1:1 mapping.
 - Python deps: `pip install python-pptx Pillow`
 
 ## Content Guidelines

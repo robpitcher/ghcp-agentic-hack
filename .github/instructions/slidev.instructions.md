@@ -170,7 +170,22 @@ background: /images/copilot-dev-foundations/slide-02-a1b2c3d4.png
 
 ### PPTX-generated decks
 
-For decks generated from the PPTX conversion pipeline, the script produces placeholder `<!-- Presenter notes -->` comments. These **must** be replaced with real notes manually after conversion, using the corresponding `*-workshop.md` as the source of truth.
+For decks generated from the PPTX conversion pipeline, the script produces placeholder `<!-- TODO: author presenter notes ... -->` comments. These **must** be replaced with real notes manually after conversion, using the corresponding rendered slide image as the primary source and `*-workshop.md` + `presenter.md` for detail.
+
+> **Important**: The converter does **not** infer notes from the workshop file. It intentionally emits TODO placeholders because it cannot see what is rendered on each slide. NotebookLM frequently merges **two topic panels onto one image**, so there is no reliable 1:1 mapping between workshop "Slide topic" bullets and slides.
+
+#### Mandatory post-conversion notes checklist
+
+After running `npm run convert:pptx -- <folder>`, for **every** slide:
+
+1. **Open the rendered slide image** (`public/images/<folder>/slide-NN-*.png`) — it is the ground truth for what the slide shows.
+2. **Identify every panel/topic** on the slide (many images contain two side-by-side panels).
+3. **Write bullets that cover every panel**:
+   - Single-topic slide → 3-5 talk-track bullets.
+   - Two-topic slide → **2-3 bullets for each topic**, grouped by panel with a short bold label naming each panel so it is clear which bullets narrate which side.
+4. **Add exactly one audience/engagement hook** (draw from `presenter.md` where a relevant prompt exists).
+5. Keep notes as talk-track (what to SAY) — do not restate on-slide text; no timing instructions.
+6. **Before merge, confirm no slide still contains a `TODO:` placeholder.**
 
 ## Tables
 

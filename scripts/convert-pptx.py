@@ -2,8 +2,10 @@
 Convert PPTX input into a Slidev markdown deck.
 
 Produces full-bleed background slides — each PPTX slide becomes a single
-background image. Presenter notes are added as empty placeholders for
-manual editing.
+background image. Presenter notes are emitted as clearly-marked TODO
+placeholders and MUST be authored manually by reading each rendered slide
+image (see the post-conversion checklist in
+.github/instructions/slidev.instructions.md).
 
 Usage:
   python scripts/convert-pptx.py <workshop-folder-name>
@@ -467,16 +469,13 @@ def main():
     print(f"Slides:     {total_slides}")
     print(f"Title:      {title}")
 
-    # Generate presenter notes from workshop source if PPTX has no notes
-    has_pptx_notes = any(n for n in notes_list)
+    # Generate placeholder notes for slides with no authored PPTX speaker notes.
+    # We deliberately do NOT infer notes from the workshop file by slide index —
+    # that produced misaligned, wrong notes. Notes are authored manually against
+    # each rendered slide image (see slidev.instructions.md post-conversion checklist).
     if not has_pptx_notes:
-        workshop_file = workshop_dir / f"{workshop_name}-workshop.md"
-        if workshop_file.exists():
-            print(f"Notes:      Generating from {workshop_file.name}")
-            workshop_notes = generate_notes_from_workshop(workshop_file, len(image_files))
-            notes_list = workshop_notes
-        else:
-            print(f"Notes:      No workshop file found, using placeholders")
+        print("Notes:      Emitting TODO placeholders — author notes per slide image")
+    notes_list = [n if n else NOTES_TODO_PLACEHOLDER for n in notes_list]
 
     # Generate Slidev markdown
     md_content = generate_slidev(image_files, notes_list, workshop_name, title)
@@ -487,7 +486,8 @@ def main():
     print(f"\nOutput:     {output_path}")
     print(f"\nConversion complete!")
     print(f"  - {len(image_files)} slides with background images")
-    print(f"  - Add presenter notes in <!-- --> comments")
+    print(f"  - Replace every TODO placeholder: author notes from each slide image")
+    print(f"    (see slidev.instructions.md post-conversion checklist)")
     print(f"  - Preview: npx slidev {output_path.relative_to(ROOT)}")
 
 
