@@ -2,7 +2,7 @@
 
 ## Overview
 
-This lab creates the **Copilot Quest starter** — a Wordle-style CLI word game that Module 2 will extend. Exercises move from baseline recognition to guided workflow use, then optimization decisions, then custom-agent guardrails so the result is a reusable game starter for the rest of the sequence.
+This lab creates the **Copilot Quest starter** — a Wordle-style CLI word game that Module 2 will extend. Exercises move from baseline recognition to guided workflow use, then optimization decisions, then delegation-readiness guardrails so the result is a reusable game starter for the rest of the sequence.
 
 - **Total time**: ~30 minutes
 - **Prerequisites**:
@@ -133,35 +133,34 @@ Using https://learn.microsoft.com/en-us/visualstudio/ide/copilot-usage-and-model
 - ✅ Documented one context reset trigger
 - ✅ Produced one reusable prompt/checklist asset for the next module
 
-## Exercise 4: Stage 4 Delegation — Custom Agent Guardrails
+## Exercise 4: Stage 4 Delegation Readiness — Custom Agent Guardrails
 
 **⏱️ Time**: 7 min  
-**📋 Objective**: Create a constrained custom-agent starter that applies least-privilege scope, explicit approval, and escalation behavior
+**📋 Objective**: Draft least-privilege guardrails for a future custom agent without creating agent or skill files yet
 
-**Warm-up (try this now)**: Ask Copilot to draft one safe delegation boundary before creating files.
+**Warm-up (try this now)**: Ask Copilot to draft one safe delegation boundary before creating any reusable artifacts.
 
 ```text
 Write one guardrail for a custom agent that may only suggest low-risk single-file changes.
 ```
 
-Expected result: Copilot returns a narrow permission or review rule you can copy into the starter agent instructions.
+Expected result: Copilot returns a narrow permission or review rule you can carry forward into the future Module 2 agent instructions.
 
-1. Create `.github/agents/foundations-helper.agent.md` with a narrow, single-purpose scope.
-2. Add a purpose statement for low-risk single-file suggestions related to **Copilot Quest**.
-3. Add allowed scope, disallowed scope, required approval before edits, and an off-ramp for ambiguity.
-4. Ask the agent to suggest one low-risk change in a single file.
-5. Review proposed edits before acceptance and reject any request for broader permissions.
-6. Document which least-privilege boundary kept the task safe.
-7. Add a handoff note for Module 2 that states what the custom agent may help with and what still requires human review.
+1. Draft a custom-agent guardrail checklist for low-risk single-file suggestions related to **Copilot Quest**.
+2. Include purpose, allowed scope, disallowed scope, required approval before edits, and an off-ramp for ambiguity.
+3. Map each guardrail to the risk it reduces, such as broad file access, unclear acceptance criteria, or unreviewed edits.
+4. Ask Copilot to tighten the checklist by removing one unnecessary permission or adding one ambiguity stop rule.
+5. Identify what would justify promoting the checklist into an actual custom agent in Module 2.
+6. Add a handoff note for Module 2 that states which custom agent and skill artifacts should be created there and what still requires human review.
 
 **🛡️ Safety checkpoint**: Keep tool permissions minimal and reject unclear or high-blast-radius tasks.
 
 ### ✅ Success Criteria
 
-- ✅ Created a custom-agent starter file
-- ✅ Added explicit purpose, scope, approval, and escalation guardrails
-- ✅ Tested one constrained low-risk delegation path
-- ✅ Reviewed suggested edits before acceptance
+- ✅ Drafted custom-agent guardrails without creating agent or skill files
+- ✅ Added explicit purpose, scope, approval, and escalation boundaries
+- ✅ Identified the promotion trigger for Module 2 artifact creation
+- ✅ Reviewed the checklist before using it as reusable guidance
 - ✅ Documented one Stage 4 delegation policy
 - ✅ Captured a handoff note for the next module
 

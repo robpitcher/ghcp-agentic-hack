@@ -13,179 +13,222 @@ layout: image-full
 background: /images/copilot-dev-foundations/slide-01-837b0b73.png
 ---
 
-<!-- Presenter notes for cover slide -->
+<!--
+Welcome the room to Foundations as the operating model for safe, cost-aware Copilot use. Emphasize that this module is not a feature tour; it is a set of repeatable habits for choosing the right surface, scope, and review gate. Ask learners to keep one current task in mind so each concept can be connected to something they actually do.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-02-98029e6e.png
 ---
 
-<!-- Section: Foundations Baseline: Surfaces, Chat, CLI, and Enterprise Trust (18 min). Slide topic (1 slide): Where GitHub Copilot Lives (IDE + Cloud, incl. Copilot app where available) — Copilot spans IDEs, terminal workflows, GitHub.com, cloud-based assistance, and Copilot app surfaces where available, letting developers move between coding, automation, and repository-level understanding with more consistent workflows across surfaces. AI Safety Moment: confirm org policy, repository access, and cross-surface context boundaries before using cloud or app experiences. Slide topic (1 slide): Look Around VS Code Chat Extension (slash commands, file references like #file/#selection) — VS Code chat gives developers slash commands, participants, and precise # references such as #file and #selection so the assistant sees the smallest useful context for the question. Usage Optimization: start with #selection or #file, then expand scope only when the answer proves more context is needed. Slide topic (1 slide): Look Around Copilot CLI — GitHub Copilot CLI is installed using the official setup guidance at <https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli> and supports terminal-first chat, command explanation, command generation, /settings, help discovery, and review-oriented workflows such as security checks before committing. AI Safety Moment: generated commands must be reviewed before execution, especially when they change files, install dependencies, or affect remote systems. -->
+<!--
+Use the agenda to show that the module moves from surfaces and trust into workflow modes, usage economics, context quality, and delegation boundaries. Point out that the labs are placed where learners can immediately repeat the pattern they just saw. Set the expectation that each section has both a productivity angle and a safety or usage-control angle.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-03-f1e42ce3.png
 ---
 
-<!-- Slide topic (1 slide): Enterprise Privacy and IP (anchor safety segment: data handling, retention, duplicate detection, admin governance) — Enterprise privacy and IP controls include data-handling expectations, retention settings, duplicate-detection options, content exclusions, auditability, and admin governance that align Copilot usage with organizational policy. AI Safety Moment: treat generated output as draft material, verify provenance-sensitive suggestions, and keep human accountability with the developer and reviewer. -->
+<!--
+Explain that Copilot now appears across IDEs, terminals, GitHub.com, cloud workflows, and app surfaces where they are available. The key teaching point is continuity: developers can move between coding, repository understanding, and automation, but context and permissions do not automatically mean the same thing everywhere. Ask learners which surface they use most today and which one carries the highest review risk in their environment.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-04-af4d8c66.png
 ---
 
-<!-- Presenter notes -->
+<!--
+Introduce VS Code Chat as the place where scope control begins. Call out slash commands, participants, and precise references such as #file and #selection as ways to give Copilot only the context it needs. Reinforce that smaller context usually improves reviewability, speed, and cost before anyone reaches for broader workspace context.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-05-22990c0d.png
 ---
 
-<!-- Presenter notes -->
+<!--
+Frame Copilot CLI as terminal-first assistance that still requires command review. It can explain commands, draft commands, help with settings discovery, and support review-oriented workflows, but the developer remains responsible for what runs. Pause on commands that install dependencies, delete files, or touch remotes and ask what approval or dry-run step would be appropriate.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-06-fbbe1d73.png
 ---
 
-<!-- Presenter notes -->
+<!--
+Anchor enterprise privacy and IP as part of normal developer workflow, not a compliance detour. Mention data handling, retention, duplicate detection, content exclusions, auditing, and admin policy as examples of controls that shape how Copilot should be used. Reinforce that generated output is draft material and provenance-sensitive work still needs human validation.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-07-2e326bf2.png
 ---
 
-<!-- Section: Guided Workflows: Inline Assistance and Built-in Copilot Experiences (20 min). Slide topic (1 slide): Inline Chat and Code Completions — Code completions accelerate flow authoring while inline chat supports scoped transformations such as refactors, type changes, and localized explanations, giving two complementary interaction patterns for day-to-day work. Usage Optimization: choose code completions for low-friction flow edits that are not billed in GitHub AI Credits on paid plans, and choose inline chat for bounded transformations with clear selection context. Slide topic (1 slide): Built-in Copilot Experiences (Ask, Plan, and Agent as examples) — GitHub Copilot includes built-in experiences that match different levels of autonomy: Ask supports explanation and low-risk understanding, Plan supports reviewed sequencing before edits, and Agent supports constrained multi-step execution when the task has clear acceptance criteria. Treat Ask, Plan, and Agent as familiar examples of Copilot assistance patterns rather than the full universe of possible custom or delegated agents. AI Safety Moment: higher-autonomy built-in experience use requires stronger approval gates, narrower scope, and explicit human review before accepting changes. Slide topic (1 slide): Show me — compare Ask, Plan, and Agent — facilitator demonstrates this scoped VS Code chat prompt and states the expected result: Ask explains options, Plan proposes reviewed steps, and Agent identifies executable work. AI Safety Moment: keep higher autonomy behind approval gates. -->
+<!--
+Use this lab transition to slow the room down before moving into higher-autonomy workflows. Learners should identify the Copilot surfaces available to them, try scoped chat or CLI orientation, and name the safety boundaries that apply. Make the success criterion concrete: they should leave the lab able to explain which context they shared and why it was appropriate.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-08-424345ab.png
 ---
 
-<!-- Slide topic (1 slide): Now you try — vary the scoped mode comparison — attendees repeat the same step, then swap #selection for #file before the lab to compare how a larger scope changes the response. Usage Optimization: compare only one scope variable at a time so the result is easier to evaluate. -->
+<!--
+Contrast inline completions with inline chat as two different flow tools. Completions are best for low-friction continuation while inline chat is better for selected transformations, explanations, and localized refactors. Emphasize that bounded selection context makes the result easier to inspect than a broad request over an entire file or project.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-09-2dec853c.png
 ---
 
-<!-- Safety: Keep mode escalation tied to task risk: Ask before Plan, Plan before Agent, and Agent only when acceptance criteria and rollback are clear. -->
+<!--
+Introduce Ask, Plan, and Agent as examples of increasing autonomy rather than as labels to memorize. Ask is for understanding, Plan is for reviewed sequencing, and Agent is for constrained multi-step execution when acceptance criteria are clear. Tie the safety moment to mode escalation: higher autonomy should bring narrower scope, stronger approval gates, and explicit review.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-10-30906493.png
 ---
 
-<!-- Presenter notes -->
+<!--
+Use the Show me slide to demonstrate how the same selected code can be handled differently by Ask, Plan, and Agent. Focus the audience on the review gate each mode implies, not just the wording of the response. Ask learners what would have to be true before they allowed the Agent path to make changes.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-11-94b43307.png
 ---
 
-<!-- Presenter notes -->
+<!--
+Use the Now you try slide to isolate one variable: changing #selection to #file. The learning goal is to compare how larger context changes the answer and the amount of material the developer must review. Encourage learners to capture when the larger scope helped and when it only added noise.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-12-0daa9eaf.png
 ---
 
-<!-- Section: Tokenomics, GitHub AI Credits, Usage Visibility, and Model Routing (24 min). Slide topic (1 slide): What Is a Token? (input/output/cache economics) — Tokens represent input, output, and cached context across prompts, responses, instructions, files, and chat history, so context size directly affects cost, latency, and quality stability. Usage Optimization: trim noisy context before sending it and reuse cached or summarized context when it preserves accuracy. Slide topic (1 slide): What Are GitHub AI Credits? Usage-Based Billing (legacy PRUs → AI Credits) — GitHub AI Credits are the billing unit for Copilot usage under usage-based billing: model interactions consume input tokens, output tokens, and cached tokens, and the token cost is converted into AI credits where 1 AI credit equals $0.01 USD. Code completions and next edit suggestions are not billed in AI credits on paid plans, while Copilot Chat, Copilot CLI, Copilot cloud agent, Copilot Spaces, Spark, and third-party coding agents can consume AI credits. Usage Optimization: treat AI credit telemetry as workflow tuning feedback and set budget guardrails before scaling usage. Slide topic (1 slide): How Do I Know My Usage? (chat, CLI, and monthly views) — Use the Microsoft Learn usage article as a point of reference for what usage windows can show: monthly usage, remaining balance, plan details, warning thresholds, and plan-specific behavior. For day-to-day checks, use the available product entry points: in VS Code Chat, open usage from the GitHub/Copilot icon in the bottom-right status area; in Copilot CLI, run /usage to view usage, /context to inspect current context-window token usage, and /model to view or change model routing. For account-level monthly usage and billing, use GitHub billing or Copilot settings because monthly credit pools and overage behavior depend on plan and organization policy. Learn more: <https://learn.microsoft.com/en-us/visualstudio/ide/copilot-usage-and-models?view=visualstudio>. Usage Optimization: check actual usage commands and model controls before switching to higher-cost models or scaling agentic workflows. -->
+<!--
+This lab reinforces the show-then-do rhythm for scoped assistance. Learners should run a similar task across inline assistance and Ask, Plan, and Agent so they can feel the change in autonomy. Remind them that the output is not complete until they can name the review step they would apply before accepting it.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-13-f2162550.png
 ---
 
-<!-- Slide topic (1 slide): What Is a Model? (model routing guide — how to choose) — A model is the engine that interprets context and generates a response; routing should match model capability to task complexity, cost sensitivity, and review risk. Microsoft guidance for Visual Studio and GitHub Copilot model guidance recommend Auto for most prompts because it routes based on reliability and availability and can reduce model cost; developers can use the model picker to view cost indicators, then switch models for genuinely complex tasks. Usage Optimization: use Auto model routing for routine work when available, choose fast/general-purpose models for straightforward tasks, and reserve deep-reasoning models for ambiguity-heavy planning, debugging, or architecture decisions. -->
+<!--
+Define tokens as the unit of context and output that drives latency, cost, and sometimes quality stability. Make clear that instructions, chat history, file references, tool results, and generated responses can all add to the context budget. Ask learners where noisy context tends to enter their own Copilot sessions.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-14-a6688050.png
 ---
 
-<!-- Safety: Do not optimize spend by skipping tests, validation, security checks, or human review. -->
+<!--
+Explain GitHub AI Credits as the billing unit used for usage-based Copilot interactions. Highlight the practical distinction that paid-plan code completions and next edit suggestions are not billed in AI credits, while chat, CLI, cloud agents, Spaces, Spark, and third-party coding agents can consume credits. The takeaway is not to avoid powerful workflows, but to use telemetry and budget guardrails before scaling them.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-15-4433beab.png
 ---
 
-<!-- Presenter notes -->
+<!--
+Use this slide to turn usage visibility into a daily operating habit. Mention VS Code usage entry points, CLI /usage, /context, and /model, plus GitHub billing or Copilot settings for account-level monthly views where policy allows. Emphasize that checking real usage signals before changing models prevents accidental cost escalation.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-16-ec49d51e.png
 ---
 
-<!-- Presenter notes -->
+<!--
+Describe models as engines with different capability, latency, and cost profiles. Auto is the default recommendation for routine work because it lets the platform route based on availability and reliability, while fast models fit bounded tasks and deeper reasoning fits ambiguous or high-risk work. Ask learners to state a one-sentence rationale before switching away from Auto.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-17-a3e239b9.png
 ---
 
-<!-- Section: Context Windows, Autonomy Spectrum, and Custom Agents (18 min). Slide topic (1 slide): Anatomy of the Context Window (compaction + context rot) — Context windows combine instructions, history, referenced files, tool results, and outputs; quality degrades when sessions accumulate noise, stale assumptions, or compaction artifacts. Usage Optimization: reset, summarize, or re-scope when context rot appears instead of piling more history into the same thread. Slide topic (1 slide): Autonomy Spectrum and Delegating Permissions — Autonomy should scale with reversibility, blast radius, and confidence, from suggestion-only support to reviewed plans to constrained execution with explicit approval gates. AI Safety Moment: high-impact tasks require narrow permissions, human approval, and clear rollback before delegated execution. Slide topic (1 slide): What Is a Custom Agent? — A custom agent is a scoped assistant configuration with a defined purpose, instructions, and limited tools that make delegation repeatable without making permissions broad by default. AI Safety Moment: design custom agents with least privilege, explicit stop conditions, and review requirements before granting tool access. -->
+<!--
+Use the checklist prompt as a practical bridge from usage data to routing decisions. The point is to have Copilot help convert scattered product controls into a team habit: check usage, inspect context, choose a model, and document why. Reinforce that deeper reasoning is valuable when it prevents rework, not when it is used as a default.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-18-ab4864ff.png
 ---
 
-<!-- Slide topic (1 slide): Show me — define custom-agent guardrails — facilitator demonstrates this prompt and states the expected result: a short custom-agent starter that names purpose, allowed scope, approval rule, and escalation off-ramp. AI Safety Moment: make permission boundaries explicit before autonomy increases. -->
+<!--
+The practice prompt asks learners to produce one reusable routing rule and one cost-savings tip. Encourage rules that are specific enough to apply later, such as staying on Auto for bounded documentation work or resetting context before retrying a failing prompt. Ask for one volunteer example and test whether the rule includes task shape, risk, and review burden.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-19-814e7c8a.png
 ---
 
-<!-- Safety: Do not grant broad file, command, or network access when a custom agent only needs to suggest a small change. -->
+<!--
+Use this lab transition to connect tokens, AI credits, model routing, and context hygiene into one optimization exercise. Learners should compare a broad prompt with a scoped prompt and explain the model route they would choose. Remind them that cost control must never replace tests, security checks, or human review.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-20-365ed987.png
 ---
 
-<!-- Presenter notes -->
+<!--
+Explain the context window as a working memory made of instructions, history, files, tool outputs, and generated content. Context rot happens when stale assumptions, noisy history, or compaction artifacts start steering answers away from the current task. Give learners permission to reset, summarize, or re-scope instead of endlessly adding more context to a degraded thread.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-21-eb54cdd5.png
 ---
 
-<!-- Presenter notes -->
+<!--
+Use the autonomy spectrum to show that delegation should grow only as reversibility, confidence, and review controls improve. Suggestion-only support, reviewed planning, and constrained execution are different risk postures. Ask learners where they would draw the approval line for tasks that touch dependencies, security, or shared infrastructure.
+-->
 
----
-layout: image-full
-background: /images/copilot-dev-foundations/slide-22-17e83e80.png
----
-
-<!-- Section: Wrap-up and Module 2 Handoff (10 min). Foundations set default operating behaviors for trust, quality, and cost-aware execution across IDE, CLI, cloud, GitHub.com, and Copilot app surfaces where available. Strong outcomes come from mode discipline, context hygiene, explicit acceptance criteria, model-routing decisions, and budget-aware defaults instead of ad hoc prompting. Module 2 builds on this baseline with instruction layering, tool orchestration, and repeatable autonomous control loops. -->
-
----
+--- 
 layout: image-full
 background: /images/copilot-dev-foundations/slide-23-50b14454.png
 ---
 
-<!-- Presenter notes -->
+<!--
+Use the guardrail checklist prompt to show what a safe delegation contract looks like. It should name purpose, allowed scope, approval rules, and an escalation off-ramp before any tool access is granted. Ask the room what permission they would remove first if the agent only needs to suggest a single-file change.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-24-ca838063.png
 ---
 
-<!-- Presenter notes -->
+<!--
+The practice step is about tightening boundaries, not making the agent more impressive. Learners should remove one unnecessary permission or add one ambiguity stop rule so the future agent knows when to pause. Reinforce that narrower tools and clearer stop rules reduce blast radius while preserving usefulness.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-25-285186c6.png
 ---
 
-<!-- Presenter notes -->
+<!--
+This final lab consolidates custom-agent guardrails with the least-privilege habit from the whole module. Learners should draft a constrained guardrail checklist and prepare the Module 2 handoff without creating agent or skill files yet. Close the lab by asking them to name one boundary that would make a future agent stop instead of continuing.
+-->
 
 ---
 layout: image-full
 background: /images/copilot-dev-foundations/slide-26-6b652162.png
 ---
 
-<!-- Presenter notes -->
+<!--
+Use the closing slide to summarize the baseline learners carry into Module 2. Strong Copilot outcomes come from scoped context, mode discipline, usage-aware model routing, explicit acceptance criteria, and review gates. Position Module 2 as an expansion into instruction layering, tool orchestration, and repeatable autonomous control loops rather than a reset of these fundamentals.
+-->

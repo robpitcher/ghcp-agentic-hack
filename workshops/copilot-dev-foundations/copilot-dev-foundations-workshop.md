@@ -14,7 +14,7 @@
 >   - 1 lab transition slide for each `### 🔬 LAB` marker, in source order
 >   - No extra recap, wrap-up, section-divider, or handoff slides unless the source contains an explicit `Slide topic` marker for that slide
 > - Ignore marker examples inside this slide-generation instruction block when counting `Slide topic` and `### 🔬 LAB` markers.
-> - The planned deck for this module is 25 slides: 1 title slide, 1 Session Agenda slide, 19 source `Slide topic` slides, and 4 lab transition slides.
+> - The planned deck for this module is 24 slides: 1 title slide, 1 Session Agenda slide, 18 source `Slide topic` slides, and 4 lab transition slides.
 > - Do not generate separate Workshop Overview or Learning Objectives slides. Use any summary or objectives text only as source context for the title, agenda, or presenter notes.
 > - Count the planned slides before generating. If the planned deck is 21 slides or fewer, generate one complete deck.
 > - If the planned deck exceeds 21 slides, split it into two decks at a natural section boundary. Do not compress the material into 21 slides.
@@ -39,7 +39,7 @@
 **Audience**: Developers with basic GitHub Copilot exposure  
 **Prerequisites**: VS Code, GitHub Copilot extension, GitHub Copilot CLI
 
-**Module summary**: This Foundations workshop introduces the core Copilot mental model before agentic scaling. The module starts with where Copilot lives across IDE, cloud, GitHub.com, the Copilot app where available, and terminal workflows, then anchors enterprise privacy and IP responsibilities. It then moves into inline assistance, built-in Copilot experiences such as Ask, Plan, and Agent, CLI controls, tokenomics, GitHub AI Credits, usage dashboards, model routing, and context-window quality. It closes with least-privilege autonomy and conceptual custom-agent guardrails so learners leave with a safe, cost-aware operating model for daily use.
+**Module summary**: This Foundations workshop introduces the core Copilot mental model before agentic scaling. The module starts with where Copilot lives across IDE, cloud, GitHub.com, the Copilot app where available, and terminal workflows, then anchors enterprise privacy and IP responsibilities. It then moves into inline assistance, built-in Copilot experiences such as Ask, Plan, and Agent, CLI controls, tokenomics, GitHub AI Credits, usage dashboards, model routing, and context-window quality. It closes with least-privilege autonomy and delegation guardrails so learners leave with a safe, cost-aware operating model for daily use.
 
 **Learning objectives**:
 
@@ -48,7 +48,7 @@
 - Use key Copilot CLI controls and installation guidance in safe workflows
 - Interpret tokens, GitHub AI Credits, dashboards, and model-routing tradeoffs for cost-aware execution
 - Detect context rot and apply context window hygiene practices
-- Apply least-privilege delegation and scoped custom-agent guardrails
+- Apply least-privilege delegation and prepare scoped guardrails for later custom-agent creation
 
 ## Session Agenda
 
@@ -57,7 +57,7 @@
 | 1 | Foundations baseline: surfaces, chat, CLI, and enterprise trust | 18 min |
 | 2 | Guided workflows: inline assistance and built-in Copilot experiences | 20 min |
 | 3 | Tokenomics, GitHub AI Credits, usage visibility, and model routing | 24 min |
-| 4 | Context windows, autonomy spectrum, and custom agents | 18 min |
+| 4 | Context windows, autonomy spectrum, and delegation guardrails | 18 min |
 | 5 | Wrap-up and Module 2 handoff | 10 min |
 | — | Hands-on labs across four exercises | 30 min |
 | **Total** | **Content plus hands-on labs** | **120 min** |
@@ -158,23 +158,22 @@ Prefer Auto for ordinary tasks, fast/general-purpose models for clear bounded wo
 
 > **Instructor**: Pause here for hands-on practice. Students complete Exercise 3 (7 min) comparing scoped versus broad prompts, usage signals, and model-routing decisions.
 
-## 4. Context Windows, Autonomy Spectrum, and Custom Agents (18 min)
+## 4. Context Windows, Autonomy Spectrum, and Delegation Guardrails (18 min)
 
 ### Key Points
 
 - **Slide topic (1 slide): Anatomy of the Context Window (compaction + context rot)** — Context windows combine instructions, history, referenced files, tool results, and outputs; quality degrades when sessions accumulate noise, stale assumptions, or compaction artifacts. **Usage Optimization**: reset, summarize, or re-scope when context rot appears instead of piling more history into the same thread.
 - **Slide topic (1 slide): Autonomy Spectrum and Delegating Permissions** — Autonomy should scale with reversibility, blast radius, and confidence, from suggestion-only support to reviewed plans to constrained execution with explicit approval gates. **AI Safety Moment**: high-impact tasks require narrow permissions, human approval, and clear rollback before delegated execution.
-- **Slide topic (1 slide): What Is a Custom Agent?** — A custom agent is a scoped assistant configuration with a defined purpose, instructions, and limited tools that make delegation repeatable without making permissions broad by default. **AI Safety Moment**: design custom agents with least privilege, explicit stop conditions, and review requirements before granting tool access.
-- **Slide topic (1 slide): Show me — define custom-agent guardrails** — facilitator demonstrates this prompt and states the expected result: a short custom-agent starter that names purpose, allowed scope, approval rule, and escalation off-ramp. **AI Safety Moment**: make permission boundaries explicit before autonomy increases.
+- **Slide topic (1 slide): Show me — define custom-agent guardrails** — facilitator demonstrates this prompt and states the expected result: a short guardrail checklist that names purpose, allowed scope, approval rule, and escalation off-ramp. **AI Safety Moment**: make permission boundaries explicit before autonomy increases.
 
   ```text
-  Draft a least-privilege custom-agent starter for low-risk single-file suggestions, including purpose, allowed scope, approval rule, and escalation off-ramp.
+  Draft a least-privilege custom-agent guardrail checklist for low-risk single-file suggestions, including purpose, allowed scope, approval rule, and escalation off-ramp.
   ```
 
 - **Slide topic (1 slide): Now you try — tighten the custom-agent boundary** — attendees repeat the same step, then apply one small variation by removing an unnecessary tool permission or adding an ambiguity stop rule before the lab. **AI Safety Moment**: narrower tools and clearer stop rules reduce blast radius.
 
   ```text
-  Tighten this custom-agent starter by removing one unnecessary permission and adding one ambiguity stop rule.
+  Tighten this custom-agent guardrail checklist by removing one unnecessary permission and adding one ambiguity stop rule.
   ```
 
 ### 🛡️ Safety Moment
@@ -182,19 +181,19 @@ Prefer Auto for ordinary tasks, fast/general-purpose models for clear bounded wo
 - Do not grant broad file, command, or network access when a custom agent only needs to suggest a small change.
 - Require the agent to stop and ask for human review when scope, risk, or acceptance criteria are unclear.
 
-### 🖥️ Demo: Least-Privilege Custom-Agent Starter
+### 🖥️ Demo: Least-Privilege Custom-Agent Guardrails
 
-1. Draft a custom-agent purpose statement for low-risk single-file suggestions.
+1. Draft a custom-agent guardrail checklist for low-risk single-file suggestions.
 2. Add allowed scope, disallowed scope, approval rules, and escalation behavior.
-3. Review the starter for permissions that can be removed before use.
+3. Review the checklist for permissions that can be removed before Module 2 artifact creation.
 
 ### 💡 Optimization Tip: Reuse Guardrails, Not Broad Context
 
-Reusable custom-agent instructions reduce repeated prompt setup, but they should encode narrow defaults rather than broad access. Scope the agent once, then keep each task prompt short and specific.
+Reusable custom-agent guardrails reduce repeated prompt setup, but they should encode narrow defaults rather than broad access. Draft the boundaries once, then create the actual agent and skill artifacts in Module 2.
 
 ### 🔬 LAB: Exercise 4 — Stage 4 Delegation — Custom Agent Guardrails
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 4 (7 min) creating a constrained custom-agent starter and applying least-privilege guardrails to one low-risk delegated task.
+> **Instructor**: Pause here for hands-on practice. Students complete Exercise 4 (7 min) drafting constrained custom-agent guardrails and preparing the Module 2 handoff without creating agent or skill files yet.
 
 ## 5. Wrap-up and Module 2 Handoff (10 min)
 

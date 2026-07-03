@@ -71,6 +71,12 @@ These must match across all files:
 - Architecture & decision flowchart diagrams (verbatim)
 - Learning objectives and key concepts tested in quizzes
 
+### Module Artifact Boundaries
+
+- **Foundations** may introduce custom-agent concepts and draft guardrail checklists, but it should not create agent or skill files.
+- **Agentic** is where learners create the concrete repo-local artifacts: a reusable `SKILL.md` skill and a `.github/agents/*.agent.md` custom agent.
+- Keep LAB, workshop, quiz, presenter notes, and slide presenter notes aligned with this boundary when editing either module.
+
 ## Document Structure Conventions
 
 ### Slidev Files (`*.slidev.md`)

@@ -13,7 +13,7 @@
 >   - 1 slide for each `Slide topic (1 slide)` marker, in source order
 >   - 1 lab transition slide for each `### 🔬 LAB` marker, in source order
 >   - No extra recap, wrap-up, section-divider, or handoff slides unless the source contains an explicit `Slide topic` marker for that slide
-> - The planned deck for this module is 18 slides: 1 title slide, 1 Session Agenda slide, 13 source `Slide topic` slides, and 3 lab transition slides.
+> - The planned deck for this module is 19 slides: 1 title slide, 1 Session Agenda slide, 14 source `Slide topic` slides, and 3 lab transition slides.
 > - Do not generate separate Workshop Overview or Learning Objectives slides. Use any summary or objectives text only as source context for the title, agenda, or presenter notes.
 > - Count the planned slides before generating. If the planned deck is 21 slides or fewer, generate one complete deck.
 > - Before generating visuals, produce a slide manifest with one row per planned slide: slide number, source marker, source line/topic, slide type, and exact source title.
@@ -44,7 +44,7 @@
 **Audience**: Developers who completed Foundations
 **Prerequisites**: Module 1 completion and familiarity with Ask/Plan/Agent mode
 
-**Module summary**: This Intermediate module maps directly to the Agentic operating layer: standing instructions, memory behavior, strong prompts, skills, tool choices, and controlled execution loops. It explicitly builds on Foundations by turning the Stage 3 reusable checklist or prompt asset and the Stage 4 delegation guardrails into more repeatable Stage 5 and Stage 6 workflows. The emphasis is not just getting answers, but designing repeatable, auditable workflows where autonomy is deliberate. Learners finish with a practical framework for when to ask directly, when to plan, when to use an agent, and how to keep cost and risk in balance.
+**Module summary**: This Intermediate module maps directly to the Agentic operating layer: standing instructions, memory behavior, strong prompts, skills, tool choices, and controlled execution loops. It explicitly builds on Foundations by turning the Stage 3 reusable checklist or prompt asset and the Stage 4 delegation guardrails into concrete Stage 5 skill and Stage 6 custom-agent artifacts. The emphasis is not just getting answers, but designing repeatable, auditable workflows where autonomy is deliberate. Learners finish with a practical framework for when to ask directly, when to plan, when to use an agent, and how to keep cost and risk in balance.
 
 **Learning objectives**:
 
@@ -85,6 +85,7 @@
 ### Key Points
 
 - **Slide topic (1 slide): What Is an Agent?** — define an agent as a bounded worker that can plan, act, observe results, and adapt over multiple steps to complete an objective such as fixing a bug, preparing a summary, or investigating a failing test. Emphasize that the value comes from iterative execution, tool use, and evidence gathering, not just better text generation. **AI Safety Moment**: action-capable systems need explicit oversight, stop conditions, escalation paths, and human review before high-impact changes are accepted.
+- **Slide topic (1 slide): What Is a Custom Agent?** — define a custom agent as a scoped assistant configuration with a defined purpose, instructions, and limited tools that make delegation repeatable without making permissions broad by default. Connect this directly to the Module 2 lab artifact because learners will create `.github/agents/copilot-quest-implementer.agent.md` after practicing skill creation. **AI Safety Moment**: design custom agents with least privilege, explicit stop conditions, and review requirements before granting tool access.
 - **Slide topic (1 slide): What Is a Skill?** — define a skill as a reusable, trusted capability package that teaches Copilot how to perform a recurring task with specific scope, constraints, expected outputs, and acceptance gates. Position skills as privileged workflow guidance because they can steer repeated tool use and handoffs across sessions or teams. **AI Safety Moment**: review skill content and trust boundaries before enabling capabilities that reach external systems, change dependencies, touch production-like resources, or use elevated tools.
 - **Slide topic (1 slide): When to Use One or the Other?** — reframe the choice as an Ask/Plan/Agent complexity decision matrix instead of a vague human/tool/agent runtime preference. Use Ask for low-complexity questions or deterministic edits with clear context, Plan for medium-complexity work that needs decomposition and human approval before execution, and Agent for high-complexity, multi-step work with branching evidence, tool use, and checkpoints. **Usage Optimization**: map task complexity to Ask, Plan, or Agent so teams avoid overusing expensive autonomous flows when a direct answer or reviewed plan is enough.
 
@@ -97,15 +98,16 @@
 ### 🛡️ Safety Moment
 
 - Agents are action-capable, so they need stop criteria before they begin.
+- Custom agents make delegation repeatable, so their purpose, tools, stop conditions, and review gates must be explicit.
 - Skills are reusable capability contracts, so review them like any other privileged workflow asset.
 - The Ask/Plan/Agent choice should reduce risk and overhead, not simply maximize autonomy.
 
-### 🖥️ Demo: Build a Strong Prompt and Skill Contract
+### 🖥️ Demo: Build a Strong Prompt and Skill File
 
-- **Show me — classify guidance into prompt fields and a skill contract** — facilitator demonstrates the prompt below and states the expected result: one strong-prompt field set, one instruction candidate, one memory candidate, and one reusable skill contract boundary.
+- **Show me — classify guidance into prompt fields and a skill file** — facilitator demonstrates the prompt below and states the expected result: one strong-prompt field set, one instruction candidate, one memory candidate, and one reusable `SKILL.md` boundary.
 
   ```text
-  Classify this task guidance into a strong prompt, instruction, memory, and skill contract fields: "When changing guess validation, keep changes scoped, run the smallest relevant test, stop if tests fail, and ask before changing dependencies."
+  Classify this task guidance into a strong prompt, instruction, memory, and SKILL.md fields: "When changing guess validation, keep changes scoped, run the smallest relevant test, stop if tests fail, and ask before changing dependencies."
   ```
 
 - **Now you try — vary the off-ramp and acceptance gate** — attendees repeat the same step, then apply one small variation by changing the off-ramp or acceptance gate before the lab.
@@ -114,9 +116,9 @@
 
 Start with a strong prompt when the work is one-off or exploratory. Promote the pattern into a skill only when the same task, scope, constraints, definition of done, and off-ramp are reused often enough to justify a trusted capability package.
 
-### 🔬 LAB: Exercise 1 — Strong Prompt and Stage 5 Skill Contract
+### 🔬 LAB: Exercise 1 — Strong Prompt and Stage 5 Skill Creation
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 1 (10 min) by separating prompt anatomy from skill design, then creating a Stage 5 skill contract with explicit acceptance gates.
+> **Instructor**: Pause here for hands-on practice. Students complete Exercise 1 (10 min) by separating prompt anatomy from skill design, then creating `.github/skills/copilot-quest-guessing/SKILL.md` with explicit acceptance gates.
 
 ## 3. Agentic Loops and Tool Control Points (25 min)
 
@@ -131,12 +133,12 @@ Start with a strong prompt when the work is one-off or exploratory. Promote the 
 - Bound loops before execution by defining maximum scope, checkpoints, evidence, and stop conditions.
 - Require separate verification evidence before accepting agent output.
 
-### 🖥️ Demo: Define a Bounded Agent Handoff
+### 🖥️ Demo: Define a Bounded Custom Agent Handoff
 
 - **Show me — define a handoff artifact** — facilitator demonstrates the prompt below and states the expected result: a bounded role handoff with inputs, outputs, validation checks, loop checkpoints, and evidence.
 
   ```text
-  Define a two-role agent handoff for implementing guess feedback and verifying edge cases. Include each role's inputs, outputs, validation checks, loop checkpoints, and the artifact that must be handed off.
+  Define a two-role custom agent handoff for implementing guess feedback and verifying edge cases. Include each role's inputs, outputs, validation checks, loop checkpoints, and the artifact that must be handed off.
   ```
 
 - **Now you try — add a verifier variation** — attendees repeat the same step, then apply one small variation by changing the verifier's required evidence before the lab.
@@ -145,9 +147,9 @@ Start with a strong prompt when the work is one-off or exploratory. Promote the 
 
 Short loops keep autonomy useful without making review expensive. Ask the agent to stop after a bounded milestone, report evidence, and wait for approval before broadening scope or using higher-risk tools.
 
-### 🔬 LAB: Exercise 2 — Stage 6 Multi-Agent Handoff Drill
+### 🔬 LAB: Exercise 2 — Stage 6 Custom Agent Handoff Drill
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 2 (10 min) by running a role-based handoff with explicit loop checkpoints, tool boundaries, and verification evidence.
+> **Instructor**: Pause here for hands-on practice. Students complete Exercise 2 (10 min) by creating `.github/agents/copilot-quest-implementer.agent.md`, then running a role-based handoff with explicit loop checkpoints, tool boundaries, and verification evidence.
 
 ## 4. Background/Cloud Agents, `/init`, Instruction Layering, and Optimization Controls (20 min)
 

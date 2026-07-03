@@ -473,6 +473,7 @@ def main():
     # We deliberately do NOT infer notes from the workshop file by slide index —
     # that produced misaligned, wrong notes. Notes are authored manually against
     # each rendered slide image (see slidev.instructions.md post-conversion checklist).
+    has_pptx_notes = any(notes_list)
     if not has_pptx_notes:
         print("Notes:      Emitting TODO placeholders — author notes per slide image")
     notes_list = [n if n else NOTES_TODO_PLACEHOLDER for n in notes_list]
