@@ -20,7 +20,7 @@ The repeatable part was not the specific module content. The repeatable part was
 |------|--------|
 | Source alignment | Agentic and Advanced workshop guides mostly matched `plan20260615-moments.md` for topic coverage and AI Safety / Usage Optimization placement. |
 | Generated decks | Image-based Slidev/PPTX output made exact text verification difficult, and speaker notes were generic or truncated in places. |
-| Slide-generation drift | AI slide generator added or renamed slide concepts when the source did not force a manifest-first generation pass. |
+| Slide-generation drift | slide-generation tool added or renamed slide concepts when the source did not force a manifest-first generation pass. |
 | Terminology | Advanced content mixed `AI credits` and `AICs`; AIC wording should stay consistent with the planning document. |
 | Product accuracy | Agent Package Manager should be framed as an ecosystem packaging option, not implied as the same kind of official GitHub deployment surface as repo or Marketplace distribution. |
 
@@ -31,7 +31,7 @@ Use this loop for each module refresh:
 1. **Plan**: Write or update the module moment plan with exact topic names, AI Safety Moment callouts, and Usage Optimization callouts.
 2. **Author**: Update `*-workshop.md` first because it is the source of truth.
 3. **Map**: Create a manifest table before slide generation: slide number, source marker, source line/topic, slide type, exact source title.
-4. **Generate**: Feed AI slide generator only the workshop source and require the manifest to be preserved exactly.
+4. **Generate**: Feed slide-generation tool only the workshop source and require the manifest to be preserved exactly.
 5. **Convert**: Run the PPTX conversion pipeline to produce full-bleed Slidev image slides.
 6. **Hydrate notes**: Replace generated or placeholder Slidev comments with 3-5 sentence presenter notes mapped to the manifest row.
 7. **Synchronize**: Check LAB exercises and QUIZ questions against the same manifest and section order.

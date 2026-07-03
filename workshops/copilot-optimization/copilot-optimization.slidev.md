@@ -2,7 +2,7 @@
 theme: ../../themes/github
 title: "Copilot Usage Optimization"
 info: |
-  Generated from AI slide generator presentation for copilot-optimization
+  Generated from slide-generation tool presentation for copilot-optimization
 ghFooterTitle: "Copilot Usage Optimization"
 ghFooterLabel: ""
 drawings:

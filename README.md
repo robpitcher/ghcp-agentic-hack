@@ -104,6 +104,8 @@ npm run convert:pptx -- <workshop-folder-name>
 Larger classes can split the source into generation packets, export one PPTX per part, and combine them during conversion:
 
 ```text
+workshops/<workshop-folder-name>/<workshop-folder-name>-workshop-part-1.md
+workshops/<workshop-folder-name>/<workshop-folder-name>-workshop-part-2.md
 source/pptx/<workshop-folder-name>-part-1.pptx
 source/pptx/<workshop-folder-name>-part-2.pptx
 ```

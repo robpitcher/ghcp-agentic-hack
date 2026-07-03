@@ -80,17 +80,17 @@ Primary sources reviewed:
 8. **Validate the updated content contract**
    If changes are implemented later, keep the workshop, LAB, quiz, slidev notes, and site metadata aligned and validate with the existing build path.
 
-9. **Strengthen AI slide generator anti-drift instructions (do first)**
-   Before rewriting any section content, harden the `> **Slide generation instructions**:` block at the top of every `*-workshop.md` so AI slide generator stops summarizing, merging, or dropping source material. Content edits in the todos above must preserve these hardened instructions rather than overwrite them. Apply the strengthened block below to all four core/optional decks (`copilot-dev-foundations`, `copilot-dev-agentic`, `copilot-dev-advanced`, `copilot-optimization`) and mirror the guidance into `.github/copilot-instructions.md` so new workshop files inherit it.
+9. **Strengthen slide-generation tool anti-drift instructions (do first)**
+   Before rewriting any section content, harden the `> **Slide generation instructions**:` block at the top of every `*-workshop.md` so slide-generation tool stops summarizing, merging, or dropping source material. Content edits in the todos above must preserve these hardened instructions rather than overwrite them. Apply the strengthened block below to all four core/optional decks (`copilot-dev-foundations`, `copilot-dev-agentic`, `copilot-dev-advanced`, `copilot-optimization`) and mirror the guidance into `.github/copilot-instructions.md` so new workshop files inherit it.
 
    10. **Review instructions and README for needed changes**
-      After the content and AI slide generator changes are defined, review the repo instructions and docs for anything that must be updated to match: `.github/copilot-instructions.md`, `.github/instructions/slidev.instructions.md`, `.github/instructions/astro.instructions.md`, and the root `README.md` (plus any workshop-level READMEs). Confirm the show-then-do slide-pointer convention, the separate-skills-library rule, the MCP-concept-only guidance, and the hardened AI slide generator instructions are all reflected in the guidance docs, and update them where they are stale or missing.
+      After the content and slide-generation tool changes are defined, review the repo instructions and docs for anything that must be updated to match: `.github/copilot-instructions.md`, `.github/instructions/slidev.instructions.md`, `.github/instructions/astro.instructions.md`, and the root `README.md` (plus any workshop-level READMEs). Confirm the show-then-do slide-pointer convention, the separate-skills-library rule, the MCP-concept-only guidance, and the hardened slide-generation tool instructions are all reflected in the guidance docs, and update them where they are stale or missing.
 
-   ## AI slide generator anti-drift instruction block
+   ## slide-generation tool anti-drift instruction block
 
-   The current instruction block already says "do not summarize away source meaning" and forces dedicated title/overview/objectives slides, but it has fidelity gaps that let AI slide generator stray:
+   The current instruction block already says "do not summarize away source meaning" and forces dedicated title/overview/objectives slides, but it has fidelity gaps that let slide-generation tool stray:
 
-- It never tells AI slide generator to honor the `Slide topic (N slide)` markers, which appear 20–31 times per file, so topics get merged or split freely.
+- It never tells slide-generation tool to honor the `Slide topic (N slide)` markers, which appear 20–31 times per file, so topics get merged or split freely.
 - Nothing prevents dropped bullets/table rows, paraphrased code/commands/prompts, added intro/recap/marketing content, or reworded Safety/Optimization callouts.
 
 Replace the fidelity bullets with the following hardened block (adjust the title token per file, e.g. `# Module ...` vs `# Copilot ...`):

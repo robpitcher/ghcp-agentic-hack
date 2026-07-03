@@ -2,7 +2,7 @@
 theme: ../../themes/github
 title: "Copilot Dev Advanced"
 info: |
-  Generated from AI slide generator presentation for copilot-dev-advanced
+  Generated from slide-generation tool presentation for copilot-dev-advanced
 ghFooterTitle: "Copilot Dev Advanced"
 ghFooterLabel: ""
 drawings:

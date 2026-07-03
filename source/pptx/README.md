@@ -20,6 +20,10 @@ npx slidev workshops/copilot-dev-foundations/copilot-dev-foundations.slidev.md
 For larger classes, use split PPTX inputs and combine them into one Slidev deck:
 
 ```bash
+# Generate slides from source packets first
+# workshops/copilot-dev-foundations/copilot-dev-foundations-workshop-part-1.md
+# workshops/copilot-dev-foundations/copilot-dev-foundations-workshop-part-2.md
+
 # Place your files
 # source/pptx/copilot-dev-foundations-part-1.pptx
 # source/pptx/copilot-dev-foundations-part-2.pptx

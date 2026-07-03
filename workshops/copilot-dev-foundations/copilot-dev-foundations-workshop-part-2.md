@@ -1,4 +1,4 @@
-# Module 1: Foundations — Workshop Guide
+# Module 1: Foundations — Workshop Guide — Part 2
 
 > **Slide generation instructions**:
 >
@@ -15,7 +15,7 @@
 >   - 1 wrap-up slide from final-section outcomes, when a wrap-up section exists
 >   - 1 next-module handoff slide from final-section handoff wording, when a handoff is present
 > - Ignore marker examples inside this slide-generation instruction block when counting `Slide topic` and `### 🔬 LAB` markers.
-> - The planned deck for this module is 27 slides: 1 title slide, 1 Session Agenda slide, 19 source `Slide topic` slides, 4 lab transition slides, 1 wrap-up slide, and 1 Module 2 handoff slide.
+> - The planned deck for this part is 17 slides and covers Sections 3-5: tokenomics, usage visibility, model routing, context windows, autonomy, custom agents, wrap-up, and Module 2 handoff.
 > - Do not generate separate Workshop Overview or Learning Objectives slides. Use any summary or objectives text only as source context for the title, agenda, or presenter notes.
 > - Count the planned slides before generating. If the planned deck is 21 slides or fewer, generate one complete deck.
 > - If the planned deck exceeds 21 slides, split it into two decks at a natural section boundary. Do not compress the material into 21 slides.
@@ -55,63 +55,9 @@
 
 | Section | Topic | Time |
 |---------|-------|------|
-| 1 | Foundations baseline: surfaces, chat, CLI, and enterprise trust | 18 min |
-| 2 | Guided workflows: inline assistance and built-in Copilot experiences | 20 min |
 | 3 | Tokenomics, GitHub AI Credits, usage visibility, and model routing | 24 min |
 | 4 | Context windows, autonomy spectrum, and custom agents | 18 min |
 | 5 | Wrap-up and Module 2 handoff | 10 min |
-| — | Hands-on labs across four exercises | 30 min |
-| **Total** | **Content plus hands-on labs** | **120 min** |
-
-## 1. Foundations Baseline: Surfaces, Chat, CLI, and Enterprise Trust (18 min)
-
-### Key Points
-
-- **Slide topic (1 slide): Where GitHub Copilot Lives (IDE + Cloud, incl. Copilot app where available)** — Copilot spans IDEs, terminal workflows, GitHub.com, cloud-based assistance, and Copilot app surfaces where available, letting developers move between coding, automation, and repository-level understanding with more consistent workflows across surfaces. **AI Safety Moment**: confirm org policy, repository access, and cross-surface context boundaries before using cloud or app experiences.
-- **Slide topic (1 slide): Look Around VS Code Chat Extension (slash commands, file references like #file/#selection)** — VS Code chat gives developers slash commands, participants, and precise `#` references such as `#file` and `#selection` so the assistant sees the smallest useful context for the question. **Usage Optimization**: start with `#selection` or `#file`, then expand scope only when the answer proves more context is needed.
-- **Slide topic (1 slide): Look Around Copilot CLI** — GitHub Copilot CLI is installed using the official setup guidance at <https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli> and supports terminal-first chat, command explanation, command generation, `/settings`, help discovery, and review-oriented workflows such as security checks before committing. **AI Safety Moment**: generated commands must be reviewed before execution, especially when they change files, install dependencies, or affect remote systems.
-- **Slide topic (1 slide): Enterprise Privacy and IP (anchor safety segment: data handling, retention, duplicate detection, admin governance)** — Enterprise privacy and IP controls include data-handling expectations, retention settings, duplicate-detection options, content exclusions, auditability, and admin governance that align Copilot usage with organizational policy. **AI Safety Moment**: treat generated output as draft material, verify provenance-sensitive suggestions, and keep human accountability with the developer and reviewer.
-
-### 🔬 LAB: Exercise 1 — Stage 1 Baseline and Governance Signals
-
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 1 (8 min) identifying surfaces, trying scoped chat and CLI orientation, and validating safety boundaries before continuing.
-
-## 2. Guided Workflows: Inline Assistance and Built-in Copilot Experiences (20 min)
-
-### Key Points
-
-- **Slide topic (1 slide): Inline Chat and Code Completions** — Code completions accelerate flow authoring while inline chat supports scoped transformations such as refactors, type changes, and localized explanations, giving two complementary interaction patterns for day-to-day work. **Usage Optimization**: choose code completions for low-friction flow edits that are not billed in GitHub AI Credits on paid plans, and choose inline chat for bounded transformations with clear selection context.
-- **Slide topic (1 slide): Built-in Copilot Experiences (Ask, Plan, and Agent as examples)** — GitHub Copilot includes built-in experiences that match different levels of autonomy: Ask supports explanation and low-risk understanding, Plan supports reviewed sequencing before edits, and Agent supports constrained multi-step execution when the task has clear acceptance criteria. Treat Ask, Plan, and Agent as familiar examples of Copilot assistance patterns rather than the full universe of possible custom or delegated agents. **AI Safety Moment**: higher-autonomy built-in experience use requires stronger approval gates, narrower scope, and explicit human review before accepting changes.
-- **Slide topic (1 slide): Show me — compare Ask, Plan, and Agent** — facilitator demonstrates this scoped VS Code chat prompt and states the expected result: Ask explains options, Plan proposes reviewed steps, and Agent identifies executable work. **AI Safety Moment**: keep higher autonomy behind approval gates.
-
-  ```text
-  Explain how the built-in Ask, Plan, and Agent experiences would handle #selection differently for this change.
-  ```
-
-- **Slide topic (1 slide): Now you try — vary the scoped mode comparison** — attendees repeat the same step, then swap `#selection` for `#file` before the lab to compare how a larger scope changes the response. **Usage Optimization**: compare only one scope variable at a time so the result is easier to evaluate.
-
-  ```text
-  Explain how the built-in Ask, Plan, and Agent experiences would handle #file differently for this change.
-  ```
-
-### 🛡️ Safety Moment
-
-- Keep mode escalation tied to task risk: Ask before Plan, Plan before Agent, and Agent only when acceptance criteria and rollback are clear.
-- Review every proposed edit or command before accepting it, even when the assistant appears confident.
-
-### 🖥️ Demo: Scoped Inline Assistance and Built-in Copilot Experiences
-
-1. Select a small code block and ask Copilot to explain it with `#selection`.
-2. Repeat the same request with `#file` and compare the extra context.
-3. Switch the task through built-in Ask, Plan, and Agent experiences to show how autonomy changes the expected review gate.
-
-### 💡 Optimization Tip: Use the Smallest Useful Context
-
-Use inline completions for flow, inline chat for selected transformations, and mode switching only when the task complexity justifies it. Smaller prompts are easier to review, usually faster, and reduce avoidable token usage.
-
-### 🔬 LAB: Exercise 2 — Stage 2 Guided Workflow Repetition
-
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 2 (8 min) running the same task across inline assistance and Ask/Plan/Agent with scoped context.
 
 ## 3. Tokenomics, GitHub AI Credits, Usage Visibility, and Model Routing (24 min)
 
@@ -206,3 +152,5 @@ Reusable custom-agent instructions reduce repeated prompt setup, but they should
 - Module 2 builds on this baseline with instruction layering, tool orchestration, and repeatable autonomous control loops.
 
 *Workshop guide for Module 1: Foundations — GitHub Copilot Developer Training*
+
+*Part 2 slide-generation packet for GitHub Copilot Developer Foundations Workshop*
