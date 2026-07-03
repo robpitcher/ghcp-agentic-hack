@@ -4,6 +4,7 @@ dist/
 dist/site/
 .astro/
 .env
+workshops/*/public
 workshops/*/public/
 *.pptx
 playwright-report/

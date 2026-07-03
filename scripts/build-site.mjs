@@ -120,7 +120,8 @@ for (const deckPath of decks) {
     const imagesDir = resolve(target, 'images')
     if (existsSync(imagesDir)) {
       for (const entry of readdirSync(imagesDir, { withFileTypes: true })) {
-        if (entry.name !== workshopName) {
+        if (entry.isDirectory() && entry.name !== workshopName) {
+          console.log(`  Removing unused slide image bundle: images/${entry.name}/`)
           rmSync(resolve(imagesDir, entry.name), { recursive: true, force: true })
         }
       }
