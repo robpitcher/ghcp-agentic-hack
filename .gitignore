@@ -6,3 +6,5 @@ dist/site/
 .env
 workshops/*/public/
 *.pptx
+playwright-report/
+test-results/
