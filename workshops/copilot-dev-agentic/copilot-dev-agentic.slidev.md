@@ -2,7 +2,7 @@
 theme: ../../themes/github
 title: "Copilot Dev Agentic"
 info: |
-  Generated from slide-generation tool presentation for copilot-dev-agentic
+  Generated from NotebookLM presentation for copilot-dev-agentic
 ghFooterTitle: "Copilot Dev Agentic"
 ghFooterLabel: ""
 drawings:
@@ -10,259 +10,162 @@ drawings:
 transition: slide-left
 mdc: true
 layout: image-full
-background: /images/copilot-dev-agentic/slide-01-3cc0ad6c.png
+background: /images/copilot-dev-agentic/slide-01-6c97b63a.png
 ---
 
 <!--
-- Welcome learners to the intermediate, agentic operating layer of Copilot development.
-- Frame the module as moving from helpful prompts to repeatable control systems.
-- Emphasize that autonomy improves when instructions, memory, skills, and loops are designed deliberately.
-- <em>Ask the room:</em> Where does Copilot feel least repeatable in your workflow today?
+Welcome learners to the Agentic module as the bridge from individual Copilot prompts to repeatable assisted workflows. Frame the session around instruction, memory, skills, agents, tools, and guardrails as parts of one operating system. Ask learners to think about a recurring task they would like to make safer and more repeatable.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-02-de2dbf76.png
+background: /images/copilot-dev-agentic/slide-02-ea66054b.png
 ---
 
 <!--
-- Use the gear-and-loop visual to introduce agentic work as a controlled operating system.
-- Connect Foundations to this module: reusable checklists become skills, guardrails become execution controls.
-- Stress the main outcome: knowing when to stay deterministic, delegate locally, or scale execution.
-- <em>Ask the room:</em> Which is harder right now: getting answers, or making workflows auditable?
+Use the agenda to show the progression from guidance layers into agentic loops, tool use, cloud or background execution, and optimization controls. Point out that each lab turns a concept into a reusable workflow artifact. Set the expectation that autonomy increases only when scope, evidence, and review gates are explicit.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-03-44af44f5.png
+background: /images/copilot-dev-agentic/slide-03-a0049c85.png
 ---
 
 <!--
-- Walk the staircase from context strategy through controlled, repeatable delivery.
-- Call out that each objective adds one more reusable control layer.
-- Set expectations that labs will convert these ideas into CLI-ready operating habits.
-- <em>Ask the room:</em> Which objective would create the fastest improvement for your team?
+Explain instructions as standing team guidance that shapes how Copilot behaves across tasks. Use examples such as coding standards, architecture boundaries, review expectations, and security rules that belong in versioned files. Reinforce that non-negotiable guardrails should live in instructions rather than being remembered informally or retyped in every prompt.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-04-d87e170f.png
+background: /images/copilot-dev-agentic/slide-04-bfc78826.png
 ---
 
 <!--
-- Orient learners to the progression: context, design, mechanics, scale, then handoff.
-- Explain that the labs are distributed checkpoints, not a separate afterthought.
-- Preview that each section answers a practical delegation decision.
-- <em>Show of hands:</em> Who already uses instructions, memory, or skills intentionally today?
+Introduce memory as a continuity layer for durable, non-sensitive facts and preferences. Useful memory might capture a preferred test command or repository convention, but it must not store secrets, regulated data, customer identifiers, credentials, or confidential one-off details. Ask learners what belongs in repo instructions instead of memory when a rule should apply to everyone.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-05-24279e55.png
+background: /images/copilot-dev-agentic/slide-05-11077cf8.png
 ---
 
 <!--
-**Instructions:**
-- Describe instructions as versioned team policy that Copilot should consistently follow.
-- Use examples like review rules, security boundaries, and architecture constraints.
-- Emphasize: non-negotiable policy belongs in files, not repeated chat reminders.
-**Memory:**
-- Position memory as continuity for stable facts, preferences, and repository conventions.
-- Contrast useful memory, like test commands, with data that should never persist.
-- <em>Ask the room:</em> What should never be saved to memory in your environment?
+Use the hierarchy slide to explain how task requests, scoped instructions, repository guidance, and memory interact. The important rule is that memory complements durable standards; it does not override organization, repository, security, or review policy. Encourage learners to debug odd Copilot behavior by checking which guidance layer may be steering the response.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-06-78d3e04f.png
+background: /images/copilot-dev-agentic/slide-06-39d82369.png
 ---
 
 <!--
-**Context hierarchy:**
-- Explain that task requests, scoped files, repo guidance, and memory interact during execution.
-- Use conflicts as examples: the more specific, current guidance should clarify behavior.
-- Reinforce that memory complements standards; it should not override durable policy.
-**Instruction layering stack:**
-- Treat the stack as a troubleshooting map for inconsistent Copilot behavior.
-- Highlight that different folders can carry different scoped instructions and expectations.
-- <em>Ask the room:</em> Where do teams confuse convenience with governance in reusable context?
+Break a strong prompt into task, scope, constraints, definition of done, and off-ramp. Emphasize that the off-ramp matters because it tells Copilot when to stop, ask, or escalate instead of guessing. Tie this to usage optimization: clear boundaries reduce retries, broad context, and expensive correction loops.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-07-f9d95d51.png
+background: /images/copilot-dev-agentic/slide-07-e2ce2ade.png
 ---
 
 <!--
-**Layer roles:**
-- Give the litmus test: broad rule, reusable fact, or repeatable work pattern.
-- Connect this to Foundations by turning a checklist into a more reusable skill.
-**Layering example:**
-- Use test coverage: instruction requires tests, memory recalls command, skill defines execution.
-- Emphasize that the layers cooperate rather than compete for control.
-- <em>Ask the room:</em> Where should “always add tests” live for your team, and why?
+Define an agent as a bounded worker that can plan, act, observe results, and adapt over multiple steps. The value is not just better text, but iterative execution with evidence gathering and checkpoints. Reinforce that action-capable systems need oversight, stop conditions, and human review before high-impact changes are accepted.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-08-d1853a54.png
+background: /images/copilot-dev-agentic/slide-08-bf050940.png
 ---
 
 <!--
-**Well-scoped skill:**
-- Explain the skill contract: scope, task, constraints, definition of done, and off-ramp.
-- Show how missing boundaries cause over-touching, retries, or incomplete work.
-- Tie optimization to fewer rework turns because the agent starts with clearer limits.
-**Safer execution test:**
-- Frame routing as a decision: instruction, memory, reusable skill, or one-time request.
-- Use “stop if tests fail” and “ask before dependencies” as concrete gates.
-- <em>Ask the room:</em> Which skill-contract element does your team most often omit?
+Define a skill as a reusable capability package for a recurring task with scope, constraints, expected outputs, and acceptance gates. Skills are powerful because they steer repeated tool use and handoffs, so they deserve review before broad adoption. Ask learners which recurring workflow would benefit from a skill and what permission boundary it would need.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-09-1a3f2135.png
+background: /images/copilot-dev-agentic/slide-09-671cc210.png
 ---
 
 <!--
-- Transition from design concepts into hands-on classification and skill-contract writing.
-- Tell learners to make success criteria, stop conditions, and verification explicit.
-- Encourage them to think like maintainers approving a delegated workflow.
-- <em>Ask the room:</em> What acceptance gate would make this exercise safe to delegate?
+Use this decision slide to map task complexity to Ask, Plan, or Agent. Ask fits low-complexity understanding or deterministic edits, Plan fits medium-complexity work that needs reviewed sequencing, and Agent fits high-complexity work with branching evidence and tool use. Reinforce that avoiding unnecessary autonomy saves time, AIC, and review effort.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-10-bad3d8f0.png
+background: /images/copilot-dev-agentic/slide-10-ca9ee9f2.png
 ---
 
 <!--
-**What is an agent:**
-- Define an agent as a bounded worker that plans, acts, observes, and adapts.
-- Stress that value comes from iterative execution, not just better generated text.
-- Reinforce safety: action-capable systems need oversight and stop conditions.
-**Runtime decision model:**
-- Compare simple known-file work with ambiguous tasks that require branching evidence.
-- Position human or tool paths as cheaper for deterministic operations.
-- <em>Ask the room:</em> Which workflows are over-delegated today and should stay direct?
+This lab turns the first section into a concrete contract. Learners should write a strong prompt and a stage 5 skill contract with task, scope, constraints, definition of done, and stop conditions. Encourage them to test whether another developer could review the artifact without additional verbal explanation.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-11-ab02c529.png
+background: /images/copilot-dev-agentic/slide-11-df88a3bf.png
 ---
 
 <!--
-- Narrate the loop as request, decide, act, observe, then correct.
-- Point out where human inspection and evidence verification interrupt blind autonomy.
-- Make termination criteria explicit before work begins to reduce runaway loops.
-- <em>Ask the room:</em> What checkpoint would stop an agent before it wastes tokens?
+Walk through the agentic loop as request, decide, act, observe, and correct. The critical teaching point is that humans design the loop boundaries before execution, including checkpoints and termination criteria. Ask learners where they would inspect evidence before allowing the next action.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-12-f9b2ab62.png
+background: /images/copilot-dev-agentic/slide-12-ceca0119.png
 ---
 
 <!--
-**Handoff evidence:**
-- Treat diffs, tests, logs, rationale, and risks as the acceptance packet.
-- Explain that plausible output is not enough without inspectable runtime evidence.
-- Reinforce the safety rule: require evidence before trust.
-**Tools:**
-- Present tools as the auditable bridge from reasoning to files, terminals, and systems.
-- Prefer direct tools for concrete operations like search, tests, or known-file edits.
-- <em>Ask the room:</em> What evidence should always travel with your team’s handoffs?
+Define tools as the bridge from reasoning to action across files, terminals, tests, repositories, and external systems. Tools are best for concrete operations with visible inputs and outputs, such as searching code or running a targeted test. Emphasize that tool invocation is a control point requiring least privilege, constrained parameters, logging, and visible results for high-risk operations.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-13-ddefb51e.png
+background: /images/copilot-dev-agentic/slide-13-0df2a2a8.png
 ---
 
 <!--
-- Transition from loop mechanics into a role-based handoff exercise.
-- Tell learners to decide what stays human-led, delegated, or verified before acceptance.
-- Emphasize that explicit checkpoints make multi-agent work reviewable.
-- <em>Ask the room:</em> Where must verification remain human-led even with confident agents?
+Use this lab to practice handoff discipline. Learners should decompose a task into scoped roles or steps, define what evidence each agent or worker must return, and decide where human review happens. The success measure is not speed alone; it is whether the handoff can be audited and stopped safely.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-14-74480dbd.png
+background: /images/copilot-dev-agentic/slide-14-046b2fa1.png
 ---
 
 <!--
-**Background and cloud agents:**
-- Compare local sync, background, and cloud by duration, observability, and environment needs.
-- Use long builds, parallel research, and isolated dependencies as routing examples.
-- Reinforce that async only helps when there is real parallel work.
-**Boilerplate with `/init`:**
-- Present `/init` as a way to capture repeatable setup and repo guidance.
-- Connect templates to lower setup churn and more consistent starting context.
-- <em>Ask the room:</em> Which task should move off the local path, and why?
+Explain background and cloud agents as options for work that is long-running, parallelizable, or needs isolated dependencies. They are not automatically better than local synchronous work; the choice depends on duration, observability, data sensitivity, environment needs, and whether the developer has useful parallel work to do. Connect this to safe delegation by naming permissions and review paths before launching work.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-15-cd3a663c.png
+background: /images/copilot-dev-agentic/slide-15-103b0078.png
 ---
 
 <!--
-**Optimization controls:**
-- Treat model routing, context budget, permissions, and validation cadence as tuning dials.
-- Explain how poor defaults create drift, overspending, or unsafe autonomy.
-- Balance speed, quality, and cost instead of maximizing one blindly.
-**Safe workflow practices:**
-- Combine least privilege, approval gates, narrow scope, and verification as one posture.
-- Make scale-up conditional on control evidence, not confidence alone.
-- <em>Ask the room:</em> What control must exist before cloud delegation is allowed?
+Present /init as a way to create reusable setup guidance or scaffolding instead of rewriting starter prompts. The generated material should be reviewed, versioned, and refined before teams rely on it. Tie it back to instructions and skills: boilerplate becomes safer when it encodes approved defaults rather than ad hoc preferences.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-16-241e7b41.png
+background: /images/copilot-dev-agentic/slide-16-cae6fb67.png
 ---
 
 <!--
-- Transition from execution choices into guardrail and readiness mapping.
-- Tell learners to connect each path to controls, evidence, and scale-up criteria.
-- Frame this as preparation for broader rollout, not just another lab task.
-- <em>Ask the room:</em> What readiness gap would block scaling in your environment?
+Use the instruction layering stack as a troubleshooting and governance model. Organization guidance, repository instructions, scoped files, user settings, memory, and the current request can all influence behavior. Ask learners how they would investigate a response that follows a personal preference but violates a repository rule.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-17-9dee2259.png
+background: /images/copilot-dev-agentic/slide-17-f1cb4b1b.png
 ---
 
 <!--
-- Use the messy-to-structured visual as the module’s aha moment.
-- Recap the shift from ad hoc requests to reproducible systems across sessions.
-- Reinforce that the goal is an operating model, not a bag of tips.
-- <em>Ask the room:</em> Which workflow should become more repeatable next week?
+Close the concept section by treating model routing, context budgeting, permission boundaries, and validation cadence as operating dials. The goal is to balance speed, quality, cost, and safety instead of maximizing autonomy. Reinforce that least privilege, explicit approvals, narrow scope, and regular verification form the reusable posture for agentic work.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-18-f5f00905.png
+background: /images/copilot-dev-agentic/slide-18-d3e3240b.png
 ---
 
 <!--
-- Walk through the equation from clear contracts to reliable autonomy.
-- Explain that scoped access and verification make stronger delegation acceptable.
-- Position governance-aware execution as the reason autonomy can scale safely.
-- <em>Ask the room:</em> What evidence proves a workflow is ready for broader orchestration?
--->
-
----
-layout: image-full
-background: /images/copilot-dev-agentic/slide-19-6163c6f4.png
----
-
-<!--
-- Close by connecting this module’s operating layer to Advanced orchestration.
-- Explain that Module 3 reuses these controls for multiagent and deployment-ready work.
-- Keep the final message centered on security, accountability, and scalable patterns.
-- <em>Ask the room:</em> What control will you carry into advanced orchestration first?
+This lab asks learners to map guardrails across stages 6 and 7 before moving into advanced orchestration. They should name the model strategy, context budget, tool permissions, validation cadence, and stop condition for a workflow. End by asking what evidence would convince them the workflow is ready for a higher-autonomy path.
 -->

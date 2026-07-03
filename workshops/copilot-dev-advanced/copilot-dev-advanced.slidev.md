@@ -2,7 +2,7 @@
 theme: ../../themes/github
 title: "Copilot Dev Advanced"
 info: |
-  Generated from slide-generation tool presentation for copilot-dev-advanced
+  Generated from NotebookLM presentation for copilot-dev-advanced
 ghFooterTitle: "Copilot Dev Advanced"
 ghFooterLabel: ""
 drawings:
@@ -10,274 +10,153 @@ drawings:
 transition: slide-left
 mdc: true
 layout: image-full
-background: /images/copilot-dev-advanced/slide-01-29284dc2.png
+background: /images/copilot-dev-advanced/slide-01-3bbeb64c.png
 ---
 
 <!--
-- Welcome learners back and position this as the advanced operating layer.
-- Emphasize orchestration agents coordinate work; they do not remove human ownership.
-- Connect the diagram to research, execution, and retrieval working as accountable lanes.
-- <em>Ask the room:</em> Which agent role would your team trust first, and why?
+Welcome learners to Advanced as the module where orchestration, integrations, and deployment paths become explicit design decisions. Frame the session around when to coordinate multiple agents, when to add tools or protocols, and how to prepare for Day 2 hack work. Emphasize that advanced does not mean unconstrained; it means better-designed boundaries.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-02-809d5ec5.png
+background: /images/copilot-dev-advanced/slide-02-4024b831.png
 ---
 
 <!--
-- Frame the workshop around scaling responsibly, not adding complexity for its own sake.
-- Preview four recurring themes: orchestration, governance, debugging, and deployment readiness.
-- Explain that Day 2 planning converts these ideas into a safe hack execution plan.
-- <em>Ask the room:</em> Where does your team feel least ready: orchestration, governance, or deployment?
+Use the agenda to show the three arcs: orchestration patterns, integration due diligence, and debugging or deployment readiness. Point out that every advanced capability introduces trust, permission, maintainership, and rollback questions. Ask learners to listen for the point where a simple workflow would be safer than an elaborate one.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-03-8a2ffb2d.png
+background: /images/copilot-dev-advanced/slide-03-0180ab9c.png
 ---
 
 <!--
-- Walk the objectives as a progression from architecture choice to operational readiness.
-- Stress that every objective pairs capability with evidence, permissions, and rollback control.
-- Set expectations that learners should leave with decision criteria, not memorized patterns.
-- <em>Ask the room:</em> Which objective would unblock your next production-adjacent pilot?
+Define multiagents as coordinated AI workers or roles around a shared objective. They help when work can be separated by ownership, evidence, and merge control, such as research, implementation, validation, or review lanes. Use Brady Gaster's Squad as an ecosystem example while making clear it is not a required dependency.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-04-e1276357.png
+background: /images/copilot-dev-advanced/slide-04-beff9943.png
 ---
 
 <!--
-- Re-anchor advanced work in the optimization habits from the earlier modules.
-- Model choice, clear prompts, and lean context matter more as orchestration adds overhead.
-- Highlight cache preservation and phase separation as practical cost controls.
-- Treat `/chronicle` insights as feedback for improving team prompting habits.
-- <em>Ask the room:</em> Which optimization habit has been hardest to sustain in real work?
+Position curated Copilot lists as discovery aids, not enterprise approvals. They can help teams find skills, examples, prompts, and ecosystem ideas, but each item still needs review for source credibility, license posture, data handling, and compatibility. Ask learners what evidence they would need before reusing a public skill internally.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-05-be90263a.png
+background: /images/copilot-dev-advanced/slide-05-58f7fb70.png
 ---
 
 <!--
-- Introduce orchestration with a decision test: can the work split cleanly into lanes?
-- Use research, implementation, and validation as examples of separable evidence paths.
-- If ownership or acceptance checks blur, keep the work with one focused agent.
-- Reinforce that unnecessary orchestration increases tokens, review time, and coordination risk.
-- <em>Ask the room:</em> Which team workflow actually justifies orchestration overhead?
+Explain subagents as scoped delegation units with narrow prompts, limited context, clear output contracts, and acceptance checks. They are most useful when a larger task can be decomposed into auditable slices like research, test writing, documentation review, or validation. Stress that attribution matters so reviewers know where each finding came from.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-06-63f96015.png
+background: /images/copilot-dev-advanced/slide-06-40b9a095.png
 ---
 
 <!--
-- Explain the coordinator as the owner of decomposition, sequencing, and final synthesis.
-- Specialists should receive narrow scopes and return evidence, not open-ended changes.
-- Tie the safety callout to preventing duplicate edits and invisible ownership gaps.
-- Use this as the reference pattern before discussing smaller delegation units.
-- <em>Ask the room:</em> Where should orchestration stop and human synthesis take over?
+Describe fleet-style execution as running many independent tasks or agents in parallel. It fits high-volume independent work such as similar refactors, broad issue triage, or many checks where coordination overhead is lower than the time saved. Warn that fleet execution is a poor fit when tasks conflict, require shared sequencing, or lack clear merge controls.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-07-489a15ac.png
+background: /images/copilot-dev-advanced/slide-07-179c566b.png
 ---
 
 <!--
-- Define a delegation unit as a small contract: inputs, output, and acceptance check.
-- Cheaper models work well when the slice is narrow and verification is explicit.
-- The diagram shows context flowing through a bounded unit, not an unbounded conversation.
-- Auditable outputs make specialist work easier to review and merge safely.
-- <em>Ask the room:</em> What evidence should be required before accepting delegated output?
+This lab turns orchestration concepts into a concrete plan. Learners should decide whether a task needs multiagents, subagents, fleet execution, or a simpler single workflow. The output should include ownership, evidence requirements, merge controls, and a reason the chosen pattern is worth the coordination cost.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-08-86678bbd.png
+background: /images/copilot-dev-advanced/slide-08-7d935c10.png
 ---
 
 <!--
-- Normalize saying no to advanced orchestration when the task does not need it.
-- Small tasks, shared-file contention, and unclear verification ownership are stop signs.
-- A simpler single-agent workflow often produces cleaner context and faster review.
-- This is both a safety choice and a cost-control habit.
-- <em>Ask the room:</em> Where has orchestration overhead slowed your team down?
+Define hooks as deterministic lifecycle guardrails that run before tool calls, accepted changes, or workflow transitions. They are useful for policy checks, secret scanning, validation commands, and review gates that should not depend on prompt quality. Emphasize that hooks make safety repeatable because they execute at defined control points.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-09-2eb6cfe5.png
+background: /images/copilot-dev-advanced/slide-09-b1cb559c.png
 ---
 
 <!--
-- Shift from agent design to integration governance: policy must not depend on prompting.
-- Hooks are useful when a check must run at a fixed lifecycle boundary.
-- Give examples like blocking risky commands before tool use or requiring pre-merge evidence.
-- Emphasize that deterministic guardrails protect even when prompts are incomplete.
-- <em>Ask the room:</em> Which integration surface is your highest enterprise risk today?
+Use marketplace extensions as an example of convenience that changes the trust boundary. Extensions can expand the developer environment and agent experience, but they may also alter permissions, telemetry, data access, and support obligations. Ask learners who should approve a marketplace addition before it becomes part of an enterprise workflow.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-10-4e13e57a.png
+background: /images/copilot-dev-advanced/slide-10-38882bdc.png
 ---
 
 <!--
-- Compare the three surfaces by control, observability, and setup overhead.
-- Prefer API or CLI when commands are deterministic, familiar, and easy to log.
-- Reach for MCP or extensions when discovery, authentication, or shared state matters.
-- Keep the decision grounded in requirements, not tool novelty.
-- <em>Ask the room:</em> What approval model should govern API, MCP, and extension onboarding?
+Introduce MCP as a protocol pattern for exposing tools, resources, and context through explicit server boundaries. Keep the focus on governance: teams need to know what tools are exposed, what data can be read or changed, and how authentication and authorization are enforced. Reinforce that onboarding a server is a security review event, not just a developer setup step.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-11-b4ac0d46.png
+background: /images/copilot-dev-advanced/slide-11-a0841cd4.png
 ---
 
 <!--
-- Describe MCP as a governed fabric around the Copilot node, not a free-for-all.
-- Authentication and authorization boundaries should be explicit before servers are enabled.
-- Remind learners that every enabled server adds tool descriptions to the context budget.
-- Onboard deliberately: only enable servers needed for the current task.
-- <em>Ask the room:</em> How can teams reduce integration complexity while preserving capability?
+Explain that APIs and CLIs are often the simplest integration path for deterministic tasks. They fit operations that are already approved, observable, scriptable, and easy to scope, such as querying issues, running tests, collecting logs, or invoking known automation. Remind learners to use least-privilege tokens, audit trails, and environment segregation.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-12-2ed14e18.png
+background: /images/copilot-dev-advanced/slide-12-4604ce07.png
 ---
 
 <!--
-- **Agentic workflow:**
-- Explain the left side as adaptive exploration: feedback, resource checks, and alternate paths.
-- This pattern fits ambiguous engineering work where goals may shift with evidence.
-- **Deterministic workflow:**
-- Explain the right side as repeatable release control: build, tests, scan, staging.
-- Release-critical gates should stay deterministic so results remain auditable.
-- <em>Ask the room:</em> Which team gate must never become agentic?
+Frame plugins as supply-chain components even when they feel like small conveniences. Review provenance, signing, versioning, rollout scope, update cadence, and rollback before enabling plugins for agent-facing workflows. Ask learners how they would remove or disable a plugin quickly if it caused incorrect tool behavior.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-13-93e4ea02.png
+background: /images/copilot-dev-advanced/slide-13-99157899.png
 ---
 
 <!--
-- Use this slide as the handoff from concepts to architecture planning.
-- Learners should choose an orchestration model and integration surface for a bounded scenario.
-- Encourage a decision with rationale, ownership, and acceptance evidence, not a perfect design.
-- Remind them the plan extends the prior Copilot Quest workflow kit.
-- <em>Ask the room:</em> What would make your architecture plan safe enough to test?
+This lab asks learners to build an integration due-diligence matrix. They should compare hooks, marketplace extensions, MCP, APIs or CLIs, and plugins by trust boundary, permissions, data exposure, auditability, and rollback. The success criterion is a recommendation that explains both value and risk.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-14-a799be96.png
+background: /images/copilot-dev-advanced/slide-14-dcb235d2.png
 ---
 
 <!--
-- Reframe debugging as evidence gathering across context, tools, instructions, and loops.
-- Start with what Copilot actually saw and did before changing architecture.
-- Minimal repro prompts reduce expensive guesswork and make failures easier to compare.
-- Use the inspection panel metaphor to separate symptoms from root causes.
-- <em>Ask the room:</em> What is your minimum debug evidence before changing an agent design?
+Teach debugging as inspection of context composition, tool-call order, instruction conflicts, permission failures, and loop dynamics. Start with the smallest reproducible prompt and add only the context needed to prove or disprove the issue. Emphasize that broad reruns can hide the root cause while burning time and AIC.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-15-9af11ed4.png
+background: /images/copilot-dev-advanced/slide-15-9230bd3a.png
 ---
 
 <!--
-- Treat agent distribution as an ownership and approval decision.
-- Repo distribution fits team-maintained assets with PR review as the control point.
-- Internal registries add platform and SecOps ownership for broader enterprise use.
-- Marketplace publication requires vendor ownership and public policy review.
-- <em>Ask the room:</em> Which distribution path matches your first internal agent pilot?
+Explain deployment choices by audience, governance, maintainership, and provenance. A GitHub repository fits source-controlled internal sharing, a marketplace path fits broader discoverability where approved, and APM-style packaging can support reproducible distribution of agents, skills, prompts, plugins, and MCP configuration. Reinforce that deployment requires ownership, policy compliance, permission review, and rollback planning.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-16-67bd9762.png
+background: /images/copilot-dev-advanced/slide-16-e2a42275.png
 ---
 
 <!--
-- Present the readiness checklist as the gate before broader enablement.
-- Capabilities, permissions, tests, rollback, and sign-off should be visible together.
-- The disabled button reinforces that deployment waits until every control is satisfied.
-- This keeps deployment readiness repeatable instead of personality-driven.
-- <em>Ask the room:</em> Which readiness gate catches your highest-risk failures early?
+Use the Day 2 hack slide to shift from concepts to execution readiness. Teams should predefine narrow scope, model strategy, success criteria, fallback path, and final demo gate before work begins. Ask each group to name what they will not attempt so they can avoid scope creep during the hack.
 -->
 
 ---
 layout: image-full
-background: /images/copilot-dev-advanced/slide-17-a8cd6f5b.png
+background: /images/copilot-dev-advanced/slide-17-30168079.png
 ---
 
 <!--
-- Transition from operational concepts into a controlled debug-and-readiness exercise.
-- Learners should diagnose the issue using evidence before applying a fix.
-- The readiness output should include governance checks, not just working code.
-- Position this as rehearsal for deciding whether an agent is deployable.
-- <em>Ask the room:</em> What failure would force rollback instead of iterative tuning?
--->
-
----
-layout: image-full
-background: /images/copilot-dev-advanced/slide-18-94b09ab6.png
----
-
-<!--
-- Introduce Day 2 planning as an engineering brief, not an improvisation session.
-- The one-page brief forces a goal, non-goals, roles, and an off-ramp.
-- Non-goals are especially important because they protect the demo from scope creep.
-- Clear role ownership helps teams know who decides, builds, validates, and presents.
-- <em>Ask the room:</em> What is the strongest one-day objective your team can complete safely?
--->
-
----
-layout: image-full
-background: /images/copilot-dev-advanced/slide-19-92374aa7.png
----
-
-<!--
-- **One complete slice:**
-- Advocate for one vertical slice spanning UI, API, services, data, and infrastructure.
-- This creates an always-demoable path and clearer validation evidence.
-- **Many half-finished features:**
-- Contrast scattered partial work with higher integration risk and late churn.
-- Scope lock early so token spend goes to delivery, not repeated replanning.
-- <em>Ask the room:</em> Which advanced capability gives your first pilot the highest ROI?
--->
-
----
-layout: image-full
-background: /images/copilot-dev-advanced/slide-20-b547866d.png
----
-
-<!--
-- Make the go/no-go gate lightweight but non-optional, even for hack demos.
-- Acceptance criteria, policy checks, and fallback plans protect credibility under pressure.
-- If core checks fail, fix or narrow scope rather than forcing the demo.
-- The same permission and rollback thinking applies to rushed internal showcases.
-- <em>Ask the room:</em> What gate determines go/no-go for your final demo submission?
--->
-
----
-layout: image-full
-background: /images/copilot-dev-advanced/slide-21-e24d4271.png
----
-
-<!--
-- Close by connecting the final lab to the module’s operating posture.
-- Advanced autonomy scales only with governance, observability, and release controls.
-- Day 2 success means constrained scope, clear ownership, and policy-aware execution.
-- Point learners to the knowledge check as confirmation before the hack begins.
-- <em>Ask the room:</em> What governance gap must close before your broader rollout?
+This final lab prepares learners to debug, deploy, and demo safely. They should produce a Day 2 plan that includes the workflow pattern, integration choices, validation evidence, fallback path, and final review gate. Close by reminding them that the strongest hack outcome is one they can explain, reproduce, and safely stop.
 -->
