@@ -129,7 +129,7 @@ Using https://learn.microsoft.com/en-us/visualstudio/ide/copilot-usage-and-model
 - ✅ Checked or identified session/monthly usage visibility
 - ✅ Captured one AI-credit-aware routing decision
 - ✅ Documented one billing or budget guardrail for model usage
-- ✅ Used real-world usage guidance before choosing a model route
+- ✅ Checked usage signals and explained why Auto, a fast model, or a reasoning model fit the task
 - ✅ Documented one context reset trigger
 - ✅ Produced one reusable prompt/checklist asset for the next module
 
