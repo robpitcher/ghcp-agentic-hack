@@ -233,7 +233,7 @@ All slide images are stored centrally in `public/images/<workshop-folder-name>/`
 
 ### PPTX-Generated Decks (Primary Workflow)
 
-For decks generated from NotebookLM PPTX files, each slide is a full-bleed image using the `image-full` layout. Use `background:` in the slide frontmatter so that Slidev's `resolveAssetUrl()` correctly prepends the `--base` path for subpath deployments:
+For decks generated from PPTX files, each slide is a full-bleed image using the `image-full` layout. Use `background:` in the slide frontmatter so that Slidev's `resolveAssetUrl()` correctly prepends the `--base` path for subpath deployments:
 
 ```markdown
 ---

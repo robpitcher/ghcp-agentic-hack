@@ -1,4 +1,4 @@
-# Copilot Usage Optimization — Workshop Guide
+# Copilot Usage Optimization — Workshop Guide — Part 1
 
 > **Slide generation instructions**:
 >
@@ -13,7 +13,7 @@
 >   - 1 slide for each `Slide topic (1 slide)` marker, in source order
 >   - 1 lab transition slide for each `### 🔬 LAB` marker, in source order
 >   - No extra recap, wrap-up, section-divider, or handoff slides unless the source contains an explicit `Slide topic` marker for that slide
-> - The planned deck for this module is 30 slides: 1 title slide, 1 Session Agenda slide, and 28 source `Slide topic` slides.
+> - The planned deck for this part is 15 slides: 1 title slide, 1 Session Agenda slide, and 13 source `Slide topic` slides. It covers Sections 1-3: optimization model, tokenomics, context economics, model routing, and cost levers.
 > - Do not generate separate Workshop Overview or Learning Objectives slides. Use any summary or objectives text only as source context for the title, agenda, or presenter notes.
 > - Count the planned slides before generating. If the planned deck is 21 slides or fewer, generate one complete deck.
 > - If the planned deck exceeds 21 slides, split it into two decks at a natural section boundary. Do not compress the material into 21 slides.
@@ -77,9 +77,6 @@
 | 1 | Why optimization matters: the cost and quality model | 8 min |
 | 2 | Tokenomics and context economics | 12 min |
 | 3 | Model routing and the biggest cost levers | 12 min |
-| 4 | Prompt and scope discipline | 12 min |
-| 5 | Agentic efficiency | 10 min |
-| 6 | Measure and sustain | 6 min |
 
 ## 1. Why Optimization Matters: The Cost and Quality Model (8 min)
 
@@ -151,75 +148,4 @@ Make Auto mode your standing default and treat reasoning/large-context escalatio
 
 > **Learn more**: <https://docs.github.com/en/copilot/tutorials/optimize-ai-usage>
 
-## 4. Prompt and Scope Discipline (12 min)
-
-### Key Points
-
-- **Slide topic (1 slide): Scoped vs. broad prompts** — tight, well-bounded prompts reduce drift, retries, and ambiguity, lowering both latency and AIC spend; broad prompts invite expensive rework loops. **Usage Optimization**: better prompt contracts lower both latency and cost.
-- **Slide topic (1 slide): Well-scoped skills reduce retries** — a skill with a clear target scope, task, constraints, definition of done, and off-ramp produces reliable results the first time. **Usage Optimization**: well-scoped skills reduce retries.
-- **Slide topic (1 slide): Fewer rework turns lower AIC** — explicit acceptance gates and stop conditions ("stop if tests fail", "ask before changing dependencies") prevent costly rework. **Usage Optimization**: lower AIC with fewer rework turns.
-- **Slide topic (1 slide): Minimal repro prompts** — when debugging, reproduce with the smallest possible prompt before changing anything; minimal repros cut expensive trial-and-error loops. **Usage Optimization**: minimal repro prompts reduce trial-and-error cost.
-- **Slide topic (1 slide): Rubber-duck before executing** — articulating the problem before execution surfaces hidden assumptions and avoids expensive wrong-direction loops. **Usage Optimization**: clarify intent first to avoid costly rework.
-
-### 🛡️ Safety Moment
-
-- Explicit acceptance criteria and stop conditions are both a quality control and a safety control — they bound what the agent is allowed to do.
-- Scope every prompt to the narrowest set of files needed; broad edits increase review burden and the chance of unintended changes.
-
-### 🖥️ Demo: Tighten a broad prompt
-
-1. Issue a deliberately broad prompt ("clean up this project") and observe the breadth and retries.
-2. Rewrite it with explicit scope, constraints, and a definition of done.
-3. Compare token/AIC usage, number of turns, and review effort between the two.
-
-### 💡 Optimization Tip: Lock scope early
-
-Define the scope and acceptance criteria before you start and resist mid-task expansion. Locking scope early avoids token-heavy churn and keeps one always-demoable slice working instead of many half-finished changes.
-
-## 5. Agentic Efficiency (10 min)
-
-### Key Points
-
-- **Slide topic (1 slide): Don't over-delegate simple tasks** — deterministic work like locating a symbol or editing a known file is faster and cheaper with direct tools than a multi-step agent loop. **Usage Optimization**: avoid over-delegating simple, deterministic tasks.
-- **Slide topic (1 slide): Bound the agentic loop** — define termination criteria and loop boundaries before execution so the request/decide/act/observe/correct cycle cannot run away and burn tokens. **Usage Optimization**: bounded loops with termination criteria reduce token burn.
-- **Slide topic (1 slide): Avoid unnecessary orchestration** — multi-agent orchestration is justified only when work is truly separable by role, evidence, and ownership; otherwise one focused workflow is cheaper and clearer. **Usage Optimization**: avoid orchestration when a single bounded workflow is sufficient.
-- **Slide topic (1 slide): Scoped subagents on lighter models** — keep delegated units narrow with clear inputs, outputs, and acceptance checks, and run them on cheaper models where possible. **Usage Optimization**: scoped subagents on lighter models cut cost without hurting quality.
-- **Slide topic (1 slide): Async and cloud only when justified** — use background tasks or cloud agents for genuinely long-running, parallelizable work, not for quick local edits. **Usage Optimization**: use async or cloud paths only for genuinely long-running, parallelizable tasks.
-- **Slide topic (1 slide): Reuse templates and scaffolding** — start from reusable setup patterns (for example via `/init`) instead of rewriting boilerplate, reducing setup churn and tokens. **Usage Optimization**: start from reusable templates to reduce setup churn.
-
-### 🛡️ Safety Moment
-
-- Bounded loops and stop conditions are a primary safety mechanism for autonomous work — design oversight in, don't add it after something goes wrong.
-- Scale autonomy with reversibility and blast radius: high-impact delegated tasks require explicit approvals and narrow permissions.
-
-### 🖥️ Demo: Right-size the work
-
-1. Take a small, well-known edit and run it as a full agent loop, noting turns and token usage.
-2. Redo the same edit with a direct tool/skill call.
-3. Discuss where the agent loop adds value (ambiguity, branching, multiple checkpoints) and where it is pure overhead.
-
-### 💡 Optimization Tip: Simplify before you scale
-
-Reach for the simplest mechanism that meets the requirement — direct tool, then single agent, then orchestration — and only add complexity when the task genuinely demands it. Simplifying architecture before scaling it prevents token and review-time waste.
-
-## 6. Measure and Sustain (6 min)
-
-### Key Points
-
-- **Slide topic (1 slide): Usage visibility and measurement** — session and monthly usage views expose hidden inefficiencies such as broad prompts and repetitive retries; regular reviews prevent avoidable overages. **Usage Optimization**: use regular usage reviews to prevent overages.
-- **Slide topic (1 slide): `/chronicle` as a cost-savings loop** — run `/chronicle` at task boundaries to capture what reduced spend (tighter scope, fewer retries, right-sized models) and what increased it (broad context, unnecessary escalations), then reuse it as a recurring cost-savings checklist. **Usage Optimization**: run `/chronicle` to preserve reusable cost controls and avoid expensive context reconstruction.
-- **Slide topic (1 slide): Instructions vs. memory for durable reuse** — place durable standards in instruction files where they are applied automatically and reserve memory for reusable context that should survive across sessions; this avoids re-sending the same guidance as prompt tokens. **Usage Optimization**: encode durable standards once and reuse them instead of re-prompting.
-- **Slide topic (1 slide): Sustained operating model** — consistent results come from mode discipline, context hygiene, explicit acceptance criteria, and budget-aware defaults rather than ad hoc improvisation.
-
-### 🛡️ Safety Moment
-
-- Usage telemetry can reveal sensitive workflow patterns — follow org policy on what usage data is shared, stored, or exported.
-- Budgets and plan limits are guardrails, not just cost tools: they cap runaway automation before it causes harm.
-
-### 💡 Optimization Tip: Close the loop every session
-
-End each meaningful task with a quick usage review and a `/chronicle` capture, then fold the recurring savings into instructions. This turns one-off optimizations into durable defaults that compound across the team.
-
-> **Learn more**: <https://docs.github.com/en/copilot/tutorials/optimize-ai-usage>
-
-*Workshop guide for Copilot Usage Optimization — GitHub Copilot Developer Training*
+*Part 1 slide-generation packet for Copilot Usage Optimization Workshop*

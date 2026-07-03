@@ -47,9 +47,9 @@ export const workshopMeta: Record<string, WorkshopMeta> = {
     desc: 'GitHub Copilot Developer Training — foundations, agentic patterns, advanced operations, and optional technology skills.',
     icon: '🎓',
     modules: [
-      { folder: 'copilot-dev-foundations', label: 'Module 1: Foundations', desc: 'Chat modes, context & instructions, models, agents, skills & customization', icon: '🎓' },
-      { folder: 'copilot-dev-agentic', label: 'Module 2: Agentic Patterns', desc: 'Agents vs. skills, background & cloud agents, instruction layering, multi-agent patterns', icon: '🤖' },
-      { folder: 'copilot-dev-advanced', label: 'Module 3: Advanced Topics', desc: 'MCP, APIs & plugins, memory, debugging, agentic loops & off-ramp design', icon: '🔬' }
+      { folder: 'copilot-dev-foundations', label: 'Module 1: Foundations', desc: 'Copilot surfaces, VS Code chat & CLI, modes, tokens & AIC billing, model routing, context windows, autonomy & custom agents', icon: '🎓' },
+      { folder: 'copilot-dev-agentic', label: 'Module 2: Agentic Patterns', desc: 'Instructions & memory, strong prompts, agents & skills, agentic loops, tools, background & cloud agents, /init, instruction layering', icon: '🤖' },
+      { folder: 'copilot-dev-advanced', label: 'Module 3: Advanced Topics', desc: 'Multiagents & Squad, subagents & fleet, hooks, MCP, APIs/CLI & plugins, extension marketplace, debugging & deploying agents', icon: '🔬' }
     ],
     prerequisites: [
       'VS Code — latest stable version installed',

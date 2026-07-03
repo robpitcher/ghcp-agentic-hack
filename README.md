@@ -51,22 +51,22 @@ Each module folder typically contains:
 
 1. Edit the module files in `workshops/<module>/`.
 2. Keep slides and lab aligned when either one changes (sections, tables, diagrams, ordering).
-3. Rebuild and preview:
+3. Follow the content conventions:
+   - **Show, then do**: each hands-on beat gets an explicit slide pointer (`Slide topic (1 slide): Show me …` / `Now you try …`) so developers know which slide to follow.
+   - **MCP is conceptual**: teach what MCP is and why it matters for agentic developers; do not demo a specific MCP server.
+   - **Enterprise skills stay in the separate skills library** (`workshops/<workshop>/skills/<slug>/SKILL.md`), not baked into module content.
+   - **Keep the hardened slide-generation instruction header** at the top of each `*-workshop.md` intact.
+4. Rebuild and preview:
 
 ```bash
 npm run build:all
 ```
 
-4. Spot-check module links from the landing page and workshop page.
+5. Spot-check module links from the landing page and workshop page.
 
 ## Add a new module to an existing workshop
 
-You must update Astro metadata in **two places**:
-
-1. `site/pages/index.astro`
-2. `site/pages/[workshop]/index.astro`
-
-Add the same module object in both `workshopMeta` maps:
+Workshop and module metadata is centralized in `site/data/workshops.ts`. Add the module to the correct workshop's `modules` array there (do not duplicate metadata in the Astro pages):
 
 - `folder`: exact folder name in `workshops/`
 - `label`: display name
@@ -87,6 +87,34 @@ npm run build:all
 | `npm run build:site` | Build Astro site only |
 | `npm run dev:site` | Astro dev server for site development |
 | `npm run convert:pptx -- <workshop-folder-name>` | Convert PPTX into slide images + `.slidev.md` deck |
+| `npm run convert:pptx:parts -- <workshop-folder-name>` | Combine `-part-*` PPTX files into one Slidev deck |
+
+## PPTX conversion workflow
+
+Small classes can use one source file and one PPTX:
+
+```text
+source/pptx/<workshop-folder-name>.pptx
+```
+
+```bash
+npm run convert:pptx -- <workshop-folder-name>
+```
+
+Larger classes can split the source into generation packets, export one PPTX per part, and combine them during conversion:
+
+```text
+workshops/<workshop-folder-name>/<workshop-folder-name>-workshop-part-1.md
+workshops/<workshop-folder-name>/<workshop-folder-name>-workshop-part-2.md
+source/pptx/<workshop-folder-name>-part-1.pptx
+source/pptx/<workshop-folder-name>-part-2.pptx
+```
+
+```bash
+npm run convert:pptx:parts -- <workshop-folder-name>
+```
+
+If the single PPTX is not present, `npm run convert:pptx -- <workshop-folder-name>` also auto-detects `-part-*` files and combines them in numeric order.
 
 ## Draft workshops
 

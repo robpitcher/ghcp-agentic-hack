@@ -2,123 +2,147 @@
 
 ---
 
-### 1. In the approved 8-stage model, what is the primary focus of Stage 7?
+### 1. When are multiagents most appropriate in the Advanced module?
 
-- A) Replacing all human review with autonomy
-- B) Designing orchestration architecture across roles, tools, and control flow
-- C) Packaging agents for public distribution
-- D) Running billing and cost reports only
+- A) Whenever a task mentions more than one file
+- B) When work can be separated by ownership, evidence, and merge control
+- C) When the team wants to skip human review
+- D) When no acceptance criteria exist
 
 <!--answer: B-->
-<!--explanation: Stage 7 is about orchestration architecture decisions, including role decomposition, handoffs, and control patterns.-->
+<!--explanation: Multiagents are justified only when work can be separated into bounded lanes with ownership, evidence, and explicit merge control.-->
 
 ---
 
-### 2. Which Stage 7 decision best supports one-slide-per-topic architecture communication?
+### 2. Why is Brady Gaster's Squad positioned as a quick look rather than a required dependency?
 
-- A) Combining orchestration, governance, and deployment into one dense diagram
-- B) Creating separate topic units for multiagents, subagents, fleet, and handoff policy
-- C) Removing all diagrams and using only narrative text
-- D) Hiding role boundaries so teams can stay flexible
+- A) The module uses it as an ecosystem example of multi-agent coordination
+- B) The module requires every learner to install it
+- C) It replaces all GitHub governance controls
+- D) It is used as the only deployment path
 
-<!--answer: B-->
-<!--explanation: One-slide-per-topic intent is strongest when each Stage 7 concept is explicit and independently teachable.-->
-
----
-
-### 3. Fleet execution in Stage 7 is most appropriate when:
-
-- A) Work items are tightly coupled and must be strictly sequential
-- B) Multiple tasks can proceed independently in parallel
-- C) The task has unknown requirements and no boundaries
-- D) You want to avoid status tracking
-
-<!--answer: B-->
-<!--explanation: Fleet-style parallelism works best for independent task branches.-->
+<!--answer: A-->
+<!--explanation: Squad is referenced as an ecosystem example of multi-agent coordination and squad-style framing, not as mandatory tooling.-->
 
 ---
 
-### 4. Which statement best reflects Stage 7 governance for hooks and extensions?
+### 3. How should teams use the Awesome Copilot skills catalog in this module?
 
-- A) Hooks should bypass policy checks for speed
-- B) Hooks can enforce lifecycle quality/security checks when defined clearly
-- C) Hooks replace code review approvals entirely
-- D) Hooks are only for UI customization
+- A) As automatic approval to use any listed skill
+- B) As a curated discovery source that still requires credibility and enterprise-compatibility review
+- C) As a replacement for official documentation and policy
+- D) As a required runtime dependency
 
 <!--answer: B-->
-<!--explanation: Stage 7 governance emphasizes enforceable lifecycle checks, approval boundaries, and auditable controls.-->
+<!--explanation: Curated resources support discovery, but teams still vet source credibility, licensing, data handling, and enterprise compatibility.-->
 
 ---
 
-### 5. What is the best Stage 7 reason to prefer CLI/API over MCP/plugin for a task?
+### 4. What makes a subagent safe to use?
 
-- A) CLI/API paths are impossible to automate
-- B) The task is deterministic and already well served by native commands/APIs
-- C) MCP is always safer by default
-- D) Plugins cannot be audited
+- A) Broad permissions and a vague prompt
+- B) Scoped prompts, minimal permissions, clear outputs, and auditable evidence
+- C) Hidden outputs so reviewers are not overloaded
+- D) Permission to merge directly without review
 
 <!--answer: B-->
-<!--explanation: Native deterministic paths can be simpler and easier to control when advanced integration features are unnecessary.-->
+<!--explanation: Subagents need narrow prompts, minimal permissions, clear output contracts, and auditability.-->
 
 ---
 
-### 6. In Stage 8, what should happen first when debugging surprising agent behavior?
+### 5. Fleet-style execution is best reserved for:
 
-- A) Increase autonomy and rerun immediately
-- B) Inspect context, actions, and tool calls before changing architecture
-- C) Disable all instructions and tools permanently
-- D) Publish to marketplace for wider testing
+- A) High-volume independent tasks where parallelism yields net AIC or time savings
+- B) Tightly coupled tasks that must be sequential
+- C) Tasks with unclear requirements and no owner
+- D) Any task where review time is unavailable
 
-<!--answer: B-->
-<!--explanation: Stage 8 readiness starts with evidence from context/action traces before architecture or deployment changes.-->
-
----
-
-### 7. Which is a required Stage 8 deploy-readiness element for custom agents?
-
-- A) Hidden permissions to reduce user friction
-- B) Documented capabilities, permissions, and rollback strategy
-- C) Removal of versioning to avoid churn
-- D) Skipping release notes
-
-<!--answer: B-->
-<!--explanation: Advanced deployment requires transparent capability boundaries and operational rollback planning.-->
+<!--answer: A-->
+<!--explanation: Fleet execution should be used only when task independence and volume make parallelism worth the coordination overhead.-->
 
 ---
 
-### 8. Why is the Extension Marketplace treated as a Stage 7 governance decision?
+### 6. What is the primary governance value of hooks?
 
-- A) Extensions cannot affect trust boundaries
-- B) New extensions can expand capabilities and risk surface
-- C) Marketplace items are always organization-approved automatically
-- D) Extensions are unrelated to Copilot workflows
+- A) They replace policy review with prompt wording
+- B) They provide enforceable guardrails such as policy checks, secret scanning, and mandatory validation
+- C) They are only for UI customization
+- D) They remove the need for tests
 
 <!--answer: B-->
-<!--explanation: Extension adoption is both a capability decision and a risk/governance decision.-->
+<!--explanation: Hooks create deterministic lifecycle guardrails that enforce required checks before changes are accepted or workflows advance.-->
 
 ---
 
-### 9. For Stage 8 Day 2 prep, which plan is strongest?
+### 7. Why does Extension Marketplace adoption require due diligence?
 
-- A) Broad scope with no fallback so the demo looks ambitious
-- B) Narrow, demoable objective with Stage 7 architecture choices, Stage 8 release gates, and fallback path
-- C) Skip role assignment and improvise during demo
-- D) Focus only on visuals; defer technical validation
+- A) Marketplace extensions can change trust, permissions, telemetry, and data-access boundaries
+- B) Marketplace extensions are always organization-approved automatically
+- C) Extensions cannot affect Copilot workflows
+- D) Publisher trust is irrelevant for enterprise use
 
-<!--answer: B-->
-<!--explanation: The workshop closes Stage 8 with explicit release gates and fallback planning for Day 2 execution.-->
+<!--answer: A-->
+<!--explanation: Extension enablement is an enterprise onboarding decision because extensions can expand capabilities and risk surfaces.-->
 
 ---
 
-### 10. In this module, the Awesome Copilot list is most useful as:
+### 8. In this workshop, how should MCP be treated?
 
-- A) A replacement for official documentation and policy
-- B) A curated discovery source for examples and ecosystem references
-- C) A required runtime dependency
-- D) A billing optimization engine
+- A) As a conceptual protocol pattern requiring security review of server onboarding, auth, and data scope
+- B) As a specific server walkthrough every team must configure
+- C) As always safer than API/CLI by default
+- D) As unrelated to tool or context exposure
+
+<!--answer: A-->
+<!--explanation: MCP stays conceptual in this module, with focus on governed tool/context exposure, authentication, authorization, and data-scope controls.-->
+
+---
+
+### 9. When is API/CLI the preferred integration path?
+
+- A) When deterministic, approved, observable commands or APIs already meet the need
+- B) When the team needs the least auditability possible
+- C) When production tokens should be shared broadly
+- D) When no environment segregation exists
+
+<!--answer: A-->
+<!--explanation: API/CLI is often simplest for deterministic tasks that are already approved, scriptable, observable, and easy to scope.-->
+
+---
+
+### 10. What is the key supply-chain concern for plugins?
+
+- A) Plugins never require version control
+- B) Plugins should be governed for signing, versioning, controlled rollout, provenance, and rollback
+- C) Plugins should always be enabled globally first
+- D) Plugins eliminate permission review
 
 <!--answer: B-->
-<!--explanation: It is positioned as a curation resource for learning and exploration, not as policy or runtime infrastructure.-->
+<!--explanation: Plugins extend behavior and therefore require supply-chain governance, including signing, version controls, rollout limits, and rollback planning.-->
+
+---
+
+### 11. What should happen first when debugging surprising chat or agent behavior?
+
+- A) Rerun with maximum context and more autonomy
+- B) Create a minimal repro using narrowed context and evidence from tool calls, permissions, and instructions
+- C) Publish the agent so more users can test it
+- D) Remove all governance controls
+
+<!--answer: B-->
+<!--explanation: Debugging starts with evidence and a minimal reproduction so teams avoid expensive trial-and-error loops.-->
+
+---
+
+### 12. Which distribution or packaging paths must be named when preparing to deploy agents?
+
+- A) GitHub Repo, Marketplace, and Agent Package Manager (APM)
+- B) Email attachment, chat transcript, and shared drive
+- C) Local-only folder, screenshot, and wiki page
+- D) Browser bookmark, issue label, and spreadsheet
+
+<!--answer: A-->
+<!--explanation: The module explicitly names GitHub Repo, Marketplace, and Agent Package Manager (APM) as distribution or packaging paths to compare with governance, provenance, and permission checks.-->
 
 ---
 

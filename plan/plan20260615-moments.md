@@ -44,7 +44,7 @@
 - **API/CLI** — **AI Safety Moment**: Programmatic interfaces can scale mistakes quickly, so require least-privilege tokens, audit trails, and environment segregation.
 - **Plugins** — **AI Safety Moment**: Plugin power should be balanced with signing, version governance, and controlled rollout to limit supply-chain and behavior risk.
 - **Debugging Chat and Agents** — **Usage Optimization**: Teach lightweight diagnostic workflows (minimal repro prompts, narrowed context) to resolve failures without expensive trial-and-error loops.
-- **Deploying Your Agents (GitHub Repo, Marketplace, Agent Package Manager)** — **AI Safety Moment**: Deployment should include policy compliance, permission review, and provenance checks before wider distribution.
+- **Deploying Your Agents (GitHub Repo, Marketplace, Agent Package Manager)** — **AI Safety Moment**: Deployment and packaging should include policy compliance, permission review, and provenance checks before wider distribution.
 - **Preparing for Day 2 Hack** — **Usage Optimization**: Encourage teams to predefine scope, model strategy, and success criteria so hack time is spent building rather than burning tokens on setup churn.
 
 *Planning companion document for AI safety and AIC usage optimization callouts by topic.*

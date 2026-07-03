@@ -1,4 +1,4 @@
-# Copilot Usage Optimization — Workshop Guide
+# Copilot Usage Optimization — Workshop Guide — Part 2
 
 > **Slide generation instructions**:
 >
@@ -13,7 +13,7 @@
 >   - 1 slide for each `Slide topic (1 slide)` marker, in source order
 >   - 1 lab transition slide for each `### 🔬 LAB` marker, in source order
 >   - No extra recap, wrap-up, section-divider, or handoff slides unless the source contains an explicit `Slide topic` marker for that slide
-> - The planned deck for this module is 30 slides: 1 title slide, 1 Session Agenda slide, and 28 source `Slide topic` slides.
+> - The planned deck for this part is 17 slides: 1 title slide, 1 Session Agenda slide, and 15 source `Slide topic` slides. It covers Sections 4-6: prompt discipline, agentic efficiency, measurement, and sustained operating model.
 > - Do not generate separate Workshop Overview or Learning Objectives slides. Use any summary or objectives text only as source context for the title, agenda, or presenter notes.
 > - Count the planned slides before generating. If the planned deck is 21 slides or fewer, generate one complete deck.
 > - If the planned deck exceeds 21 slides, split it into two decks at a natural section boundary. Do not compress the material into 21 slides.
@@ -74,82 +74,9 @@
 
 | Section | Topic | Time |
 |---------|-------|------|
-| 1 | Why optimization matters: the cost and quality model | 8 min |
-| 2 | Tokenomics and context economics | 12 min |
-| 3 | Model routing and the biggest cost levers | 12 min |
 | 4 | Prompt and scope discipline | 12 min |
 | 5 | Agentic efficiency | 10 min |
 | 6 | Measure and sustain | 6 min |
-
-## 1. Why Optimization Matters: The Cost and Quality Model (8 min)
-
-### Key Points
-
-- **Slide topic (1 slide): Optimization is an engineering discipline** — usage-based billing makes every workflow choice a cost decision, not only a UX decision; treating efficiency as a first-class concern keeps spend predictable as adoption scales.
-- **Slide topic (1 slide): Tokens as the unit of cost and quality** — tokens represent prompt, input, output, and cached context, so context size directly affects both spend and quality stability; bloated context raises cost and increases drift.
-- **Slide topic (1 slide): AIC — the AI Consumption model** — AIC maps spend to measured token and model usage (input, output, and cached tokens at model-specific rates), making model choice, prompt size, and loop depth explicit engineering tradeoffs.
-- **Slide topic (1 slide): The optimization mindset** — choose the cheapest path that still clears the quality bar; optimization is not about using less Copilot, it is about removing waste — noise, retries, and unnecessary escalations.
-
-### 🛡️ Safety Moment
-
-- Cost optimization never overrides review gates: cheaper output still requires human accountability before merge.
-- Set user-level budgets and plan limits before scaling usage so efficiency goals do not silently become overruns.
-- Treat billing telemetry as governance evidence, not just a personal metric — shared visibility keeps teams aligned.
-
-### 💡 Optimization Tip: Make cost a design input
-
-Decide the acceptable cost/quality tradeoff *before* you prompt, not after the bill arrives. Naming the budget and the quality bar up front turns optimization into a deliberate choice instead of cleanup.
-
-## 2. Tokenomics and Context Economics (12 min)
-
-### Key Points
-
-- **Slide topic (1 slide): Anatomy of the context window** — context windows combine instructions, history, references, and outputs; they degrade when sessions accumulate noise and compaction artifacts, which raises cost and lowers reliability. **Usage Optimization**: reset or re-scope when context rot appears.
-- **Slide topic (1 slide): Context rot and when to reset** — long, noisy sessions produce drift, repeated retries, and contradictory guidance; recognizing the signs early prevents expensive recovery loops.
-- **Slide topic (1 slide): Front-load context once** — provide the relevant files, conventions, and constraints a single time at the start rather than re-pasting them every turn; cached, well-placed context is cheaper than repeated re-sends. **Usage Optimization**: front-load context once instead of repeating it across turns.
-- **Slide topic (1 slide): Trim noise before sending** — narrow inputs to what the task actually needs (`#selection`/`#file` before workspace-wide reasoning) so the model spends tokens on signal, not clutter. **Usage Optimization**: trim noise before sending context.
-- **Slide topic (1 slide): Encode conventions, don't repeat them** — durable standards belong in instruction files where they are applied automatically, instead of being retyped into each prompt. **Usage Optimization**: encode conventions in instructions so they are not re-sent as prompt text.
-
-### 🛡️ Safety Moment
-
-- Re-scoping a drifting session is safer than pushing through it — context rot increases the risk of incorrect or unsafe edits.
-- Keep sensitive data out of long-lived context; broad context windows widen the blast radius if shared or exported.
-
-### 🖥️ Demo: Front-load vs. re-paste
-
-1. Start a session and paste the same large file into three consecutive prompts; note the rising token usage.
-2. Restart, provide the file once with a clear task and `#file` reference, then ask the follow-ups.
-3. Compare token usage and answer quality between the two approaches.
-
-### 💡 Optimization Tip: Re-scope at task boundaries
-
-When a task ends, start a fresh, tightly scoped session for the next one rather than continuing in a bloated context. Smaller, purpose-built context windows are cheaper and more reliable than carrying accumulated history forward.
-
-## 3. Model Routing and the Biggest Cost Levers (12 min)
-
-### Key Points
-
-- **Slide topic (1 slide): Model choice is the fastest cost lever** — matching model capability to task complexity is the single highest-leverage decision; fast models fit straightforward tasks, reasoning models fit ambiguity-heavy architecture and debugging. **Usage Optimization**: match model capability to task complexity.
-- **Slide topic (1 slide): Auto mode — efficiency by default** — auto model selection routes work to a cost-efficient model while preserving quality for many tasks, earns a 10% discount on paid plans, and protects the cache by only switching at natural boundaries. **Usage Optimization**: prefer Auto mode for default routing and cache protection.
-- **Slide topic (1 slide): Configurable reasoning and larger context windows** — advanced reasoning and context settings improve deep multi-file tasks but increase credit usage; stay at defaults for routine work and escalate intentionally. **Usage Optimization**: escalate reasoning/context only when the task demands it.
-- **Slide topic (1 slide): Run specialists on lighter models** — a scoped subtask rarely needs the most expensive reasoning model; reserve premium models for genuinely hard decisions. **Usage Optimization**: run scoped subtasks on lighter models to cut cost without hurting quality.
-
-### 🛡️ Safety Moment
-
-- Don't down-route safety-critical or irreversible work to save credits — match the model to the risk, not just the cost.
-- Document model-routing defaults for the team so cost-saving choices stay consistent and auditable.
-
-### 🖥️ Demo: Same task, three models
-
-1. Pick one well-defined refactor task and run it on a fast model, a reasoning model, and Auto.
-2. Compare output quality, latency, and token/AIC usage across the three.
-3. Identify the cheapest model that still clears the quality bar — that is the routing default for this task class.
-
-### 💡 Optimization Tip: Default to Auto, escalate on purpose
-
-Make Auto mode your standing default and treat reasoning/large-context escalation as an explicit decision tied to task difficulty. This captures the Auto discount and cache protection while keeping premium spend reserved for work that truly needs it.
-
-> **Learn more**: <https://docs.github.com/en/copilot/tutorials/optimize-ai-usage>
 
 ## 4. Prompt and Scope Discipline (12 min)
 
@@ -223,3 +150,5 @@ End each meaningful task with a quick usage review and a `/chronicle` capture, t
 > **Learn more**: <https://docs.github.com/en/copilot/tutorials/optimize-ai-usage>
 
 *Workshop guide for Copilot Usage Optimization — GitHub Copilot Developer Training*
+
+*Part 2 slide-generation packet for Copilot Usage Optimization Workshop*
