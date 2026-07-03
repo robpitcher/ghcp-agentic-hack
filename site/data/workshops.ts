@@ -67,11 +67,11 @@ export const workshopMeta: Record<string, WorkshopMeta> = {
         subtitle: '9:00 AM – 5:00 PM',
         items: [
           { time: '9:00 – 9:30', duration: '30 min', activity: 'Welcome & Kickoff' },
-          { time: '9:30 – 11:30', duration: '120 min', activity: 'Module 1: Foundations (presentation + lab) — Speakers 1 & 2', topics: ['Copilot chat modes and interaction patterns', 'Context, instructions, and prompt discipline', 'Models, agents, skills, and customization'] },
+          { time: '9:30 – 11:30', duration: '120 min', activity: 'Module 1: Foundations (presentation + lab) — Speakers 1 & 2', topics: ['Foundations baseline: surfaces, chat, CLI, and enterprise trust', 'Guided workflows: inline assistance and built-in Copilot experiences', 'Tokenomics, GitHub AI Credits, usage visibility, and model routing', 'Context windows, autonomy spectrum, and custom agents'] },
           { time: '11:30 – 11:45', duration: '15 min', activity: '☕ Break' },
-          { time: '11:45 – 1:40', duration: '115 min', activity: 'Module 2: Agentic Patterns (presentation + lab) — Speakers 3 & 4', topics: ['Agents vs. skills and when to use each', 'Background and cloud agents', 'Instruction layering and multi-agent patterns', 'Agent quality, token optimization, and iteration loops'] },
+          { time: '11:45 – 1:40', duration: '115 min', activity: 'Module 2: Agentic Patterns (presentation + lab) — Speakers 3 & 4', topics: ['Instructions, memory, context hierarchy, and strong prompts', 'Agents, skills, and the Ask/Plan/Agent decision matrix', 'Agentic loops and tool control points', 'Background/cloud agents, /init, instruction layering, and optimization controls'] },
           { time: '1:40 – 2:25', duration: '45 min', activity: '🍽️ Lunch' },
-          { time: '2:25 – 3:55', duration: '90 min', activity: 'Module 3: Advanced Topics (presentation + lab) — Speakers 5 & 6', topics: ['MCP, APIs, and extensions', 'Memory, debugging, and diagnostics', 'Agent architecture patterns and off-ramp design', 'Full-stack agent workflows and best practices'] },
+          { time: '2:25 – 3:55', duration: '90 min', activity: 'Module 3: Advanced Topics (presentation + lab) — Speakers 5 & 6', topics: ['Orchestration and trusted discovery: multiagents, Squad, Awesome Copilot List, subagents, and fleet', 'Governed integration surfaces: hooks, Extension Marketplace, MCP, API/CLI, and plugins', 'Operations and Day 2 readiness: debugging, deployment paths, and hack preparation'] },
           { time: '3:55 – 4:10', duration: '15 min', activity: '☕ Break' },
           { time: '4:10 – 5:00', duration: '50 min', activity: 'Open Lab / Hack Prep' }
         ]
