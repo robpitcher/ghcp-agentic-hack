@@ -12,13 +12,12 @@
 >   - 1 `## Session Agenda` slide
 >   - 1 slide for each `Slide topic (1 slide)` marker, in source order
 >   - 1 lab transition slide for each `### 🔬 LAB` marker, in source order
->   - 1 wrap-up slide from final-section outcomes, when a wrap-up section exists
->   - 1 next-module handoff slide from final-section handoff wording, when a handoff is present
-> - The planned deck for this part is 17 slides and covers Sections 4-6: prompt discipline, agentic efficiency, measurement, and sustained operating model.
+>   - No extra recap, wrap-up, section-divider, or handoff slides unless the source contains an explicit `Slide topic` marker for that slide
+> - The planned deck for this part is 17 slides: 1 title slide, 1 Session Agenda slide, and 15 source `Slide topic` slides. It covers Sections 4-6: prompt discipline, agentic efficiency, measurement, and sustained operating model.
 > - Do not generate separate Workshop Overview or Learning Objectives slides. Use any summary or objectives text only as source context for the title, agenda, or presenter notes.
 > - Count the planned slides before generating. If the planned deck is 21 slides or fewer, generate one complete deck.
 > - If the planned deck exceeds 21 slides, split it into two decks at a natural section boundary. Do not compress the material into 21 slides.
-> - A 21-slide output is incomplete when the planned deck exceeds 21 slides or when any `Slide topic`, lab transition, prompt/code block, table row, wrap-up outcome, or handoff point is missing.
+> - A 21-slide output is incomplete when the planned deck exceeds 21 slides or when any `Slide topic`, lab transition, prompt/code block, table row, or final-section outcome is missing.
 > - Generate dedicated slides for the title and `## Session Agenda`; do not skip, merge, or reorder these.
 > - Do not merge two `Slide topic` markers onto one slide, even if the content appears related.
 > - Do not move a topic across section boundaries.
