@@ -27,15 +27,14 @@ Expected result: Copilot returns IDE, terminal, GitHub/browser, cloud, or Copilo
 2. Write a one-sentence description of **Copilot Quest** — the word game you want to build for this repo or project.
 3. In VS Code chat, run one scoped request with `#selection` and one with `#file`.
 4. Open Copilot CLI installation guidance at <https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli>, then record one CLI feature you expect to use safely.
-5. In terminal, run:
+5. In terminal, confirm Copilot CLI is installed and review available interactive commands:
 
 ```powershell
-copilot
-/settings
-/help
+copilot --help
+copilot help commands
 ```
 
-Then ask the interactive CLI:
+Then open the interactive CLI with `copilot`, run `/settings` and `/help`, and ask:
 
 ```text
 List the top 3 folders a new contributor should read first.
