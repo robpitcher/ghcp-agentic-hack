@@ -66,15 +66,14 @@ export const workshopMeta: Record<string, WorkshopMeta> = {
         day: 'Day 1 — Modules & Labs',
         subtitle: '9:00 AM – 5:00 PM',
         items: [
-          { time: '9:00 – 9:15', duration: '15 min', activity: 'Welcome & Kickoff' },
-          { time: '9:15 – 10:45', duration: '90 min', activity: 'Module 1: Foundations (presentation + lab) — Speakers 1 & 2', topics: ['Copilot chat modes and interaction patterns', 'Context, instructions, and prompt discipline', 'Models, agents, skills, and customization'] },
-          { time: '10:45 – 11:00', duration: '15 min', activity: '☕ Break' },
-          { time: '11:00 – 12:55', duration: '115 min', activity: 'Module 2: Agentic Patterns (presentation + lab) — Speakers 2, 3 & 4', topics: ['Agents vs. skills and when to use each', 'Background and cloud agents', 'Instruction layering and multi-agent patterns', 'Agent quality, token optimization, and iteration loops'] },
-          { time: '12:55 – 1:40', duration: '45 min', activity: '🍽️ Lunch' },
-          { time: '1:40 – 3:10', duration: '90 min', activity: 'Module 3: Advanced Topics (presentation + lab) — Speakers 4 & 5', topics: ['MCP, APIs, and extensions', 'Memory, debugging, and diagnostics', 'Agent architecture patterns and off-ramp design', 'Full-stack agent workflows and best practices'] },
-          { time: '3:10 – 3:25', duration: '15 min', activity: '☕ Break' },
-          { time: '3:25 – 4:45', duration: '80 min', activity: 'Open Lab / Hack Prep' },
-          { time: '4:45 – 5:00', duration: '15 min', activity: 'Day 1 Wrap-up & Day 2 Preview' }
+          { time: '9:00 – 9:30', duration: '30 min', activity: 'Welcome & Kickoff' },
+          { time: '9:30 – 11:30', duration: '120 min', activity: 'Module 1: Foundations (presentation + lab) — Speakers 1 & 2', topics: ['Copilot chat modes and interaction patterns', 'Context, instructions, and prompt discipline', 'Models, agents, skills, and customization'] },
+          { time: '11:30 – 11:45', duration: '15 min', activity: '☕ Break' },
+          { time: '11:45 – 1:40', duration: '115 min', activity: 'Module 2: Agentic Patterns (presentation + lab) — Speakers 3 & 4', topics: ['Agents vs. skills and when to use each', 'Background and cloud agents', 'Instruction layering and multi-agent patterns', 'Agent quality, token optimization, and iteration loops'] },
+          { time: '1:40 – 2:25', duration: '45 min', activity: '🍽️ Lunch' },
+          { time: '2:25 – 3:55', duration: '90 min', activity: 'Module 3: Advanced Topics (presentation + lab) — Speakers 5 & 6', topics: ['MCP, APIs, and extensions', 'Memory, debugging, and diagnostics', 'Agent architecture patterns and off-ramp design', 'Full-stack agent workflows and best practices'] },
+          { time: '3:55 – 4:10', duration: '15 min', activity: '☕ Break' },
+          { time: '4:10 – 5:00', duration: '50 min', activity: 'Open Lab / Hack Prep' }
         ]
       },
       {
