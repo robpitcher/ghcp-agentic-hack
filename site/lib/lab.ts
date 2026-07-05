@@ -10,6 +10,7 @@ export interface LabRenderResult {
 }
 
 export function renderLabMarkdown(sourcePath: string): LabRenderResult {
+  const toc: { id: string; text: string }[] = []
   const markedInstance = new Marked(
     markedHighlight({
       emptyLangClass: 'hljs',
@@ -20,40 +21,36 @@ export function renderLabMarkdown(sourcePath: string): LabRenderResult {
       }
     })
   )
+  markedInstance.use({
+    renderer: {
+      heading(token) {
+        const plain = plainHeadingText(token.tokens)
+        const slug = slugifyHeading(plain)
+        if (token.depth === 2) {
+          toc.push({ id: slug, text: plain })
+        }
+        return `<h${token.depth} id="${slug}">${this.parser.parseInline(token.tokens)}</h${token.depth}>`
+      }
+    }
+  })
 
   const content = readFileSync(sourcePath, 'utf-8')
   const titleMatch = content.match(/^#\s+(.+)/m)
   const title = titleMatch ? titleMatch[1] : sourcePath
-  const toc: { id: string; text: string }[] = []
-  const rawHtml = markedInstance.parse(content) as string
-  const html = rawHtml.replace(/<h([1-6])>(.*?)<\/h[1-6]>/g, (_match: string, level: string, inner: string) => {
-    const plain = plainHeadingText(inner)
-    const slug = slugifyHeading(plain)
-    if (level === '2') {
-      toc.push({ id: slug, text: plain })
-    }
-    return `<h${level} id="${slug}">${inner}</h${level}>`
-  })
+  const html = markedInstance.parse(content) as string
 
   return { html, title, toc }
 }
 
-function plainHeadingText(value: string): string {
-  let current = value
-  let previous: string
+interface InlineToken {
+  text?: string
+  tokens?: InlineToken[]
+}
 
-  do {
-    previous = current
-    current = current
-      .replace(/<[^>]*>/g, '')
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, "'")
-      .replace(/&amp;/g, '&')
-  } while (current !== previous)
-
-  return current
+function plainHeadingText(tokens: InlineToken[]): string {
+  return tokens
+    .map(token => token.tokens ? plainHeadingText(token.tokens) : token.text ?? '')
+    .join('')
 }
 
 function slugifyHeading(value: string): string {
