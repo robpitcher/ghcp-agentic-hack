@@ -70,7 +70,7 @@ export const workshopMeta: Record<string, WorkshopMeta> = {
         icon: '🎓',
         skillTracks: [
           { slug: 'general', label: 'General / Core', description: 'Use the baseline module lab and quiz without technology-specific examples.', icon: '🎓' },
-          { slug: 'cpp-hardware', label: 'C++ / Hardware', description: 'Practice the shared concepts with embedded C++ setup, code review, and hardware-safety examples.', icon: '🔧', skillSlug: 'cpp-hardware', audience: 'Hardware, firmware, and embedded C++ developers' }
+          { slug: 'cpp-hardware', label: 'C++ / Hardware', description: 'Embedded C++ examples with build context, code review, and safety gates.', icon: '🔧', skillSlug: 'cpp-hardware', audience: 'Embedded C++' }
         ]
       },
       {
@@ -80,7 +80,7 @@ export const workshopMeta: Record<string, WorkshopMeta> = {
         icon: '🤖',
         skillTracks: [
           { slug: 'general', label: 'General / Core', description: 'Use the baseline module lab and quiz without technology-specific examples.', icon: '🎓' },
-          { slug: 'cpp-hardware', label: 'C++ / Hardware', description: 'Create repo-local guidance and agent handoffs for embedded C++ modernization work.', icon: '🔧', skillSlug: 'cpp-hardware', audience: 'Hardware, firmware, and embedded C++ developers' }
+          { slug: 'cpp-hardware', label: 'C++ / Hardware', description: 'Agentic prompts, skills, and handoffs for embedded C++ work.', icon: '🔧', skillSlug: 'cpp-hardware', audience: 'Embedded C++' }
         ]
       },
       {
@@ -90,7 +90,7 @@ export const workshopMeta: Record<string, WorkshopMeta> = {
         icon: '🔬',
         skillTracks: [
           { slug: 'general', label: 'General / Core', description: 'Use the baseline module lab and quiz without technology-specific examples.', icon: '🎓' },
-          { slug: 'cpp-hardware', label: 'C++ / Hardware', description: 'Apply advanced orchestration and governance choices to firmware and hardware-facing workflows.', icon: '🔧', skillSlug: 'cpp-hardware', audience: 'Hardware, firmware, and embedded C++ developers' }
+          { slug: 'cpp-hardware', label: 'C++ / Hardware', description: 'Advanced orchestration and governance for firmware workflows.', icon: '🔧', skillSlug: 'cpp-hardware', audience: 'Embedded C++' }
         ]
       }
     ],

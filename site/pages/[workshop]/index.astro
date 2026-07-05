@@ -81,6 +81,7 @@ const trackStorageKey = `${workshop}-skill-track`
             <span id="track-status" class="track-status" hidden>
               <span id="track-status-label"></span>
               <button type="button" id="track-change-button" class="track-change-button">Change</button>
+              <button type="button" id="track-reset-button" class="track-change-button">Reset</button>
             </span>
           )}
         </div>
@@ -337,6 +338,9 @@ const trackStorageKey = `${workshop}-skill-track`
     font-size: 12px;
     font-weight: 700;
     white-space: nowrap;
+  }
+  .track-status[hidden] {
+    display: none;
   }
   .track-change-button {
     border: 0;
@@ -853,6 +857,7 @@ const trackStorageKey = `${workshop}-skill-track`
   const statusChip = document.getElementById('track-status') as HTMLSpanElement | null;
   const statusLabel = document.getElementById('track-status-label') as HTMLSpanElement | null;
   const changeTrackButton = document.getElementById('track-change-button') as HTMLButtonElement | null;
+  const resetTrackButton = document.getElementById('track-reset-button') as HTMLButtonElement | null;
   const modal = document.getElementById('track-picker') as HTMLDivElement | null;
   const modalTitle = document.getElementById('track-modal-title') as HTMLHeadingElement | null;
   const optionsContainer = document.getElementById('track-modal-options') as HTMLDivElement | null;
@@ -877,6 +882,16 @@ const trackStorageKey = `${workshop}-skill-track`
       if (statusLabel) statusLabel.textContent = `Track: ${track.label}`;
       statusChip.hidden = false;
     }
+  }
+
+  function clearStoredTrack() {
+    try {
+      window.localStorage.removeItem(storageKey);
+    } catch {
+      // Storage can be unavailable in private or restricted browser contexts; hiding the chip is still safe.
+    }
+    if (statusLabel) statusLabel.textContent = '';
+    if (statusChip) statusChip.hidden = true;
   }
 
   function parseOptions(link: HTMLAnchorElement): TrackOption[] {
@@ -965,6 +980,7 @@ const trackStorageKey = `${workshop}-skill-track`
   changeTrackButton?.addEventListener('click', () => {
     if (firstOptions.length > 1) openTrackModal(changeTrackButton, firstOptions, false);
   });
+  resetTrackButton?.addEventListener('click', clearStoredTrack);
 
   allResourceLinks.forEach(link => {
     link.addEventListener('click', event => {
