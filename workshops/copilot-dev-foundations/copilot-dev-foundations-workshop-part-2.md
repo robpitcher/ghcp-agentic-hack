@@ -129,9 +129,9 @@ Prefer Auto for ordinary tasks, fast/general-purpose models for clear bounded wo
 
 ### 🖥️ Demo: Least-Privilege Custom-Agent Guardrails
 
-1. Draft a custom-agent guardrail checklist for low-risk single-file suggestions.
-2. Add allowed scope, disallowed scope, approval rules, and escalation behavior.
-3. Review the checklist for permissions that can be removed before Module 2 artifact creation.
+1. Compare a broad risky guardrail with a narrower safer guardrail for low-risk single-file suggestions.
+2. Draft a custom-agent guardrail checklist with allowed scope, disallowed scope, approval rules, and escalation behavior.
+3. Review the checklist for one permission that can be removed and one ambiguity stop rule before Module 2 artifact creation.
 
 ### 💡 Optimization Tip: Reuse Guardrails, Not Broad Context
 
@@ -139,7 +139,7 @@ Reusable custom-agent guardrails reduce repeated prompt setup, but they should e
 
 ### 🔬 LAB: Exercise 4 — Stage 4 Delegation — Custom Agent Guardrails
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 4 (7 min) drafting constrained custom-agent guardrails and preparing the Module 2 handoff without creating agent or skill files yet.
+> **Instructor**: Pause here for hands-on practice. Students complete Exercise 4 (7 min) comparing broad versus narrow guardrails, drafting constrained custom-agent boundaries, and preparing the Module 2 handoff without creating agent or skill files yet.
 
 ## 5. Wrap-up and Module 2 Handoff (10 min)
 

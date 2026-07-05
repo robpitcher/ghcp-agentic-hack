@@ -71,6 +71,19 @@ These must match across all files:
 - Architecture & decision flowchart diagrams (verbatim)
 - Learning objectives and key concepts tested in quizzes
 
+## Curriculum QA Workflow
+
+Use the deterministic QA workflow whenever changing developer-training workshop content, labs, quizzes, presenter notes, Slidev decks, or workshop-scoped skills.
+
+- Treat each `*-workshop.md` file as the source of truth.
+- Save durable review findings as markdown under `qa\`.
+- Use `.github\skills\curriculum-qa\SKILL.md` for thorough agent-assisted review of slides, labs, quizzes, and learner-flow accuracy.
+- Run `npm run test:curriculum-qa` after changing workshop source, LAB, QUIZ, presenter, Slidev, QA, or curriculum skill files.
+- Run `npm run test:labs` when lab rendering, headings, or copyable prompt/command blocks change.
+- Keep live Copilot and VS Code participant checks manual with `npm run test:labs:participant` unless explicitly approved for the target environment.
+- Classify findings as blocking inaccuracies, consistency gaps, or improvement opportunities.
+- Do not use QA reports as a substitute for fixing source content; reports provide traceability and review evidence.
+
 ### Module Artifact Boundaries
 
 - **Foundations** may introduce custom-agent concepts and draft guardrail checklists, but it should not create agent or skill files.

@@ -176,5 +176,5 @@ background: /images/copilot-dev-agentic/slide-18-d3e3240b.png
 ---
 
 <!--
-This lab asks learners to map guardrails across stages 6 and 7 before moving into advanced orchestration. They should name the model strategy, context budget, tool permissions, validation cadence, and stop condition for a workflow. End by asking what evidence would convince them the workflow is ready for a higher-autonomy path.
+This lab asks learners to complete a Stage 6 to Stage 7 guardrail mapping before moving into advanced orchestration. They should name the model strategy, context budget, tool permissions, validation cadence, and stop condition for a workflow. End by asking what evidence would convince them the workflow is ready for a higher-autonomy path.
 -->

@@ -68,7 +68,7 @@
 
 ### 🔬 LAB: Exercise 1 — Stage 1 Baseline and Governance Signals
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 1 (8 min) identifying surfaces, trying scoped chat and CLI orientation, and validating safety boundaries before continuing.
+> **Instructor**: Pause here for hands-on practice. Students complete Exercise 1 (8 min) defining the Copilot Quest starter project, identifying surfaces, trying scoped chat and CLI orientation, and validating safety boundaries before continuing.
 
 ## 2. Guided Workflows: Inline Assistance and Built-in Copilot Experiences (20 min)
 

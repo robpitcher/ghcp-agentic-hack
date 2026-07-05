@@ -138,30 +138,80 @@ Using https://learn.microsoft.com/en-us/visualstudio/ide/copilot-usage-and-model
 **⏱️ Time**: 7 min  
 **📋 Objective**: Draft least-privilege guardrails for a future custom agent without creating agent or skill files yet
 
-**Warm-up (try this now)**: Ask Copilot to draft one safe delegation boundary before creating any reusable artifacts.
+In this exercise, you are not building the custom agent yet. You are writing the "rules of the road" that Module 2 will turn into a real agent file. Think of a guardrail as a short boundary that tells a future agent what it may do, what it must not do, and when it must stop for human review.
+
+**What you will create**: a short Module 2 handoff note named `copilot-quest-agent-guardrails.md` or saved in your workshop notes.
+
+### Step 1: Watch first — compare a broad guardrail with a safer one
+
+The instructor will show two possible guardrails for a future Copilot Quest helper.
+
+| Broad and risky | Narrower and safer |
+|-----------------|--------------------|
+| "Update any files needed to improve the game." | "Suggest one low-risk single-file change for guess feedback, explain the diff, and stop before editing if the scope expands." |
+
+Notice why the safer version is easier to review: it names the task, limits file scope, requires explanation, and includes a stop rule.
+
+### Step 2: Now you try — ask Copilot for one boundary
 
 ```text
 Write one guardrail for a custom agent that may only suggest low-risk single-file changes.
 ```
 
-Expected result: Copilot returns a narrow permission or review rule you can carry forward into the future Module 2 agent instructions.
+Expected result: Copilot should return a narrow permission or review rule you can carry forward into the future Module 2 agent instructions. If it suggests broad file access, automatic edits, or unclear ownership, ask it to tighten the rule.
 
-1. Draft a custom-agent guardrail checklist for low-risk single-file suggestions related to **Copilot Quest**.
-2. Include purpose, allowed scope, disallowed scope, required approval before edits, and an off-ramp for ambiguity.
-3. Map each guardrail to the risk it reduces, such as broad file access, unclear acceptance criteria, or unreviewed edits.
-4. Ask Copilot to tighten the checklist by removing one unnecessary permission or adding one ambiguity stop rule.
-5. Identify what would justify promoting the checklist into an actual custom agent in Module 2.
-6. Add a handoff note for Module 2 that states which custom agent and skill artifacts should be created there and what still requires human review.
+### Step 3: Make it concrete for Copilot Quest
+
+Use this small template to draft your handoff note:
+
+```markdown
+# Copilot Quest Agent Guardrails
+
+**Purpose**
+Help with one low-risk Copilot Quest change at a time.
+
+**Allowed scope**
+- Suggest one single-file change related to guess feedback, scoring, hints, or tests.
+- Explain the expected diff before any edit is accepted.
+
+**Not allowed**
+- Do not change dependencies.
+- Do not edit multiple files without asking.
+- Do not skip tests or review.
+
+**Stop and ask when**
+- The task needs more than one file.
+- The acceptance criteria are unclear.
+- A command would install, delete, publish, or contact an external service.
+
+**Module 2 handoff**
+Turn this checklist into a repo-local custom agent and companion skill in Module 2.
+```
+
+### Step 4: Improve one guardrail
+
+Ask Copilot to tighten your draft:
+
+```text
+Review this guardrail checklist. Remove one unnecessary permission, add one ambiguity stop rule, and explain which risk each change reduces.
+```
+
+Expected result: You should have one improved permission boundary and one clear off-ramp for ambiguity.
+
+### Step 5: Save the handoff for Module 2
+
+Save your note where you can find it in the next module. Do **not** create `.github/skills` or `.github/agents` files yet. In Module 2, you will use this note to create the real skill and custom-agent artifacts.
 
 **🛡️ Safety checkpoint**: Keep tool permissions minimal and reject unclear or high-blast-radius tasks.
 
 ### ✅ Success Criteria
 
 - ✅ Drafted custom-agent guardrails without creating agent or skill files
-- ✅ Added explicit purpose, scope, approval, and escalation boundaries
-- ✅ Identified the promotion trigger for Module 2 artifact creation
-- ✅ Reviewed the checklist before using it as reusable guidance
-- ✅ Documented one Stage 4 delegation policy
-- ✅ Captured a handoff note for the next module
+- ✅ Created a Module 2 handoff note with purpose, allowed scope, not-allowed scope, stop rules, and handoff guidance
+- ✅ Compared a broad risky guardrail with a narrower safer guardrail
+- ✅ Asked Copilot for one low-risk single-file boundary and tightened it if it was too broad
+- ✅ Improved one guardrail by removing an unnecessary permission or adding an ambiguity stop rule
+- ✅ Confirmed the real skill and custom-agent files will be created in Module 2, not Foundations
+- ✅ Saved the handoff note where you can reuse it in the next module
 
 *Hands-on lab for Module 1: Foundations Content Refresh — GitHub Copilot Developer Training*

@@ -7,6 +7,7 @@
     "build:site": "astro build --root site",
     "build:all": "node scripts/build-site.mjs",
     "test:labs": "playwright test tests/lab-usability.spec.ts",
+    "test:curriculum-qa": "playwright test tests/curriculum-qa.spec.ts",
     "test:labs:participant": "playwright test tests/lab-participant.spec.ts",
     "convert:pptx": "python scripts/convert-pptx.py",
     "convert:pptx:parts": "python scripts/convert-pptx.py --parts"
