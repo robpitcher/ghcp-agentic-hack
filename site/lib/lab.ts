@@ -39,13 +39,21 @@ export function renderLabMarkdown(sourcePath: string): LabRenderResult {
 }
 
 function plainHeadingText(value: string): string {
-  return value
-    .replace(/<[^>]*>/g, '')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
+  let current = value
+  let previous: string
+
+  do {
+    previous = current
+    current = current
+      .replace(/<[^>]*>/g, '')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+  } while (current !== previous)
+
+  return current
 }
 
 function slugifyHeading(value: string): string {
