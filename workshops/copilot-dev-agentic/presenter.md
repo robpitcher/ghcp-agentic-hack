@@ -16,7 +16,7 @@
 - Which skill in your environment would need a trust review because it reaches external systems, changes dependencies, or uses privileged tools?
 - If your team says "always add tests for behavior changes," where should that guidance live: instructions, memory, prompt, or skill, and why?
 - Which skill-contract element is most frequently omitted by your team: target scope, task, constraints, definition of done, or off-ramp?
-- What is a real task that should stay in Ask mode, one that should move to Plan mode, and one that justifies Agent mode?
+- For the Copilot Quest five-letter guess validation/feedback task, what part should stay in Ask mode, what part should move to Plan mode, and what evidence would justify Agent mode?
 
 ### 3. Agentic Loops and Tool Control Points (25 min)
 
@@ -24,7 +24,7 @@
 - What kinds of work genuinely benefit from an agentic loop because they involve branching choices or multi-step evidence gathering?
 - What loop stop condition should be set before an agent starts changing code or using tools?
 - Which tools in your environment need confirmation, logging, constrained parameters, or separate approval before use?
-- What minimum evidence should an agent produce before acceptance: tests, diffs, rationale, logs, unresolved risks, or something else?
+- What minimum evidence should the Copilot Quest implementer/verifier handoff produce before acceptance: edge-case checks, tests, diffs, rationale, logs, unresolved risks, or something else?
 
 ### 4. Background/Cloud Agents, `/init`, Instruction Layering, and Optimization Controls (20 min)
 

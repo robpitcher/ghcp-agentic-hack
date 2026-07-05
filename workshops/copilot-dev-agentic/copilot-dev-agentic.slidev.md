@@ -104,7 +104,7 @@ background: /images/copilot-dev-agentic/slide-10-ca9ee9f2.png
 ---
 
 <!--
-This lab turns the first section into a concrete repo-local skill artifact. Learners should write a strong prompt and create `.github/skills/copilot-quest-guessing/SKILL.md` with task, scope, constraints, definition of done, and stop conditions. Encourage them to test whether another developer could review the artifact without additional verbal explanation.
+This lab turns the first section into a concrete repo-local skill artifact for the Copilot Quest five-letter guess validation and feedback task. Learners should write a strong prompt and create `.github/skills/copilot-quest-guessing/SKILL.md` with task, scope, constraints, definition of done, and stop conditions. Encourage them to test whether another developer could review the artifact without additional verbal explanation.
 -->
 
 ---
@@ -131,7 +131,7 @@ background: /images/copilot-dev-agentic/slide-13-0df2a2a8.png
 ---
 
 <!--
-Use this lab to practice custom-agent creation and handoff discipline. Learners should create `.github/agents/copilot-quest-implementer.agent.md`, decompose a task into scoped roles or steps, define what evidence each agent or worker must return, and decide where human review happens. The success measure is not speed alone; it is whether the handoff can be audited and stopped safely.
+Use this lab to practice custom-agent creation and handoff discipline using the same Copilot Quest validation and feedback task from the skill exercise. Learners should create `.github/agents/copilot-quest-implementer.agent.md`, decompose implementation and verification into scoped roles or steps, define what evidence each agent or worker must return, and decide where human review happens. The success measure is not speed alone; it is whether the handoff can be audited and stopped safely.
 -->
 
 ---

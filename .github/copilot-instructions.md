@@ -292,6 +292,14 @@ All slide images live in `public/images/<workshop-folder-name>/`.
 
 Labs and demos must teach learners where to find and how to safely use the concept, not only define it. When a workshop asks learners to create, draft, fill, compare, save, run, review, find, set up, or evaluate something, include the concrete artifact path, VS Code surface, Command Palette command, integrated terminal command, Copilot CLI command, GitHub UI location, starter template, expected evidence, and pass/fail or rollback criteria as applicable.
 
+Labs must also provide the learner's task source. Do not ask beginners to invent the task when the curriculum already has a module scenario or track scenario. Use the **core workshop build thread** for general/core labs and a **domain-appropriate scenario** for skill-track labs:
+
+- **Core/general track**: use Copilot Quest as the default build scenario when learners create code, skills, agents, orchestration packages, or Day 2 plans.
+- **Technology skill tracks**: use the selected domain and technology skill as the scenario source, not Copilot Quest unless the track intentionally uses a game-like domain example.
+- **Foundations**: focus on finding IDE/CLI capabilities, scoping context, capturing notes, and preparing handoffs.
+- **Agentic**: provide concrete build, review, skill, or agent tasks because learners create repo-local artifacts.
+- **Advanced**: provide concrete governance, orchestration, integration, debugging, or deployment scenarios without turning the module into a large feature build.
+
 For advanced integration surfaces:
 
 - **Copilot/agent hooks**: show where hook configuration lives, which lifecycle event is used, one safe setup or discovery path, validation evidence that the hook ran, and how to disable or roll it back.

@@ -29,11 +29,12 @@ Compare companion files against the workshop source:
 3. Compare LAB exercises against the workshop sequence and verify that every lab has objectives, safety checkpoints, success criteria, copyable prompts or commands, and expected learner artifacts.
 4. Review LAB step clarity. Every instruction that asks participants to create, draft, fill, compare, save, run, review, find, set up, or evaluate something must include the exact artifact, path, starter template, table/checklist fields, command, expected evidence, product surface, or pass/fail criteria.
 5. Trace every LAB success criterion back to a specific participant instruction, prompt, template field, saved artifact, or safety checkpoint. Flag criteria that are vague, instructor-only, not observable, or not actually requested by the lab steps.
-6. Compare quiz questions against taught concepts. Verify that each question has four options, one answer comment, and an explanation that matches the workshop source.
-7. Compare presenter notes against workshop sections and confirm that discussion prompts do not drift into workshop source files.
-8. Compare Slidev presenter notes against the workshop and lab intent. Verify that every LAB exercise topic is represented in the slide deck through a lab transition, demo note, or presenter note that uses the same key concept language. Flag placeholders, generic notes, missing safety or optimization guidance, and visual-slide issues that need human inspection.
-9. Review the cross-module learner journey from Foundations to Agentic to Advanced.
-10. Save findings as markdown under `qa\`.
+6. Review LAB scenario alignment. Core/general labs should use the core workshop build thread when learners create code or artifacts; skill-track labs should use domain scenarios aligned to the same module concept.
+7. Compare quiz questions against taught concepts. Verify that each question has four options, one answer comment, and an explanation that matches the workshop source.
+8. Compare presenter notes against workshop sections and confirm that discussion prompts do not drift into workshop source files.
+9. Compare Slidev presenter notes against the workshop and lab intent. Verify that every LAB exercise topic is represented in the slide deck through a lab transition, demo note, or presenter note that uses the same key concept language. Flag placeholders, generic notes, missing safety or optimization guidance, and visual-slide issues that need human inspection.
+10. Review the cross-module learner journey from Foundations to Agentic to Advanced.
+11. Save findings as markdown under `qa\`.
 
 ## LAB Step Clarity Review
 
@@ -53,6 +54,20 @@ Review labs as if the participant is new to the artifact, product surface, or in
 | Evaluate | Trust, permission, provenance, data-scope, version, telemetry, validation, and rollback criteria. |
 
 Flag a **consistency gap** when a step is understandable to an experienced instructor but leaves beginners to infer the artifact shape, storage location, required fields, or evidence. Flag it as **blocking** when the ambiguity prevents a learner from completing the exercise or when a success criterion claims an artifact exists but no step tells learners how to create it.
+
+## LAB Scenario Alignment Review
+
+Review whether the lab gives learners the right task source for the track and module:
+
+| Track/module | QA must verify |
+|--------------|----------------|
+| Core/general track | Code, skill, agent, orchestration, and Day 2 tasks use the core workshop build thread unless the workshop source says otherwise. |
+| Technology skill track | Tasks use a concrete domain scenario aligned to the selected skill, not the core build scenario by default. |
+| Foundations | Learners get concrete orientation tasks, notes, prompt assets, and handoff artifacts without creating later-module skill or agent files. |
+| Agentic | Learners get concrete build, review, skill, or custom-agent tasks instead of being asked to invent work. |
+| Advanced | Learners get concrete governance, orchestration, integration, debugging, deployment, or Day 2 scenarios without a large implementation build. |
+
+Flag a **consistency gap** when the lab says "pick one task," "choose a scenario," or "select a helper" without a default or bounded option set. Flag it as **blocking** when the missing task source prevents learners from completing the exercise or breaks the core-vs-skill-track scenario boundary.
 
 ## Advanced Surface Setup and Discovery Review
 
@@ -136,6 +151,7 @@ Reviewed <files>.
 |------|--------|----------|
 | Source-truth alignment | Passing / Gap / Blocking | <specific evidence> |
 | Step clarity | Passing / Gap / Blocking | <specific learner action and supporting artifact/template/evidence> |
+| Scenario alignment | Passing / Gap / Blocking | <core build thread or skill-track domain scenario evidence> |
 
 ## Findings
 

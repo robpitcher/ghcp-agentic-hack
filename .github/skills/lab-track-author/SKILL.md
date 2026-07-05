@@ -28,6 +28,7 @@ The artifact split is strict:
 | No switching | Treat the selected skill track as a workshop-level choice, not a per-module toggle. |
 | Beginner explicit | Every create, save, fill, compare, review, or run instruction must name the artifact, path, table, checklist, command, or evidence the participant should produce. |
 | Show where/how | When a lab teaches a Copilot surface, integration, hook, plugin, MCP boundary, API/CLI, or marketplace extension, show where the learner finds it, how they safely set up or evaluate it, how they validate it, and how they disable or roll it back. |
+| Scenario aligned | Core labs use the core build thread; skill-track labs use domain scenarios aligned to the same module concept. |
 
 ## Track Creation Workflow
 
@@ -66,6 +67,8 @@ workshops\<module>\quizzes\<skill-slug>-QUIZ.md
 - Link or name the matching technology skill before the first exercise.
 - Ask participants to review, install or copy, invoke, and evaluate the skill during the lab flow.
 - Adapt the scenario to the domain without adding concepts that the shared slides do not teach.
+- Provide the learner's task source. Do not ask participants to invent the work when a concrete module scenario, default task, or bounded option set can be supplied.
+- For core/general labs, use the core workshop build thread as the default scenario; for technology tracks, use the selected domain and technology skill as the scenario source.
 - Make every success criterion observable from a participant action, artifact, prompt, or checkpoint.
 - Write labs for beginners: do not say only "create a skill," "draft an agent," "fill a matrix," or "save a note." Provide the exact file path, folder creation command or VS Code action, starter template, expected table/checklist fields, and where to save the result.
 - When a lab asks participants to compare or review something, include the comparison checklist or table directly in the lab.
@@ -93,6 +96,20 @@ Before publishing a skill-track lab, trace every participant action through this
 | Evaluate | Trust, permission, provenance, data-scope, version, telemetry, validation, and rollback criteria. |
 
 If an action cannot be traced to a concrete artifact or evidence item, rewrite the step before shipping the lab.
+
+## Scenario Alignment Gate
+
+Before publishing a skill-track lab, confirm that the task source matches the track:
+
+| Track type | Scenario requirement |
+|------------|----------------------|
+| Core/general | Use the shared core build thread when learners create code, skills, agents, orchestration packages, or Day 2 plans. |
+| Technology skill track | Use a concrete domain scenario that practices the same module concept through the selected technology skill. |
+| Foundations | Keep scenarios lightweight: orientation, notes, prompt assets, and guardrail handoffs. |
+| Agentic | Provide concrete build, review, skill, or custom-agent tasks; do not ask learners to invent them. |
+| Advanced | Provide concrete governance, orchestration, integration, debug, deployment, or Day 2 scenarios without turning the lab into a large implementation build. |
+
+If the lab says "pick one task" or "choose a scenario," either provide a default task or give a small bounded option set.
 
 ## Advanced Surface Walkthrough Gate
 

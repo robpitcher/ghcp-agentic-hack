@@ -13,7 +13,12 @@ Before starting, download or open the C++ / Hardware Developer Skill from the wo
 **📋 Objective**: Create a repo-local skill package that instructs Copilot how to behave for recurring embedded C++ review work.
 
 1. Open VS Code Chat or Copilot CLI in the embedded C++ repository. If you use VS Code, open Chat from the Activity Bar or Command Palette; if you use Copilot CLI, open a terminal at the repository root and start interactive mode with `copilot`.
-2. Create the skill folder and file. In VS Code, you can right-click the Explorer and create folders manually, or run:
+2. Use this default embedded C++ scenario for this exercise. If your project does not have an exact GPIO helper, apply the same review pattern to a small hardware-facing HAL wrapper, register accessor, or driver helper.
+
+```text
+Review a small GPIO/register helper for fixed-width integer use, volatile/register access assumptions, hardware side effects, dynamic allocation risk, validation evidence, and human-review stop conditions. Keep the work focused on review and planning before edits.
+```
+3. Create the skill folder and file. In VS Code, you can right-click the Explorer and create folders manually, or run:
 
 ```powershell
 New-Item -ItemType Directory -Force -Path .github\skills\embedded-cpp-review
@@ -26,13 +31,13 @@ If you cannot write to the repo during class, create the same path in your proje
 .github/skills/embedded-cpp-review/SKILL.md
 ```
 
-3. Use this strong prompt to generate content for `.github/skills/embedded-cpp-review/SKILL.md` as a Copilot behavior package, not a lab. Paste the result into the file or into your project-notes draft.
+4. Use this strong prompt to generate content for `.github/skills/embedded-cpp-review/SKILL.md` as a Copilot behavior package, not a lab. Paste the result into the file or into your project-notes draft.
 
 ```text
-Create a repo-local Copilot skill for embedded C++ review. Write it as Copilot-facing behavior instructions, not a participant lab. Include activation criteria, preferred tools and context, fixed-width integer rules, volatile/register review checks, dynamic allocation restrictions, safety gates, output contract, validation evidence, and stop conditions. Keep it focused on review and planning before edits.
+Create a repo-local Copilot skill for reviewing a small embedded C++ GPIO/register helper. Write it as Copilot-facing behavior instructions, not a participant lab. Include activation criteria, preferred tools and context, fixed-width integer rules, volatile/register review checks, dynamic allocation restrictions, hardware side-effect safety gates, output contract, validation evidence, and stop conditions. Keep it focused on review and planning before edits.
 ```
 
-4. Compare the generated draft to the downloaded C++ / Hardware Developer Skill using this checklist.
+5. Compare the generated draft to the downloaded C++ / Hardware Developer Skill using this checklist.
 
 ```markdown
 # Embedded C++ Skill Review Checklist
@@ -45,13 +50,14 @@ Create a repo-local Copilot skill for embedded C++ review. Write it as Copilot-f
 - The skill does not include secrets, board credentials, customer identifiers, or proprietary datasheet excerpts.
 ```
 
-5. Edit the draft to tighten any unsafe language that implies generated low-level code can be trusted without build, static analysis, simulator, or hardware validation.
+6. Edit the draft to tighten any unsafe language that implies generated low-level code can be trusted without build, static analysis, simulator, or hardware validation.
 
 **🛡️ Safety checkpoint**: Do not store secrets, board credentials, customer identifiers, or proprietary datasheet excerpts in memory or skill files.
 
 ### ✅ Success Criteria
 
 - ✅ Your skill draft includes task, scope, constraints, definition of done, and off-ramp language.
+- ✅ Your skill draft uses the provided embedded GPIO/register helper review scenario rather than Copilot Quest.
 - ✅ Your skill draft tells Copilot how to behave rather than walking the participant through a lab.
 - ✅ Your draft includes embedded C++ safety rules and validation evidence.
 - ✅ Your draft avoids sensitive memory content and unsafe autonomy claims.
