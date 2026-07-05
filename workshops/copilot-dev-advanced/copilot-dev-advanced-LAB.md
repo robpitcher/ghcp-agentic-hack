@@ -23,12 +23,51 @@ For a Copilot Quest scoreboard scenario, decide whether one agent, subagents, mu
 
 Expected result: You have a safe orchestration choice before designing the full package.
 
-1. Choose one medium-scope scenario that could realistically extend Copilot Quest, such as hints, daily puzzle mode, or a scoreboard.
-2. Decide whether the work should use one agent, subagents, multiagents, or fleet-style parallel execution.
-3. If you choose subagents or multiagents, define scoped prompts, minimal permissions, expected outputs, and audit evidence for each delegated role.
-4. If you choose fleet-style execution, prove the tasks are independent and explain why parallelism saves net time or AICs.
-5. Add one quick-look resource from Brady Gaster's Squad or the Awesome Copilot skills catalog as discovery input, then document credibility and enterprise-compatibility checks before reuse.
-6. Save the result as the first page of your Copilot Quest orchestration package.
+1. Create a notes file named `copilot-quest-orchestration-package.md`, or add the template below to your existing workflow kit.
+
+```markdown
+# Copilot Quest Orchestration Package
+
+### Page 1: Orchestration and Discovery Plan
+
+### Scenario
+
+- Feature or change:
+- Why it is medium scope:
+
+### Orchestration Choice
+
+- Pattern selected: One agent / Subagents / Multiagents / Fleet-style parallel execution
+- Why this pattern fits:
+- Why the other patterns are not needed:
+
+### Delegated Roles
+
+| Role | Scope | Allowed tools | Expected output | Audit evidence |
+| --- | --- | --- | --- | --- |
+| | | | | |
+
+### Fleet Independence Check
+
+- Independent task lanes:
+- Shared files, data, or behavior:
+- Merge owner:
+- Why parallelism saves net time or AICs:
+
+### Trusted Discovery
+
+- Resource reviewed:
+- Source credibility:
+- License or reuse check:
+- Enterprise compatibility:
+- Reuse decision:
+```
+
+2. Choose one medium-scope scenario that could realistically extend Copilot Quest, such as hints, daily puzzle mode, or a scoreboard, and fill the Scenario section.
+3. Decide whether the work should use one agent, subagents, multiagents, or fleet-style parallel execution, then fill the Orchestration Choice section.
+4. If you choose subagents or multiagents, fill one Delegated Roles row for each role with scoped prompts, minimal permissions, expected outputs, and audit evidence.
+5. If you choose fleet-style execution, complete the Fleet Independence Check to prove the tasks are independent and explain why parallelism saves net time or AICs.
+6. Add one quick-look resource from Brady Gaster's Squad or the Awesome Copilot skills catalog as discovery input, then complete the Trusted Discovery section before reuse.
 
 **🛡️ Safety checkpoint**: Assign ownership for final merge decisions, preserve human approval before side-effecting actions, and treat curated resources as review inputs rather than automatic approvals.
 
@@ -53,12 +92,36 @@ For a bounded Copilot Quest task, compare hooks, Extension Marketplace, MCP, API
 
 Expected result: You have a conceptual integration recommendation without configuring any real server, extension, or plugin.
 
-1. Pick one bounded task, such as fetching a word list, updating the scoreboard, or validating a generated answer.
-2. Fill a five-row matrix for hooks, Extension Marketplace, MCP, API/CLI, and plugins.
-3. For each row, document permissions, data scope, observability, provenance or publisher trust, validation path, and rollback option.
-4. Keep MCP conceptual: describe tool/context boundaries and security review needs without configuring a specific server.
-5. Choose the simplest safe surface and explain why the other options add unnecessary risk or overhead.
-6. Add one enforceable hook/checkpoint your team would require before accepting changes.
+1. Add this matrix to `copilot-quest-orchestration-package.md` as `Page 2: Integration Due-Diligence Matrix`.
+
+```markdown
+### Page 2: Integration Due-Diligence Matrix
+
+### Bounded Task
+
+- Task:
+
+| Surface | Permissions | Data scope | Observability | Provenance or publisher trust | Validation path | Rollback option | Decision |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Hooks | | | | | | | |
+| Extension Marketplace | | | | | | | |
+| MCP | Conceptual only: tool/context boundary and security review | | | | | | |
+| API/CLI | | | | | | | |
+| Plugins | | | | | | | |
+
+### Recommendation
+
+- Simplest safe surface:
+- Why the other options add unnecessary risk or overhead:
+- Required acceptance hook/checkpoint:
+```
+
+2. Pick one bounded task, such as fetching a word list, updating the scoreboard, or validating a generated answer, and fill the Bounded Task field.
+3. Fill each row for hooks, Extension Marketplace, MCP, API/CLI, and plugins.
+4. For each row, document permissions, data scope, observability, provenance or publisher trust, validation path, rollback option, and a decision such as "use," "defer," or "do not use."
+5. Keep MCP conceptual: describe tool/context boundaries and security review needs without configuring a specific server.
+6. Choose the simplest safe surface and explain why the other options add unnecessary risk or overhead.
+7. Add one enforceable hook/checkpoint your team would require before accepting changes.
 
 **🛡️ Safety checkpoint**: Use only approved tools/endpoints, avoid sensitive data in prompts/logs, and document trust boundaries before enabling extensions, plugins, or MCP servers.
 
@@ -83,10 +146,49 @@ Write a five-item Day 2 go/no-go gate: minimal repro status, permissions, tests,
 
 Expected result: You have a lightweight readiness checklist to expand into the full decision package.
 
-1. Simulate one failed chat or agent run and write the smallest safe repro prompt that narrows context, tool-call order, permissions, or instruction conflicts.
-2. Draft a deploy checklist for a custom agent package: capabilities, permissions, provenance, tests, version owner, rollback, and support expectations.
-3. Choose one distribution or packaging path — GitHub Repo, Marketplace, or Agent Package Manager (APM) — and justify why it fits the audience and governance model.
-4. Build a Day 2 hack proposal with:
+1. Add this final section to `copilot-quest-orchestration-package.md` as `Page 3: Debug, Deploy, and Day 2 Hack Plan`.
+
+```markdown
+### Page 3: Debug, Deploy, and Day 2 Hack Plan
+
+### Minimal Repro
+
+- Failed chat or agent behavior:
+- Smallest repro prompt:
+- Narrowed context:
+- Tool-call order:
+- Permission or instruction conflict to check:
+
+### Deploy Checklist
+
+- Capabilities:
+- Permissions:
+- Provenance:
+- Tests:
+- Version owner:
+- Rollback:
+- Support expectations:
+
+### Packaging Decision
+
+- Selected path: GitHub Repo / Marketplace / Agent Package Manager (APM)
+- Audience:
+- Governance fit:
+- Why the other paths are not selected:
+
+### Day 2 Hack Proposal
+
+- Core objective:
+- Explicit non-goal:
+- Model or agent strategy:
+- Success criterion:
+- Fallback if integration fails:
+```
+
+2. Simulate one failed chat or agent run and fill the Minimal Repro section with the smallest safe repro prompt that narrows context, tool-call order, permissions, or instruction conflicts.
+3. Draft the Deploy Checklist for a custom agent package: capabilities, permissions, provenance, tests, version owner, rollback, and support expectations.
+4. Choose one distribution or packaging path — GitHub Repo, Marketplace, or Agent Package Manager (APM) — and justify why it fits the audience and governance model.
+5. Build a Day 2 hack proposal with:
 
    - One core objective
    - One explicit non-goal
@@ -94,7 +196,7 @@ Expected result: You have a lightweight readiness checklist to expand into the f
    - One success criterion
    - One fallback if integration fails
 
-5. Treat the result as the deployable capstone for the full Copilot Quest build.
+6. Treat the result as the deployable capstone for the full Copilot Quest build.
 
 **🛡️ Safety checkpoint**: No deployment or demo without documented permissions, provenance checks, governance sign-off, and rollback plan.
 
