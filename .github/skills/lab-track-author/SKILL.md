@@ -26,6 +26,7 @@ The artifact split is strict:
 | Skill focused | Adapt exercises, prompts, examples, and quiz scenarios to the selected technology skill. |
 | Same concepts | Test and practice the same module concepts taught by the shared slides. |
 | No switching | Treat the selected skill track as a workshop-level choice, not a per-module toggle. |
+| Beginner explicit | Every create, save, fill, compare, review, or run instruction must name the artifact, path, table, checklist, command, or evidence the participant should produce. |
 
 ## Track Creation Workflow
 
@@ -65,6 +66,26 @@ workshops\<module>\quizzes\<skill-slug>-QUIZ.md
 - Ask participants to review, install or copy, invoke, and evaluate the skill during the lab flow.
 - Adapt the scenario to the domain without adding concepts that the shared slides do not teach.
 - Make every success criterion observable from a participant action, artifact, prompt, or checkpoint.
+- Write labs for beginners: do not say only "create a skill," "draft an agent," "fill a matrix," or "save a note." Provide the exact file path, folder creation command or VS Code action, starter template, expected table/checklist fields, and where to save the result.
+- When a lab asks participants to compare or review something, include the comparison checklist or table directly in the lab.
+- When a lab asks participants to capture evidence, name the evidence type: command output, diff summary, validation result, approval note, unresolved-risk list, or rollback decision.
+- Keep copyable templates compatible with rendered lab navigation: avoid `##` headings inside fenced templates unless they are intended to become page-level lab headings.
+
+## Beginner Clarity Gate
+
+Before publishing a skill-track lab, trace every participant action through this gate:
+
+| Action verb | Required learner support |
+|-------------|--------------------------|
+| Create | Exact file or folder path, plus a command or clear VS Code Explorer instruction. |
+| Draft | Starter prompt and expected output fields. |
+| Fill | Table or checklist template with required columns or bullets. |
+| Compare | Named sources and a review checklist. |
+| Save | File name, location, and content template. |
+| Run | Copyable command and expected evidence to capture. |
+| Review | Specific pass/fail criteria, safety gate, or decision options. |
+
+If an action cannot be traced to a concrete artifact or evidence item, rewrite the step before shipping the lab.
 
 ## Quiz Authoring Checklist
 
