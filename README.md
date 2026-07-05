@@ -13,15 +13,16 @@ Use this flow:
 
 ```bash
 npm install
-npm run build:all
-```
-
-```powershell
-New-Item -ItemType Junction -Path dist\local-preview\ghcp-agentic-hack -Target (Resolve-Path dist\site).Path -Force
-npx http-server dist/local-preview -p 4201 -c-1 --cors -s
+npm run preview:local
 ```
 
 Open: <http://localhost:4201/ghcp-agentic-hack/>
+
+If port `4201` is already in use, choose another port:
+
+```bash
+npm run preview:local -- --port=4202
+```
 
 > **Important**: Do not change the base path to `/` for local testing. Production uses `/ghcp-agentic-hack/`.
 
@@ -59,7 +60,7 @@ Each module folder typically contains:
 4. Rebuild and preview:
 
 ```bash
-npm run build:all
+npm run preview:local
 ```
 
 5. Spot-check module links from the landing page and workshop page.
@@ -86,6 +87,7 @@ npm run build:all
 | `npm run build:all` | Build all Slidev decks, Astro site, and merged output in `dist/site/` |
 | `npm run build:site` | Build Astro site only |
 | `npm run dev:site` | Astro dev server for site development |
+| `npm run preview:local` | Build everything, create a local Pages-style preview under `/ghcp-agentic-hack/`, and serve it at <http://localhost:4201/ghcp-agentic-hack/> |
 | `npm run test:labs` | Run safe Playwright lab usability checks used by CI |
 | `npm run test:labs:participant` | Run opt-in participant-mode lab checks against local VS Code and Copilot CLI |
 | `npm run convert:pptx -- <workshop-folder-name>` | Convert PPTX into slide images + `.slidev.md` deck |
