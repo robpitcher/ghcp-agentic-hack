@@ -11,6 +11,7 @@ interface LabModule {
   slug: string
   title: string
   sourcePath: string
+  route: string
   headings: string[]
   codeBlocks: LabCodeBlock[]
 }
@@ -42,11 +43,41 @@ function discoverLabs(): LabModule[] {
         slug: entry.name,
         title,
         sourcePath,
+        route: `${entry.name}/lab/`,
         headings,
         codeBlocks
       }
     })
     .filter((lab): lab is LabModule => Boolean(lab))
+    .flatMap(lab => {
+      const labDir = path.join(workshopsDir, lab.slug, 'labs')
+      if (!existsSync(labDir)) return [lab]
+
+      const trackLabs = readdirSync(labDir)
+        .filter(file => file.endsWith('-LAB.md'))
+        .map(file => {
+          const sourcePath = path.join(labDir, file)
+          const source = readFileSync(sourcePath, 'utf-8')
+          const title = source.match(/^#\s+(.+)$/m)?.[1] ?? file
+          const headings = Array.from(source.matchAll(/^##\s+(.+)$/gm), match => match[1])
+          const codeBlocks = Array.from(source.matchAll(/```([^\r\n]*)\r?\n([\s\S]*?)\r?\n```/g), match => ({
+            language: match[1].trim(),
+            text: normalize(match[2])
+          }))
+          const trackSlug = file.replace(/-LAB\.md$/, '')
+
+          return {
+            slug: `${lab.slug}-${trackSlug}`,
+            title,
+            sourcePath,
+            route: `${lab.slug}/labs/${trackSlug}/`,
+            headings,
+            codeBlocks
+          }
+        })
+
+      return [lab, ...trackLabs]
+    })
     .sort((a, b) => a.slug.localeCompare(b.slug))
 }
 
@@ -62,10 +93,37 @@ test.describe('lab usability', () => {
     }
   })
 
+  test('workshop lab and quiz actions use the skill-track picker', async ({ page }) => {
+    await page.goto('copilot-dev-training/')
+
+    await expect(page.getByRole('heading', { level: 1, name: 'GitHub Copilot Dev Hack' })).toBeVisible()
+    await expect(page.getByText('Choose one skill track')).toHaveCount(0)
+    await expect(page.locator('.module-track-label')).toHaveCount(0)
+
+    await page.locator('.module-card').nth(0).getByRole('link', { name: 'Lab' }).click()
+    await expect(page.getByRole('heading', { level: 2, name: 'Choose a lab track for Module 1: Foundations' })).toBeVisible()
+    await page.getByRole('button', { name: /C\+\+ \/ Hardware/ }).click()
+    await expect(page).toHaveURL(/copilot-dev-foundations\/labs\/cpp-hardware\/$/)
+
+    await page.goto('copilot-dev-training/')
+    await expect(page.locator('#track-status')).toContainText('Track: C++ / Hardware')
+    await page.getByRole('button', { name: 'Change' }).click()
+    await expect(page.getByRole('heading', { level: 2, name: 'Choose your workshop skill track' })).toBeVisible()
+    await page.keyboard.press('Escape')
+    await page.getByRole('button', { name: 'Reset' }).click()
+    await expect(page.locator('#track-status')).toBeHidden()
+    await page.locator('.module-card').nth(1).getByRole('link', { name: 'Quiz' }).click()
+    await expect(page.getByRole('heading', { level: 2, name: 'Choose a quiz track for Module 2: Agentic Patterns' })).toBeVisible()
+    await page.getByRole('button', { name: /C\+\+ \/ Hardware/ }).click()
+    await page.goto('copilot-dev-training/')
+    await page.locator('.module-card').nth(1).getByRole('link', { name: 'Quiz' }).click()
+    await expect(page).toHaveURL(/copilot-dev-agentic\/quizzes\/cpp-hardware\/$/)
+  })
+
   for (const lab of labs) {
     test.describe(lab.slug, () => {
       test('renders the lab structure and exercise checkpoints', async ({ page }) => {
-        await page.goto(`${lab.slug}/lab/`)
+        await page.goto(lab.route)
         await expect(page.getByRole('heading', { level: 1, name: lab.title })).toBeVisible()
         await expect(page.locator('.lab-content')).toContainText('⏱️ Time')
         await expect(page.locator('.lab-content')).toContainText('📋 Objective')
@@ -77,7 +135,7 @@ test.describe('lab usability', () => {
       })
 
       test('walks table-of-contents anchors for each exercise', async ({ page }) => {
-        await page.goto(`${lab.slug}/lab/`)
+        await page.goto(lab.route)
 
         const tocLinks = page.locator('.lab-toc a')
         await expect(tocLinks).toHaveCount(lab.headings.length)
@@ -95,7 +153,7 @@ test.describe('lab usability', () => {
 
       test('walks and verifies every copyable command or prompt block', async ({ page, context, baseURL }) => {
         await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: new URL(baseURL!).origin })
-        await page.goto(`${lab.slug}/lab/`)
+        await page.goto(lab.route)
 
         const blocks = page.locator('.lab-content pre')
         await expect(blocks).toHaveCount(lab.codeBlocks.length)

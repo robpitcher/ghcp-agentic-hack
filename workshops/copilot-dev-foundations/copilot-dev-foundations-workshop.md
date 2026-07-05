@@ -67,8 +67,8 @@
 ### Key Points
 
 - **Slide topic (1 slide): Where GitHub Copilot Lives (IDE + Cloud, incl. Copilot app where available)** — Copilot spans IDEs, terminal workflows, GitHub.com, cloud-based assistance, and Copilot app surfaces where available, letting developers move between coding, automation, and repository-level understanding with more consistent workflows across surfaces. **AI Safety Moment**: confirm org policy, repository access, and cross-surface context boundaries before using cloud or app experiences.
-- **Slide topic (1 slide): Look Around VS Code Chat Extension (slash commands, file references like #file/#selection)** — VS Code chat gives developers slash commands, participants, and precise `#` references such as `#file` and `#selection` so the assistant sees the smallest useful context for the question. **Usage Optimization**: start with `#selection` or `#file`, then expand scope only when the answer proves more context is needed.
-- **Slide topic (1 slide): Look Around Copilot CLI** — GitHub Copilot CLI is installed using the official setup guidance at <https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli> and supports terminal-first chat, command explanation, command generation, `/settings`, help discovery, and review-oriented workflows such as security checks before committing. **AI Safety Moment**: generated commands must be reviewed before execution, especially when they change files, install dependencies, or affect remote systems.
+- **Slide topic (1 slide): Look Around VS Code Chat Extension (slash commands, file references like #file/#selection)** — VS Code chat gives developers slash commands, participants, and precise `#` references such as `#file` and `#selection` so the assistant sees the smallest useful context for the question. Show learners where to open Chat from the VS Code Activity Bar or Command Palette, how to select a small block before using `#selection`, and how to switch to `#file` only when the whole file is needed. **Usage Optimization**: start with `#selection` or `#file`, then expand scope only when the answer proves more context is needed.
+- **Slide topic (1 slide): Look Around Copilot CLI** — GitHub Copilot CLI is installed using the official setup guidance at <https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli> and supports terminal-first chat, command explanation, command generation, `/settings`, help discovery, and review-oriented workflows such as security checks before committing. Show learners where to open the VS Code integrated terminal, how to confirm `copilot --help`, how to enter interactive mode with `copilot`, and how to use `/settings` and `/help` before running generated commands. **AI Safety Moment**: generated commands must be reviewed before execution, especially when they change files, install dependencies, or affect remote systems.
 - **Slide topic (1 slide): Enterprise Privacy and IP (anchor safety segment: data handling, retention, duplicate detection, admin governance)** — Enterprise privacy and IP controls include data-handling expectations, retention settings, duplicate-detection options, content exclusions, auditability, and admin governance that align Copilot usage with organizational policy. **AI Safety Moment**: treat generated output as draft material, verify provenance-sensitive suggestions, and keep human accountability with the developer and reviewer.
 
 ### 🔬 LAB: Exercise 1 — Stage 1 Baseline and Governance Signals
@@ -103,6 +103,7 @@
 1. Select a small code block and ask Copilot to explain it with `#selection`.
 2. Repeat the same request with `#file` and compare the extra context.
 3. Switch the task through built-in Ask, Plan, and Agent experiences to show how autonomy changes the expected review gate.
+4. Point out where the chat mode or experience selector appears in the learner's environment; if a mode is unavailable, have learners record "not available" instead of forcing the workflow.
 
 ### 💡 Optimization Tip: Use the Smallest Useful Context
 
@@ -149,6 +150,7 @@ Use inline completions for flow, inline chat for selected transformations, and m
 1. Compare one broad prompt and one scoped prompt for the same objective.
 2. Ask Copilot to convert usage-window and model-picker guidance into a real-world checklist before selecting a route.
 3. Compare Auto, a fast/general-purpose route, or a deeper reasoning route if those options are available in the learner environment.
+4. Show the VS Code GitHub/Copilot status-area usage entry point and the Copilot CLI `/usage`, `/context`, and `/model` commands so learners know where the signals come from.
 
 ### 💡 Optimization Tip: Route by Task Shape
 

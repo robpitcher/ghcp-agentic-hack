@@ -1,135 +1,102 @@
 ---
 name: C++ / Hardware Developer Skill
-description: Use this skill when working with C, C++, firmware, embedded systems, hardware abstraction layers, memory-mapped I/O, CMake, compile_commands.json, C++ language-server setup, or safe modernization of legacy C++ projects.
+description: Instruct GitHub Copilot how to work safely with embedded C++, firmware, HALs, build context, and hardware-facing review gates.
 icon: 🔧
-audience: Hardware, firmware, and embedded C++ developers
+audience: Embedded C++ developers
 order: 1
 ---
 
 # C++ / Hardware Developer Skill
 
-Use this skill to help GitHub Copilot work effectively on hardware-oriented C and C++ codebases. It focuses Copilot on semantic C++ understanding, embedded constraints, safe modernization, and human review gates for low-level code.
+Use this skill to make GitHub Copilot behave like a careful assistant for hardware-oriented C and C++ work. This is an agentic behavior package, not a participant lab: it tells Copilot which context to inspect, which tools to prefer, which safety boundaries to honor, and what evidence to return.
 
-## When to Use This Skill
+## Activation Criteria
 
-- You are working in a C or C++ codebase with complex includes, macros, templates, overloads, or build-system-specific configuration.
-- You need Copilot to reason about firmware, drivers, hardware abstraction layers, register maps, or memory-mapped I/O.
-- You need to set up or use `compile_commands.json` and a C++ language server so Copilot can answer symbol-aware questions.
-- You are modernizing legacy C++ and need an assess, plan, execute, validate workflow with approval gates.
-- You want Copilot suggestions to follow embedded rules such as fixed-width types, no dynamic allocation after initialization, and careful `volatile` usage.
+Use this skill when the task involves:
 
-## Core Operating Principles
+- C or C++ source, headers, templates, macros, overloads, build flags, target-specific compilation, or language-server-backed symbol reasoning.
+- Firmware, drivers, hardware abstraction layers, register maps, memory-mapped I/O, interrupt paths, real-time code, or embedded constraints.
+- CMake, `compile_commands.json`, compiler warnings, static analysis, simulator validation, hardware-in-the-loop validation, or target-board checks.
+- Legacy C++ modernization where changes require assessment, planning, approval, execution, and validation gates.
 
-| Principle | Guidance |
-|-----------|----------|
-| Semantic context first | Prefer language-server-backed symbol understanding over plain text search. |
-| Build context matters | Keep `compile_commands.json` current so include paths, defines, standards, and target flags match the real build. |
-| Encode durable rules | Put embedded constraints in `.github/copilot-instructions.md` instead of repeating them in every prompt. |
-| Scope tightly | Use `#file`, `#selection`, and precise task boundaries before asking broad codebase questions. |
-| Human accountability | Treat generated low-level code as draft until build, static analysis, peer review, and hardware validation pass. |
+## Context and Tool Preferences
 
-## Recommended Setup
+1. Prefer precise context over broad repository scans. Start with `#file`, `#selection`, symbol lookup, build files, and targeted searches.
+2. Look for `compile_commands.json`, `CMakeLists.txt`, toolchain files, target flags, include paths, defines, compiler standard, and platform assumptions before making C++ claims.
+3. Prefer C++ language-server or symbol-aware context for inheritance, call hierarchy, overloads, type resolution, and cross-file relationships.
+4. Use text search for discovery, but state when text search may miss macro expansion, generated headers, overload resolution, templates, or target-specific definitions.
+5. Ask before running commands that install tools, modify files, change dependencies, flash hardware, touch devices, or access remote systems.
 
-1. Open the target C or C++ project in VS Code.
-2. Confirm the project builds locally with the intended compiler and target configuration.
-3. Generate a compilation database for CMake projects:
+## Embedded C++ Constraints
 
-```powershell
-cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-```
+Follow these defaults unless the repository explicitly says otherwise:
 
-4. Install the Microsoft C++ Language Server for Copilot CLI workflows:
+- Prefer fixed-width integer types from `<cstdint>` for hardware-facing values.
+- Preserve unrelated register bits and explain masking assumptions.
+- Treat `volatile` as required for memory-mapped register access, not as a synchronization primitive.
+- Avoid dynamic allocation after initialization in real-time, ISR, driver, and constrained embedded paths.
+- Avoid blocking calls, exceptions, locks, unbounded loops, and logging in ISR or real-time paths unless the codebase explicitly permits them.
+- Prefer RAII for resource handles and `constexpr` for compile-time tables where the target supports them.
+- Do not infer datasheet behavior. Name assumptions and require verification against authoritative hardware documentation.
 
-```powershell
-npm install -g @microsoft/cpp-language-server
-```
+## Required Workflow
 
-5. Ask Copilot to use semantic C++ context when answering symbol, call hierarchy, inheritance, or type questions:
+For low-risk explanation tasks:
 
-```text
-Find all classes derived from the base formatter type in this project. Use the C++ LSP.
-```
+1. Summarize the code or symbol.
+2. List build-context assumptions.
+3. Identify hardware-facing responsibilities and review risks.
+4. Suggest the narrowest next prompt or validation step.
 
-> **Note**: For MSBuild (`.vcxproj`) projects, use an MSBuild-to-`compile_commands.json` extractor until native compilation database support is available in your environment.
+For edits, modernization, or hardware-facing changes:
 
-## Embedded C++ Instruction Template
+1. **Assess** current behavior, build context, risks, warnings, and unknowns.
+2. **Plan** ordered changes, validation commands, rollback notes, and approval gates.
+3. **Wait for approval** before editing hardware-facing code, build flags, dependencies, or generated artifacts.
+4. **Execute narrowly** after approval, changing the smallest safe surface.
+5. **Validate** with build, tests, static analysis, simulator, hardware-in-the-loop, target-board checks, or PR review as applicable.
 
-Create `.github/copilot-instructions.md` in the target project and adapt this template:
+## Safety Gates
 
-```markdown
-# Copilot Instructions — Embedded C++
+Stop and ask for human review when:
 
-- Use fixed-width integer types from <cstdint> (`uint32_t`, not `unsigned int`).
-- Do not use dynamic allocation after initialization; prefer `std::array` and fixed buffers.
-- Use RAII for resource handles.
-- Avoid exceptions in ISR and real-time paths.
-- Mark memory-mapped register accesses `volatile` and verify register behavior against the datasheet.
-- Prefer `constexpr` for compile-time tables.
-- Prefer `std::span` for buffer parameters when the target platform supports it.
-- Keep prompts scoped to the relevant driver, HAL, register map, or selected code.
-```
+- The task affects register semantics, interrupt behavior, timing, memory allocation, concurrency, compiler flags, linker scripts, startup code, bootloaders, safety-critical paths, or hardware flashing.
+- Required datasheets, schematics, target flags, generated headers, or validation commands are missing.
+- A command could modify files, install dependencies, access hardware, flash firmware, or change remote systems.
+- The requested change conflicts with repository instructions, coding standards, or validation requirements.
+- The prompt asks to store secrets, credentials, board identifiers, proprietary datasheet excerpts, customer identifiers, or regulated data in memory or durable instructions.
 
-## Prompt Patterns
+## Output Contract
 
-### Understand a C++ File
+Return answers in this shape when practical:
 
 ```text
-Explain what this file does, list its public symbols, identify hardware-facing responsibilities, and call out any build-context assumptions. #file
+Summary:
+Context used:
+Build or hardware assumptions:
+Findings:
+Risks and safety gates:
+Recommended next step:
+Validation evidence or commands:
+Open questions:
 ```
 
-### Compare Text Search and Semantic Search
+For code review, include severity and confidence. For plans, include approval gates. For commands, explain what each command does before suggesting execution.
 
-```text
-Find all classes derived from the base formatter type in this project. First explain what a grep-only search may miss, then answer using the C++ LSP.
-```
+## Validation Preferences
 
-### Review Register Access
+Prefer validation that matches the project:
 
-```text
-Review this register-write helper for fixed-width types, volatile correctness, masking behavior, and datasheet assumptions. Do not rewrite it yet; list risks and validation steps first. #selection
-```
+- Build with the real target toolchain and flags.
+- Run unit tests, integration tests, static analysis, formatting, or compiler warning checks already used by the repository.
+- Use simulator, emulator, hardware-in-the-loop, or target-board validation for hardware-facing behavior.
+- Require PR review for generated changes that affect drivers, HALs, register maps, timing, or safety-critical paths.
 
-### Generate a Hardware-Safe Helper
+## Usage Optimization
 
-```text
-Write a helper to set bits 3 and 5 of the GPIO mode register. Use fixed-width types, preserve unrelated bits, avoid dynamic allocation, and explain what must be verified against the datasheet. #selection
-```
+- Reuse durable instructions for project conventions instead of repeating constraints in every prompt.
+- Keep prompts scoped to the relevant file, symbol, selection, build target, or validation command.
+- Use assessment and planning before edits to reduce retries and avoid unsafe broad changes.
+- Tell agents which warnings or constraints are pre-existing so they focus on the requested change.
 
-### Plan Legacy Modernization
-
-```text
-Assess this legacy C++ component for safe modernization. Produce an assessment first, then a plan. Do not apply changes until I approve the plan. Focus on build compatibility, ownership semantics, fixed buffers, and test coverage.
-```
-
-## Safe Modernization Workflow
-
-Use an explicit four-stage loop for legacy C++:
-
-| Stage | Output | Approval Gate |
-|-------|--------|---------------|
-| Assess | Current build, risks, warnings, and modernization opportunities | Human reviews scope and exclusions |
-| Plan | Ordered tasks, validation commands, rollback notes | Human approves before edits |
-| Execute | Small changes with build verification after each step | Human reviews diffs and failures |
-| Validate | Tests, static analysis, hardware or simulator checks, PR review | Human confirms release readiness |
-
-For Visual Studio `@Modernize` workflows, keep the same approval model: review `assessment.md`, review and approve `plan.md`, let the agent execute only approved tasks, then validate with builds, tests, and pull request review.
-
-## Safety Checklist
-
-- Verify generated register code against the datasheet.
-- Check ISR and real-time paths for blocking calls, allocation, exceptions, locks, and unbounded loops.
-- Confirm generated code preserves unrelated register bits and handles masks correctly.
-- Rebuild with the real target flags, not just a desktop approximation.
-- Run static analysis and unit tests where available.
-- Validate hardware-facing behavior on the target board, simulator, or hardware-in-the-loop environment before release.
-- Keep the developer accountable for correctness, timing, memory behavior, and device safety.
-
-## Usage Optimization Tips
-
-- Generate and maintain `compile_commands.json` once so later questions avoid noisy multi-pass text search.
-- Encode project conventions in instruction files instead of retyping them in prompts.
-- Keep prompts scoped to the relevant file or selection before using whole-codebase context.
-- Ask for assessment and planning before edits when the change affects build flags, hardware behavior, or legacy modernization.
-- Tell modernization agents which warnings or deviations are pre-existing so they spend effort only on relevant work.
-
-*Technology skill for C++ / Hardware Developers — GitHub Copilot Developer Training*
+*Agentic behavior skill for C++ / Hardware Developers — GitHub Copilot Developer Training*

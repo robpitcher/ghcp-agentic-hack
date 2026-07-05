@@ -27,12 +27,75 @@ Compare companion files against the workshop source:
 1. Identify the module folder and read the workshop source first.
 2. Extract the workshop sections, lab indicators, safety moments, optimization tips, demos, and key concept list.
 3. Compare LAB exercises against the workshop sequence and verify that every lab has objectives, safety checkpoints, success criteria, copyable prompts or commands, and expected learner artifacts.
-4. Trace every LAB success criterion back to a specific participant instruction, prompt, template field, saved artifact, or safety checkpoint. Flag criteria that are vague, instructor-only, not observable, or not actually requested by the lab steps.
-5. Compare quiz questions against taught concepts. Verify that each question has four options, one answer comment, and an explanation that matches the workshop source.
-6. Compare presenter notes against workshop sections and confirm that discussion prompts do not drift into workshop source files.
-7. Compare Slidev presenter notes against the workshop and lab intent. Verify that every LAB exercise topic is represented in the slide deck through a lab transition, demo note, or presenter note that uses the same key concept language. Flag placeholders, generic notes, missing safety or optimization guidance, and visual-slide issues that need human inspection.
-8. Review the cross-module learner journey from Foundations to Agentic to Advanced.
-9. Save findings as markdown under `qa\`.
+4. Review LAB step clarity. Every instruction that asks participants to create, draft, fill, compare, save, run, review, find, set up, or evaluate something must include the exact artifact, path, starter template, table/checklist fields, command, expected evidence, product surface, or pass/fail criteria.
+5. Trace every LAB success criterion back to a specific participant instruction, prompt, template field, saved artifact, or safety checkpoint. Flag criteria that are vague, instructor-only, not observable, or not actually requested by the lab steps.
+6. Review LAB scenario alignment. Core/general labs should use the core workshop build thread when learners create code or artifacts; skill-track labs should use domain scenarios aligned to the same module concept.
+7. Compare quiz questions against taught concepts. Verify that each question has four options, one answer comment, and an explanation that matches the workshop source.
+8. Compare presenter notes against workshop sections and confirm that discussion prompts do not drift into workshop source files.
+9. Compare Slidev presenter notes against the workshop and lab intent. Verify that every LAB exercise topic is represented in the slide deck through a lab transition, demo note, or presenter note that uses the same key concept language. Flag placeholders, generic notes, missing safety or optimization guidance, and visual-slide issues that need human inspection.
+10. Review the cross-module learner journey from Foundations to Agentic to Advanced.
+11. Save findings as markdown under `qa\`.
+
+## LAB Step Clarity Review
+
+Review labs as if the participant is new to the artifact, product surface, or integration they are using. Do not assume they know what belongs in a skill, custom agent, matrix, readiness note, orchestration package, checklist, hook, plugin, MCP configuration, API/CLI command, marketplace entry, or QA artifact unless the lab provides a template, exact fields, or exact entry point.
+
+| Action verb | Required learner support |
+|-------------|--------------------------|
+| Create | Exact file or folder path, plus a command or clear VS Code Explorer instruction. |
+| Draft | Starter prompt and expected output fields. |
+| Fill | Table or checklist template with required columns or bullets. |
+| Compare | Named sources and a review checklist. |
+| Save | File name, location, and content template. |
+| Run | Copyable command and expected evidence to capture. |
+| Review | Specific pass/fail criteria, safety gate, or decision options. |
+| Find | Exact product surface, menu, command, UI location, or repository path. |
+| Set up | Copyable command or configuration path, expected result, validation check, and rollback or disable step. |
+| Evaluate | Trust, permission, provenance, data-scope, version, telemetry, validation, and rollback criteria. |
+
+Flag a **consistency gap** when a step is understandable to an experienced instructor but leaves beginners to infer the artifact shape, storage location, required fields, or evidence. Flag it as **blocking** when the ambiguity prevents a learner from completing the exercise or when a success criterion claims an artifact exists but no step tells learners how to create it.
+
+## LAB Scenario Alignment Review
+
+Review whether the lab gives learners the right task source for the track and module:
+
+| Track/module | QA must verify |
+|--------------|----------------|
+| Core/general track | Code, skill, agent, orchestration, and advanced evidence tasks use the core workshop build thread unless the workshop source says otherwise. |
+| Technology skill track | Tasks use a concrete domain scenario aligned to the selected skill, not the core build scenario by default. |
+| Foundations | Learners get concrete orientation tasks, notes, prompt assets, and handoff artifacts without creating later-module skill or agent files. |
+| Agentic | Learners get concrete build, review, skill, or custom-agent tasks instead of being asked to invent work. |
+| Advanced | Learners get concrete governance, orchestration, integration, debugging, deployment, capability-discovery, and evidence-capture scenarios without a large implementation build. Day 2 is a separate event; flag Advanced lab or quiz deliverables that ask learners to produce Day 2 event plans. |
+
+Flag a **consistency gap** when the lab says "pick one task," "choose a scenario," or "select a helper" without a default or bounded option set. Flag it as **blocking** when the missing task source prevents learners from completing the exercise or breaks the core-vs-skill-track scenario boundary.
+
+## Advanced Surface Setup and Discovery Review
+
+For Advanced module labs and any skill track that references integration surfaces, verify that the lab teaches where and how to find, set up, evaluate, validate, and roll back the surface when setup is in scope.
+
+| Surface | QA must verify |
+|---------|----------------|
+| Copilot/agent hooks | The lab names where hook configuration lives, which lifecycle event is being used, how the learner validates execution, and how to disable or roll back the hook. |
+| Extension Marketplace | The lab shows where to open the marketplace or extension details and asks learners to inspect publisher, version, trust, permissions, telemetry, and disable/uninstall path. |
+| Plugins | The lab shows Agent Customizations > Plugins and Extensions view agent-plugin surfaces where available, notes `chat.plugins.enabled` may be organization-managed, and includes `plugin.json` or package metadata, included slash commands/skills/custom agents/hooks/MCP servers, provenance, signing or source, versioning, rollout, telemetry/data-scope, and rollback checks before enablement. |
+| MCP | The lab keeps MCP conceptual unless the workshop source explicitly adds a live server walkthrough; it shows discovery surfaces such as Extensions search `@mcp`, `MCP: Open User Configuration`, `MCP: Open Workspace Folder Configuration`, and `MCP: List Servers`, and identifies configuration scope, exposed tools/resources/prompts/context, data boundary, authentication/authorization, and required approval. |
+| API/CLI | The lab includes an exact command or endpoint pattern, expected inputs/outputs, audit evidence, approval/logging requirements, and why it is safer or more observable than a broader integration. |
+| Debug evidence | The lab shows how VS Code users open the Agent Debug Log panel with `Developer: Open Agent Debug Panel` or **Show Agent Debug Logs**, inspect load events, tool calls, LLM requests, Summary, and Agent Flow Chart, then open **Show Chat Debug View** for raw payloads. It includes `#debugEventsSnapshot`, `/troubleshoot` with the `github.copilot.chat.agentDebugLog.enabled` setting, the note that debug data is not persisted across VS Code sessions, and a Copilot CLI alternative with prompt, selected context, tool or command output, error text, and narrowed rerun evidence. |
+
+Flag a **consistency gap** when a lab only says "compare hooks, plugins, MCP, API/CLI, or marketplace" without showing where learners find the surface or what evidence they should capture. Flag it as **blocking** when a lab asks learners to enable or rely on an integration without trust review, validation evidence, or rollback guidance.
+
+## VS Code Chat Surface Review
+
+For labs that teach Chat, agent mode, customizations, or execution-mode selection, verify the lab demonstrates the current VS Code surfaces instead of only naming the concept:
+
+| Surface | QA must verify |
+|---------|----------------|
+| Configure Tools | Learners are told where to open **Configure Tools**, which tools to keep enabled, and which tools to leave off for the first pass. |
+| `#` picker | Learners use or inspect the `#` picker for context sources and tools such as `#selection`, `#file`, `#codebase`, or `#problems`. |
+| Permissions picker | The lab names **Default Approvals**, **Bypass Approvals**, or **Autopilot** and explains why the chosen level fits the task risk. |
+| Agent Customizations | Learners open the Chat Configure gear and Agent Customizations view before creating or reviewing Instructions, Skills, Agents, Prompt Files, Hooks, or Plugins. |
+| Review controls | Learners know where to find the files changed bar, inline diff, **Keep**, **Undo**, **Undo All**, **Restore Checkpoint**, and `/fork` when agent edits are produced. |
+| Agent Sessions | Learners locate the Agent Sessions sidebar and agent/session type picker when comparing Local, Copilot CLI/background, Cloud, or third-party agent execution. |
 
 ## LAB Success Criteria Traceability
 
@@ -40,8 +103,8 @@ For each LAB exercise, build a quick traceability check:
 
 | Success criterion asks learner to... | Must be backed by... |
 |--------------------------------------|--------------------|
-| Create or save something | A step that names the artifact, file, note, checklist, or package location. |
-| Compare options | A step, table, example, or prompt that gives the options being compared. |
+| Create or save something | A step that names the artifact, file, note, checklist, or package location and provides a starter template when the artifact shape is not obvious. |
+| Compare options | A step, table, example, or prompt that gives the options being compared and the criteria for comparison. |
 | Improve or tighten output | A prompt or instruction that asks for a revision and states what should change. |
 | Make a safety decision | A safety checkpoint or step that identifies the risk and review gate. |
 | Prepare a next-module handoff | A step that names what carries forward and what must not be created yet. |
@@ -67,7 +130,7 @@ Verify the full curriculum path:
 |--------|---------------------------|
 | Foundations | New Copilot Quest starter, Copilot surfaces, safe CLI use, guided workflows, usage optimization, model/context routing, and delegation guardrails |
 | Agentic | Strong prompts, instructions, memory boundaries, repo-local skill creation, custom agent creation, tool-control handoffs, background/cloud readiness, `/init`, and instruction layering |
-| Advanced | Multiagents, subagents, fleet decisions, trusted discovery, hooks, Extension Marketplace, MCP as a governed concept, API/CLI, plugins, debugging, deployment, and Day 2 readiness |
+| Advanced | Multiagents, subagents, fleet decisions, trusted discovery, hooks, Extension Marketplace, MCP as a governed concept, API/CLI, plugins, debugging, deployment, and separate-event Day 2 readiness without Day 2 lab or quiz deliverables |
 
 ## Artifact Boundary Checks
 
@@ -101,6 +164,8 @@ Reviewed <files>.
 | Area | Status | Evidence |
 |------|--------|----------|
 | Source-truth alignment | Passing / Gap / Blocking | <specific evidence> |
+| Step clarity | Passing / Gap / Blocking | <specific learner action and supporting artifact/template/evidence> |
+| Scenario alignment | Passing / Gap / Blocking | <core build thread or skill-track domain scenario evidence> |
 
 ## Findings
 

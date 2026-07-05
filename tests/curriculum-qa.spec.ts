@@ -297,6 +297,51 @@ test.describe('curriculum source-of-truth QA', () => {
     expect(advancedLab).toContain('without configuring any real server')
   })
 
+  test('C++ skill-track labs and quizzes preserve shared slide concept coverage', () => {
+    const expectedConcepts: Record<string, string[]> = {
+      'copilot-dev-foundations': ['copilot surfaces', 'safe', 'model', 'context', 'guardrails'],
+      'copilot-dev-agentic': ['instructions', 'memory', 'strong prompt', 'skill', 'custom agent', 'tool', 'background', '/init'],
+      'copilot-dev-advanced': ['multiagent', 'subagent', 'fleet', 'hooks', 'extension', 'mcp', 'api/cli', 'plugins', 'debug', 'deployment']
+    }
+
+    for (const module of trainingModules) {
+      const labPath = path.join(workshopsDir, module.slug, 'labs', 'cpp-hardware-LAB.md')
+      const quizPath = path.join(workshopsDir, module.slug, 'quizzes', 'cpp-hardware-QUIZ.md')
+
+      expect(existsSync(labPath), `${module.slug} should include a C++ skill-track lab`).toBe(true)
+      expect(existsSync(quizPath), `${module.slug} should include a C++ skill-track quiz`).toBe(true)
+
+      const lab = lower(readFileSync(labPath, 'utf-8'))
+      const quiz = readFileSync(quizPath, 'utf-8')
+      const quizLower = lower(quiz)
+
+      expect(lab, `${module.slug} C++ lab should name the skill track`).toContain('c++ / hardware')
+      expect(lab, `${module.slug} C++ lab should preserve shared slides as source truth`).toContain('slides remain the source of truth')
+      expect(lab, `${module.slug} C++ lab should practice applying the skill`).toContain('c++ / hardware developer skill')
+      expect(lab, `${module.slug} C++ lab should include safety checkpoints`).toContain('safety checkpoint')
+      expect(lab, `${module.slug} C++ lab should include success criteria`).toContain('success criteria')
+      expect(lab, `${module.slug} C++ lab should include copyable prompts or commands`).toContain('```')
+      expect(quizLower, `${module.slug} C++ quiz should use C++ context`).toContain('c++')
+
+      for (const concept of expectedConcepts[module.slug]) {
+        expect(`${lab}\n${quizLower}`, `${module.slug} C++ track should cover ${concept}`).toContain(concept)
+      }
+
+      const blocks = quizQuestionBlocks(quiz)
+      const answers = Array.from(quiz.matchAll(/<!--answer:\s*([A-D])-->/g))
+      const explanations = Array.from(quiz.matchAll(/<!--explanation:\s*[\s\S]*?-->/g))
+      expect(blocks.length, `${module.slug} C++ quiz should include questions`).toBeGreaterThan(0)
+      expect(answers.length, `${module.slug} C++ quiz answers should match question count`).toBe(blocks.length)
+      expect(explanations.length, `${module.slug} C++ quiz explanations should match question count`).toBe(blocks.length)
+
+      for (const [index, block] of blocks.entries()) {
+        for (const option of ['A', 'B', 'C', 'D']) {
+          expect(block, `${module.slug} C++ question ${index + 1} should include option ${option}`).toMatch(new RegExp(`^- ${option}\\)\\s+`, 'm'))
+        }
+      }
+    }
+  })
+
   test('curriculum QA reports and reusable QA skill are present', () => {
     const qaFiles = [
       'README.md',
@@ -320,5 +365,32 @@ test.describe('curriculum source-of-truth QA', () => {
     expect(skill).toContain('labs')
     expect(skill).toContain('quizzes')
     expect(skill).toContain('lab topic to slide deck traceability')
+  })
+
+  test('skill-track authoring skill is present for future track creation', () => {
+    const skillPath = path.join(repoRoot, '.github', 'skills', 'lab-track-author', 'SKILL.md')
+    expect(existsSync(skillPath), 'lab track authoring skill should exist').toBe(true)
+
+    const skill = lower(readFileSync(skillPath, 'utf-8'))
+    expect(skill).toContain('slides stay shared')
+    expect(skill).toContain('source truth first')
+    expect(skill).toContain('skill as behavior')
+    expect(skill).toContain('technology skill checklist')
+    expect(skill).toContain('labs')
+    expect(skill).toContain('quizzes')
+    expect(skill).toContain('npm run test:curriculum-qa')
+  })
+
+  test('C++ workshop technology skill is a Copilot behavior package', () => {
+    const skillPath = path.join(workshopsDir, 'copilot-dev-training', 'skills', 'cpp-hardware', 'SKILL.md')
+    expect(existsSync(skillPath), 'C++ / Hardware skill should exist').toBe(true)
+
+    const skill = lower(readFileSync(skillPath, 'utf-8'))
+    expect(skill).toContain('agentic behavior package')
+    expect(skill).toContain('activation criteria')
+    expect(skill).toContain('context and tool preferences')
+    expect(skill).toContain('safety gates')
+    expect(skill).toContain('output contract')
+    expect(skill).toContain('validation preferences')
   })
 })

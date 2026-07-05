@@ -77,7 +77,7 @@ background: /images/copilot-dev-advanced/slide-08-7d935c10.png
 ---
 
 <!--
-Define hooks as deterministic lifecycle guardrails that run before tool calls, accepted changes, or workflow transitions. They are useful for policy checks, secret scanning, validation commands, and review gates that should not depend on prompt quality. Emphasize that hooks make safety repeatable because they execute at defined control points.
+Define hooks as deterministic lifecycle guardrails that run before tool calls, accepted changes, or workflow transitions. They are useful for policy checks, secret scanning, validation commands, and review gates that should not depend on prompt quality. Show that Copilot/agent hooks can be represented as repository-level `.github/hooks/*.json` configuration and that learners must validate syntax and know the rollback command before trusting a hook.
 -->
 
 ---
@@ -86,7 +86,7 @@ background: /images/copilot-dev-advanced/slide-09-b1cb559c.png
 ---
 
 <!--
-Use marketplace extensions as an example of convenience that changes the trust boundary. Extensions can expand the developer environment and agent experience, but they may also alter permissions, telemetry, data access, and support obligations. Ask learners who should approve a marketplace addition before it becomes part of an enterprise workflow.
+Use marketplace extensions as an example of convenience that changes the trust boundary. Extensions can expand the developer environment and agent experience, but they may also alter permissions, telemetry, data access, and support obligations. Ask learners to open extension details, inspect publisher/version/trust signals, and identify how they would disable or uninstall before asking who should approve adoption.
 -->
 
 ---
@@ -95,7 +95,7 @@ background: /images/copilot-dev-advanced/slide-10-38882bdc.png
 ---
 
 <!--
-Introduce MCP as a protocol pattern for exposing tools, resources, and context through explicit server boundaries. Keep the focus on governance: teams need to know what tools are exposed, what data can be read or changed, and how authentication and authorization are enforced. Reinforce that onboarding a server is a security review event, not just a developer setup step.
+Introduce MCP as a protocol pattern for exposing tools, resources, and context through explicit server boundaries. Keep the focus on governance: teams need to know where configuration would live, what tools are exposed, what data can be read or changed, and how authentication and authorization are enforced. Reinforce that this workshop does not configure a live MCP server because onboarding a server is a security review event, not just a developer setup step.
 -->
 
 ---
@@ -104,7 +104,7 @@ background: /images/copilot-dev-advanced/slide-11-a0841cd4.png
 ---
 
 <!--
-Explain that APIs and CLIs are often the simplest integration path for deterministic tasks. They fit operations that are already approved, observable, scriptable, and easy to scope, such as querying issues, running tests, collecting logs, or invoking known automation. Remind learners to use least-privilege tokens, audit trails, and environment segregation.
+Explain that APIs and CLIs are often the simplest integration path for deterministic tasks. They fit operations that are already approved, observable, scriptable, and easy to scope, such as querying issues, running tests, collecting logs, or invoking known automation. Ask learners to capture a read-only command, output shape, approval/logging requirement, and why this is safer than a broader plugin or agent action.
 -->
 
 ---
@@ -113,7 +113,7 @@ background: /images/copilot-dev-advanced/slide-12-4604ce07.png
 ---
 
 <!--
-Frame plugins as supply-chain components even when they feel like small conveniences. Review provenance, signing, versioning, rollout scope, update cadence, and rollback before enabling plugins for agent-facing workflows. Ask learners how they would remove or disable a plugin quickly if it caused incorrect tool behavior.
+Frame plugins as supply-chain components even when they feel like small conveniences. Review provenance, signing or source, versioning, rollout scope, update cadence, telemetry/data scope, and rollback before enabling plugins for agent-facing workflows. Ask learners where plugin metadata would be reviewed and how they would remove or disable a plugin quickly if it caused incorrect tool behavior.
 -->
 
 ---
@@ -122,7 +122,7 @@ background: /images/copilot-dev-advanced/slide-13-99157899.png
 ---
 
 <!--
-This lab asks learners to build an integration due-diligence matrix. They should compare hooks, marketplace extensions, MCP, APIs or CLIs, and plugins by trust boundary, permissions, data exposure, auditability, and rollback. The success criterion is a recommendation that explains both value and risk.
+This lab asks learners to build an integration due-diligence matrix with setup or discovery evidence. They should create or evaluate a safe Copilot/agent hook draft, inspect marketplace and plugin trust signals, keep MCP conceptual, capture deterministic API/CLI evidence, and compare all surfaces by trust boundary, permissions, data exposure, auditability, and rollback. The success criterion is a recommendation that explains both value and risk.
 -->
 
 ---
@@ -158,5 +158,5 @@ background: /images/copilot-dev-advanced/slide-17-30168079.png
 ---
 
 <!--
-This final lab prepares learners to debug, deploy, and demo safely. They should produce a Day 2 plan that includes the workflow pattern, integration choices, validation evidence, fallback path, and final review gate. Close by reminding them that the strongest hack outcome is one they can explain, reproduce, and safely stop.
+This final lab prepares learners to debug, inspect capability surfaces, and choose a deployment path safely. They should produce evidence from the Agent Debug Log, Chat Debug View, or Copilot CLI, map it to the debugging checklist, and record packaging readiness with rollback expectations. Close by reminding them that Day 2 is a separate event; this lab creates reusable evidence and readiness inputs rather than a Day 2 event plan.
 -->

@@ -104,10 +104,10 @@
 
 ### 🖥️ Demo: Build a Strong Prompt and Skill File
 
-- **Show me — classify guidance into prompt fields and a skill file** — facilitator demonstrates the prompt below and states the expected result: one strong-prompt field set, one instruction candidate, one memory candidate, and one reusable `SKILL.md` boundary.
+- **Show me — classify Copilot Quest guidance into prompt fields and a skill file** — facilitator demonstrates the prompt below and states the expected result: one strong-prompt field set, one instruction candidate, one memory candidate, and one reusable `SKILL.md` boundary for the Copilot Quest validation/feedback task.
 
   ```text
-  Classify this task guidance into a strong prompt, instruction, memory, and SKILL.md fields: "When changing guess validation, keep changes scoped, run the smallest relevant test, stop if tests fail, and ask before changing dependencies."
+  Classify this Copilot Quest task guidance into a strong prompt, instruction, memory, and SKILL.md fields: "When adding five-letter guess validation and invalid-guess feedback, keep changes scoped, run the smallest relevant test or manual check, stop if validation fails, and ask before changing dependencies, scoring, UI, or project structure."
   ```
 
 - **Now you try — vary the off-ramp and acceptance gate** — attendees repeat the same step, then apply one small variation by changing the off-ramp or acceptance gate before the lab.
@@ -118,7 +118,7 @@ Start with a strong prompt when the work is one-off or exploratory. Promote the 
 
 ### 🔬 LAB: Exercise 1 — Strong Prompt and Stage 5 Skill Creation
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 1 (10 min) by separating prompt anatomy from skill design, then creating `.github/skills/copilot-quest-guessing/SKILL.md` with explicit acceptance gates.
+> **Instructor**: Pause here for hands-on practice. Students complete Exercise 1 (10 min) by using the provided Copilot Quest five-letter guess validation/feedback task, separating prompt anatomy from skill design, then creating `.github/skills/copilot-quest-guessing/SKILL.md` with explicit acceptance gates.
 
 ## 3. Agentic Loops and Tool Control Points (25 min)
 
@@ -135,10 +135,10 @@ Start with a strong prompt when the work is one-off or exploratory. Promote the 
 
 ### 🖥️ Demo: Define a Bounded Custom Agent Handoff
 
-- **Show me — define a handoff artifact** — facilitator demonstrates the prompt below and states the expected result: a bounded role handoff with inputs, outputs, validation checks, loop checkpoints, and evidence.
+- **Show me — define a handoff artifact** — facilitator demonstrates the prompt below and states the expected result: a bounded role handoff with inputs, outputs, validation checks, loop checkpoints, and evidence for the same Copilot Quest validation/feedback task.
 
   ```text
-  Define a two-role custom agent handoff for implementing guess feedback and verifying edge cases. Include each role's inputs, outputs, validation checks, loop checkpoints, and the artifact that must be handed off.
+  Define a two-role custom agent handoff for implementing Copilot Quest five-letter guess validation and invalid-guess feedback, then verifying empty, non-alphabetic, wrong-length, and valid five-letter cases. Include each role's inputs, outputs, validation checks, loop checkpoints, and the artifact that must be handed off.
   ```
 
 - **Now you try — add a verifier variation** — attendees repeat the same step, then apply one small variation by changing the verifier's required evidence before the lab.

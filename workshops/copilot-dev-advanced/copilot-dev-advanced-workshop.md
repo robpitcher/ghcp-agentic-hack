@@ -44,7 +44,7 @@
 **Audience**: Developers who completed Foundations and Intermediate (Agentic)
 **Prerequisites**: Working knowledge of instructions, tools, and agentic workflows
 
-**Module summary**: This Advanced workshop focuses on practical orchestration and production-readiness patterns for scaled AI-assisted development. The module emphasizes multiagent choices, trusted resource discovery, governed integration surfaces, debugging methodology, deployment pathways, and Day 2 hack planning. The content stays conceptual for emerging ecosystem surfaces while giving teams enough structure to make safe, cost-aware decisions.
+**Module summary**: This Advanced workshop focuses on practical orchestration and production-readiness patterns for scaled AI-assisted development. The module emphasizes multiagent choices, trusted resource discovery, governed integration surfaces, debugging methodology, deployment pathways, and Day 2 readiness as a separate event context. The content stays conceptual for emerging ecosystem surfaces while giving teams enough structure to make safe, cost-aware decisions.
 
 **Learning objectives**:
 
@@ -52,7 +52,7 @@
 - Vet ecosystem resources, extensions, marketplace entries, and plugins before enterprise use
 - Evaluate hooks, MCP, API/CLI, and deployment paths with governance discipline
 - Debug chat and agent behavior systematically using narrowed context and evidence
-- Build a constrained Day 2 hack plan with success criteria, model strategy, and safety gates
+- Capture advanced capability and debug evidence that can inform a separate Day 2 event without turning this module lab into event planning
 
 ## Recap: Optimizing AI Usage
 
@@ -122,11 +122,11 @@ Before diving into advanced orchestration, recap the efficiency and optimization
 
 ### Key Points
 
-- **Slide topic (1 slide): Hooks** — hooks create deterministic lifecycle guardrails at moments such as before a tool call, before a change is accepted, or before a workflow advances. Use them for policy checks, secret scanning, validation commands, and repeatable review gates that should not depend on prompt quality. **AI Safety Moment**: hooks provide enforceable guardrails through policy checks, secret scanning, and mandatory validation before changes are accepted. **Learn more**: <https://docs.github.com/en/copilot/concepts/agents/hooks>
-- **Slide topic (1 slide): Extension Marketplace** — marketplace extensions can expand the developer environment and agent experience, but every addition can change trust, permissions, telemetry, and data-access boundaries. Treat marketplace enablement as an enterprise onboarding decision rather than an individual convenience choice. **AI Safety Moment**: review publisher trust, permissions, data-access needs, support posture, and enterprise compatibility before enabling marketplace extensions.
-- **Slide topic (1 slide): MCP (Model Context Protocol)** — MCP is a conceptual protocol pattern for exposing tools, resources, and context to AI applications through explicit server boundaries. Keep MCP onboarding governed: know what tools are exposed, what data can be read or changed, and how authentication and authorization are enforced. **AI Safety Moment**: server onboarding is a security review event covering authentication, authorization, and data-scope controls. **Learn more**: <https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp-in-your-ide>
-- **Slide topic (1 slide): API/CLI** — APIs and CLIs are often the simplest integration path for deterministic tasks such as querying issues, running tests, collecting logs, or invoking known automation. Choose them when commands are already approved, observable, scriptable, and easy to scope by environment. **AI Safety Moment**: use least-privilege tokens, audit trails, and environment segregation for API/CLI automation.
-- **Slide topic (1 slide): Plugins** — plugins extend runtime or tool behavior and should be governed like supply-chain components, even when they are convenient or familiar. Evaluate provenance, signing, versioning, rollout scope, update cadence, and rollback before enabling them for agent-facing workflows. **AI Safety Moment**: require signing, version governance, controlled rollout, and supply-chain risk review for plugins.
+- **Slide topic (1 slide): Hooks** — hooks create deterministic lifecycle guardrails at moments such as before a tool call, before a change is accepted, or before a workflow advances. Use them for policy checks, secret scanning, validation commands, and repeatable review gates that should not depend on prompt quality. Show learners that Copilot/agent hooks are configured in `.github/hooks/*.json` for repository-level use, can be created from the VS Code integrated terminal or another repository terminal, and must include validation and rollback evidence before they are trusted. **AI Safety Moment**: hooks provide enforceable guardrails through policy checks, secret scanning, and mandatory validation before changes are accepted. **Learn more**: <https://docs.github.com/en/copilot/concepts/agents/hooks>
+- **Slide topic (1 slide): Extension Marketplace** — marketplace extensions can expand the developer environment and agent experience, but every addition can change trust, permissions, telemetry, and data-access boundaries. Show learners where to open the VS Code Extensions view or extension details and what to inspect: publisher, version, install/trust signals, permission or telemetry questions, and disable/uninstall path. Treat marketplace enablement as an enterprise onboarding decision rather than an individual convenience choice. **AI Safety Moment**: review publisher trust, permissions, data-access needs, support posture, and enterprise compatibility before enabling marketplace extensions.
+- **Slide topic (1 slide): MCP (Model Context Protocol)** — MCP is a conceptual protocol pattern for exposing tools, resources, prompts, and context to AI applications through explicit server boundaries. Keep MCP onboarding governed: know what tools are exposed, what data can be read or changed, how authentication and authorization are enforced, and where configuration would live in the learner's environment. Show learners the VS Code discovery surfaces, such as searching `@mcp` in Extensions, `MCP: Open User Configuration`, `MCP: Open Workspace Folder Configuration`, and `MCP: List Servers`, but do not configure a live MCP server in this workshop. **AI Safety Moment**: server onboarding is a security review event covering authentication, authorization, and data-scope controls. **Learn more**: <https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp-in-your-ide>
+- **Slide topic (1 slide): API/CLI** — APIs and CLIs are often the simplest integration path for deterministic tasks such as querying issues, running tests, collecting logs, or invoking known automation. Show one read-only command or endpoint pattern, expected output shape, logging or approval requirement, and why it is more observable than a broad plugin or agent action. Choose APIs/CLIs when commands are already approved, observable, scriptable, and easy to scope by environment. **AI Safety Moment**: use least-privilege tokens, audit trails, and environment segregation for API/CLI automation.
+- **Slide topic (1 slide): Plugins** — plugins package slash commands, skills, custom agents, hooks, and MCP server definitions into installable workflow bundles and should be governed like supply-chain components. Show learners Agent Customizations > Plugins, the Extensions view's agent plugin surfaces where available, and `plugin.json` metadata before enablement. Require provenance, signing or source checks, versioning, rollout scope, telemetry/data-scope questions, included customizations, and rollback before enablement. **AI Safety Moment**: require signing, version governance, controlled rollout, and supply-chain risk review for plugins.
 
 ### 🛡️ Safety Moment
 
@@ -136,7 +136,7 @@ Before diving into advanced orchestration, recap the efficiency and optimization
 
 ### 🖥️ Demo: Select the least risky integration surface
 
-- **Show me — compare hooks, marketplace, MCP, API/CLI, and plugins** — facilitator demonstrates an integration selection prompt and states the expected result: the simplest interface that meets requirements with explicit governance review.
+- **Show me — set up and compare hooks, marketplace, MCP, API/CLI, and plugins** — facilitator demonstrates a safe draft Copilot/agent hook configuration, validates the JSON, names the rollback command, then uses the integration selection prompt. The expected result is the simplest interface that meets requirements with explicit governance review.
 
   ```text
   For this scenario, compare hooks, Extension Marketplace, MCP, API/CLI, and plugins. Recommend the simplest safe option based on permissions, observability, data scope, enterprise review, and rollback.
@@ -154,7 +154,7 @@ Before diving into advanced orchestration, recap the efficiency and optimization
 
 ### 🔬 LAB: Exercise 2 — Stage 7 Integration Due-Diligence Matrix
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 2 (10 min) comparing hooks, marketplace extensions, MCP, API/CLI, and plugins for one bounded scenario.
+> **Instructor**: Pause here for hands-on practice. Students complete Exercise 2 (10 min) creating or evaluating a safe draft Copilot/agent hook, inspecting marketplace/plugin trust signals, keeping MCP conceptual, capturing API/CLI evidence, and comparing all five integration surfaces for one bounded scenario.
 
 ## 3. Operations and Day 2 Readiness (35 min)
 
@@ -170,12 +170,12 @@ Before diving into advanced orchestration, recap the efficiency and optimization
 - Keep provenance, permissions, owner, version, rollback, and support expectations attached to the package.
 - Do not let Day 2 demo pressure bypass policy checks or fallback planning.
 
-### 🖥️ Demo: Debug, deploy, and scope the hack
+### 🖥️ Demo: Debug, deploy, and inspect capability evidence
 
-- **Show me — create a minimal debug and deployment brief** — facilitator demonstrates a prompt that turns a failed run into a minimal repro, deployment path recommendation, and Day 2 success gate.
+- **Show me — create a minimal debug and deployment brief** — facilitator demonstrates a prompt that turns a failed run into a minimal repro, debug-evidence checklist, and deployment path recommendation.
 
   ```text
-  Review this failed agent run. Identify the likely context, tool-call order, permission, or instruction-conflict issue. Then propose the smallest safe repro prompt, recommend GitHub Repo, Marketplace, or Agent Package Manager (APM) as the distribution or packaging path, and define one Day 2 success criterion.
+  Review this failed agent run. Identify the likely context, tool-call order, permission, or instruction-conflict issue. Then propose the smallest safe repro prompt, name the VS Code or CLI evidence to inspect, and recommend GitHub Repo, Marketplace, or Agent Package Manager (APM) as the distribution or packaging path.
   ```
 
 - **Now you try — vary the failure and deployment audience** — attendees repeat the same step, then change the failure signal and intended audience before finalizing their lab artifact.
@@ -186,14 +186,14 @@ Before diving into advanced orchestration, recap the efficiency and optimization
 
 ### 💡 Optimization Tip: Narrow the final mile
 
-> 💡 **Usage Optimization**: Debugging and Day 2 planning both improve when the prompt, context, success criteria, and model strategy are small enough to inspect quickly.
+> 💡 **Usage Optimization**: Debugging and deployment planning improve when the prompt, context, evidence, success criteria, and model strategy are small enough to inspect quickly.
 
-### 🔬 LAB: Exercise 3 — Stage 8 Debug, Deploy, and Day 2 Hack Plan
+### 🔬 LAB: Exercise 3 — Stage 8 Capability Discovery and Debug Evidence
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 3 (10 min) creating a minimal debug protocol, choosing a deployment path, and writing a constrained Day 2 hack plan.
+> **Instructor**: Pause here for hands-on practice. Students complete Exercise 3 (10 min) creating a minimal debug protocol, finding VS Code or CLI debug evidence, mapping evidence to the slide debugging checklist, inspecting capability surfaces, and choosing a deployment path. Day 2 remains a separate event and is not a lab deliverable.
 
 ## 🧠 Knowledge Check (5 min)
 
-> **Instructor**: Close the module with the 12-question quiz (`copilot-dev-advanced-QUIZ.md`). It checks the required Advanced concepts — multiagents with Squad, Awesome Copilot List, subagents, fleet, hooks, Extension Marketplace, MCP, API/CLI, plugins, debugging, deployment paths, and Day 2 planning — so confirm learners can articulate each before they start the Day 2 hack.
+> **Instructor**: Close the module with the 12-question quiz (`copilot-dev-advanced-QUIZ.md`). It checks the required Advanced concepts — multiagents with Squad, Awesome Copilot List, subagents, fleet, hooks, Extension Marketplace, MCP, API/CLI, plugins, debugging, and deployment paths — so confirm learners can articulate each before they use them in a separate Day 2 event.
 
 *Workshop guide for Module 3: Advanced — GitHub Copilot Developer Training*

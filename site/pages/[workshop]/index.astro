@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro'
 import { readdirSync, existsSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { discoverWorkshopSkills, workshopMeta, type AgendaDay, type ModuleMeta, type TechnologySkill } from '../../data/workshops'
+import { discoverWorkshopSkills, resolveModuleSkillTracks, workshopMeta, type AgendaDay, type ModuleMeta, type TechnologySkill } from '../../data/workshops'
 
 const base = import.meta.env.BASE_URL
 
@@ -67,14 +67,24 @@ export function getStaticPaths() {
 const { label, desc, icon, hasWorkshop, hasLab, hasSlides, hasQuiz, modules, skills, prerequisites, agenda } = Astro.props
 const { workshop } = Astro.params
 const workshopsDir: string = __WORKSHOPS_DIR__
+const trackStorageKey = `${workshop}-skill-track`
 ---
 
 <Base title={label}>
-  <div class="workshop-page">
+  <div class="workshop-page" data-track-storage-key={trackStorageKey}>
     <div class="workshop-header">
       <span class="workshop-icon" set:html={icon} />
       <div>
-        <h1 class="workshop-title">{label}</h1>
+        <div class="workshop-title-row">
+          <h1 class="workshop-title">{label}</h1>
+          {modules && (
+            <span id="track-status" class="track-status" hidden>
+              <span id="track-status-label"></span>
+              <button type="button" id="track-change-button" class="track-change-button">Change</button>
+              <button type="button" id="track-reset-button" class="track-change-button">Reset</button>
+            </span>
+          )}
+        </div>
         {desc && <p class="workshop-desc">{desc}</p>}
       </div>
     </div>
@@ -84,9 +94,30 @@ const workshopsDir: string = __WORKSHOPS_DIR__
         modules.map(m => {
           const mDir = resolve(workshopsDir, m.folder)
           const mFiles = existsSync(mDir) ? readdirSync(mDir) : []
-          const mHasLab = mFiles.some((f: string) => f.endsWith('-LAB.md'))
           const mHasSlides = mFiles.some((f: string) => f.endsWith('.slidev.md'))
-          const mHasQuiz = mFiles.some((f: string) => f.endsWith('-QUIZ.md'))
+          const tracks = resolveModuleSkillTracks(workshopsDir, m.folder).filter(track => track.labPath || track.quizPath)
+          const labTracks = tracks
+            .filter(track => track.labPath)
+            .map(track => ({
+              slug: track.slug,
+              label: track.label,
+              description: track.description,
+              icon: track.icon,
+              audience: track.audience,
+              skillUrl: track.skill ? `${base}${workshop}/skills/${track.skill.slug}/` : undefined,
+              url: track.slug === 'general' ? `${base}${m.folder}/lab` : `${base}${m.folder}/labs/${track.slug}/`
+            }))
+          const quizTracks = tracks
+            .filter(track => track.quizPath)
+            .map(track => ({
+              slug: track.slug,
+              label: track.label,
+              description: track.description,
+              icon: track.icon,
+              audience: track.audience,
+              skillUrl: track.skill ? `${base}${workshop}/skills/${track.skill.slug}/` : undefined,
+              url: track.slug === 'general' ? `${base}${m.folder}/quiz` : `${base}${m.folder}/quizzes/${track.slug}/`
+            }))
           return (
             <div class="module-card">
               <div class="module-header">
@@ -97,9 +128,9 @@ const workshopsDir: string = __WORKSHOPS_DIR__
                 </div>
               </div>
               <div class="module-links">
-                {mHasLab && <a href={`${base}${m.folder}/lab`} class="module-link module-link-lab">Lab</a>}
                 {mHasSlides && <a href={`${base}${m.folder}/slides/1`} target="_blank" rel="noopener noreferrer" onclick={`window.open(this.href,'_blank','width=1280,height=720,menubar=no,toolbar=no,location=no,status=no');return false;`} class="module-link module-link-slides">Slides</a>}
-                {mHasQuiz && <a href={`${base}${m.folder}/quiz`} class="module-link module-link-quiz">Quiz</a>}
+                {labTracks.length > 0 && <a href={labTracks[0].url} class="module-link module-link-lab track-resource-link" data-resource-type="lab" data-module-label={m.label} data-track-options={JSON.stringify(labTracks)}>Lab</a>}
+                {quizTracks.length > 0 && <a href={quizTracks[0].url} class="module-link module-link-quiz track-resource-link" data-resource-type="quiz" data-module-label={m.label} data-track-options={JSON.stringify(quizTracks)}>Quiz</a>}
               </div>
             </div>
           )
@@ -235,6 +266,23 @@ const workshopsDir: string = __WORKSHOPS_DIR__
       </section>
     )}
   </div>
+
+  {modules && (
+    <div id="track-picker" class="track-modal" hidden>
+      <div class="track-modal-backdrop" data-track-modal-close></div>
+      <section class="track-modal-panel" role="dialog" aria-modal="true" aria-labelledby="track-modal-title" aria-describedby="track-modal-desc">
+        <div class="track-modal-header">
+          <div>
+            <p class="track-modal-eyebrow">Workshop skill track</p>
+            <h2 id="track-modal-title">Choose your workshop skill track</h2>
+          </div>
+          <button type="button" class="track-modal-close" data-track-modal-close aria-label="Close skill track picker">×</button>
+        </div>
+        <p id="track-modal-desc" class="track-modal-desc">Slides are shared for everyone. Your choice applies to labs and quizzes for this workshop.</p>
+        <div id="track-modal-options" class="track-modal-options"></div>
+      </section>
+    </div>
+  )}
 </Base>
 
 <style>
@@ -264,6 +312,12 @@ const workshopsDir: string = __WORKSHOPS_DIR__
     height: 48px;
     display: block;
   }
+  .workshop-title-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
   .workshop-title {
     font-size: clamp(28px, 4vw, 40px);
     font-weight: 800;
@@ -272,6 +326,35 @@ const workshopsDir: string = __WORKSHOPS_DIR__
     color: var(--text-1);
     margin-top: 0;
     margin-bottom: 8px;
+  }
+  .track-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    background: rgba(9, 105, 218, 0.1);
+    color: #0969da;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .track-status[hidden] {
+    display: none;
+  }
+  .track-change-button {
+    border: 0;
+    border-left: 1px solid rgba(9, 105, 218, 0.22);
+    background: transparent;
+    color: #0969da;
+    cursor: pointer;
+    font: inherit;
+    margin: -2px -2px -2px 0;
+    padding: 2px 0 2px 8px;
+  }
+  .track-change-button:hover,
+  .track-change-button:focus-visible {
+    text-decoration: underline;
   }
   .workshop-desc {
     font-size: 16px;
@@ -395,6 +478,11 @@ const workshopsDir: string = __WORKSHOPS_DIR__
     display: flex;
     gap: 8px;
     flex-shrink: 0;
+  }
+  .module-links {
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
   .module-link,
   .skill-link {
@@ -631,4 +719,290 @@ const workshopsDir: string = __WORKSHOPS_DIR__
       flex-direction: column;
     }
   }
+  .track-modal[hidden] {
+    display: none;
+  }
+  .track-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+  }
+  .track-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(31, 35, 40, 0.45);
+  }
+  .track-modal-panel {
+    position: relative;
+    width: min(760px, 100%);
+    max-height: min(720px, calc(100vh - 48px));
+    overflow-y: auto;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--bg);
+    box-shadow: 0 24px 64px rgba(31, 35, 40, 0.28);
+    padding: 24px;
+  }
+  .track-modal-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .track-modal-eyebrow {
+    color: #0969da;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin: 0 0 6px;
+    text-transform: uppercase;
+  }
+  .track-modal h2 {
+    color: var(--text-1);
+    font-size: 24px;
+    margin: 0;
+  }
+  .track-modal-close {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--bg-soft);
+    color: var(--text-1);
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+  }
+  .track-modal-desc {
+    color: var(--text-2);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 12px 0 20px;
+  }
+  .track-modal-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .track-choice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-soft);
+    color: inherit;
+    cursor: pointer;
+    padding: 16px;
+    text-align: left;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .track-choice:hover,
+  .track-choice:focus-visible {
+    border-color: #0969da;
+    box-shadow: 0 0 0 2px rgba(9, 105, 218, 0.18);
+    outline: none;
+  }
+  .track-choice-icon {
+    font-size: 26px;
+    line-height: 1;
+  }
+  .track-choice-title,
+  .track-choice-audience,
+  .track-choice-desc,
+  .track-choice-skill {
+    display: block;
+  }
+  .track-choice-title {
+    color: var(--text-1);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .track-choice-audience,
+  .track-choice-skill {
+    color: #0969da;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .track-choice-desc {
+    color: var(--text-2);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  @media (max-width: 700px) {
+    .track-modal-options {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
+
+<script>
+  interface TrackOption {
+    slug: string;
+    label: string;
+    description: string;
+    icon: string;
+    audience?: string;
+    skillUrl?: string;
+    url: string;
+  }
+
+  const workshopPage = document.querySelector<HTMLElement>('.workshop-page');
+  const storageKey = workshopPage?.dataset.trackStorageKey || 'workshop-skill-track';
+  const statusChip = document.getElementById('track-status') as HTMLSpanElement | null;
+  const statusLabel = document.getElementById('track-status-label') as HTMLSpanElement | null;
+  const changeTrackButton = document.getElementById('track-change-button') as HTMLButtonElement | null;
+  const resetTrackButton = document.getElementById('track-reset-button') as HTMLButtonElement | null;
+  const modal = document.getElementById('track-picker') as HTMLDivElement | null;
+  const modalTitle = document.getElementById('track-modal-title') as HTMLHeadingElement | null;
+  const optionsContainer = document.getElementById('track-modal-options') as HTMLDivElement | null;
+  let activeTrigger: HTMLElement | null = null;
+  let pendingNavigation = true;
+
+  function getStoredTrack(): string | undefined {
+    try {
+      return window.localStorage.getItem(storageKey) || undefined;
+    } catch {
+      return undefined;
+    }
+  }
+
+  function setStoredTrack(track: TrackOption) {
+    try {
+      window.localStorage.setItem(storageKey, track.slug);
+    } catch {
+      // Storage can be unavailable in private or restricted browser contexts; routing still works for this click.
+    }
+    if (statusChip) {
+      if (statusLabel) statusLabel.textContent = `Track: ${track.label}`;
+      statusChip.hidden = false;
+    }
+  }
+
+  function clearStoredTrack() {
+    try {
+      window.localStorage.removeItem(storageKey);
+    } catch {
+      // Storage can be unavailable in private or restricted browser contexts; hiding the chip is still safe.
+    }
+    if (statusLabel) statusLabel.textContent = '';
+    if (statusChip) statusChip.hidden = true;
+  }
+
+  function parseOptions(link: HTMLAnchorElement): TrackOption[] {
+    try {
+      return JSON.parse(link.dataset.trackOptions || '[]') as TrackOption[];
+    } catch {
+      return [];
+    }
+  }
+
+  function routeForStoredTrack(options: TrackOption[]): string | undefined {
+    const storedTrack = getStoredTrack();
+    if (!storedTrack) return undefined;
+    return options.find(option => option.slug === storedTrack)?.url;
+  }
+
+  function openTrackModal(link: HTMLElement, options: TrackOption[], navigateAfterSelect = true) {
+    if (!modal || !optionsContainer || !modalTitle) return;
+    activeTrigger = link;
+    pendingNavigation = navigateAfterSelect;
+    const resourceType = link.dataset.resourceType === 'quiz' ? 'quiz' : 'lab';
+    const moduleLabel = link.dataset.moduleLabel || 'this module';
+    modalTitle.textContent = navigateAfterSelect ? `Choose a ${resourceType} track for ${moduleLabel}` : 'Choose your workshop skill track';
+    optionsContainer.replaceChildren(...options.map(option => createTrackChoice(option)));
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    optionsContainer.querySelector<HTMLButtonElement>('button')?.focus();
+  }
+
+  function closeTrackModal() {
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    activeTrigger?.focus();
+  }
+
+  function createTrackChoice(option: TrackOption): HTMLButtonElement {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'track-choice';
+    const icon = document.createElement('span');
+    icon.className = 'track-choice-icon';
+    icon.textContent = option.icon;
+    const content = document.createElement('span');
+    const title = document.createElement('span');
+    title.className = 'track-choice-title';
+    title.textContent = option.label;
+    content.append(title);
+    if (option.audience) {
+      const audience = document.createElement('span');
+      audience.className = 'track-choice-audience';
+      audience.textContent = option.audience;
+      content.append(audience);
+    }
+    const description = document.createElement('span');
+    description.className = 'track-choice-desc';
+    description.textContent = option.description;
+    content.append(description);
+    if (option.skillUrl) {
+      const skill = document.createElement('span');
+      skill.className = 'track-choice-skill';
+      skill.textContent = 'Skill guidance included';
+      content.append(skill);
+    }
+    button.append(icon, content);
+    button.addEventListener('click', () => {
+      setStoredTrack(option);
+      if (pendingNavigation) {
+        window.location.href = option.url;
+      } else {
+        closeTrackModal();
+      }
+    });
+    return button;
+  }
+
+  const allResourceLinks = document.querySelectorAll<HTMLAnchorElement>('.track-resource-link');
+  const firstOptions = allResourceLinks.length > 0 ? parseOptions(allResourceLinks[0]) : [];
+  const storedTrack = getStoredTrack();
+  const storedTrackOption = firstOptions.find(option => option.slug === storedTrack);
+  if (storedTrackOption && statusChip) {
+    if (statusLabel) statusLabel.textContent = `Track: ${storedTrackOption.label}`;
+    statusChip.hidden = false;
+  }
+
+  changeTrackButton?.addEventListener('click', () => {
+    if (firstOptions.length > 1) openTrackModal(changeTrackButton, firstOptions, false);
+  });
+  resetTrackButton?.addEventListener('click', clearStoredTrack);
+
+  allResourceLinks.forEach(link => {
+    link.addEventListener('click', event => {
+      const options = parseOptions(link);
+      const storedUrl = routeForStoredTrack(options);
+      if (storedUrl) {
+        event.preventDefault();
+        window.location.href = storedUrl;
+        return;
+      }
+
+      if (options.length > 1) {
+        event.preventDefault();
+        openTrackModal(link, options);
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-track-modal-close]').forEach(element => {
+    element.addEventListener('click', closeTrackModal);
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && modal && !modal.hidden) closeTrackModal();
+  });
+</script>

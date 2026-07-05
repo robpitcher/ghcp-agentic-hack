@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev:site": "astro dev --root site",
+    "preview:local": "node scripts/preview-local.mjs",
     "build:site": "astro build --root site",
     "build:all": "node scripts/build-site.mjs",
     "test:labs": "playwright test tests/lab-usability.spec.ts",
