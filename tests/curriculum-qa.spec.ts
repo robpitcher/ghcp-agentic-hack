@@ -312,6 +312,7 @@ test.describe('curriculum source-of-truth QA', () => {
 
       expect(lab, `${module.slug} C++ lab should name the skill track`).toContain('c++ / hardware')
       expect(lab, `${module.slug} C++ lab should preserve shared slides as source truth`).toContain('slides remain the source of truth')
+      expect(lab, `${module.slug} C++ lab should practice applying the skill`).toContain('c++ / hardware developer skill')
       expect(lab, `${module.slug} C++ lab should include safety checkpoints`).toContain('safety checkpoint')
       expect(lab, `${module.slug} C++ lab should include success criteria`).toContain('success criteria')
       expect(lab, `${module.slug} C++ lab should include copyable prompts or commands`).toContain('```')
@@ -368,8 +369,23 @@ test.describe('curriculum source-of-truth QA', () => {
     const skill = lower(readFileSync(skillPath, 'utf-8'))
     expect(skill).toContain('slides stay shared')
     expect(skill).toContain('source truth first')
+    expect(skill).toContain('skill as behavior')
+    expect(skill).toContain('technology skill checklist')
     expect(skill).toContain('labs')
     expect(skill).toContain('quizzes')
     expect(skill).toContain('npm run test:curriculum-qa')
+  })
+
+  test('C++ workshop technology skill is a Copilot behavior package', () => {
+    const skillPath = path.join(workshopsDir, 'copilot-dev-training', 'skills', 'cpp-hardware', 'SKILL.md')
+    expect(existsSync(skillPath), 'C++ / Hardware skill should exist').toBe(true)
+
+    const skill = lower(readFileSync(skillPath, 'utf-8'))
+    expect(skill).toContain('agentic behavior package')
+    expect(skill).toContain('activation criteria')
+    expect(skill).toContain('context and tool preferences')
+    expect(skill).toContain('safety gates')
+    expect(skill).toContain('output contract')
+    expect(skill).toContain('validation preferences')
   })
 })
