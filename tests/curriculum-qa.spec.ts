@@ -255,16 +255,21 @@ test.describe('curriculum source-of-truth QA', () => {
 
     test(`${module.label} Slidev deck has substantive presenter notes`, () => {
       const slidev = readModuleFile(module, '.slidev.md')
-      const backgrounds = Array.from(slidev.matchAll(/^background:\s+\/images\//gm))
-      const notes = slideNoteBlocks(slidev)
+      const normalized = normalize(slidev)
+      const slideBlocks = Array.from(
+        normalized.matchAll(/(?:^|\n)---\n([\s\S]*?)\n---\n([\s\S]*?)(?=\n---\n|\s*$)/g),
+        match => ({ frontmatter: match[1], body: match[2] })
+      )
 
-      expect(backgrounds.length, `${module.slug} should include generated slide backgrounds`).toBeGreaterThan(0)
-      expect(notes.length, `${module.slug} should include notes for each generated slide`).toBeGreaterThanOrEqual(backgrounds.length)
+      const generatedSlides = slideBlocks.filter(block => /^background:\s+\/images\//m.test(block.frontmatter))
+      expect(generatedSlides.length, `${module.slug} should include generated slide backgrounds`).toBeGreaterThan(0)
       expect(lower(slidev), `${module.slug} should not contain note placeholders`).not.toMatch(/todo|author presenter notes|placeholder/)
 
-      for (const [index, note] of notes.entries()) {
-        const wordCount = note.split(/\s+/).filter(Boolean).length
-        expect(wordCount, `${module.slug} slide note ${index + 1} should be substantive`).toBeGreaterThanOrEqual(15)
+      for (const [index, slide] of generatedSlides.entries()) {
+        const notes = Array.from(slide.body.matchAll(/<!--([\s\S]*?)-->/g), match => match[1].trim()).filter(Boolean)
+        expect(notes.length, `${module.slug} generated slide ${index + 1} should include presenter notes`).toBeGreaterThan(0)
+        const wordCount = notes.join(' ').split(/\s+/).filter(Boolean).length
+        expect(wordCount, `${module.slug} generated slide ${index + 1} notes should be substantive`).toBeGreaterThanOrEqual(15)
       }
     })
   }
