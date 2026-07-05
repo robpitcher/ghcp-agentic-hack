@@ -57,24 +57,30 @@ Use the C++ / Hardware Developer Skill output contract. Explain the safest comma
 
 1. Open a small C++ function, driver helper, HAL wrapper, or register access example in VS Code.
 2. Select only the function or helper you want reviewed. In Copilot Chat, ask for explanation first, explicitly invoking the C++ skill output contract.
+3. Before sending the request, select **Configure Tools** in the chat input and keep repository search and file-reading tools enabled. Leave terminal, web, external service, flashing, or device tools off for the first review pass.
+4. Keep the permissions picker on **Default Approvals** so any terminal command or sensitive tool call requires review.
 
 ```text
 Use the C++ / Hardware Developer Skill. Explain this selected C++ hardware-facing helper. Identify inputs, outputs, hardware assumptions, volatile usage, fixed-width types, and any behavior that should be checked against a datasheet. Return Summary, Context used, Build or hardware assumptions, Findings, Risks and safety gates, Recommended next step, Validation evidence or commands, and Open questions. Do not rewrite the code.
 ```
 
-3. Keep the same selection and ask for a plan before edits.
+5. Keep the same selection and ask for a plan before edits.
 
 ```text
 Use the C++ / Hardware Developer Skill. Create a safe review plan for improving this helper. Separate issues into correctness, readability, build compatibility, and hardware-validation checks. Do not make code changes.
 ```
 
-4. Add this Agent-mode decision note to `cpp-foundations-track-notes.md`.
+6. Type `#` in the chat input and record which explicit context source you used, such as `#selection`, `#file`, `#codebase`, or `#problems`.
+7. If Agent proposes file edits, use the files changed bar above the chat input to open the inline diff. Record whether you would use **Keep**, **Undo**, **Undo All**, **Restore Checkpoint**, or `/fork` before accepting hardware-facing changes.
+8. Add this Agent-mode decision note to `cpp-foundations-track-notes.md`.
 
 ```markdown
 ### Agent Mode Decision
 
 - Safe Agent mode use:
 - Too risky for Agent mode:
+- Tools enabled:
+- Permission mode:
 - Required validation command or evidence:
 - Human reviewer:
 ```
@@ -86,6 +92,8 @@ Use the C++ / Hardware Developer Skill. Create a safe review plan for improving 
 - ✅ Your explanation separates code behavior from hardware or datasheet assumptions.
 - ✅ Your plan includes review before edits.
 - ✅ Copilot's answer follows the skill output contract closely enough to be auditable.
+- ✅ Your notes identify which tools and permission mode were enabled.
+- ✅ Your notes identify which Keep/Undo, checkpoint, or fork control would be used before accepting generated changes.
 - ✅ Your notes identify one safe use and one unsafe use of Agent mode for embedded C++.
 
 ## Exercise 3: Stage 3 Optimization — Build Context and Model Routing

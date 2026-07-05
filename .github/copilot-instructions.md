@@ -294,19 +294,27 @@ Labs and demos must teach learners where to find and how to safely use the conce
 
 Labs must also provide the learner's task source. Do not ask beginners to invent the task when the curriculum already has a module scenario or track scenario. Use the **core workshop build thread** for general/core labs and a **domain-appropriate scenario** for skill-track labs:
 
-- **Core/general track**: use Copilot Quest as the default build scenario when learners create code, skills, agents, orchestration packages, or Day 2 plans.
+- **Core/general track**: use Copilot Quest as the default build scenario when learners create code, skills, agents, orchestration packages, or advanced evidence packages.
 - **Technology skill tracks**: use the selected domain and technology skill as the scenario source, not Copilot Quest unless the track intentionally uses a game-like domain example.
 - **Foundations**: focus on finding IDE/CLI capabilities, scoping context, capturing notes, and preparing handoffs.
 - **Agentic**: provide concrete build, review, skill, or agent tasks because learners create repo-local artifacts.
-- **Advanced**: provide concrete governance, orchestration, integration, debugging, or deployment scenarios without turning the module into a large feature build.
+- **Advanced**: provide concrete governance, orchestration, integration, debugging, or deployment scenarios without turning the module into a large feature build. Day 2 is a separate event; Advanced labs and quizzes should capture capability discovery, debug evidence, validation, and deployment readiness rather than asking learners to produce Day 2 event plans.
 
 For advanced integration surfaces:
 
 - **Copilot/agent hooks**: show where hook configuration lives, which lifecycle event is used, one safe setup or discovery path, validation evidence that the hook ran, and how to disable or roll it back.
 - **Extension Marketplace**: show where to open the marketplace or extension details, what publisher/version/trust/permission/telemetry signals to inspect, and how to disable or uninstall.
-- **Plugins**: require provenance, signing or source, versioning, rollout, telemetry/data-scope, and rollback checks before enablement.
-- **MCP**: keep setup conceptual unless the workshop source explicitly adds a server-specific walkthrough; identify where configuration would live, what tools/context would be exposed, which data boundary changes, and what approval is required.
+- **Plugins**: show Agent Customizations > Plugins and Extensions view agent-plugin surfaces where available; require `chat.plugins.enabled` awareness, `plugin.json` or package metadata review, included slash commands/skills/custom agents/hooks/MCP servers, provenance, signing or source, versioning, rollout, telemetry/data-scope, and rollback checks before enablement.
+- **MCP**: keep setup conceptual unless the workshop source explicitly adds a server-specific walkthrough; show VS Code discovery surfaces such as Extensions search `@mcp`, `MCP: Open User Configuration`, `MCP: Open Workspace Folder Configuration`, and `MCP: List Servers`; identify configuration scope, exposed tools/resources/prompts/context, data boundary changes, and required approval.
 - **API/CLI**: provide the exact command or endpoint pattern, expected inputs and outputs, audit evidence, approval/logging requirements, and why it is safer or more observable than a broader integration.
+- **Debug evidence**: for VS Code, show how to open the Agent Debug Log panel with `Developer: Open Agent Debug Panel` or **Show Agent Debug Logs**, inspect load events, tool calls, LLM requests, Summary, and Agent Flow Chart, then open **Show Chat Debug View** for raw request/response payloads. Include `#debugEventsSnapshot`, `/troubleshoot` with the `github.copilot.chat.agentDebugLog.enabled` setting, and the warning that debug data is not persisted across VS Code sessions. For Copilot CLI, capture the exact prompt, selected context, tool or command output, error text, and narrowed rerun evidence.
+
+For VS Code Chat and agent labs:
+
+- **Tools and approvals**: show **Configure Tools**, the `#` picker for context/tools, and the permissions picker. Prefer **Default Approvals** for beginner and sensitive tasks unless the lab explicitly justifies broader autonomy.
+- **Agent Customizations**: show the Chat Configure gear and Agent Customizations view for Instructions, Skills, Agents, Prompt Files, Hooks, and Plugins before asking learners to create repo-local artifacts.
+- **Agent review controls**: show the files changed bar, inline diff, **Keep**, **Undo**, **Undo All**, **Restore Checkpoint**, and `/fork` when learners review agent edits.
+- **Agent Sessions**: show the Agent Sessions sidebar and agent/session type picker when learners compare Local, Copilot CLI/background, Cloud, or third-party agent execution.
 
 ## Git Workflow
 

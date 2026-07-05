@@ -103,7 +103,7 @@ New-Item -ItemType Directory -Force -Path .github\hooks | Out-Null
 {
   "version": 1,
   "hooks": {
-    "sessionStart": [
+    "SessionStart": [
       {
         "type": "command",
         "bash": "mkdir -p logs && echo \"Embedded C++ hook sessionStart $(date -Iseconds)\" >> logs/embedded-cpp-hooks.log",
@@ -123,21 +123,21 @@ New-Item -ItemType Directory -Force -Path .github\hooks | Out-Null
 Get-Content .github\hooks\embedded-cpp-session.json | ConvertFrom-Json | Out-Null
 ```
 
-4. Record the hook lifecycle event, file path, validation result, and rollback command in the Hooks row. Use this rollback command if the hook is only a lab draft:
+4. Record the hook lifecycle event `SessionStart`, file path, validation result, and rollback command in the Hooks row. Use this rollback command if the hook is only a lab draft:
 
 ```powershell
 Remove-Item .github\hooks\embedded-cpp-session.json
 ```
 
 5. Open the VS Code Extensions view from the Activity Bar or Command Palette command `Extensions: Focus on Extensions View`. Choose one embedded, C++, or hardware-related extension to inspect, but do not install it unless your instructor or organization allows it. Record publisher, version, install or trust signals, permissions or telemetry questions, and disable/uninstall path in the Extension Marketplace row.
-6. Keep MCP conceptual: document where configuration would live for your environment, what embedded tools or context a server would expose, what data boundary changes, and which approval is required. Do not configure a live MCP server in this lab.
+6. Keep MCP conceptual but find the VS Code surfaces. In the Extensions view, search `@mcp` to see MCP server entries without installing one. Open Command Palette and locate `MCP: Open User Configuration`, `MCP: Open Workspace Folder Configuration`, and `MCP: List Servers`. Record which configuration scope would fit embedded tooling, what tools/resources/prompts a server would expose, what hardware or source data boundary changes, and which approval is required. Do not configure a live MCP server in this lab.
 7. Evaluate one deterministic API/CLI option. If GitHub CLI is approved in your environment, run this read-only command from the repository terminal and record the output shape:
 
 ```powershell
 gh repo view --json name,visibility,defaultBranchRef
 ```
 
-8. Evaluate plugins as supply-chain components. Record where plugin metadata or configuration would be reviewed, provenance or signing/source checks, versioning, rollout scope, telemetry/data-scope questions, and rollback path before any enablement.
+8. Evaluate plugins as supply-chain components. In VS Code Chat, select the Configure gear and open Agent Customizations > **Plugins** if your organization enables `chat.plugins.enabled`. In the Extensions view, look for **Agent Plugins - Installed** or use the `@agentPlugins @recommended` filter if available. Record whether plugin support is available, where plugin metadata or `plugin.json` would be reviewed, provenance or signing/source checks, versioning, rollout scope, telemetry/data-scope questions, included skills/agents/hooks/MCP servers, and rollback path before any enablement.
 9. Use this prompt to fill the matrix.
 
 ```text
@@ -156,16 +156,16 @@ Use the C++ / Hardware Developer Skill as the domain behavior contract. Create a
 - ✅ Your matrix explains how integration choices preserve or enforce skill behavior.
 - ✅ Your plugin or extension review includes provenance, versioning, rollout, and rollback.
 
-## Exercise 3: Debug, Deploy, and Day 2 Hack Readiness
+## Exercise 3: Embedded Debug Evidence and Capability Discovery
 
 **⏱️ Time**: 20 min
 
-**📋 Objective**: Prepare a Day 2 C++ hack plan that keeps agent behavior debuggable and deployment-ready.
+**📋 Objective**: Capture debug evidence, inspect advanced capability surfaces, and compare deployment paths for an embedded C++ Copilot workflow.
 
-1. Add this section to `embedded-cpp-orchestration-package.md` as `Page 3: Debug, Deploy, and Day 2 Readiness`.
+1. Add this section to `embedded-cpp-orchestration-package.md` as `Page 3: Embedded Debug Evidence and Capability Discovery`.
 
 ```markdown
-### Page 3: Debug, Deploy, and Day 2 Readiness
+### Page 3: Embedded Debug Evidence and Capability Discovery
 
 ### Minimal Repro Plan
 
@@ -178,6 +178,37 @@ Use the C++ / Hardware Developer Skill as the domain behavior contract. Create a
 - Permission checks:
 - Validation commands:
 
+### VS Code or CLI Debug Evidence
+
+- Evidence source: Agent Debug Log panel / Chat Debug View / Copilot CLI
+- Timestamp or session marker:
+- Load events reviewed:
+- Tool or LLM request reviewed:
+- Evidence captured:
+- Snapshot or troubleshooting prompt:
+- Persistence note:
+
+### Slide Debugging Checklist
+
+| Debugging capability | Embedded C++ evidence captured |
+| --- | --- |
+| Context composition | |
+| Tool-call order | |
+| Instruction conflicts | |
+| Permission failures | |
+| Loop dynamics | |
+
+### Embedded Capability Discovery
+
+| Surface | Where you found it | Embedded evidence captured | Safe next step |
+| --- | --- | --- | --- |
+| Hooks | | | |
+| Extension Marketplace | | | |
+| MCP configuration boundary | | | |
+| API/CLI | | | |
+| Plugin metadata | | | |
+| Package or deployment surface | | | |
+
 ### Deployment Path Comparison
 
 | Path | Audience | Governance fit | Provenance review | Rollback plan | Decision |
@@ -185,18 +216,6 @@ Use the C++ / Hardware Developer Skill as the domain behavior contract. Create a
 | GitHub Repo | | | | | |
 | Marketplace | | | | | |
 | Agent Package Manager | | | | | |
-
-### Day 2 Readiness Checklist
-
-- Repository setup:
-- Instruction files:
-- C++ / Hardware Developer Skill package:
-- Custom agent:
-- Validation commands:
-- Static analysis:
-- Hardware or simulator validation:
-- PR review:
-- Rollback plan:
 ```
 
 2. Draft a minimal reproduction prompt for surprising agent behavior.
@@ -205,11 +224,47 @@ Use the C++ / Hardware Developer Skill as the domain behavior contract. Create a
 Create a minimal repro plan for a Copilot agent that changed an embedded C++ helper unexpectedly. Include narrowed context, selected files, the C++ / Hardware Developer Skill behavior that should have applied, tool-call evidence, instruction layers, permission checks, and validation commands.
 ```
 
-3. Compare deployment paths for your future embedded C++ agent or skill by filling the Deployment Path Comparison table.
-4. Create a Day 2 readiness checklist.
+3. If you use VS Code, open the Agent Debug Log panel for the current chat or agent session:
+
+   - Open Command Palette with `Ctrl+Shift+P` or `F1`.
+   - Run `Developer: Open Agent Debug Panel`.
+   - Or open the overflow menu at the top of the Chat view and select **Show Agent Debug Logs**.
+   - Run your smallest repro prompt against a bounded embedded C++ helper or review scenario.
+   - In the Logs view, record the timestamp or session marker and inspect startup events: **Load Instructions**, **Load Agents**, **Load Hooks**, and **Load Skills**.
+   - Select one tool-call row and record the input payload, returned output, and whether the tool order could explain the C++ behavior.
+   - Select one LLM request row and record whether the attached context and loaded C++ / Hardware Developer Skill explain the result.
+   - Open the Summary view from the session breadcrumb and capture model turns, tool calls, token count, errors, and total events.
+   - Open the Agent Flow Chart if available and note whether subagents or repeated loops created hardware-safety or review risk.
+
+4. Open the Chat Debug View from the Chat view overflow menu by selecting **Show Chat Debug View**. Select one request and record the system prompt, user prompt, attached context, and complete tool invocation payloads that explain the embedded C++ result.
+5. If the Agent Debug Log panel is open, ask Copilot about the actual session evidence with one of these prompts:
 
 ```text
-Create a Day 2 readiness checklist for an embedded C++ Copilot hack. Include repository setup, instruction files, C++ / Hardware Developer Skill package, custom agent, validation commands, static analysis, hardware or simulator validation, PR review, and rollback plan.
+#debugEventsSnapshot which instruction files, skills, hooks, and agents were loaded before the embedded C++ response?
+```
+
+```text
+/troubleshoot why did the agent change the embedded C++ helper differently than the C++ / Hardware Developer Skill required?
+```
+
+> **Note**: `/troubleshoot` requires the `github.copilot.chat.agentDebugLog.enabled` setting. Debug data is not persisted across VS Code sessions, so capture evidence before restarting VS Code.
+
+6. If you use Copilot CLI instead of VS Code, capture the exact prompt, selected context files, tool or command output, error text, and a second run with narrowed context. Add those details to the VS Code or CLI Debug Evidence section and label the source as `Copilot CLI`.
+7. Fill the Slide Debugging Checklist by mapping your embedded evidence to the debugging capabilities from the slides: context composition, tool-call order, instruction conflicts, permission failures, and loop dynamics.
+8. Fill the Embedded Capability Discovery table:
+
+   - Hooks: `.github\hooks\embedded-cpp-session.json`, validation output, and rollback command from Exercise 2
+   - Extension Marketplace: VS Code Extensions view or `Extensions: Focus on Extensions View`, using an embedded, C++, or hardware-related extension for inspection only
+   - MCP configuration boundary: where MCP configuration would live and what embedded tools/context a server would expose
+   - API/CLI: the read-only `gh repo view --json name,visibility,defaultBranchRef` command or an approved deterministic build/static-analysis command
+   - Plugin metadata: where provenance, version, rollout, telemetry/data scope, and rollback would be reviewed before enablement
+   - Package or deployment surface: GitHub Repo, Marketplace, or Agent Package Manager (APM) documentation or internal approval path
+
+9. Compare deployment paths for your future embedded C++ agent or skill by filling the Deployment Path Comparison table.
+10. Record the validation evidence that must exist before sharing the reusable skill or agent: static analysis, simulator or hardware-safe validation, PR review, owner approval, and rollback plan. Do not create a Day 2 event plan in this lab.
+
+```text
+Create a validation evidence checklist for sharing an embedded C++ Copilot skill or agent. Include static analysis, simulator or hardware-safe validation, PR review, owner approval, support expectations, and rollback plan.
 ```
 
 **🛡️ Safety checkpoint**: Deployment readiness requires evidence, provenance, permission review, validation, and rollback before a reusable agent or skill is shared broadly.
@@ -217,8 +272,10 @@ Create a Day 2 readiness checklist for an embedded C++ Copilot hack. Include rep
 ### ✅ Success Criteria
 
 - ✅ Your minimal repro plan uses narrowed context and evidence from tools, permissions, and instructions.
+- ✅ Your Agent Debug Log, Chat Debug View, or Copilot CLI evidence maps to context composition, tool-call order, instruction conflicts, permission failures, and loop dynamics.
+- ✅ Your capability discovery table shows where to find hooks, marketplace extensions, MCP boundaries, API/CLI options, plugin metadata, and package/deployment surfaces.
 - ✅ Your deployment comparison names GitHub Repo, Marketplace, and Agent Package Manager paths where relevant.
 - ✅ Your deployment plan treats the skill as the reusable behavior package for Copilot.
-- ✅ Your Day 2 checklist includes validation, review, and rollback steps.
+- ✅ Your validation evidence checklist includes static analysis, review, owner approval, support expectations, and rollback steps.
 
 *Hands-on lab for Module 3 Advanced Topics — C++ / Hardware skill track*

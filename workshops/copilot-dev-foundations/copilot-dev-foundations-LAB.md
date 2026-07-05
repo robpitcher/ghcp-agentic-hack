@@ -114,25 +114,30 @@ Expected result: Copilot explains that `#selection` limits context to the highli
 ```
 
 4. Open the chat mode or experience selector in Copilot Chat and try the same request in Ask, Plan, and Agent where those experiences are available in your environment. If one is unavailable, write "not available in my environment" in your notes.
-5. Add this comparison table to `copilot-quest-foundations-notes.md`.
+5. Before using Agent, select **Configure Tools** in the chat input and keep only the tools needed for this low-risk task, such as repository search and file-reading tools. Leave terminal, web, and external service tools off unless the task requires them.
+6. Open the permissions picker in the chat input. Keep **Default Approvals** for this beginner exercise so terminal commands and sensitive tool calls require review.
+7. Type `#` in the chat input and notice the available context sources and tools, such as `#selection`, `#file`, `#codebase`, `#problems`, or tool sets. Record which one you used.
+8. Add this comparison table to `copilot-quest-foundations-notes.md`.
 
 ```markdown
 ### Ask / Plan / Agent Comparison
 
-| Experience | What I asked | What it returned | Review gate before accepting |
-| --- | --- | --- | --- |
-| Ask | | | |
-| Plan | | | |
-| Agent | | | |
+| Experience | What I asked | Tools or context enabled | What it returned | Review gate before accepting |
+| --- | --- | --- | --- | --- |
+| Ask | | | | |
+| Plan | | | | |
+| Agent | | | | |
 
 - Safest experience for low-risk understanding:
 - Rule for staying in Ask or Plan:
 - Response I rejected or revised because it proposed unclear multi-file edits:
 ```
 
-6. Identify which built-in experience is safest for a low-risk understanding task and why.
-7. Capture one rule for when you should stay in Ask or Plan instead of escalating to Agent.
-8. Reject or revise any response that proposes unclear multi-file edits.
+9. Identify which built-in experience is safest for a low-risk understanding task and why.
+10. Capture one rule for when you should stay in Ask or Plan instead of escalating to Agent.
+11. If Agent proposes file edits, use the files changed bar above the chat input to open the inline diff. Practice **Keep** or **Undo** on one change if your environment allows it; otherwise record where those controls would appear.
+12. If the response is off track, edit the previous chat message and resend it, or use **Steer with Message** while the agent is running. For a larger reset, record where **Restore Checkpoint** or `/fork` would be used.
+13. Reject or revise any response that proposes unclear multi-file edits.
 
 **🛡️ Safety checkpoint**: Validate generated edits before acceptance and reject unclear multi-file proposals.
 
@@ -142,6 +147,9 @@ Expected result: Copilot explains that `#selection` limits context to the highli
 - ✅ Used inline chat for a bounded selected transformation
 - ✅ Used at least one slash command with scoped context
 - ✅ Compared built-in Ask, Plan, and Agent behavior
+- ✅ Used Configure Tools or the `#` picker to limit context and tools
+- ✅ Kept Default Approvals or documented why a broader permission mode was not appropriate
+- ✅ Located Keep/Undo, Restore Checkpoint, or Fork controls for reviewing agent work
 - ✅ Chose a stage-appropriate mode with rationale
 - ✅ Captured one escalation rule for Agent mode
 - ✅ Added or refined one reusable instruction for the starter kit

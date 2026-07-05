@@ -21,13 +21,17 @@
 ### 3. Operations and Day 2 Readiness (35 min)
 
 - What evidence do you inspect first when chat or agent behavior surprises you?
+- How would you open the Agent Debug Log panel, inspect load events, tool calls, LLM requests, Summary, and Agent Flow Chart, then use Chat Debug View for raw request and response payloads?
+- When would you use `#debugEventsSnapshot` or `/troubleshoot`, and what setting does `/troubleshoot` require?
+- If a learner uses Copilot CLI instead of VS Code, what prompt, context, tool output, error text, and narrowed rerun evidence should they capture?
+- Which debugging clue points to context composition, tool-call order, instruction conflict, permission failure, or loop dynamics?
 - Which distribution or packaging path fits your first internal agent: GitHub Repo, Marketplace, or Agent Package Manager (APM)?
 - What permission, provenance, and rollback gates must pass before sharing the agent beyond the build team?
-- What Day 2 scope, model strategy, success criterion, and fallback path will keep the hack demo safe and achievable?
+- Which capability surfaces should learners be able to find without enabling anything: hooks, Extension Marketplace details, MCP configuration boundary, API/CLI option, plugin metadata, and package/deployment surface?
 
 ### Knowledge Check (5 min)
 
 - Which required Advanced topic is least familiar to the room, and what governance question should teams answer before using it?
-- Which Usage Optimization callout changes how learners will plan Day 2 work?
+- Which Usage Optimization callout changes how learners will debug or package advanced workflows?
 
 *Presenter note prompts extracted from workshop discussion point sections for Slidev talk track development.*

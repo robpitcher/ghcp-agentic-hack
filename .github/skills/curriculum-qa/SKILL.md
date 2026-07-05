@@ -61,11 +61,11 @@ Review whether the lab gives learners the right task source for the track and mo
 
 | Track/module | QA must verify |
 |--------------|----------------|
-| Core/general track | Code, skill, agent, orchestration, and Day 2 tasks use the core workshop build thread unless the workshop source says otherwise. |
+| Core/general track | Code, skill, agent, orchestration, and advanced evidence tasks use the core workshop build thread unless the workshop source says otherwise. |
 | Technology skill track | Tasks use a concrete domain scenario aligned to the selected skill, not the core build scenario by default. |
 | Foundations | Learners get concrete orientation tasks, notes, prompt assets, and handoff artifacts without creating later-module skill or agent files. |
 | Agentic | Learners get concrete build, review, skill, or custom-agent tasks instead of being asked to invent work. |
-| Advanced | Learners get concrete governance, orchestration, integration, debugging, deployment, or Day 2 scenarios without a large implementation build. |
+| Advanced | Learners get concrete governance, orchestration, integration, debugging, deployment, capability-discovery, and evidence-capture scenarios without a large implementation build. Day 2 is a separate event; flag Advanced lab or quiz deliverables that ask learners to produce Day 2 event plans. |
 
 Flag a **consistency gap** when the lab says "pick one task," "choose a scenario," or "select a helper" without a default or bounded option set. Flag it as **blocking** when the missing task source prevents learners from completing the exercise or breaks the core-vs-skill-track scenario boundary.
 
@@ -77,11 +77,25 @@ For Advanced module labs and any skill track that references integration surface
 |---------|----------------|
 | Copilot/agent hooks | The lab names where hook configuration lives, which lifecycle event is being used, how the learner validates execution, and how to disable or roll back the hook. |
 | Extension Marketplace | The lab shows where to open the marketplace or extension details and asks learners to inspect publisher, version, trust, permissions, telemetry, and disable/uninstall path. |
-| Plugins | The lab includes provenance, signing or source, versioning, rollout, telemetry/data-scope, and rollback checks before enablement. |
-| MCP | The lab keeps MCP conceptual unless the workshop source explicitly adds a live server walkthrough; it identifies configuration location, exposed tools/context, data boundary, authentication/authorization, and required approval. |
+| Plugins | The lab shows Agent Customizations > Plugins and Extensions view agent-plugin surfaces where available, notes `chat.plugins.enabled` may be organization-managed, and includes `plugin.json` or package metadata, included slash commands/skills/custom agents/hooks/MCP servers, provenance, signing or source, versioning, rollout, telemetry/data-scope, and rollback checks before enablement. |
+| MCP | The lab keeps MCP conceptual unless the workshop source explicitly adds a live server walkthrough; it shows discovery surfaces such as Extensions search `@mcp`, `MCP: Open User Configuration`, `MCP: Open Workspace Folder Configuration`, and `MCP: List Servers`, and identifies configuration scope, exposed tools/resources/prompts/context, data boundary, authentication/authorization, and required approval. |
 | API/CLI | The lab includes an exact command or endpoint pattern, expected inputs/outputs, audit evidence, approval/logging requirements, and why it is safer or more observable than a broader integration. |
+| Debug evidence | The lab shows how VS Code users open the Agent Debug Log panel with `Developer: Open Agent Debug Panel` or **Show Agent Debug Logs**, inspect load events, tool calls, LLM requests, Summary, and Agent Flow Chart, then open **Show Chat Debug View** for raw payloads. It includes `#debugEventsSnapshot`, `/troubleshoot` with the `github.copilot.chat.agentDebugLog.enabled` setting, the note that debug data is not persisted across VS Code sessions, and a Copilot CLI alternative with prompt, selected context, tool or command output, error text, and narrowed rerun evidence. |
 
 Flag a **consistency gap** when a lab only says "compare hooks, plugins, MCP, API/CLI, or marketplace" without showing where learners find the surface or what evidence they should capture. Flag it as **blocking** when a lab asks learners to enable or rely on an integration without trust review, validation evidence, or rollback guidance.
+
+## VS Code Chat Surface Review
+
+For labs that teach Chat, agent mode, customizations, or execution-mode selection, verify the lab demonstrates the current VS Code surfaces instead of only naming the concept:
+
+| Surface | QA must verify |
+|---------|----------------|
+| Configure Tools | Learners are told where to open **Configure Tools**, which tools to keep enabled, and which tools to leave off for the first pass. |
+| `#` picker | Learners use or inspect the `#` picker for context sources and tools such as `#selection`, `#file`, `#codebase`, or `#problems`. |
+| Permissions picker | The lab names **Default Approvals**, **Bypass Approvals**, or **Autopilot** and explains why the chosen level fits the task risk. |
+| Agent Customizations | Learners open the Chat Configure gear and Agent Customizations view before creating or reviewing Instructions, Skills, Agents, Prompt Files, Hooks, or Plugins. |
+| Review controls | Learners know where to find the files changed bar, inline diff, **Keep**, **Undo**, **Undo All**, **Restore Checkpoint**, and `/fork` when agent edits are produced. |
+| Agent Sessions | Learners locate the Agent Sessions sidebar and agent/session type picker when comparing Local, Copilot CLI/background, Cloud, or third-party agent execution. |
 
 ## LAB Success Criteria Traceability
 
@@ -116,7 +130,7 @@ Verify the full curriculum path:
 |--------|---------------------------|
 | Foundations | New Copilot Quest starter, Copilot surfaces, safe CLI use, guided workflows, usage optimization, model/context routing, and delegation guardrails |
 | Agentic | Strong prompts, instructions, memory boundaries, repo-local skill creation, custom agent creation, tool-control handoffs, background/cloud readiness, `/init`, and instruction layering |
-| Advanced | Multiagents, subagents, fleet decisions, trusted discovery, hooks, Extension Marketplace, MCP as a governed concept, API/CLI, plugins, debugging, deployment, and Day 2 readiness |
+| Advanced | Multiagents, subagents, fleet decisions, trusted discovery, hooks, Extension Marketplace, MCP as a governed concept, API/CLI, plugins, debugging, deployment, and separate-event Day 2 readiness without Day 2 lab or quiz deliverables |
 
 ## Artifact Boundary Checks
 

@@ -103,11 +103,11 @@ Before publishing a skill-track lab, confirm that the task source matches the tr
 
 | Track type | Scenario requirement |
 |------------|----------------------|
-| Core/general | Use the shared core build thread when learners create code, skills, agents, orchestration packages, or Day 2 plans. |
+| Core/general | Use the shared core build thread when learners create code, skills, agents, orchestration packages, or advanced evidence packages. |
 | Technology skill track | Use a concrete domain scenario that practices the same module concept through the selected technology skill. |
 | Foundations | Keep scenarios lightweight: orientation, notes, prompt assets, and guardrail handoffs. |
 | Agentic | Provide concrete build, review, skill, or custom-agent tasks; do not ask learners to invent them. |
-| Advanced | Provide concrete governance, orchestration, integration, debug, deployment, or Day 2 scenarios without turning the lab into a large implementation build. |
+| Advanced | Provide concrete governance, orchestration, integration, debug, deployment, capability-discovery, and evidence-capture scenarios without turning the lab into a large implementation build. Day 2 is a separate event; do not ask learners to create Day 2 event plans as Advanced lab or quiz deliverables. |
 
 If the lab says "pick one task" or "choose a scenario," either provide a default task or give a small bounded option set.
 
@@ -119,9 +119,12 @@ For advanced skill-track labs that mention integration surfaces, require this mi
 |---------|------------------------------|
 | Copilot/agent hooks | Where the hook configuration lives, one safe setup or discovery path, what lifecycle event is involved, how to validate that it ran, and how to disable or roll it back. |
 | Extension Marketplace | Where to open the marketplace, which publisher/version/install or trust signals to inspect, what permissions or telemetry questions to ask, and how to disable or uninstall. |
-| Plugins | Where plugin metadata or configuration is found, provenance/version/signing or source checks, rollout decision, and rollback path. |
-| MCP | Configuration location and exposed tools/context as a governance review; no live server setup unless the workshop source explicitly requires it. |
+| Plugins | Agent Customizations > Plugins and Extensions view agent-plugin surfaces where available, `chat.plugins.enabled` awareness, `plugin.json` or package metadata, included slash commands/skills/custom agents/hooks/MCP servers, provenance/version/signing or source checks, rollout decision, and rollback path. |
+| MCP | Extensions search `@mcp`, `MCP: Open User Configuration`, `MCP: Open Workspace Folder Configuration`, `MCP: List Servers`, configuration scope, and exposed tools/resources/prompts/context as a governance review; no live server setup unless the workshop source explicitly requires it. |
 | API/CLI | Exact command or endpoint pattern, expected inputs/outputs, approval/logging requirements, and why it is safer or more observable than a broader integration. |
+| Debug evidence | VS Code path for opening the Agent Debug Log panel with `Developer: Open Agent Debug Panel` or **Show Agent Debug Logs**, inspecting load events, tool calls, LLM requests, Summary, and Agent Flow Chart, plus **Show Chat Debug View** for raw payloads. Include `#debugEventsSnapshot`, `/troubleshoot` with the `github.copilot.chat.agentDebugLog.enabled` setting, the note that debug data is not persisted across VS Code sessions, and a Copilot CLI alternative that captures prompt, selected context, tool or command output, error text, and narrowed rerun evidence. |
+
+For VS Code Chat labs, include **Configure Tools**, the `#` picker for context/tools, the permissions picker, Agent Customizations view, files changed review controls, checkpoints/forks, and Agent Sessions sidebar whenever those surfaces are part of the concept being taught.
 
 ## Quiz Authoring Checklist
 

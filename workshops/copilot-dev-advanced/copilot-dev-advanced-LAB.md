@@ -2,7 +2,7 @@
 
 ## Overview
 
-This lab extends the **Copilot Quest** Stage 5-6 Workflow Kit into the **Orchestration Package**. Exercises now mirror the Advanced module order: orchestration and trusted discovery, governed integration surfaces, then debugging, deployment, and Day 2 readiness.
+This lab extends the **Copilot Quest** Stage 5-6 Workflow Kit into the **Orchestration Package**. Exercises now mirror the Advanced module order: orchestration and trusted discovery, governed integration surfaces, then debugging, capability discovery, and deployment evidence.
 
 - **Total time**: ~30 minutes
 - **Prerequisites**:
@@ -125,7 +125,7 @@ New-Item -ItemType Directory -Force -Path .github\hooks | Out-Null
 {
   "version": 1,
   "hooks": {
-    "sessionStart": [
+    "SessionStart": [
       {
         "type": "command",
         "bash": "mkdir -p logs && echo \"Copilot hook sessionStart $(date -Iseconds)\" >> logs/copilot-hooks.log",
@@ -145,21 +145,21 @@ New-Item -ItemType Directory -Force -Path .github\hooks | Out-Null
 Get-Content .github\hooks\copilot-quest-session.json | ConvertFrom-Json | Out-Null
 ```
 
-5. Record the hook lifecycle event, file path, validation result, and rollback command in the Hooks row. Use this rollback command if the hook is only a lab draft:
+5. Record the hook lifecycle event `SessionStart`, file path, validation result, and rollback command in the Hooks row. Use this rollback command if the hook is only a lab draft:
 
 ```powershell
 Remove-Item .github\hooks\copilot-quest-session.json
 ```
 
 6. Open the VS Code Extensions view from the Activity Bar or Command Palette command `Extensions: Focus on Extensions View`. Choose one extension related to your scenario, but do not install it unless your instructor or organization allows it. Record publisher, version, install or trust signals, permissions or telemetry questions, and disable/uninstall path in the Extension Marketplace row.
-7. Keep MCP conceptual: document where configuration would live for your environment, what tools or context a server would expose, what data boundary changes, and which approval is required. Do not configure a live MCP server in this lab.
+7. Keep MCP conceptual but find the VS Code surfaces. In the Extensions view, search `@mcp` to see MCP server entries without installing one. Open Command Palette and locate `MCP: Open User Configuration`, `MCP: Open Workspace Folder Configuration`, and `MCP: List Servers`. Record which configuration scope would fit the bounded task, what tools/resources/prompts a server would expose, what data boundary changes, and which approval is required. Do not configure a live MCP server in this lab.
 8. Evaluate one deterministic API/CLI option. If GitHub CLI is approved in your environment, run this read-only command from the repository terminal and record the output shape:
 
 ```powershell
 gh repo view --json name,visibility,defaultBranchRef
 ```
 
-9. Evaluate plugins as supply-chain components. Record where plugin metadata or configuration would be reviewed, provenance or signing/source checks, versioning, rollout scope, telemetry/data-scope questions, and rollback path before any enablement.
+9. Evaluate plugins as supply-chain components. In VS Code Chat, select the Configure gear and open Agent Customizations > **Plugins** if your organization enables `chat.plugins.enabled`. In the Extensions view, look for **Agent Plugins - Installed** or use the `@agentPlugins @recommended` filter if available. Record whether plugin support is available, where plugin metadata or `plugin.json` would be reviewed, provenance or signing/source checks, versioning, rollout scope, telemetry/data-scope questions, included skills/agents/hooks/MCP servers, and rollback path before any enablement.
 10. For each matrix row, document permissions, data scope, observability, provenance or publisher trust, validation path, rollback option, and a decision such as "use," "defer," or "do not use."
 11. Choose the simplest safe surface and explain why the other options add unnecessary risk or overhead.
 12. Add one enforceable hook/checkpoint your team would require before accepting changes.
@@ -175,23 +175,23 @@ gh repo view --json name,visibility,defaultBranchRef
 - ✅ Selected the simplest safe surface with rationale
 - ✅ Defined one enforceable hook/checkpoint tied to acceptance or release approval
 
-## Exercise 3: Stage 8 Debug, Deploy, and Day 2 Hack Plan
+## Exercise 3: Stage 8 Capability Discovery and Debug Evidence
 
 **⏱️ Time**: 10 min
-**📋 Objective**: Produce a Stage 8 package covering minimal debugging, deployment path choice, and Day 2 hack execution
+**📋 Objective**: Produce a Stage 8 package that shows how to find VS Code or CLI debugging evidence, inspect advanced capability surfaces, and choose a deployment path
 
 **Warm-up (try this now)**:
 
 ```text
-Write a five-item Day 2 go/no-go gate: minimal repro status, permissions, tests, rollback, and owner sign-off.
+For a surprising Copilot Quest agent result, list the first five evidence items you would inspect before rerunning: minimal prompt, context files, tool-call order, instruction layers, and permission or log evidence.
 ```
 
-Expected result: You have a lightweight readiness checklist to expand into the full decision package.
+Expected result: You have a lightweight debug-evidence checklist before expanding the full decision package.
 
-1. Add this final section to `copilot-quest-orchestration-package.md` as `Page 3: Debug, Deploy, and Day 2 Hack Plan`.
+1. Add this final section to `copilot-quest-orchestration-package.md` as `Page 3: Capability Discovery and Debug Evidence`.
 
 ```markdown
-### Page 3: Debug, Deploy, and Day 2 Hack Plan
+### Page 3: Capability Discovery and Debug Evidence
 
 ### Minimal Repro
 
@@ -200,6 +200,37 @@ Expected result: You have a lightweight readiness checklist to expand into the f
 - Narrowed context:
 - Tool-call order:
 - Permission or instruction conflict to check:
+
+### VS Code Agent Debug Evidence
+
+- Debug surface opened: Agent Debug Log panel / Chat Debug View / Copilot CLI
+- Timestamp or session marker:
+- Load events reviewed:
+- Tool or LLM request reviewed:
+- Evidence captured:
+- Snapshot or troubleshooting prompt:
+- Persistence note:
+
+### Slide Debugging Checklist
+
+| Debugging capability | Evidence captured |
+| --- | --- |
+| Context composition | |
+| Tool-call order | |
+| Instruction conflicts | |
+| Permission failures | |
+| Loop dynamics | |
+
+### Capability Discovery Evidence
+
+| Surface | Where you found it | Evidence captured | Safe next step |
+| --- | --- | --- | --- |
+| Hooks | | | |
+| Extension Marketplace | | | |
+| MCP configuration boundary | | | |
+| API/CLI | | | |
+| Plugin metadata | | | |
+| Package or deployment surface | | | |
 
 ### Deploy Checklist
 
@@ -217,36 +248,58 @@ Expected result: You have a lightweight readiness checklist to expand into the f
 - Audience:
 - Governance fit:
 - Why the other paths are not selected:
-
-### Day 2 Hack Proposal
-
-- Core objective:
-- Explicit non-goal:
-- Model or agent strategy:
-- Success criterion:
-- Fallback if integration fails:
 ```
 
 2. Simulate one failed chat or agent run and fill the Minimal Repro section with the smallest safe repro prompt that narrows context, tool-call order, permissions, or instruction conflicts.
-3. Draft the Deploy Checklist for a custom agent package: capabilities, permissions, provenance, tests, version owner, rollback, and support expectations.
-4. Choose one distribution or packaging path — GitHub Repo, Marketplace, or Agent Package Manager (APM) — and justify why it fits the audience and governance model.
-5. Build a Day 2 hack proposal with:
+3. If you use VS Code, open the Agent Debug Log panel for the current chat or agent session:
 
-   - One core objective
-   - One explicit non-goal
-   - One model or agent strategy
-   - One success criterion
-   - One fallback if integration fails
+   - Open Command Palette with `Ctrl+Shift+P` or `F1`.
+   - Run `Developer: Open Agent Debug Panel`.
+   - Or open the overflow menu at the top of the Chat view and select **Show Agent Debug Logs**.
+   - Run your smallest repro prompt in Chat or agent mode.
+   - In the Logs view, record the timestamp or session marker and inspect the startup events: **Load Instructions**, **Load Agents**, **Load Hooks**, and **Load Skills**.
+   - Select one tool-call row and record the input payload, returned output, and whether the order matches the expected workflow.
+   - Select one LLM request row and record whether the context and instructions explain the behavior.
+   - Open the Summary view from the session breadcrumb and capture model turns, tool calls, token count, errors, and total events.
+   - Open the Agent Flow Chart if available and note whether subagents or repeated loops explain the behavior.
 
-6. Treat the result as the deployable capstone for the full Copilot Quest build.
+4. Open the Chat Debug View from the Chat view overflow menu by selecting **Show Chat Debug View**. Select one request and record the system prompt, user prompt, attached context, and complete tool invocation payloads that explain the result.
+5. If the Agent Debug Log panel is open, ask Copilot about the actual session evidence with one of these prompts:
+
+```text
+#debugEventsSnapshot which customization files, skills, hooks, and agents were loaded for this session?
+```
+
+```text
+/troubleshoot the agent made an unexpected tool call in the last response, why?
+```
+
+> **Note**: `/troubleshoot` requires the `github.copilot.chat.agentDebugLog.enabled` setting. Debug data is not persisted across VS Code sessions, so capture evidence before restarting VS Code.
+
+6. If you use Copilot CLI instead of VS Code, capture the exact prompt, selected context files, tool or command output, error text, and a second run with narrowed context. Add those details to the VS Code Agent Debug Evidence section and label the source as `Copilot CLI`.
+7. Fill the Slide Debugging Checklist by mapping your evidence to the debugging capabilities from the slides: context composition, tool-call order, instruction conflicts, permission failures, and loop dynamics.
+8. Fill the Capability Discovery Evidence table:
+
+   - Hooks: `.github\hooks\copilot-quest-session.json`, validation output, and rollback command from Exercise 2
+   - Extension Marketplace: VS Code Extensions view or `Extensions: Focus on Extensions View`
+   - MCP configuration boundary: where MCP configuration would live for the learner's environment and what tools/context would be exposed
+   - API/CLI: the read-only `gh repo view --json name,visibility,defaultBranchRef` command or another approved deterministic command
+   - Plugin metadata: where provenance, version, rollout, telemetry/data scope, and rollback would be reviewed
+   - Package or deployment surface: GitHub Repo, Marketplace, or Agent Package Manager (APM) documentation or internal approval path
+
+9. Draft the Deploy Checklist for a custom agent package: capabilities, permissions, provenance, tests, version owner, rollback, and support expectations.
+10. Choose one distribution or packaging path — GitHub Repo, Marketplace, or Agent Package Manager (APM) — and justify why it fits the audience and governance model.
+11. Treat the result as the deployable capstone evidence for the full Copilot Quest build. Do not create a Day 2 event plan in this lab.
 
 **🛡️ Safety checkpoint**: No deployment or demo without documented permissions, provenance checks, governance sign-off, and rollback plan.
 
 ### ✅ Success Criteria
 
 - ✅ Produced a minimal debug protocol with narrowed context
+- ✅ Captured VS Code Agent Debug Log, Chat Debug View, or Copilot CLI evidence before the session data expired
+- ✅ Mapped evidence to context composition, tool-call order, instruction conflicts, permission failures, and loop dynamics
+- ✅ Found advanced capability surfaces in VS Code or CLI and recorded safe next steps
 - ✅ Included GitHub Repo, Marketplace, or Agent Package Manager (APM) as the selected distribution or packaging pathway
-- ✅ Delivered a scoped Day 2 plan with model strategy, fallback, and release gate
 - ✅ Produced a capstone artifact that closes the module sequence
 
 *Hands-on lab for Module 3: Advanced Content Refresh (Stage 7-8) — GitHub Copilot Developer Training*
