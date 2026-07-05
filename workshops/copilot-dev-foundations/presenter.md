@@ -25,7 +25,7 @@
 
 - What signs tell your team that context rot is affecting answer quality?
 - Which workflows should remain human-first even when custom agents are available?
-- What least-privilege rule should every custom-agent guardrail checklist include before Module 2 artifact creation?
+- Which broad custom-agent permission would you remove first, and what stop rule would make the Module 2 handoff safer?
 
 ### 5. Wrap-up and Module 2 Handoff (10 min)
 
