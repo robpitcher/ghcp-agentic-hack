@@ -23,25 +23,62 @@ List three places I can use GitHub Copilot and one safe beginner task for each.
 
 Expected result: Copilot returns IDE, terminal, GitHub/browser, cloud, or Copilot app surfaces where available with low-risk tasks you can review.
 
-1. List where you can access Copilot in your workflow, including IDE, browser/GitHub.com, terminal, cloud, or Copilot app experiences where available.
-2. Write a one-sentence description of **Copilot Quest** — the word game you want to build for this repo or project.
-3. In VS Code chat, run one scoped request with `#selection` and one with `#file`.
-4. Open Copilot CLI installation guidance at <https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli>, then record one CLI feature you expect to use safely.
-5. In terminal, confirm Copilot CLI is installed and review available interactive commands:
+1. Create a note named `copilot-quest-foundations-notes.md` in your workshop notes, or use this starter template in any notes app.
+
+```markdown
+# Copilot Quest Foundations Notes
+
+### Copilot Surfaces
+
+| Surface | Where I found it | Safe beginner task | Review gate |
+| --- | --- | --- | --- |
+| VS Code Chat | | | |
+| Inline completion or inline chat | | | |
+| Copilot CLI | | | |
+| GitHub.com or browser | | | |
+| Cloud, app, or background agent if available | | | |
+
+### Copilot Quest Starter
+
+- One-sentence game description:
+
+### Governance
+
+- Privacy or IP control:
+- Human review owner:
+```
+
+2. Open VS Code and find Copilot Chat. Use the Chat icon in the Activity Bar, or open the Command Palette and run `Chat: Open Chat`.
+3. In the notes table, list where you can access Copilot in your workflow, including IDE, browser/GitHub.com, terminal, cloud, or Copilot app experiences where available.
+4. Write a one-sentence description of **Copilot Quest** — the word game you want to build for this repo or project.
+5. Create a small selection in an open file: highlight a function, paragraph, or configuration block that is safe to share. In VS Code Chat, run one scoped request with `#selection`.
+
+```text
+Explain this selected code or text using only #selection. Return one sentence about what context you used.
+```
+
+6. Open a single file in the editor and run a second scoped request with `#file`.
+
+```text
+Explain the purpose of #file in this request. Return one sentence about how this differs from #selection.
+```
+
+7. Open Copilot CLI installation guidance at <https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli>, then record one CLI feature you expect to use safely.
+8. Open the VS Code integrated terminal or another terminal in the repository root. Confirm Copilot CLI is installed and review available interactive commands:
 
 ```powershell
 copilot --help
 copilot help commands
 ```
 
-Then open the interactive CLI with `copilot`, run `/settings` and `/help`, and ask:
+9. Open the interactive CLI with `copilot`. Inside the interactive CLI, run `/settings` and `/help`, then ask:
 
 ```text
 List the top 3 folders a new contributor should read first.
 ```
 
-6. Note one enterprise privacy or IP control your team should enforce by default, such as content exclusions, duplicate detection, retention expectations, or admin policy.
-7. Record who owns review of generated suggestions before any code is accepted.
+10. In `copilot-quest-foundations-notes.md`, note one enterprise privacy or IP control your team should enforce by default, such as content exclusions, duplicate detection, retention expectations, or admin policy.
+11. Record who owns review of generated suggestions before any code is accepted.
 
 **🛡️ Safety checkpoint**: Treat all output as draft, review generated commands before execution, and define the human review gate before accepting any suggestion.
 
@@ -68,18 +105,34 @@ Explain what #selection does in GitHub Copilot chat in one short paragraph.
 
 Expected result: Copilot explains that `#selection` limits context to the highlighted code or text.
 
-1. Use an inline completion for a low-risk comment, helper, or test stub related to **Copilot Quest**.
-2. Select a small block and ask inline chat for a bounded transformation.
-3. Run one slash command against selected code:
+1. Create or open a scratch file for a low-risk **Copilot Quest** note, helper, or test stub. Use an inline completion by starting a comment or function name and pausing for Copilot's suggestion before accepting or rejecting it.
+2. Select a small block in the editor. Open inline chat from the editor context menu or Command Palette, then ask for a bounded transformation such as "make this comment clearer" or "turn this note into a checklist."
+3. Keep the same selected block highlighted and run one slash command in VS Code Chat:
 
 ```text
 /fix #selection
 ```
 
-4. Switch the same request through built-in Ask, Plan, and Agent experiences and compare output.
-5. Identify which built-in experience is safest for a low-risk understanding task and why.
-6. Capture one rule for when you should stay in Ask or Plan instead of escalating to Agent.
-7. Reject or revise any response that proposes unclear multi-file edits.
+4. Open the chat mode or experience selector in Copilot Chat and try the same request in Ask, Plan, and Agent where those experiences are available in your environment. If one is unavailable, write "not available in my environment" in your notes.
+5. Add this comparison table to `copilot-quest-foundations-notes.md`.
+
+```markdown
+### Ask / Plan / Agent Comparison
+
+| Experience | What I asked | What it returned | Review gate before accepting |
+| --- | --- | --- | --- |
+| Ask | | | |
+| Plan | | | |
+| Agent | | | |
+
+- Safest experience for low-risk understanding:
+- Rule for staying in Ask or Plan:
+- Response I rejected or revised because it proposed unclear multi-file edits:
+```
+
+6. Identify which built-in experience is safest for a low-risk understanding task and why.
+7. Capture one rule for when you should stay in Ask or Plan instead of escalating to Agent.
+8. Reject or revise any response that proposes unclear multi-file edits.
 
 **🛡️ Safety checkpoint**: Validate generated edits before acceptance and reject unclear multi-file proposals.
 
@@ -106,20 +159,39 @@ Using https://learn.microsoft.com/en-us/visualstudio/ide/copilot-usage-and-model
 
 Expected result: Copilot returns concrete usage entry points and commands, explains which ones show session/context usage versus monthly account usage, and notes why Auto is usually the first model-routing choice.
 
-1. Ask one broad prompt, then ask a scoped `#file` or `#selection` prompt for the same objective.
-2. Compare quality and token impact signals.
-3. Check the available session or monthly usage view in your environment, or write where your team reviews that usage. In VS Code Chat, open usage from the GitHub/Copilot icon in the bottom-right status area; in Copilot CLI try `/usage`, `/context`, and `/model`.
-4. Re-run the scoped prompt with Auto model routing if available, then compare with one explicitly selected model option if your environment offers it.
-5. Use the real-world usage checklist before choosing a route:
+1. Add this usage and routing template to `copilot-quest-foundations-notes.md`.
+
+```markdown
+### Usage and Model Routing
+
+| Check | Where I found it | Evidence captured |
+| --- | --- | --- |
+| VS Code usage entry point | | |
+| CLI `/usage` | | |
+| CLI `/context` | | |
+| CLI `/model` | | |
+| Monthly account or team usage | | |
+
+| Prompt scope | Quality signal | Token or context signal | Route selected |
+| --- | --- | --- | --- |
+| Broad prompt | | | |
+| `#file` or `#selection` prompt | | | |
+```
+
+2. Ask one broad prompt, then ask a scoped `#file` or `#selection` prompt for the same objective.
+3. Compare quality and token impact signals in the table.
+4. Check the available session or monthly usage view in your environment, or write where your team reviews that usage. In VS Code Chat, open usage from the GitHub/Copilot icon in the bottom-right status area; in Copilot CLI try `/usage`, `/context`, and `/model`.
+5. Re-run the scoped prompt with Auto model routing if available, then compare with one explicitly selected model option if your environment offers it.
+6. Use the real-world usage checklist before choosing a route:
 
 ```text
 Using https://learn.microsoft.com/en-us/visualstudio/ide/copilot-usage-and-models?view=visualstudio as a reference point, create a practical usage-check checklist for VS Code chat and Copilot CLI: include opening usage from the GitHub/Copilot icon in the bottom-right status area of VS Code, CLI `/usage` for usage, CLI `/context` for context-window token usage, CLI `/model` for model routing, GitHub billing/settings for monthly AI credit usage, and when Auto model selection is the lowest-cost first choice.
 ```
 
-6. Note when a fast/general-purpose model is enough and when higher-cost reasoning is justified.
-7. Record one context-rot warning sign and one reset strategy.
-8. Add one budget guardrail for your workflow, such as a spend trigger, escalation threshold, or review gate before high-cost mode changes.
-9. Draft a short prompt template or checklist that Module 2 can reuse for adding guesses, scoring, and hints to the game.
+7. Note when a fast/general-purpose model is enough and when higher-cost reasoning is justified.
+8. Record one context-rot warning sign and one reset strategy.
+9. Add one budget guardrail for your workflow, such as a spend trigger, escalation threshold, or review gate before high-cost mode changes.
+10. Draft a short prompt template or checklist that Module 2 can reuse for adding guesses, scoring, and hints to the game.
 
 **🛡️ Safety checkpoint**: Do not optimize cost by skipping tests, validation, or security checks.
 

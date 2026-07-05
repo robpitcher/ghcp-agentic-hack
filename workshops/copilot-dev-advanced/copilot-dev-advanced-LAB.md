@@ -117,17 +117,59 @@ Expected result: You have a conceptual integration recommendation without config
 ```
 
 2. Pick one bounded task, such as fetching a word list, updating the scoreboard, or validating a generated answer, and fill the Bounded Task field.
-3. Fill each row for hooks, Extension Marketplace, MCP, API/CLI, and plugins.
-4. For each row, document permissions, data scope, observability, provenance or publisher trust, validation path, rollback option, and a decision such as "use," "defer," or "do not use."
-5. Keep MCP conceptual: describe tool/context boundaries and security review needs without configuring a specific server.
-6. Choose the simplest safe surface and explain why the other options add unnecessary risk or overhead.
-7. Add one enforceable hook/checkpoint your team would require before accepting changes.
+3. Set up a safe draft Copilot/agent hook from the VS Code integrated terminal or any repository terminal. This creates `.github\hooks\copilot-quest-session.json` and writes a session-start log if hooks run in your Copilot CLI or cloud-agent environment.
+
+```powershell
+New-Item -ItemType Directory -Force -Path .github\hooks | Out-Null
+@'
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "mkdir -p logs && echo \"Copilot hook sessionStart $(date -Iseconds)\" >> logs/copilot-hooks.log",
+        "powershell": "New-Item -ItemType Directory -Force -Path logs | Out-Null; Add-Content -Path logs/copilot-hooks.log -Value \"Copilot hook sessionStart $(Get-Date -Format o)\"",
+        "cwd": ".",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}
+'@ | Set-Content -Path .github\hooks\copilot-quest-session.json -Encoding utf8
+```
+
+4. Validate the hook configuration syntax before relying on it.
+
+```powershell
+Get-Content .github\hooks\copilot-quest-session.json | ConvertFrom-Json | Out-Null
+```
+
+5. Record the hook lifecycle event, file path, validation result, and rollback command in the Hooks row. Use this rollback command if the hook is only a lab draft:
+
+```powershell
+Remove-Item .github\hooks\copilot-quest-session.json
+```
+
+6. Open the VS Code Extensions view from the Activity Bar or Command Palette command `Extensions: Focus on Extensions View`. Choose one extension related to your scenario, but do not install it unless your instructor or organization allows it. Record publisher, version, install or trust signals, permissions or telemetry questions, and disable/uninstall path in the Extension Marketplace row.
+7. Keep MCP conceptual: document where configuration would live for your environment, what tools or context a server would expose, what data boundary changes, and which approval is required. Do not configure a live MCP server in this lab.
+8. Evaluate one deterministic API/CLI option. If GitHub CLI is approved in your environment, run this read-only command from the repository terminal and record the output shape:
+
+```powershell
+gh repo view --json name,visibility,defaultBranchRef
+```
+
+9. Evaluate plugins as supply-chain components. Record where plugin metadata or configuration would be reviewed, provenance or signing/source checks, versioning, rollout scope, telemetry/data-scope questions, and rollback path before any enablement.
+10. For each matrix row, document permissions, data scope, observability, provenance or publisher trust, validation path, rollback option, and a decision such as "use," "defer," or "do not use."
+11. Choose the simplest safe surface and explain why the other options add unnecessary risk or overhead.
+12. Add one enforceable hook/checkpoint your team would require before accepting changes.
 
 **🛡️ Safety checkpoint**: Use only approved tools/endpoints, avoid sensitive data in prompts/logs, and document trust boundaries before enabling extensions, plugins, or MCP servers.
 
 ### ✅ Success Criteria
 
 - ✅ Compared all five integration surfaces in the required order
+- ✅ Created or evaluated a draft Copilot/agent hook configuration with validation and rollback evidence
 - ✅ Included marketplace publisher trust and plugin supply-chain checks
 - ✅ Described MCP as a governed concept without a server walkthrough
 - ✅ Selected the simplest safe surface with rationale

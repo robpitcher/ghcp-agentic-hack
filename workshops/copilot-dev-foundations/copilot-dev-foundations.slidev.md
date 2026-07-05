@@ -41,7 +41,7 @@ background: /images/copilot-dev-foundations/slide-04-af4d8c66.png
 ---
 
 <!--
-Introduce VS Code Chat as the place where scope control begins. Call out slash commands, participants, and precise references such as #file and #selection as ways to give Copilot only the context it needs. Reinforce that smaller context usually improves reviewability, speed, and cost before anyone reaches for broader workspace context.
+Introduce VS Code Chat as the place where scope control begins, and explicitly point learners to the Chat icon or the Command Palette command for opening it. Call out slash commands, participants, and precise references such as #file and #selection as ways to give Copilot only the context it needs. Reinforce that smaller context usually improves reviewability, speed, and cost before anyone reaches for broader workspace context.
 -->
 
 ---
@@ -50,7 +50,7 @@ background: /images/copilot-dev-foundations/slide-05-22990c0d.png
 ---
 
 <!--
-Frame Copilot CLI as terminal-first assistance that still requires command review. It can explain commands, draft commands, help with settings discovery, and support review-oriented workflows, but the developer remains responsible for what runs. Pause on commands that install dependencies, delete files, or touch remotes and ask what approval or dry-run step would be appropriate.
+Frame Copilot CLI as terminal-first assistance that still requires command review, and show that learners can use the VS Code integrated terminal or any repository terminal. It can explain commands, draft commands, help with settings discovery, and support review-oriented workflows, but the developer remains responsible for what runs. Pause on commands that install dependencies, delete files, or touch remotes and ask what approval or dry-run step would be appropriate.
 -->
 
 ---
@@ -140,7 +140,7 @@ background: /images/copilot-dev-foundations/slide-15-4433beab.png
 ---
 
 <!--
-Use this slide to turn usage visibility into a daily operating habit. Mention VS Code usage entry points, CLI /usage, /context, and /model, plus GitHub billing or Copilot settings for account-level monthly views where policy allows. Emphasize that checking real usage signals before changing models prevents accidental cost escalation.
+Use this slide to turn usage visibility into a daily operating habit. Mention the VS Code GitHub/Copilot status-area usage entry point, CLI /usage, /context, and /model, plus GitHub billing or Copilot settings for account-level monthly views where policy allows. Emphasize that checking real usage signals before changing models prevents accidental cost escalation.
 -->
 
 ---

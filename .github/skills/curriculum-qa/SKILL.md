@@ -27,7 +27,7 @@ Compare companion files against the workshop source:
 1. Identify the module folder and read the workshop source first.
 2. Extract the workshop sections, lab indicators, safety moments, optimization tips, demos, and key concept list.
 3. Compare LAB exercises against the workshop sequence and verify that every lab has objectives, safety checkpoints, success criteria, copyable prompts or commands, and expected learner artifacts.
-4. Review LAB step clarity. Every instruction that asks participants to create, draft, fill, compare, save, run, or review something must include the exact artifact, path, starter template, table/checklist fields, command, expected evidence, or pass/fail criteria.
+4. Review LAB step clarity. Every instruction that asks participants to create, draft, fill, compare, save, run, review, find, set up, or evaluate something must include the exact artifact, path, starter template, table/checklist fields, command, expected evidence, product surface, or pass/fail criteria.
 5. Trace every LAB success criterion back to a specific participant instruction, prompt, template field, saved artifact, or safety checkpoint. Flag criteria that are vague, instructor-only, not observable, or not actually requested by the lab steps.
 6. Compare quiz questions against taught concepts. Verify that each question has four options, one answer comment, and an explanation that matches the workshop source.
 7. Compare presenter notes against workshop sections and confirm that discussion prompts do not drift into workshop source files.
@@ -37,7 +37,7 @@ Compare companion files against the workshop source:
 
 ## LAB Step Clarity Review
 
-Review labs as if the participant is new to the artifact they are creating. Do not assume they know what belongs in a skill, custom agent, matrix, readiness note, orchestration package, checklist, or QA artifact unless the lab provides a template or exact fields.
+Review labs as if the participant is new to the artifact, product surface, or integration they are using. Do not assume they know what belongs in a skill, custom agent, matrix, readiness note, orchestration package, checklist, hook, plugin, MCP configuration, API/CLI command, marketplace entry, or QA artifact unless the lab provides a template, exact fields, or exact entry point.
 
 | Action verb | Required learner support |
 |-------------|--------------------------|
@@ -48,8 +48,25 @@ Review labs as if the participant is new to the artifact they are creating. Do n
 | Save | File name, location, and content template. |
 | Run | Copyable command and expected evidence to capture. |
 | Review | Specific pass/fail criteria, safety gate, or decision options. |
+| Find | Exact product surface, menu, command, UI location, or repository path. |
+| Set up | Copyable command or configuration path, expected result, validation check, and rollback or disable step. |
+| Evaluate | Trust, permission, provenance, data-scope, version, telemetry, validation, and rollback criteria. |
 
 Flag a **consistency gap** when a step is understandable to an experienced instructor but leaves beginners to infer the artifact shape, storage location, required fields, or evidence. Flag it as **blocking** when the ambiguity prevents a learner from completing the exercise or when a success criterion claims an artifact exists but no step tells learners how to create it.
+
+## Advanced Surface Setup and Discovery Review
+
+For Advanced module labs and any skill track that references integration surfaces, verify that the lab teaches where and how to find, set up, evaluate, validate, and roll back the surface when setup is in scope.
+
+| Surface | QA must verify |
+|---------|----------------|
+| Copilot/agent hooks | The lab names where hook configuration lives, which lifecycle event is being used, how the learner validates execution, and how to disable or roll back the hook. |
+| Extension Marketplace | The lab shows where to open the marketplace or extension details and asks learners to inspect publisher, version, trust, permissions, telemetry, and disable/uninstall path. |
+| Plugins | The lab includes provenance, signing or source, versioning, rollout, telemetry/data-scope, and rollback checks before enablement. |
+| MCP | The lab keeps MCP conceptual unless the workshop source explicitly adds a live server walkthrough; it identifies configuration location, exposed tools/context, data boundary, authentication/authorization, and required approval. |
+| API/CLI | The lab includes an exact command or endpoint pattern, expected inputs/outputs, audit evidence, approval/logging requirements, and why it is safer or more observable than a broader integration. |
+
+Flag a **consistency gap** when a lab only says "compare hooks, plugins, MCP, API/CLI, or marketplace" without showing where learners find the surface or what evidence they should capture. Flag it as **blocking** when a lab asks learners to enable or rely on an integration without trust review, validation evidence, or rollback guidance.
 
 ## LAB Success Criteria Traceability
 

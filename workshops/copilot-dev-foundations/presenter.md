@@ -7,6 +7,7 @@
 - Which Copilot surface gives your team the highest productivity today, and why?
 - Where do new users most often misunderstand cross-surface context or privacy boundaries?
 - Which enterprise control should be explained before developers use cloud, app, or terminal workflows?
+- Where exactly should beginners click or type first: VS Code Chat, Command Palette, integrated terminal, or Copilot CLI interactive mode?
 
 ### 2. Guided Workflows: Inline Assistance and Built-in Copilot Experiences (20 min)
 
@@ -20,6 +21,7 @@
 - How should teams balance speed, quality, and spend under deadlines?
 - Where should Auto mode be the default versus manual selection of fast/general-purpose or deep-reasoning models?
 - Where can developers see real usage signals, warnings, limits, and model cost indicators before changing models?
+- Which usage or model-control entry point is most visible in your environment: VS Code status area, Copilot CLI `/usage`, `/context`, `/model`, or GitHub billing/settings?
 
 ### 4. Context Windows, Autonomy Spectrum, and Delegation Guardrails (18 min)
 

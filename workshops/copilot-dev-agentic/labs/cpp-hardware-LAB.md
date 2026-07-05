@@ -12,7 +12,8 @@ Before starting, download or open the C++ / Hardware Developer Skill from the wo
 
 **📋 Objective**: Create a repo-local skill package that instructs Copilot how to behave for recurring embedded C++ review work.
 
-1. Create the skill folder and file. In VS Code, you can right-click the Explorer and create folders manually, or run:
+1. Open VS Code Chat or Copilot CLI in the embedded C++ repository. If you use VS Code, open Chat from the Activity Bar or Command Palette; if you use Copilot CLI, open a terminal at the repository root and start interactive mode with `copilot`.
+2. Create the skill folder and file. In VS Code, you can right-click the Explorer and create folders manually, or run:
 
 ```powershell
 New-Item -ItemType Directory -Force -Path .github\skills\embedded-cpp-review
@@ -25,13 +26,13 @@ If you cannot write to the repo during class, create the same path in your proje
 .github/skills/embedded-cpp-review/SKILL.md
 ```
 
-2. Use this strong prompt to generate content for `.github/skills/embedded-cpp-review/SKILL.md` as a Copilot behavior package, not a lab. Paste the result into the file or into your project-notes draft.
+3. Use this strong prompt to generate content for `.github/skills/embedded-cpp-review/SKILL.md` as a Copilot behavior package, not a lab. Paste the result into the file or into your project-notes draft.
 
 ```text
 Create a repo-local Copilot skill for embedded C++ review. Write it as Copilot-facing behavior instructions, not a participant lab. Include activation criteria, preferred tools and context, fixed-width integer rules, volatile/register review checks, dynamic allocation restrictions, safety gates, output contract, validation evidence, and stop conditions. Keep it focused on review and planning before edits.
 ```
 
-3. Compare the generated draft to the downloaded C++ / Hardware Developer Skill using this checklist.
+4. Compare the generated draft to the downloaded C++ / Hardware Developer Skill using this checklist.
 
 ```markdown
 # Embedded C++ Skill Review Checklist
@@ -44,7 +45,7 @@ Create a repo-local Copilot skill for embedded C++ review. Write it as Copilot-f
 - The skill does not include secrets, board credentials, customer identifiers, or proprietary datasheet excerpts.
 ```
 
-4. Edit the draft to tighten any unsafe language that implies generated low-level code can be trusted without build, static analysis, simulator, or hardware validation.
+5. Edit the draft to tighten any unsafe language that implies generated low-level code can be trusted without build, static analysis, simulator, or hardware validation.
 
 **🛡️ Safety checkpoint**: Do not store secrets, board credentials, customer identifiers, or proprietary datasheet excerpts in memory or skill files.
 
@@ -61,7 +62,8 @@ Create a repo-local Copilot skill for embedded C++ review. Write it as Copilot-f
 
 **📋 Objective**: Draft a custom agent handoff for embedded C++ modernization with explicit tool and approval boundaries.
 
-1. Create the agent folder and file. In VS Code, you can right-click the Explorer and create folders manually, or run:
+1. Open VS Code Chat or Copilot CLI and keep the C++ / Hardware Developer Skill visible in a browser tab or editor pane.
+2. Create the agent folder and file. In VS Code, you can right-click the Explorer and create folders manually, or run:
 
 ```powershell
 New-Item -ItemType Directory -Force -Path .github\agents
@@ -74,13 +76,13 @@ If you cannot write to the repo during class, create the same path in your proje
 .github/agents/embedded-cpp-modernizer.agent.md
 ```
 
-2. Ask Copilot to draft `.github/agents/embedded-cpp-modernizer.agent.md`.
+3. Ask Copilot to draft `.github/agents/embedded-cpp-modernizer.agent.md`.
 
 ```text
 Use the C++ / Hardware Developer Skill as the domain behavior source. Draft a custom agent definition for embedded C++ modernization. It may inspect files, propose plans, and run approved build or test commands. It must not flash hardware, change compiler flags, modify register behavior, or edit production code without explicit approval. Include required evidence and stop conditions.
 ```
 
-3. Add this tool-risk map below the draft and mark each possible tool use as low, medium, or high risk.
+4. Add this tool-risk map below the draft and mark each possible tool use as low, medium, or high risk.
 
 ```markdown
 # Embedded C++ Tool-Risk Map

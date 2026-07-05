@@ -27,17 +27,18 @@ Classify this guidance into strong-prompt fields, instruction, memory, and skill
 
 Expected result: you should get Task, Scope, Constraints, Definition of Done, and Off-Ramp fields, plus separate instruction, memory, and skill file candidates.
 
-1. Pick one deterministic coding task in your repo, such as improving guess validation, scoring, feedback messages, or another bounded behavior learners can verify quickly.
-2. Write the task first as a strong prompt with these fields: Task, Scope, Constraints, Definition of Done, and Off-Ramp.
-3. Classify any durable team rule into instructions, any stable non-sensitive reusable fact into memory, and any repeatable execution pattern into a skill.
-4. Create the skill folder and file. In VS Code, you can right-click the Explorer and create folders manually, or run:
+1. Open VS Code Chat or Copilot CLI in the repository you used for Module 1. If you use VS Code, open Chat from the Activity Bar or Command Palette; if you use Copilot CLI, open a terminal at the repository root and start interactive mode with `copilot`.
+2. Pick one deterministic coding task in your repo, such as improving guess validation, scoring, feedback messages, or another bounded behavior learners can verify quickly.
+3. Write the task first as a strong prompt with these fields: Task, Scope, Constraints, Definition of Done, and Off-Ramp.
+4. Classify any durable team rule into instructions, any stable non-sensitive reusable fact into memory, and any repeatable execution pattern into a skill.
+5. Create the skill folder and file. In VS Code, you can right-click the Explorer and create folders manually, or run:
 
 ```powershell
 New-Item -ItemType Directory -Force -Path .github\skills\copilot-quest-guessing
 New-Item -ItemType File -Force -Path .github\skills\copilot-quest-guessing\SKILL.md
 ```
 
-5. Paste this starter template into `.github/skills/copilot-quest-guessing/SKILL.md`.
+6. Paste this starter template into `.github/skills/copilot-quest-guessing/SKILL.md`.
 
 ```markdown
 # Copilot Quest Guessing Skill
@@ -72,16 +73,16 @@ Use this skill when changing guess validation, scoring, feedback messages, or gu
 - Ask before editing unrelated scoring, UI, or persistence behavior.
 ```
 
-6. Ask Copilot to improve the draft while keeping it a skill, not a lab:
+7. Ask Copilot to improve the draft while keeping it a skill, not a lab:
 
 ```text
 Review this SKILL.md draft as a repo-local Copilot skill. Make it beginner-friendly, focused on guess validation work, and explicit about scope, constraints, definition of done, stop conditions, and acceptance gates. Do not add secrets, private data, or broad tool permissions.
 ```
 
-7. Review the result. Confirm it includes target scope, task, constraints, definition of done, off-ramp, and at least one explicit acceptance gate such as "stop if tests fail" or "ask before changing dependencies."
-8. Use the Ask/Plan/Agent decision matrix to choose an execution mode for the task: Ask for low complexity, Plan for medium complexity, or Agent for high complexity with branching evidence.
-9. Run the task once using the chosen mode and capture the evidence required by your definition of done.
-10. Create `.github/skills/copilot-quest-guessing/notes.md` and paste this review note template.
+8. Review the result. Confirm it includes target scope, task, constraints, definition of done, off-ramp, and at least one explicit acceptance gate such as "stop if tests fail" or "ask before changing dependencies."
+9. Use the Ask/Plan/Agent decision matrix to choose an execution mode for the task: Ask for low complexity, Plan for medium complexity, or Agent for high complexity with branching evidence.
+10. Run the task once using the chosen mode and capture the evidence required by your definition of done. Evidence can be a copied command output, manual check result, diff summary, or Copilot response excerpt.
+11. Create `.github/skills/copilot-quest-guessing/notes.md` and paste this review note template.
 
 ```markdown
 # Copilot Quest Guessing Skill Notes
@@ -96,7 +97,7 @@ Review this SKILL.md draft as a repo-local Copilot skill. Make it beginner-frien
 - Repeatable behavior kept in `SKILL.md`:
 ```
 
-11. Complete the note so it shows what stayed in instructions and memory rather than inside `SKILL.md`.
+12. Complete the note so it shows what stayed in instructions and memory rather than inside `SKILL.md`.
 
 **🛡️ Safety checkpoint**: Do not place secrets, sensitive data, regulated data, or non-negotiable policy in memory or inside the skill when it should live in instructions.
 
@@ -122,15 +123,16 @@ Draft a two-role handoff for implementing guess feedback and verifying edge case
 
 Expected result: you should get a simple implementer-to-verifier contract with visible evidence expectations and explicit tool boundaries.
 
-1. Choose a task that can be split into two independent subtasks, such as implementing guess feedback while separately validating test coverage or edge-case handling.
-2. Create the custom agent folder and file. In VS Code, you can right-click the Explorer and create folders manually, or run:
+1. Open VS Code Chat or Copilot CLI in the same repository and keep your Module 1 guardrail note nearby.
+2. Choose a task that can be split into two independent subtasks, such as implementing guess feedback while separately validating test coverage or edge-case handling.
+3. Create the custom agent folder and file. In VS Code, you can right-click the Explorer and create folders manually, or run:
 
 ```powershell
 New-Item -ItemType Directory -Force -Path .github\agents
 New-Item -ItemType File -Force -Path .github\agents\copilot-quest-implementer.agent.md
 ```
 
-3. Paste this starter definition into `.github/agents/copilot-quest-implementer.agent.md`, then customize the task names for your repo.
+4. Paste this starter definition into `.github/agents/copilot-quest-implementer.agent.md`, then customize the task names for your repo.
 
 ```markdown
 # Copilot Quest Implementer Agent
@@ -174,7 +176,7 @@ Stop after one failed validation attempt if the cause is unclear, then report th
 - Unresolved risks or follow-up questions
 ```
 
-4. Define a second verifier role in your notes with this checklist.
+5. Define a second verifier role in your notes with this checklist.
 
 ```markdown
 # Copilot Quest Verifier Handoff
@@ -186,9 +188,9 @@ Stop after one failed validation attempt if the cause is unclear, then report th
 - The verifier recommends accept, revise, or stop.
 ```
 
-5. Run the workflow using the implementer role and verifier checklist. Capture one handoff artifact from each role, such as a diff summary, failed-test note, verification checklist, command output, or unresolved-risk list.
-6. If the implementer and verifier disagree, write one decision note with the conflict, evidence reviewed, final decision, and human owner who approved it.
-7. Save the custom agent file and verifier checklist as the Stage 6 workflow kit so Module 3 can reuse it for orchestration of Copilot Quest.
+6. Run the workflow using the implementer role and verifier checklist. Capture one handoff artifact from each role, such as a diff summary, failed-test note, verification checklist, command output, or unresolved-risk list.
+7. If the implementer and verifier disagree, write one decision note with the conflict, evidence reviewed, final decision, and human owner who approved it.
+8. Save the custom agent file and verifier checklist as the Stage 6 workflow kit so Module 3 can reuse it for orchestration of Copilot Quest.
 
 **🛡️ Safety checkpoint**: Treat tool invocation as a control point. Do not accept implementation output without separate verification evidence.
 

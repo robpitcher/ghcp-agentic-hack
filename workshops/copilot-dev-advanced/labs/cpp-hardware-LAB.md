@@ -95,19 +95,63 @@ Use the C++ / Hardware Developer Skill as the behavior contract. For an embedded
 - Approval or logging requirement:
 ```
 
-2. Use this prompt to fill the matrix.
+2. Create a safe draft Copilot/agent hook from the VS Code integrated terminal or any repository terminal. This creates `.github\hooks\embedded-cpp-session.json` and writes a session-start log if hooks run in your Copilot CLI or cloud-agent environment.
+
+```powershell
+New-Item -ItemType Directory -Force -Path .github\hooks | Out-Null
+@'
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "mkdir -p logs && echo \"Embedded C++ hook sessionStart $(date -Iseconds)\" >> logs/embedded-cpp-hooks.log",
+        "powershell": "New-Item -ItemType Directory -Force -Path logs | Out-Null; Add-Content -Path logs/embedded-cpp-hooks.log -Value \"Embedded C++ hook sessionStart $(Get-Date -Format o)\"",
+        "cwd": ".",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}
+'@ | Set-Content -Path .github\hooks\embedded-cpp-session.json -Encoding utf8
+```
+
+3. Validate the hook configuration syntax before relying on it.
+
+```powershell
+Get-Content .github\hooks\embedded-cpp-session.json | ConvertFrom-Json | Out-Null
+```
+
+4. Record the hook lifecycle event, file path, validation result, and rollback command in the Hooks row. Use this rollback command if the hook is only a lab draft:
+
+```powershell
+Remove-Item .github\hooks\embedded-cpp-session.json
+```
+
+5. Open the VS Code Extensions view from the Activity Bar or Command Palette command `Extensions: Focus on Extensions View`. Choose one embedded, C++, or hardware-related extension to inspect, but do not install it unless your instructor or organization allows it. Record publisher, version, install or trust signals, permissions or telemetry questions, and disable/uninstall path in the Extension Marketplace row.
+6. Keep MCP conceptual: document where configuration would live for your environment, what embedded tools or context a server would expose, what data boundary changes, and which approval is required. Do not configure a live MCP server in this lab.
+7. Evaluate one deterministic API/CLI option. If GitHub CLI is approved in your environment, run this read-only command from the repository terminal and record the output shape:
+
+```powershell
+gh repo view --json name,visibility,defaultBranchRef
+```
+
+8. Evaluate plugins as supply-chain components. Record where plugin metadata or configuration would be reviewed, provenance or signing/source checks, versioning, rollout scope, telemetry/data-scope questions, and rollback path before any enablement.
+9. Use this prompt to fill the matrix.
 
 ```text
 Use the C++ / Hardware Developer Skill as the domain behavior contract. Create a governance matrix for adding Copilot-adjacent tooling to an embedded C++ workflow. Compare hooks, marketplace extensions, MCP as a governed concept, deterministic API/CLI scripts, and plugins. Include permissions, telemetry, data scope, versioning, rollback, approval gates, and how each option preserves the skill's safety gates.
 ```
 
-3. Add one deterministic API/CLI example that is safer than a custom plugin by completing the Deterministic API/CLI Example section.
+10. Add one deterministic API/CLI example that is safer than a custom plugin by completing the Deterministic API/CLI Example section.
 
 **🛡️ Safety checkpoint**: Plugin and extension enablement can change trust, permissions, telemetry, and data-access boundaries; review provenance before enablement.
 
 ### ✅ Success Criteria
 
 - ✅ Your matrix covers all five integration surfaces.
+- ✅ Your hook row includes configuration path, lifecycle event, validation evidence, and rollback command.
 - ✅ Your API/CLI example is deterministic, approved, observable, and scoped.
 - ✅ Your matrix explains how integration choices preserve or enforce skill behavior.
 - ✅ Your plugin or extension review includes provenance, versioning, rollout, and rollback.

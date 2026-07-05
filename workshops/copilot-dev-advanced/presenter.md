@@ -15,6 +15,8 @@
 - What publisher, provenance, permission, data-scope, and rollback checks should be required before enabling extensions or plugins?
 - When is API/CLI safer and simpler than MCP or a plugin for the same task?
 - How can hooks enforce non-negotiable validation without turning every workflow into a heavy release process?
+- Where should learners see each integration in practice: `.github/hooks/*.json`, VS Code Extensions view, MCP configuration location, a deterministic CLI command, or plugin metadata?
+- What evidence proves an integration is safe enough to keep: validation output, publisher review, approval note, telemetry/data-scope decision, or rollback command?
 
 ### 3. Operations and Day 2 Readiness (35 min)
 

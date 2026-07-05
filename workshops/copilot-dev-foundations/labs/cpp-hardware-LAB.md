@@ -13,15 +13,28 @@ Before starting, download or open the C++ / Hardware Developer Skill from the wo
 **📋 Objective**: Map the Copilot surfaces you can use for a firmware or hardware-facing C++ project and identify safety signals before running generated commands.
 
 1. Open an embedded C++ or firmware-style project in VS Code.
-2. Create a short note named `cpp-foundations-track-notes.md`.
-3. Read the C++ / Hardware Developer Skill sections named `Activation Criteria`, `Context and Tool Preferences`, and `Safety Gates`.
-4. Ask Copilot Chat to apply the skill while identifying useful surfaces.
+2. Create a short note named `cpp-foundations-track-notes.md` and paste this starter table.
+
+```markdown
+# C++ Foundations Track Notes
+
+| Surface | Where I found it | C++ use | Tool or context source | Review gate |
+| --- | --- | --- | --- | --- |
+| VS Code Chat | | | | |
+| Inline assistance | | | | |
+| Copilot CLI | | | | |
+| GitHub.com or browser | | | | |
+| Cloud or background agent if available | | | | |
+```
+
+3. Open the C++ / Hardware Developer Skill from the workshop page. Read the sections named `Activation Criteria`, `Context and Tool Preferences`, and `Safety Gates`.
+4. Open Copilot Chat from the VS Code Activity Bar or Command Palette, then ask Copilot Chat to apply the skill while identifying useful surfaces.
 
 ```text
 Use the C++ / Hardware Developer Skill. I am working in an embedded C++ project. Identify which Copilot surfaces are useful for understanding this codebase: VS Code chat, inline assistance, Copilot CLI, GitHub.com, and cloud or background agents. For each surface, list one safe use, one tool or context source you would prefer, and one review gate.
 ```
 
-5. Ask Copilot CLI for a command explanation before running anything that could change the project.
+5. Open the VS Code integrated terminal or another terminal at the repository root. Ask Copilot CLI for a command explanation before running anything that could change the project.
 
 ```text
 Use the C++ / Hardware Developer Skill output contract. Explain the safest command sequence to inspect this C++ project structure, compiler configuration, and test entry points. Do not run commands that modify files.
@@ -42,20 +55,29 @@ Use the C++ / Hardware Developer Skill output contract. Explain the safest comma
 
 **📋 Objective**: Use Ask, Plan, and Agent mode boundaries to review a small hardware-facing C++ helper without handing over unsafe autonomy.
 
-1. Select a small C++ function, driver helper, HAL wrapper, or register access example.
-2. Ask for explanation first, explicitly invoking the C++ skill output contract.
+1. Open a small C++ function, driver helper, HAL wrapper, or register access example in VS Code.
+2. Select only the function or helper you want reviewed. In Copilot Chat, ask for explanation first, explicitly invoking the C++ skill output contract.
 
 ```text
 Use the C++ / Hardware Developer Skill. Explain this selected C++ hardware-facing helper. Identify inputs, outputs, hardware assumptions, volatile usage, fixed-width types, and any behavior that should be checked against a datasheet. Return Summary, Context used, Build or hardware assumptions, Findings, Risks and safety gates, Recommended next step, Validation evidence or commands, and Open questions. Do not rewrite the code.
 ```
 
-3. Ask for a plan before edits.
+3. Keep the same selection and ask for a plan before edits.
 
 ```text
 Use the C++ / Hardware Developer Skill. Create a safe review plan for improving this helper. Separate issues into correctness, readability, build compatibility, and hardware-validation checks. Do not make code changes.
 ```
 
-4. Add a note that describes when Agent mode would be acceptable and when it would be too risky.
+4. Add this Agent-mode decision note to `cpp-foundations-track-notes.md`.
+
+```markdown
+### Agent Mode Decision
+
+- Safe Agent mode use:
+- Too risky for Agent mode:
+- Required validation command or evidence:
+- Human reviewer:
+```
 
 **🛡️ Safety checkpoint**: Agent mode should not edit hardware-facing code unless scope, validation commands, and human review gates are explicit.
 
@@ -72,14 +94,26 @@ Use the C++ / Hardware Developer Skill. Create a safe review plan for improving 
 
 **📋 Objective**: Reduce noisy prompting by preparing build context and choosing the right model depth for C++ work.
 
-1. Use the skill's `Context and Tool Preferences` section to identify whether the project has `compile_commands.json`, CMake files, or another build configuration.
-2. If the project uses CMake, copy this command into your notes as the preferred setup command.
+1. Use VS Code Explorer or Search to look for `compile_commands.json`, `CMakeLists.txt`, `Makefile`, or another build configuration.
+2. Use the skill's `Context and Tool Preferences` section to identify which discovered file is the best context source for Copilot.
+3. Add this build-context note to `cpp-foundations-track-notes.md`.
+
+```markdown
+### Build Context
+
+- Build configuration found:
+- Best context file or folder:
+- Why this helps Copilot:
+- Command that is safe to copy into notes:
+```
+
+4. If the project uses CMake, copy this command into your notes as the preferred setup command.
 
 ```powershell
 cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 ```
 
-3. Ask Copilot to classify three C++ tasks by model depth.
+5. Ask Copilot to classify three C++ tasks by model depth.
 
 ```text
 Use the C++ / Hardware Developer Skill. For an embedded C++ project, classify these tasks as fast/general model, auto mode, or deeper reasoning model: explain a small function, plan modernization of a driver, diagnose a cross-file build failure. Explain the token and context tradeoff for each and name the narrowest useful context source.
@@ -100,7 +134,20 @@ Use the C++ / Hardware Developer Skill. For an embedded C++ project, classify th
 
 **📋 Objective**: Draft guardrails for future agentic C++ work without creating agent or skill files in this Foundations module.
 
-1. Create a guardrail draft in your notes.
+1. Add this guardrail draft section to `cpp-foundations-track-notes.md`.
+
+```markdown
+### Future Embedded Agent Guardrails
+
+- Allowed tasks:
+- Disallowed tasks:
+- Required approvals:
+- Validation commands:
+- Hardware-safety stop conditions:
+- Evidence the agent must return:
+- Human embedded engineer stop conditions:
+```
+
 2. Use this prompt to structure it.
 
 ```text

@@ -288,6 +288,18 @@ All slide images live in `public/images/<workshop-folder-name>/`.
 - Store section discussion prompts in `presenter.md` instead of `*-workshop.md`
 - Slide presenter notes provide talk-track guidance, not repeat slide content
 
+## Show/Tell Setup and Discovery Standard
+
+Labs and demos must teach learners where to find and how to safely use the concept, not only define it. When a workshop asks learners to create, draft, fill, compare, save, run, review, find, set up, or evaluate something, include the concrete artifact path, VS Code surface, Command Palette command, integrated terminal command, Copilot CLI command, GitHub UI location, starter template, expected evidence, and pass/fail or rollback criteria as applicable.
+
+For advanced integration surfaces:
+
+- **Copilot/agent hooks**: show where hook configuration lives, which lifecycle event is used, one safe setup or discovery path, validation evidence that the hook ran, and how to disable or roll it back.
+- **Extension Marketplace**: show where to open the marketplace or extension details, what publisher/version/trust/permission/telemetry signals to inspect, and how to disable or uninstall.
+- **Plugins**: require provenance, signing or source, versioning, rollout, telemetry/data-scope, and rollback checks before enablement.
+- **MCP**: keep setup conceptual unless the workshop source explicitly adds a server-specific walkthrough; identify where configuration would live, what tools/context would be exposed, which data boundary changes, and what approval is required.
+- **API/CLI**: provide the exact command or endpoint pattern, expected inputs and outputs, audit evidence, approval/logging requirements, and why it is safer or more observable than a broader integration.
+
 ## Git Workflow
 
 - The `main` branch is protected — all changes must go through a pull request

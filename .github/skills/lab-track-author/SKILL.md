@@ -27,6 +27,7 @@ The artifact split is strict:
 | Same concepts | Test and practice the same module concepts taught by the shared slides. |
 | No switching | Treat the selected skill track as a workshop-level choice, not a per-module toggle. |
 | Beginner explicit | Every create, save, fill, compare, review, or run instruction must name the artifact, path, table, checklist, command, or evidence the participant should produce. |
+| Show where/how | When a lab teaches a Copilot surface, integration, hook, plugin, MCP boundary, API/CLI, or marketplace extension, show where the learner finds it, how they safely set up or evaluate it, how they validate it, and how they disable or roll it back. |
 
 ## Track Creation Workflow
 
@@ -69,6 +70,9 @@ workshops\<module>\quizzes\<skill-slug>-QUIZ.md
 - Write labs for beginners: do not say only "create a skill," "draft an agent," "fill a matrix," or "save a note." Provide the exact file path, folder creation command or VS Code action, starter template, expected table/checklist fields, and where to save the result.
 - When a lab asks participants to compare or review something, include the comparison checklist or table directly in the lab.
 - When a lab asks participants to capture evidence, name the evidence type: command output, diff summary, validation result, approval note, unresolved-risk list, or rollback decision.
+- When a lab introduces a product surface or integration, include the learner entry point: VS Code Activity Bar, Command Palette command, integrated terminal command, Copilot CLI command, GitHub UI location, configuration file path, or official marketplace/details page.
+- For hooks, plugins, Extension Marketplace, MCP, and API/CLI examples, include setup or discovery steps only when the current module teaches that concept. Provide validation evidence and disable, uninstall, or rollback steps before asking learners to rely on the integration.
+- Keep MCP as a governed concept unless the source workshop explicitly adds a server-specific walkthrough. If a lab mentions MCP, have learners document where configuration would live, what tools/context would be exposed, which data boundary changes, and what approval is required.
 - Keep copyable templates compatible with rendered lab navigation: avoid `##` headings inside fenced templates unless they are intended to become page-level lab headings.
 
 ## Beginner Clarity Gate
@@ -84,8 +88,23 @@ Before publishing a skill-track lab, trace every participant action through this
 | Save | File name, location, and content template. |
 | Run | Copyable command and expected evidence to capture. |
 | Review | Specific pass/fail criteria, safety gate, or decision options. |
+| Find | Exact product surface, menu, command, UI location, or repository path. |
+| Set up | Copyable command or configuration path, expected result, validation check, and rollback or disable step. |
+| Evaluate | Trust, permission, provenance, data-scope, version, telemetry, validation, and rollback criteria. |
 
 If an action cannot be traced to a concrete artifact or evidence item, rewrite the step before shipping the lab.
+
+## Advanced Surface Walkthrough Gate
+
+For advanced skill-track labs that mention integration surfaces, require this minimum walkthrough detail:
+
+| Surface | Required learner walkthrough |
+|---------|------------------------------|
+| Copilot/agent hooks | Where the hook configuration lives, one safe setup or discovery path, what lifecycle event is involved, how to validate that it ran, and how to disable or roll it back. |
+| Extension Marketplace | Where to open the marketplace, which publisher/version/install or trust signals to inspect, what permissions or telemetry questions to ask, and how to disable or uninstall. |
+| Plugins | Where plugin metadata or configuration is found, provenance/version/signing or source checks, rollout decision, and rollback path. |
+| MCP | Configuration location and exposed tools/context as a governance review; no live server setup unless the workshop source explicitly requires it. |
+| API/CLI | Exact command or endpoint pattern, expected inputs/outputs, approval/logging requirements, and why it is safer or more observable than a broader integration. |
 
 ## Quiz Authoring Checklist
 
