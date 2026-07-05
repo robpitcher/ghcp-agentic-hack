@@ -46,11 +46,11 @@ function plainHeadingText(value: string): string {
     previous = current
     current = current
       .replace(/<[^>]*>/g, '')
-      .replace(/&amp;/g, '&')
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
       .replace(/&quot;/g, '"')
       .replace(/&#39;/g, "'")
+      .replace(/&amp;/g, '&')
   } while (current !== previous)
 
   return current
