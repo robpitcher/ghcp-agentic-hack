@@ -1,42 +1,59 @@
 ---
-import Base from '../../layouts/Base.astro'
-import { readdirSync, existsSync } from 'node:fs'
+import Base from '../../../../layouts/Base.astro'
+import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { parseQuizMarkdown, type Question } from '../../lib/quiz'
+import { parseQuizMarkdown, type Question } from '../../../../lib/quiz'
+import { resolveModuleSkillTracks, workshopMeta, type ModuleSkillTrack } from '../../../../data/workshops'
+
+interface TrackQuizProps {
+  questions: Question[]
+  title: string
+  moduleLabel: string
+  track: ModuleSkillTrack
+}
 
 export function getStaticPaths() {
   const workshopsDir: string = __WORKSHOPS_DIR__
   const showDrafts: boolean = __SHOW_DRAFTS__
-  const paths: { params: { workshop: string }; props: { questions: Question[]; title: string } }[] = []
+  const paths: { params: { workshop: string; track: string }; props: TrackQuizProps }[] = []
 
-  for (const dir of readdirSync(workshopsDir, { withFileTypes: true }).filter(d => d.isDirectory())) {
-    const dirPath = resolve(workshopsDir, dir.name)
-    const isDraft = existsSync(resolve(dirPath, '.draft'))
-    if (isDraft && !showDrafts) continue
+  for (const meta of Object.values(workshopMeta)) {
+    for (const module of meta.modules ?? []) {
+      const moduleDir = resolve(workshopsDir, module.folder)
+      if (!existsSync(moduleDir)) continue
+      if (!showDrafts && existsSync(resolve(moduleDir, '.draft'))) continue
 
-    const files = readdirSync(dirPath)
-    const quizFile = files.find(f => f.endsWith('-QUIZ.md'))
-    if (!quizFile) continue
+      for (const track of resolveModuleSkillTracks(workshopsDir, module.folder).filter(candidate => candidate.slug !== 'general' && candidate.quizPath)) {
+        const { questions, title } = parseQuizMarkdown(track.quizPath!)
+        if (questions.length === 0) continue
 
-    const { questions, title } = parseQuizMarkdown(resolve(dirPath, quizFile))
-
-    if (questions.length > 0) {
-      paths.push({
-        params: { workshop: dir.name },
-        props: { questions, title }
-      })
+        paths.push({
+          params: { workshop: module.folder, track: track.slug },
+          props: { questions, title, moduleLabel: module.label, track }
+        })
+      }
     }
   }
+
   return paths
 }
 
-const { questions, title } = Astro.props
+const { questions, title, moduleLabel, track } = Astro.props
+const base = import.meta.env.BASE_URL
 ---
 
 <Base title={title}>
   <div class="quiz-container">
+    <div class="track-banner">
+      <p class="track-eyebrow">{moduleLabel} skill-track quiz</p>
+      <h1>{track.icon} {title}</h1>
+      <p>{track.description}</p>
+      {track.skill && (
+        <a href={`${base}copilot-dev-training/skills/${track.skill.slug}/`} class="track-skill-link">Review required skill guidance</a>
+      )}
+    </div>
+
     <div class="quiz-header">
-      <h1 class="quiz-title">{title}</h1>
       <p class="quiz-subtitle">{questions.length} questions · Select an answer for each, then check your score</p>
     </div>
 
@@ -79,23 +96,50 @@ const { questions, title } = Astro.props
 
 <style>
   .quiz-container {
-    max-width: 720px;
+    max-width: 760px;
     margin: 0 auto;
     padding: 24px 0 64px;
   }
-  .quiz-header { margin-bottom: 32px; }
-  .quiz-title {
-    font-size: clamp(24px, 4vw, 36px);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    color: var(--text-1);
-    margin-bottom: 8px;
+  .track-banner {
+    margin-bottom: 24px;
+    padding: 24px;
+    border: 1px solid rgba(9, 105, 218, 0.22);
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(9, 105, 218, 0.08), rgba(9, 105, 218, 0.03));
   }
+  .track-eyebrow {
+    color: #0969da;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin: 0 0 6px;
+    text-transform: uppercase;
+  }
+  .track-banner h1 {
+    color: var(--text-1);
+    font-size: clamp(24px, 4vw, 36px);
+    line-height: 1.1;
+    margin: 0 0 8px;
+  }
+  .track-banner p {
+    color: var(--text-2);
+    margin: 0 0 14px;
+  }
+  .track-skill-link {
+    display: inline-block;
+    border-radius: 6px;
+    background: #0969da;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 14px;
+    text-decoration: none;
+  }
+  .quiz-header { margin-bottom: 32px; }
   .quiz-subtitle {
     font-size: 15px;
     color: var(--text-2);
   }
-
   .quiz-question {
     position: relative;
     background: var(--bg-soft);
@@ -107,7 +151,6 @@ const { questions, title } = Astro.props
   }
   .quiz-question.correct { border-color: #3fb950; }
   .quiz-question.incorrect { border-color: #f85149; }
-
   .question-number {
     position: absolute;
     left: 20px;
@@ -125,7 +168,6 @@ const { questions, title } = Astro.props
   }
   .quiz-question.correct .question-number { background: rgba(63,185,80,0.2); color: #3fb950; }
   .quiz-question.incorrect .question-number { background: rgba(248,81,73,0.2); color: #f85149; }
-
   .question-text {
     font-size: 16px;
     font-weight: 600;
@@ -133,9 +175,7 @@ const { questions, title } = Astro.props
     margin: 0 0 16px;
     line-height: 1.4;
   }
-
   .options-list { display: flex; flex-direction: column; gap: 8px; }
-
   .option-label {
     display: flex;
     align-items: center;
@@ -148,7 +188,6 @@ const { questions, title } = Astro.props
     font-size: 14px;
   }
   .option-label:hover { border-color: var(--text-2); background: rgba(0,0,0,0.03); }
-
   .option-radio {
     position: absolute;
     opacity: 0;
@@ -161,7 +200,6 @@ const { questions, title } = Astro.props
     border-color: var(--brand);
   }
   .option-radio:checked ~ .option-text { font-weight: 600; }
-
   .option-letter {
     width: 28px;
     height: 28px;
@@ -176,14 +214,10 @@ const { questions, title } = Astro.props
     transition: background 0.15s, border-color 0.15s, color 0.15s;
   }
   .option-text { color: var(--text-1); }
-
-  /* Correct/incorrect option highlighting */
   .option-label.is-correct { border-color: #3fb950; background: rgba(63,185,80,0.08); }
   .option-label.is-correct .option-letter { background: #3fb950; color: #fff; border-color: #3fb950; }
   .option-label.is-wrong { border-color: #f85149; background: rgba(248,81,73,0.08); }
   .option-label.is-wrong .option-letter { background: #f85149; color: #fff; border-color: #f85149; }
-
-  /* Feedback */
   .question-feedback {
     margin-top: 12px;
     padding: 10px 14px;
@@ -198,8 +232,6 @@ const { questions, title } = Astro.props
   .quiz-question.incorrect .question-feedback { background: rgba(248,81,73,0.08); color: #f85149; }
   .feedback-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
   .feedback-text { color: var(--text-1); }
-
-  /* Actions */
   .quiz-actions {
     display: flex;
     gap: 12px;
@@ -218,8 +250,6 @@ const { questions, title } = Astro.props
   .quiz-btn:hover { opacity: 0.85; }
   .quiz-btn-primary { background: var(--brand); color: #fff; }
   .quiz-btn-secondary { background: var(--bg-soft); color: var(--text-1); border: 1px solid var(--border); }
-
-  /* Score */
   .quiz-score {
     text-align: center;
     margin-top: 32px;
@@ -232,8 +262,6 @@ const { questions, title } = Astro.props
   .score-value { font-size: 48px; font-weight: 800; color: var(--brand); }
   .score-total { font-size: 20px; color: var(--text-2); }
   .score-label { font-size: 14px; color: var(--text-2); margin-top: 4px; }
-
-  /* Locked state after check */
   .quiz-form.locked .option-label { pointer-events: none; }
 </style>
 
@@ -251,19 +279,16 @@ const { questions, title } = Astro.props
       const answer = q.getAttribute('data-answer') || '';
       const explanation = q.getAttribute('data-explanation') || '';
       const selected = (q.querySelector('input[type="radio"]:checked') as HTMLInputElement)?.value || '';
-
       const isCorrect = selected === answer;
       q.classList.add(isCorrect ? 'correct' : 'incorrect');
       if (isCorrect) correct++;
 
-      // Highlight correct/wrong options
       q.querySelectorAll('.option-label').forEach((label) => {
         const letter = label.getAttribute('data-letter');
         if (letter === answer) label.classList.add('is-correct');
         else if (letter === selected && !isCorrect) label.classList.add('is-wrong');
       });
 
-      // Show feedback
       const feedback = q.querySelector('.question-feedback') as HTMLDivElement;
       const icon = feedback.querySelector('.feedback-icon') as HTMLDivElement;
       const text = feedback.querySelector('.feedback-text') as HTMLDivElement;
@@ -272,7 +297,6 @@ const { questions, title } = Astro.props
       feedback.hidden = false;
     });
 
-    // Show score
     const scoreValue = scoreEl.querySelector('.score-value') as HTMLSpanElement;
     scoreValue.textContent = String(correct);
     scoreEl.hidden = false;

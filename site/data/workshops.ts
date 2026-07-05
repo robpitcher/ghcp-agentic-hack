@@ -6,6 +6,16 @@ export interface ModuleMeta {
   label: string
   desc: string
   icon: string
+  skillTracks?: SkillTrackMeta[]
+}
+
+export interface SkillTrackMeta {
+  slug: string
+  label: string
+  description: string
+  icon: string
+  skillSlug?: string
+  audience?: string
 }
 
 export interface AgendaItem {
@@ -41,15 +51,48 @@ export interface TechnologySkill {
   downloadFileName: string
 }
 
+export interface ModuleSkillTrack extends SkillTrackMeta {
+  labPath?: string
+  quizPath?: string
+  skill?: TechnologySkill
+}
+
 export const workshopMeta: Record<string, WorkshopMeta> = {
   'copilot-dev-training': {
     label: 'GitHub Copilot Dev Hack',
     desc: 'GitHub Copilot Developer Training — foundations, agentic patterns, advanced operations, and optional technology skills.',
     icon: '🎓',
     modules: [
-      { folder: 'copilot-dev-foundations', label: 'Module 1: Foundations', desc: 'Copilot surfaces, VS Code chat & CLI, modes, tokens & AIC billing, model routing, context windows, autonomy & custom agents', icon: '🎓' },
-      { folder: 'copilot-dev-agentic', label: 'Module 2: Agentic Patterns', desc: 'Instructions & memory, strong prompts, agents & skills, agentic loops, tools, background & cloud agents, /init, instruction layering', icon: '🤖' },
-      { folder: 'copilot-dev-advanced', label: 'Module 3: Advanced Topics', desc: 'Multiagents & Squad, subagents & fleet, hooks, MCP, APIs/CLI & plugins, extension marketplace, debugging & deploying agents', icon: '🔬' }
+      {
+        folder: 'copilot-dev-foundations',
+        label: 'Module 1: Foundations',
+        desc: 'Copilot surfaces, VS Code chat & CLI, modes, tokens & AIC billing, model routing, context windows, autonomy & custom agents',
+        icon: '🎓',
+        skillTracks: [
+          { slug: 'general', label: 'General / Core', description: 'Use the baseline module lab and quiz without technology-specific examples.', icon: '🎓' },
+          { slug: 'cpp-hardware', label: 'C++ / Hardware', description: 'Practice the shared concepts with embedded C++ setup, code review, and hardware-safety examples.', icon: '🔧', skillSlug: 'cpp-hardware', audience: 'Hardware, firmware, and embedded C++ developers' }
+        ]
+      },
+      {
+        folder: 'copilot-dev-agentic',
+        label: 'Module 2: Agentic Patterns',
+        desc: 'Instructions & memory, strong prompts, agents & skills, agentic loops, tools, background & cloud agents, /init, instruction layering',
+        icon: '🤖',
+        skillTracks: [
+          { slug: 'general', label: 'General / Core', description: 'Use the baseline module lab and quiz without technology-specific examples.', icon: '🎓' },
+          { slug: 'cpp-hardware', label: 'C++ / Hardware', description: 'Create repo-local guidance and agent handoffs for embedded C++ modernization work.', icon: '🔧', skillSlug: 'cpp-hardware', audience: 'Hardware, firmware, and embedded C++ developers' }
+        ]
+      },
+      {
+        folder: 'copilot-dev-advanced',
+        label: 'Module 3: Advanced Topics',
+        desc: 'Multiagents & Squad, subagents & fleet, hooks, MCP, APIs/CLI & plugins, extension marketplace, debugging & deploying agents',
+        icon: '🔬',
+        skillTracks: [
+          { slug: 'general', label: 'General / Core', description: 'Use the baseline module lab and quiz without technology-specific examples.', icon: '🎓' },
+          { slug: 'cpp-hardware', label: 'C++ / Hardware', description: 'Apply advanced orchestration and governance choices to firmware and hardware-facing workflows.', icon: '🔧', skillSlug: 'cpp-hardware', audience: 'Hardware, firmware, and embedded C++ developers' }
+        ]
+      }
     ],
     prerequisites: [
       'VS Code — latest stable version installed',
@@ -162,6 +205,49 @@ export function discoverWorkshopSkills(workshopsDir: string, workshopName: strin
     .sort((a, b) => a.order - b.order || a.name.localeCompare(b.name))
 }
 
+export function moduleMetaByFolder(folder: string): ModuleMeta | undefined {
+  for (const meta of Object.values(workshopMeta)) {
+    const module = meta.modules?.find(candidate => candidate.folder === folder)
+    if (module) return module
+  }
+
+  return undefined
+}
+
+export function parentWorkshopForModule(folder: string): string | undefined {
+  for (const [workshopName, meta] of Object.entries(workshopMeta)) {
+    if (meta.modules?.some(module => module.folder === folder)) return workshopName
+  }
+
+  return undefined
+}
+
+export function resolveModuleSkillTracks(workshopsDir: string, moduleFolder: string): ModuleSkillTrack[] {
+  const module = moduleMetaByFolder(moduleFolder)
+  if (!module?.skillTracks) return []
+
+  const moduleDir = resolve(workshopsDir, moduleFolder)
+  const parentWorkshop = parentWorkshopForModule(moduleFolder)
+  const parentSkills = parentWorkshop ? discoverWorkshopSkills(workshopsDir, parentWorkshop) : []
+
+  return module.skillTracks.map(track => {
+    const labPath = track.slug === 'general'
+      ? findFirstMatchingFile(moduleDir, '-LAB.md')
+      : resolve(moduleDir, 'labs', `${track.slug}-LAB.md`)
+    const quizPath = track.slug === 'general'
+      ? findFirstMatchingFile(moduleDir, '-QUIZ.md')
+      : resolve(moduleDir, 'quizzes', `${track.slug}-QUIZ.md`)
+    const skill = track.skillSlug ? parentSkills.find(candidate => candidate.slug === track.skillSlug) : undefined
+
+    return {
+      ...track,
+      labPath: labPath && existsSync(labPath) ? labPath : undefined,
+      quizPath: quizPath && existsSync(quizPath) ? quizPath : undefined,
+      skill
+    }
+  })
+}
+
 export function parseSkillMarkdown(content: string, fallbackSlug: string): Omit<TechnologySkill, 'slug' | 'sourcePath' | 'downloadFileName'> {
   const { frontmatter, body } = splitFrontmatter(content)
   const titleMatch = body.match(/^#\s+(.+)$/m)
@@ -203,4 +289,11 @@ function titleFromSlug(slug: string): string {
     .filter(Boolean)
     .map(part => part.charAt(0).toUpperCase() + part.slice(1))
     .join(' ')
+}
+
+function findFirstMatchingFile(dirPath: string, suffix: string): string | undefined {
+  if (!existsSync(dirPath)) return undefined
+
+  const file = readdirSync(dirPath).find(candidate => candidate.endsWith(suffix))
+  return file ? resolve(dirPath, file) : undefined
 }

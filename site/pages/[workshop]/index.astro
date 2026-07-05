@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro'
 import { readdirSync, existsSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { discoverWorkshopSkills, workshopMeta, type AgendaDay, type ModuleMeta, type TechnologySkill } from '../../data/workshops'
+import { discoverWorkshopSkills, resolveModuleSkillTracks, workshopMeta, type AgendaDay, type ModuleMeta, type TechnologySkill } from '../../data/workshops'
 
 const base = import.meta.env.BASE_URL
 
@@ -67,6 +67,7 @@ export function getStaticPaths() {
 const { label, desc, icon, hasWorkshop, hasLab, hasSlides, hasQuiz, modules, skills, prerequisites, agenda } = Astro.props
 const { workshop } = Astro.params
 const workshopsDir: string = __WORKSHOPS_DIR__
+const moduleSkillTracks = modules ? resolveModuleSkillTracks(workshopsDir, modules[0].folder) : []
 ---
 
 <Base title={label}>
@@ -79,14 +80,37 @@ const workshopsDir: string = __WORKSHOPS_DIR__
       </div>
     </div>
 
+    {modules && moduleSkillTracks.length > 0 && (
+      <section class="track-selection" aria-labelledby="track-selection-heading">
+        <div class="section-heading-row">
+          <div>
+            <h2 id="track-selection-heading" class="tracks-heading">Choose one skill track</h2>
+            <p class="tracks-sub">Slides stay the same for everyone. Your selected track controls every module lab, quiz, and skill guidance link for this workshop.</p>
+          </div>
+          <span class="tracks-count">{moduleSkillTracks.length} Tracks</span>
+        </div>
+        <div class="track-options" role="list">
+          {moduleSkillTracks.map(track => (
+            <button type="button" class="track-option" data-track-option={track.slug} aria-pressed={track.slug === 'general' ? 'true' : 'false'}>
+              <span class="track-option-icon">{track.icon}</span>
+              <span>
+                <span class="track-option-title">{track.label}</span>
+                {track.audience && <span class="track-option-audience">{track.audience}</span>}
+                <span class="track-option-desc">{track.description}</span>
+              </span>
+            </button>
+          ))}
+        </div>
+      </section>
+    )}
+
     <div class="resource-grid">
       {modules ? (
         modules.map(m => {
           const mDir = resolve(workshopsDir, m.folder)
           const mFiles = existsSync(mDir) ? readdirSync(mDir) : []
-          const mHasLab = mFiles.some((f: string) => f.endsWith('-LAB.md'))
           const mHasSlides = mFiles.some((f: string) => f.endsWith('.slidev.md'))
-          const mHasQuiz = mFiles.some((f: string) => f.endsWith('-QUIZ.md'))
+          const tracks = resolveModuleSkillTracks(workshopsDir, m.folder).filter(track => track.labPath || track.quizPath)
           return (
             <div class="module-card">
               <div class="module-header">
@@ -97,9 +121,17 @@ const workshopsDir: string = __WORKSHOPS_DIR__
                 </div>
               </div>
               <div class="module-links">
-                {mHasLab && <a href={`${base}${m.folder}/lab`} class="module-link module-link-lab">Lab</a>}
                 {mHasSlides && <a href={`${base}${m.folder}/slides/1`} target="_blank" rel="noopener noreferrer" onclick={`window.open(this.href,'_blank','width=1280,height=720,menubar=no,toolbar=no,location=no,status=no');return false;`} class="module-link module-link-slides">Slides</a>}
-                {mHasQuiz && <a href={`${base}${m.folder}/quiz`} class="module-link module-link-quiz">Quiz</a>}
+                {tracks.map(track => (
+                  <div class="module-track-links" data-track-links={track.slug}>
+                    <span class="module-track-label">{track.icon} {track.label}</span>
+                    <div class="module-track-actions">
+                      {track.labPath && <a href={track.slug === 'general' ? `${base}${m.folder}/lab` : `${base}${m.folder}/labs/${track.slug}/`} class="module-link module-link-lab">Lab</a>}
+                      {track.quizPath && <a href={track.slug === 'general' ? `${base}${m.folder}/quiz` : `${base}${m.folder}/quizzes/${track.slug}/`} class="module-link module-link-quiz">Quiz</a>}
+                      {track.skill && <a href={`${base}${workshop}/skills/${track.skill.slug}/`} class="module-link module-link-skill">Skill</a>}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )
@@ -283,6 +315,83 @@ const workshopsDir: string = __WORKSHOPS_DIR__
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
   }
+  .track-selection {
+    border: 1px solid rgba(9, 105, 218, 0.22);
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(9, 105, 218, 0.08), rgba(9, 105, 218, 0.03));
+    margin-bottom: 24px;
+    padding: 24px;
+  }
+  .tracks-heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-1);
+    margin: 0 0 4px;
+  }
+  .tracks-sub {
+    color: var(--text-2);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .tracks-count {
+    padding: 4px 12px;
+    border-radius: 100px;
+    background: rgba(9, 105, 218, 0.1);
+    color: #0969da;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .track-options {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .track-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-soft);
+    color: inherit;
+    cursor: pointer;
+    padding: 16px;
+    text-align: left;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .track-option[aria-pressed="true"] {
+    border-color: #0969da;
+    box-shadow: 0 0 0 2px rgba(9, 105, 218, 0.18);
+  }
+  .track-option-icon {
+    font-size: 26px;
+    line-height: 1;
+  }
+  .track-option-title,
+  .track-option-audience,
+  .track-option-desc {
+    display: block;
+  }
+  .track-option-title {
+    color: var(--text-1);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .track-option-audience {
+    color: #0969da;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .track-option-desc {
+    color: var(--text-2);
+    font-size: 13px;
+    line-height: 1.4;
+  }
   @media (max-width: 960px) {
     .resource-grid { grid-template-columns: repeat(2, 1fr); }
   }
@@ -396,6 +505,29 @@ const workshopsDir: string = __WORKSHOPS_DIR__
     gap: 8px;
     flex-shrink: 0;
   }
+  .module-links {
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .module-track-links {
+    display: none;
+    align-items: center;
+    gap: 8px;
+  }
+  .module-track-links.is-active {
+    display: flex;
+  }
+  .module-track-label {
+    color: var(--text-2);
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .module-track-actions {
+    display: flex;
+    gap: 8px;
+  }
   .module-link,
   .skill-link {
     display: inline-block;
@@ -421,6 +553,10 @@ const workshopsDir: string = __WORKSHOPS_DIR__
   .module-link-quiz {
     background: rgba(191, 135, 0, 0.1);
     color: #9a6700;
+  }
+  .module-link-skill {
+    background: rgba(9, 105, 218, 0.08);
+    color: #0969da;
   }
   .skills-section,
   .prerequisites-section,
@@ -622,6 +758,13 @@ const workshopsDir: string = __WORKSHOPS_DIR__
     .skill-actions {
       width: 100%;
     }
+    .track-options {
+      grid-template-columns: 1fr;
+    }
+    .module-track-links,
+    .module-track-actions {
+      width: 100%;
+    }
     .module-link,
     .skill-link {
       flex: 1;
@@ -632,3 +775,32 @@ const workshopsDir: string = __WORKSHOPS_DIR__
     }
   }
 </style>
+
+<script>
+  const storageKey = 'copilot-dev-training-skill-track';
+  const trackButtons = document.querySelectorAll<HTMLButtonElement>('[data-track-option]');
+  const trackGroups = document.querySelectorAll<HTMLElement>('[data-track-links]');
+
+  function setTrack(track: string) {
+    trackButtons.forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.trackOption === track));
+    });
+    trackGroups.forEach(group => {
+      group.classList.toggle('is-active', group.dataset.trackLinks === track);
+    });
+    window.localStorage.setItem(storageKey, track);
+  }
+
+  if (trackButtons.length > 0) {
+    const availableTracks = Array.from(trackButtons).map(button => button.dataset.trackOption);
+    const storedTrack = window.localStorage.getItem(storageKey);
+    const initialTrack = storedTrack && availableTracks.includes(storedTrack) ? storedTrack : 'general';
+    setTrack(initialTrack);
+
+    trackButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        if (button.dataset.trackOption) setTrack(button.dataset.trackOption);
+      });
+    });
+  }
+</script>
