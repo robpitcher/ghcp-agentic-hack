@@ -8,8 +8,8 @@ The `*-workshop.md` file in each module is authoritative. Labs, quizzes, present
 
 ## Report expectations
 
-- Save module-specific findings as `qa\<module-slug>-qa.md`.
-- Save cross-module learner-journey findings as `qa\curriculum-continuity-qa.md`.
+- Save module-specific findings as `qa/<module-slug>-qa.md`.
+- Save cross-module learner-journey findings as `qa/curriculum-continuity-qa.md`.
 - Classify findings as blocking inaccuracies, consistency gaps, or improvement opportunities.
 - Cite the files and section names that support each finding.
 - Keep reports factual and actionable; do not use reports as a substitute for fixing source content.
