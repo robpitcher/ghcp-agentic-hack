@@ -77,7 +77,12 @@ const trackStorageKey = `${workshop}-skill-track`
       <div>
         <div class="workshop-title-row">
           <h1 class="workshop-title">{label}</h1>
-          {modules && <span id="track-status" class="track-status" hidden></span>}
+          {modules && (
+            <span id="track-status" class="track-status" hidden>
+              <span id="track-status-label"></span>
+              <button type="button" id="track-change-button" class="track-change-button">Change</button>
+            </span>
+          )}
         </div>
         {desc && <p class="workshop-desc">{desc}</p>}
       </div>
@@ -322,6 +327,9 @@ const trackStorageKey = `${workshop}-skill-track`
     margin-bottom: 8px;
   }
   .track-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 5px 10px;
     border-radius: 100px;
     background: rgba(9, 105, 218, 0.1);
@@ -329,6 +337,20 @@ const trackStorageKey = `${workshop}-skill-track`
     font-size: 12px;
     font-weight: 700;
     white-space: nowrap;
+  }
+  .track-change-button {
+    border: 0;
+    border-left: 1px solid rgba(9, 105, 218, 0.22);
+    background: transparent;
+    color: #0969da;
+    cursor: pointer;
+    font: inherit;
+    margin: -2px -2px -2px 0;
+    padding: 2px 0 2px 8px;
+  }
+  .track-change-button:hover,
+  .track-change-button:focus-visible {
+    text-decoration: underline;
   }
   .workshop-desc {
     font-size: 16px;
@@ -829,10 +851,13 @@ const trackStorageKey = `${workshop}-skill-track`
   const workshopPage = document.querySelector<HTMLElement>('.workshop-page');
   const storageKey = workshopPage?.dataset.trackStorageKey || 'workshop-skill-track';
   const statusChip = document.getElementById('track-status') as HTMLSpanElement | null;
+  const statusLabel = document.getElementById('track-status-label') as HTMLSpanElement | null;
+  const changeTrackButton = document.getElementById('track-change-button') as HTMLButtonElement | null;
   const modal = document.getElementById('track-picker') as HTMLDivElement | null;
   const modalTitle = document.getElementById('track-modal-title') as HTMLHeadingElement | null;
   const optionsContainer = document.getElementById('track-modal-options') as HTMLDivElement | null;
-  let activeTrigger: HTMLAnchorElement | null = null;
+  let activeTrigger: HTMLElement | null = null;
+  let pendingNavigation = true;
 
   function getStoredTrack(): string | undefined {
     try {
@@ -849,7 +874,7 @@ const trackStorageKey = `${workshop}-skill-track`
       // Storage can be unavailable in private or restricted browser contexts; routing still works for this click.
     }
     if (statusChip) {
-      statusChip.textContent = `Track: ${track.label}`;
+      if (statusLabel) statusLabel.textContent = `Track: ${track.label}`;
       statusChip.hidden = false;
     }
   }
@@ -868,12 +893,13 @@ const trackStorageKey = `${workshop}-skill-track`
     return options.find(option => option.slug === storedTrack)?.url;
   }
 
-  function openTrackModal(link: HTMLAnchorElement, options: TrackOption[]) {
+  function openTrackModal(link: HTMLElement, options: TrackOption[], navigateAfterSelect = true) {
     if (!modal || !optionsContainer || !modalTitle) return;
     activeTrigger = link;
+    pendingNavigation = navigateAfterSelect;
     const resourceType = link.dataset.resourceType === 'quiz' ? 'quiz' : 'lab';
     const moduleLabel = link.dataset.moduleLabel || 'this module';
-    modalTitle.textContent = `Choose a ${resourceType} track for ${moduleLabel}`;
+    modalTitle.textContent = navigateAfterSelect ? `Choose a ${resourceType} track for ${moduleLabel}` : 'Choose your workshop skill track';
     optionsContainer.replaceChildren(...options.map(option => createTrackChoice(option)));
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
@@ -918,7 +944,11 @@ const trackStorageKey = `${workshop}-skill-track`
     button.append(icon, content);
     button.addEventListener('click', () => {
       setStoredTrack(option);
-      window.location.href = option.url;
+      if (pendingNavigation) {
+        window.location.href = option.url;
+      } else {
+        closeTrackModal();
+      }
     });
     return button;
   }
@@ -928,9 +958,13 @@ const trackStorageKey = `${workshop}-skill-track`
   const storedTrack = getStoredTrack();
   const storedTrackOption = firstOptions.find(option => option.slug === storedTrack);
   if (storedTrackOption && statusChip) {
-    statusChip.textContent = `Track: ${storedTrackOption.label}`;
+    if (statusLabel) statusLabel.textContent = `Track: ${storedTrackOption.label}`;
     statusChip.hidden = false;
   }
+
+  changeTrackButton?.addEventListener('click', () => {
+    if (firstOptions.length > 1) openTrackModal(changeTrackButton, firstOptions, false);
+  });
 
   allResourceLinks.forEach(link => {
     link.addEventListener('click', event => {

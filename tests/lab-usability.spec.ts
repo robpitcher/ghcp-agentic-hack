@@ -107,6 +107,9 @@ test.describe('lab usability', () => {
 
     await page.goto('copilot-dev-training/')
     await expect(page.locator('#track-status')).toContainText('Track: C++ / Hardware')
+    await page.getByRole('button', { name: 'Change' }).click()
+    await expect(page.getByRole('heading', { level: 2, name: 'Choose your workshop skill track' })).toBeVisible()
+    await page.keyboard.press('Escape')
     await page.locator('.module-card').nth(1).getByRole('link', { name: 'Quiz' }).click()
     await expect(page).toHaveURL(/copilot-dev-agentic\/quizzes\/cpp-hardware\/$/)
   })
