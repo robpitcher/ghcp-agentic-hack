@@ -1,8 +1,8 @@
 ---
 name: C++ / Hardware Developer Skill
-description: Instruct GitHub Copilot how to work safely and effectively in C, C++, firmware, embedded systems, hardware abstraction layers, memory-mapped I/O, CMake, compile_commands.json, C++ language-server, and legacy modernization contexts.
+description: Instruct GitHub Copilot how to work safely with embedded C++, firmware, HALs, build context, and hardware-facing review gates.
 icon: 🔧
-audience: Hardware, firmware, and embedded C++ developers
+audience: Embedded C++ developers
 order: 1
 ---
 
