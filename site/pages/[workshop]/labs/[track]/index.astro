@@ -25,7 +25,7 @@ export function getStaticPaths() {
       if (!showDrafts && existsSync(resolve(moduleDir, '.draft'))) continue
 
       for (const track of resolveModuleSkillTracks(workshopsDir, module.folder).filter(candidate => candidate.slug !== 'general' && candidate.labPath)) {
-        const { html, title, toc } = renderLabMarkdown(track.labPath!)
+        const { html, title, toc } = renderLabMarkdown(track.labPath!, { stripTitleHeading: true })
         paths.push({
           params: { workshop: module.folder, track: track.slug },
           props: { html, title, toc, moduleLabel: module.label, track }
@@ -46,8 +46,8 @@ const exerciseCount = toc.filter(t => /exercise|lab\s+\d/i.test(t.text)).length 
   <div class="track-banner">
     <div>
       <p class="track-eyebrow">{moduleLabel} skill-track lab</p>
-      <h1>{track.icon} {track.label}</h1>
-      <p>{track.description}</p>
+      <h1>{track.icon} {title}</h1>
+      <p><strong>{track.label}</strong>: {track.description}</p>
       {track.skill && (
         <a href={`${base}copilot-dev-training/skills/${track.skill.slug}/`} class="track-skill-link">Review required skill guidance</a>
       )}

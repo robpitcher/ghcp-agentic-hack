@@ -9,8 +9,13 @@ export interface LabRenderResult {
   toc: { id: string; text: string }[]
 }
 
-export function renderLabMarkdown(sourcePath: string): LabRenderResult {
+export interface LabRenderOptions {
+  stripTitleHeading?: boolean
+}
+
+export function renderLabMarkdown(sourcePath: string, options: LabRenderOptions = {}): LabRenderResult {
   const toc: { id: string; text: string }[] = []
+  let skippedTitleHeading = false
   const markedInstance = new Marked(
     markedHighlight({
       emptyLangClass: 'hljs',
@@ -26,6 +31,10 @@ export function renderLabMarkdown(sourcePath: string): LabRenderResult {
       heading(token) {
         const plain = plainHeadingText(token.tokens)
         const slug = slugifyHeading(plain)
+        if (options.stripTitleHeading && token.depth === 1 && !skippedTitleHeading) {
+          skippedTitleHeading = true
+          return ''
+        }
         if (token.depth === 2) {
           toc.push({ id: slug, text: plain })
         }

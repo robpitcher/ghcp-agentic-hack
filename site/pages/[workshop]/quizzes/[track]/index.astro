@@ -303,9 +303,15 @@ const base = import.meta.env.BASE_URL
     checkBtn.hidden = true;
     resetBtn.hidden = false;
     form.classList.add('locked');
+    form.querySelectorAll<HTMLInputElement>('input[type="radio"]').forEach(input => {
+      input.disabled = true;
+    });
   });
 
   resetBtn.addEventListener('click', () => {
+    form.querySelectorAll<HTMLInputElement>('input[type="radio"]').forEach(input => {
+      input.disabled = false;
+    });
     form.reset();
     form.classList.remove('locked');
     document.querySelectorAll('.quiz-question').forEach(q => {
