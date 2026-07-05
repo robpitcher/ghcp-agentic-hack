@@ -93,6 +93,24 @@ test.describe('lab usability', () => {
     }
   })
 
+  test('workshop lab and quiz actions use the skill-track picker', async ({ page }) => {
+    await page.goto('copilot-dev-training/')
+
+    await expect(page.getByRole('heading', { level: 1, name: 'GitHub Copilot Dev Hack' })).toBeVisible()
+    await expect(page.getByText('Choose one skill track')).toHaveCount(0)
+    await expect(page.locator('.module-track-label')).toHaveCount(0)
+
+    await page.locator('.module-card').nth(0).getByRole('link', { name: 'Lab' }).click()
+    await expect(page.getByRole('heading', { level: 2, name: 'Choose a lab track for Module 1: Foundations' })).toBeVisible()
+    await page.getByRole('button', { name: /C\+\+ \/ Hardware/ }).click()
+    await expect(page).toHaveURL(/copilot-dev-foundations\/labs\/cpp-hardware\/$/)
+
+    await page.goto('copilot-dev-training/')
+    await expect(page.locator('#track-status')).toContainText('Track: C++ / Hardware')
+    await page.locator('.module-card').nth(1).getByRole('link', { name: 'Quiz' }).click()
+    await expect(page).toHaveURL(/copilot-dev-agentic\/quizzes\/cpp-hardware\/$/)
+  })
+
   for (const lab of labs) {
     test.describe(lab.slug, () => {
       test('renders the lab structure and exercise checkpoints', async ({ page }) => {
