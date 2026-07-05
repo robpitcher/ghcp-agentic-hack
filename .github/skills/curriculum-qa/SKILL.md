@@ -27,12 +27,29 @@ Compare companion files against the workshop source:
 1. Identify the module folder and read the workshop source first.
 2. Extract the workshop sections, lab indicators, safety moments, optimization tips, demos, and key concept list.
 3. Compare LAB exercises against the workshop sequence and verify that every lab has objectives, safety checkpoints, success criteria, copyable prompts or commands, and expected learner artifacts.
-4. Trace every LAB success criterion back to a specific participant instruction, prompt, template field, saved artifact, or safety checkpoint. Flag criteria that are vague, instructor-only, not observable, or not actually requested by the lab steps.
-5. Compare quiz questions against taught concepts. Verify that each question has four options, one answer comment, and an explanation that matches the workshop source.
-6. Compare presenter notes against workshop sections and confirm that discussion prompts do not drift into workshop source files.
-7. Compare Slidev presenter notes against the workshop and lab intent. Verify that every LAB exercise topic is represented in the slide deck through a lab transition, demo note, or presenter note that uses the same key concept language. Flag placeholders, generic notes, missing safety or optimization guidance, and visual-slide issues that need human inspection.
-8. Review the cross-module learner journey from Foundations to Agentic to Advanced.
-9. Save findings as markdown under `qa\`.
+4. Review LAB step clarity. Every instruction that asks participants to create, draft, fill, compare, save, run, or review something must include the exact artifact, path, starter template, table/checklist fields, command, expected evidence, or pass/fail criteria.
+5. Trace every LAB success criterion back to a specific participant instruction, prompt, template field, saved artifact, or safety checkpoint. Flag criteria that are vague, instructor-only, not observable, or not actually requested by the lab steps.
+6. Compare quiz questions against taught concepts. Verify that each question has four options, one answer comment, and an explanation that matches the workshop source.
+7. Compare presenter notes against workshop sections and confirm that discussion prompts do not drift into workshop source files.
+8. Compare Slidev presenter notes against the workshop and lab intent. Verify that every LAB exercise topic is represented in the slide deck through a lab transition, demo note, or presenter note that uses the same key concept language. Flag placeholders, generic notes, missing safety or optimization guidance, and visual-slide issues that need human inspection.
+9. Review the cross-module learner journey from Foundations to Agentic to Advanced.
+10. Save findings as markdown under `qa\`.
+
+## LAB Step Clarity Review
+
+Review labs as if the participant is new to the artifact they are creating. Do not assume they know what belongs in a skill, custom agent, matrix, readiness note, orchestration package, checklist, or QA artifact unless the lab provides a template or exact fields.
+
+| Action verb | Required learner support |
+|-------------|--------------------------|
+| Create | Exact file or folder path, plus a command or clear VS Code Explorer instruction. |
+| Draft | Starter prompt and expected output fields. |
+| Fill | Table or checklist template with required columns or bullets. |
+| Compare | Named sources and a review checklist. |
+| Save | File name, location, and content template. |
+| Run | Copyable command and expected evidence to capture. |
+| Review | Specific pass/fail criteria, safety gate, or decision options. |
+
+Flag a **consistency gap** when a step is understandable to an experienced instructor but leaves beginners to infer the artifact shape, storage location, required fields, or evidence. Flag it as **blocking** when the ambiguity prevents a learner from completing the exercise or when a success criterion claims an artifact exists but no step tells learners how to create it.
 
 ## LAB Success Criteria Traceability
 
@@ -40,8 +57,8 @@ For each LAB exercise, build a quick traceability check:
 
 | Success criterion asks learner to... | Must be backed by... |
 |--------------------------------------|--------------------|
-| Create or save something | A step that names the artifact, file, note, checklist, or package location. |
-| Compare options | A step, table, example, or prompt that gives the options being compared. |
+| Create or save something | A step that names the artifact, file, note, checklist, or package location and provides a starter template when the artifact shape is not obvious. |
+| Compare options | A step, table, example, or prompt that gives the options being compared and the criteria for comparison. |
 | Improve or tighten output | A prompt or instruction that asks for a revision and states what should change. |
 | Make a safety decision | A safety checkpoint or step that identifies the risk and review gate. |
 | Prepare a next-module handoff | A step that names what carries forward and what must not be created yet. |
@@ -101,6 +118,7 @@ Reviewed <files>.
 | Area | Status | Evidence |
 |------|--------|----------|
 | Source-truth alignment | Passing / Gap / Blocking | <specific evidence> |
+| Step clarity | Passing / Gap / Blocking | <specific learner action and supporting artifact/template/evidence> |
 
 ## Findings
 
