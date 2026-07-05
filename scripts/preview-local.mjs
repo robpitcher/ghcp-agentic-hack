@@ -85,7 +85,7 @@ const server = createServer((request, response) => {
 
 server.on('error', error => {
   if (error.code === 'EADDRINUSE') {
-    console.error(`Port ${port} is already in use. Try: npm run preview:local -- --no-build --port=4202`)
+    console.error(`Port ${port} is already in use. Try: npm run preview:local -- --port=4202`)
     process.exit(1)
   }
 
