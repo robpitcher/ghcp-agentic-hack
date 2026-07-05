@@ -125,7 +125,7 @@ New-Item -ItemType Directory -Force -Path .github\hooks | Out-Null
 {
   "version": 1,
   "hooks": {
-    "SessionStart": [
+    "sessionStart": [
       {
         "type": "command",
         "bash": "mkdir -p logs && echo \"Copilot hook sessionStart $(date -Iseconds)\" >> logs/copilot-hooks.log",
@@ -145,7 +145,7 @@ New-Item -ItemType Directory -Force -Path .github\hooks | Out-Null
 Get-Content .github\hooks\copilot-quest-session.json | ConvertFrom-Json | Out-Null
 ```
 
-5. Record the hook lifecycle event `SessionStart`, file path, validation result, and rollback command in the Hooks row. Use this rollback command if the hook is only a lab draft:
+5. Record the hook lifecycle event `sessionStart`, file path, validation result, and rollback command in the Hooks row. Use this rollback command if the hook is only a lab draft:
 
 ```powershell
 Remove-Item .github\hooks\copilot-quest-session.json

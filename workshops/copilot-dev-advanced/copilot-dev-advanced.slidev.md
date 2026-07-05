@@ -158,5 +158,5 @@ background: /images/copilot-dev-advanced/slide-17-30168079.png
 ---
 
 <!--
-This final lab prepares learners to debug, deploy, and demo safely. They should produce a Day 2 plan that includes the workflow pattern, integration choices, validation evidence, fallback path, and final review gate. Close by reminding them that the strongest hack outcome is one they can explain, reproduce, and safely stop.
+This final lab prepares learners to debug, inspect capability surfaces, and choose a deployment path safely. They should produce evidence from the Agent Debug Log, Chat Debug View, or Copilot CLI, map it to the debugging checklist, and record packaging readiness with rollback expectations. Close by reminding them that Day 2 is a separate event; this lab creates reusable evidence and readiness inputs rather than a Day 2 event plan.
 -->

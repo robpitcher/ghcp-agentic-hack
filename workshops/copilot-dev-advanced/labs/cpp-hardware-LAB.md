@@ -103,7 +103,7 @@ New-Item -ItemType Directory -Force -Path .github\hooks | Out-Null
 {
   "version": 1,
   "hooks": {
-    "SessionStart": [
+    "sessionStart": [
       {
         "type": "command",
         "bash": "mkdir -p logs && echo \"Embedded C++ hook sessionStart $(date -Iseconds)\" >> logs/embedded-cpp-hooks.log",
@@ -123,7 +123,7 @@ New-Item -ItemType Directory -Force -Path .github\hooks | Out-Null
 Get-Content .github\hooks\embedded-cpp-session.json | ConvertFrom-Json | Out-Null
 ```
 
-4. Record the hook lifecycle event `SessionStart`, file path, validation result, and rollback command in the Hooks row. Use this rollback command if the hook is only a lab draft:
+4. Record the hook lifecycle event `sessionStart`, file path, validation result, and rollback command in the Hooks row. Use this rollback command if the hook is only a lab draft:
 
 ```powershell
 Remove-Item .github\hooks\embedded-cpp-session.json
