@@ -55,6 +55,8 @@ pip install python-pptx Pillow
 | Convert a PPTX deck | `npm run convert:pptx -- <workshop-folder-name>` | Extracts slide images and writes the `.slidev.md` deck |
 | Combine split PPTX parts | `npm run convert:pptx:parts -- <workshop-folder-name>` | Combines `-part-*` PPTX files into one Slidev deck |
 
+> **Important**: To update one slide image without losing presenter notes, replace the existing PNG under `public/images/<workshop-folder-name>/` and leave the `*.slidev.md` file unchanged. Re-run `convert:pptx` only when you intentionally want to regenerate the whole Slidev deck; conversion overwrites the deck and recreates presenter-note TODO placeholders.
+
 ## Repo layout (what to edit)
 
 ```text

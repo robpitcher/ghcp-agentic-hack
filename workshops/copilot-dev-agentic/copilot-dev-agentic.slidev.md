@@ -2,7 +2,7 @@
 theme: ../../themes/github
 title: "Copilot Dev Agentic"
 info: |
-  Generated from NotebookLM presentation for copilot-dev-agentic
+  Generated from PPTX presentation for copilot-dev-agentic
 ghFooterTitle: "Copilot Dev Agentic"
 ghFooterLabel: ""
 drawings:
@@ -100,7 +100,7 @@ Use this decision slide to map task complexity to Ask, Plan, or Agent. Ask fits 
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-10-ca9ee9f2.png
+background: /images/copilot-dev-agentic/slide-10-d3914032.png
 ---
 
 <!--
@@ -127,7 +127,7 @@ Define tools as the bridge from reasoning to action across files, terminals, tes
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-13-0df2a2a8.png
+background: /images/copilot-dev-agentic/slide-13-d3914032.png
 ---
 
 <!--
@@ -172,7 +172,7 @@ Close the concept section by treating model routing, context budgeting, permissi
 
 ---
 layout: image-full
-background: /images/copilot-dev-agentic/slide-18-d3e3240b.png
+background: /images/copilot-dev-agentic/slide-18-d3914032.png
 ---
 
 <!--

@@ -26,6 +26,16 @@
 			],
 			"gallery": "https://api.mcp.github.com",
 			"version": "1.0.0"
+		},
+		"Canva": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"--registry=https://registry.npmjs.org/",
+				"mcp-remote@latest",
+				"https://mcp.canva.com/mcp"
+			]
 		}
 	}
 }

@@ -51,6 +51,10 @@ WORKSHOPS_DIR = ROOT / "workshops"
 PUBLIC_DIR = ROOT / "public" / "images"
 SOURCE_DIR = ROOT / "source" / "pptx"
 WATERMARK_TEXT = "".join(chr(code) for code in (78, 111, 116, 101, 98, 111, 111, 107, 76, 77))
+NOTES_TODO_PLACEHOLDER = (
+    "<!-- TODO: author presenter notes from the rendered slide image. "
+    "Cover every visible panel/topic and add one audience hook. -->"
+)
 
 
 def remove_footers(prs):
