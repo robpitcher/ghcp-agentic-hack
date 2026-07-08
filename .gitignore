@@ -8,3 +8,4 @@ workshops/*/public
 *.pptx
 playwright-report/
 test-results/
+feedback/

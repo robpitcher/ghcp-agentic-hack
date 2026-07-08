@@ -13,6 +13,7 @@ source/pptx/                 # Input PPTX files for conversion (gitignored)
 site/                        # Astro site — shared metadata in site/data/workshops.ts
 scripts/                     # build-site.mjs, convert-pptx.py
 themes/                      # Slidev theme (github/)
+lessons-learned/             # Durable implementation notes and troubleshooting learnings
 ```
 
 Each module folder contains:
@@ -26,6 +27,10 @@ Parent workshop folders can also contain local technology skills:
 - `skills/<skill-slug>/SKILL.md` — downloadable Copilot-style skill rendered on the workshop detail page
 
 When adding or modifying workshop registration, modules, or skill discovery, update `site/data/workshops.ts` rather than duplicating metadata in Astro pages.
+
+## Lessons Learned
+
+Before changing MCP, tooling, build, deployment, or curriculum workflow behavior, review `lessons-learned\` for relevant prior implementation notes, troubleshooting context, and validated fixes. Add a short lessons-learned note when a repeatable setup issue or workflow discovery would help future contributors avoid rediscovery.
 
 ## Large Files — Always Use `view_range`
 
@@ -274,6 +279,7 @@ All slide images live in `public/images/<workshop-folder-name>/`.
 - The `*-workshop.md` is the **source of truth**; PPTX files are gitignored
 - Run `npm run convert:pptx -- <folder>` to extract images and generate the Slidev file
 - After conversion, replace every `<!-- TODO: author presenter notes ... -->` placeholder by **opening each rendered slide image** and writing talk-track bullets that cover every panel shown (2-3 bullets per topic on two-topic slides), plus one audience hook from `presenter.md`. See the mandatory post-conversion checklist in `.github/instructions/slidev.instructions.md`. The converter does **not** infer notes from the workshop file — NotebookLM merges topics onto single images, so there is no reliable 1:1 mapping.
+- To update one slide visual while preserving presenter notes, replace the corresponding PNG in `public/images/<workshop-folder-name>/` and do **not** re-run `convert:pptx`. If the filename changes, update only that slide's `background:` path in the `.slidev.md` file and leave its existing notes block intact.
 - Python deps: `pip install python-pptx Pillow`
 
 ## Content Guidelines

@@ -245,11 +245,22 @@ background: /images/copilot-dev-foundations/slide-02-a1b2c3d4.png
 ```
 
 Key rules for PPTX-generated decks:
+
 - **Use `layout: image-full`** — this layout renders the background image full-bleed with `background-size: contain`
 - **Use `background:` frontmatter, NOT `<img>` tags** — Slidev's `handleBackground()` calls `resolveAssetUrl()` which prepends `import.meta.env.BASE_URL` at runtime, so images load correctly on subpath deployments (e.g., GitHub Pages)
 - **No text on slides** — the image IS the slide
 - **Presenter notes in `<!-- -->`** — added manually after conversion
 - **One image per slide** — specified in the `background:` frontmatter
+
+### Replacing One PPTX Slide Image
+
+When only one slide visual changes, preserve presenter notes by replacing the existing PNG instead of regenerating the Slidev deck:
+
+1. Export the changed PPTX slide as a PNG at the same dimensions as the existing deck images, typically `1376x768`.
+2. Replace the matching `public/images/<workshop-folder-name>/slide-NN-HASH.png` file without changing its filename.
+3. Leave the slide's `background:` line and `<!-- -->` presenter notes unchanged.
+
+If the image filename changes, update only the affected slide's `background:` path and keep the existing presenter notes block intact. Do not run `npm run convert:pptx -- <workshop-folder-name>` for a single-image replacement because conversion rewrites the deck and recreates note TODO placeholders.
 
 ### Manually-Authored Slides with Images
 
