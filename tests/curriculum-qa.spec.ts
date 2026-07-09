@@ -279,8 +279,9 @@ test.describe('curriculum source-of-truth QA', () => {
     expect(foundationsLab).not.toContain('.github/skills/')
     expect(foundationsLab).not.toContain('.github/agents/')
 
-    expect(agenticLab).toContain('.github/skills/copilot-quest-guessing/skill.md')
-    expect(agenticLab).toContain('.github/agents/copilot-quest-implementer.agent.md')
+    expect(agenticLab).toContain('.github/skills/copilot-quest/skill.md')
+    expect(agenticLab).toContain('.github/agents/copilot-quest.agent.md')
+    expect(agenticLab).toContain('agentic-loop.md')
     expect(agenticLab).toContain('workflow kit')
 
     expect(advancedLab).toContain('orchestration package')

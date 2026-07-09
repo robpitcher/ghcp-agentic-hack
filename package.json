@@ -10,6 +10,7 @@
     "test:labs": "playwright test tests/lab-usability.spec.ts",
     "test:curriculum-qa": "playwright test tests/curriculum-qa.spec.ts",
     "test:labs:participant": "playwright test tests/lab-participant.spec.ts",
+    "test:copilot-cli-session": "playwright test tests/copilot-cli-session.spec.ts",
     "convert:pptx": "python scripts/convert-pptx.py",
     "convert:pptx:parts": "python scripts/convert-pptx.py --parts"
   },

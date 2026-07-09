@@ -2,309 +2,395 @@
 
 ## Overview
 
-This lab extends the **Copilot Quest starter** into a practical Stage 5-6 workflow kit that learners can reuse after class. The exercises mirror the workshop sequence: first separate strong prompts from instructions, memory, and skills while creating a repo-local skill; then create a bounded custom agent and practice tool-control handoffs; finally map background/cloud execution, `/init`, instruction layering, and optimization controls to readiness evidence. Use the Module 1 reusable checklist, prompt asset, and delegation guardrails as starting points.
+This lab turns the Agentic module concepts into one end-to-end **Copilot Quest** workflow. You will create project context, Copilot instructions, memory guidance, a repo-local skill, a custom agent, a simple agentic loop, an implementation plan, validation evidence, and usage/debug evidence.
 
-- **Stage 5**: CLI power-user precision with strong prompts, controlled autonomy, explicit stop conditions, and better Ask/Plan/Agent choices
-- **Stage 6**: Multi-agent orchestration with role-based handoffs, tool boundaries, validation evidence, and conflict resolution
-- **Stage 6 → 7 bridge**: readiness guardrails that test whether the workflow is auditable, policy-aware, observable, and safe to scale
+Choose one surface and stay with it for the full lab:
 
-- **Total time**: ~30 minutes
-- **Prerequisites**:
-  - Module 1 completion
-  - VS Code with GitHub Copilot
-  - Local repository with `.github/` folder access
+| Path | Recommended for | Use when you want |
+|------|-----------------|-------------------|
+| **VS Code Chat** | Most participants | Agent mode, Configure Tools, Agent Customizations, files changed review, Keep/Undo controls, and debug panels in one visible UI |
+| **Copilot CLI** | CLI-ready participants | Terminal-first sessions, `copilot init` or interactive `/init`, `/plan`, `/diff`, `/usage`, `/context`, `/memory`, `/share`, and CLI transcript evidence |
 
-## Exercise 1: Strong Prompt and Stage 5 Skill Creation
+Both paths produce the same required workflow kit:
+
+- `README.md`
+- `PROJECT-PLAN.md`
+- `.github\copilot-instructions.md`
+- `.github\agents\copilot-quest.agent.md`
+- `.github\skills\copilot-quest\SKILL.md`
+- `AGENTIC-LOOP.md`
+- `copilot-quest-vscode-session-notes.md` or `copilot-quest-cli-session.md`
+
+**Total time**: ~30 minutes
+
+**Prerequisites**:
+
+- Module 1 completion
+- VS Code with GitHub Copilot and GitHub Copilot Chat installed and signed in
+- Git installed
+- Optional: GitHub Copilot CLI installed and authenticated if choosing the CLI path
+
+> **Note**: VS Code Chat is the recommended default path. Use the CLI path only if you already have Copilot CLI available and want terminal-first session evidence.
+
+## Exercise 1: Strong Prompt and Stage 5 Surface Selection
 
 **⏱️ Time**: 10 min
-**📋 Objective**: Separate a strong prompt from instructions, memory, and a reusable repo-local skill, then choose Ask, Plan, or Agent based on task complexity
+**📋 Objective**: Create project context before initialization, choose a Chat or CLI execution surface, and prepare a strong prompt boundary for the Copilot Quest workflow.
 
 **Warm-up (try this now)**:
 
 ```text
-Classify this guidance into strong-prompt fields, instruction, memory, and skill fields: "For guess validation changes, keep scope small, run the smallest relevant test, stop if tests fail, and ask before changing dependencies."
+Classify this Copilot Quest task guidance into strong-prompt fields, instruction candidates, memory candidates, and skill candidates: "Build a Wordle-like CLI game with small testable changes, validate duplicate-letter scoring, review every diff, and stop before changing dependencies or broad project structure."
 ```
 
-Expected result: you should get Task, Scope, Constraints, Definition of Done, and Off-Ramp fields, plus separate instruction, memory, and skill file candidates.
+Expected result: you should get Task, Scope, Constraints, Definition of Done, and Off-Ramp fields, plus separate instruction, memory, and skill candidates.
 
-1. Open VS Code Chat or Copilot CLI in the repository you used for Module 1. If you use VS Code, open Chat from the Activity Bar or Command Palette; if you use Copilot CLI, open a terminal at the repository root and start interactive mode with `copilot`.
-2. In VS Code, open the Agent Customizations view so you can see where skills and agents are managed: open Chat, select the Configure gear in the Chat view header, then review the **Skills** section. Record whether you see built-in, extension-provided, or workspace skills.
-3. Use this default Copilot Quest task for the rest of this exercise. If your starter already has some of this behavior, treat the task as an improvement and tighten the existing implementation.
+1. Open VS Code.
+2. Select **File > Open Folder**.
+3. Create or select a folder named `copilot-quest`.
+4. Select **Open**.
+5. In VS Code Explorer, select **New File** and create `README.md`.
+6. Paste this content into `README.md` and save the file:
 
-```text
-Add or improve five-letter guess validation and feedback for the Copilot Quest CLI game. Reject empty guesses, non-alphabetic guesses, and guesses that are not exactly five letters. Return clear user-facing feedback for each invalid case. Do not change unrelated scoring, UI, dependencies, or project structure. Add or update the smallest relevant test or manual check that proves the validation behavior.
+```markdown
+# Copilot Quest
+
+Copilot Quest is a Wordle-like CLI word game used to practice agentic GitHub Copilot workflows.
 ```
 
-4. Ask Copilot to identify the smallest relevant file and test/manual check for this task before writing the strong prompt.
+7. In VS Code Explorer, select **New File** and create `PROJECT-PLAN.md`.
+8. Paste this content into `PROJECT-PLAN.md` and save the file:
 
-```text
-For the Copilot Quest task below, identify the smallest relevant source file and test or manual check. Do not edit files yet.
+```markdown
+# Copilot Quest Project Plan
+
+### Goal
+
+Build Copilot Quest as a small Wordle-like CLI word game that demonstrates agentic GitHub Copilot workflows.
+
+### Initial scope
+
+- Five-letter secret word.
+- Six guesses per round.
+- Per-letter feedback for correct position, present in another position, and absent.
+- Input validation for guess length and allowed characters.
+- Tests for duplicate-letter scoring.
+- README instructions for running and testing the game.
+
+### Copilot setup expectations
+
+- Create or initialize `.github/copilot-instructions.md` after this plan exists so Copilot has project intent.
+- Create a repo-local custom agent for Copilot Quest planning, implementation, review, and testing.
+- Create a repo-local skill that tells Copilot how to behave for Copilot Quest work.
+- Request memory for the durable Copilot Quest scenario when memory is available.
+- Use a simple observe, plan, act, validate, review, and decide loop.
 ```
 
-5. Write the task first as a strong prompt with these fields: Task, Scope, Constraints, Definition of Done, and Off-Ramp.
-6. Classify any durable team rule into instructions, any stable non-sensitive reusable fact into memory, and any repeatable execution pattern into a skill.
-7. Create the skill folder and file. In VS Code, you can use Agent Customizations > Skills as an orientation surface, then create the repo-local file in Explorer. You can right-click the Explorer and create folders manually, or run:
+9. Open the VS Code integrated terminal with **Terminal > New Terminal** and initialize Git:
 
 ```powershell
-New-Item -ItemType Directory -Force -Path .github\skills\copilot-quest-guessing
-New-Item -ItemType File -Force -Path .github\skills\copilot-quest-guessing\SKILL.md
+git init
 ```
 
-8. Paste this starter template into `.github/skills/copilot-quest-guessing/SKILL.md`.
+10. Choose your execution path and record it in your notes.
 
-```markdown
-# Copilot Quest Guessing Skill
+| Choose | If your environment has | First setup action |
+|--------|--------------------------|--------------------|
+| **VS Code Chat** | GitHub Copilot Chat extension signed in | Open Chat, select Agent mode, open **Configure Tools**, and keep **Default Approvals** |
+| **Copilot CLI** | `copilot` command authenticated | Run `copilot init`, then start an interactive CLI session |
 
-Use this skill when changing five-letter guess validation, invalid-guess feedback, or guess-related tests in the Copilot Quest starter.
+11. If you choose **VS Code Chat**, open Chat from the Activity Bar or Command Palette. Select **Agent** mode, open **Configure Tools**, keep **Default Approvals**, and use the `#` picker to inspect focused context such as `#file:README.md` and `#file:PROJECT-PLAN.md`.
+12. If you choose **Copilot CLI**, run this command in the VS Code integrated terminal after `README.md` and `PROJECT-PLAN.md` exist. In an interactive CLI session, `/init` is the equivalent initialization concept.
 
-### Scope
-
-- Work only on five-letter guess validation, invalid-guess feedback, related tests, and messages unless the user approves broader changes.
-- Prefer the smallest safe edit that satisfies the requested behavior.
-- Do not change dependencies, project structure, scoring, UI, persistence, or unrelated game mechanics without asking first.
-
-### Required Workflow
-
-1. Restate the requested guess behavior.
-2. Identify the files or functions likely involved.
-3. Propose the smallest change before editing.
-4. Run the smallest relevant validation after edits.
-5. Stop and report evidence if validation fails.
-
-### Definition of Done
-
-- Empty, non-alphabetic, and wrong-length guesses produce clear feedback.
-- Existing behavior outside guess handling is unchanged.
-- Relevant tests or manual checks pass.
-- The final response includes files changed, validation evidence, and any remaining risks.
-
-### Stop Conditions
-
-- Stop if tests fail and the cause is unclear.
-- Ask before changing dependencies or broad architecture.
-- Ask before editing unrelated scoring, UI, persistence, dependencies, or project structure.
+```powershell
+copilot init
 ```
 
-9. Ask Copilot to improve the draft while keeping it a skill, not a lab. If your VS Code version exposes `/create-skill`, you may use it as a drafting shortcut, but still save and review the final repo-local skill at `.github\skills\copilot-quest-guessing\SKILL.md`.
+13. If you choose **Copilot CLI**, start the interactive session:
+
+```powershell
+copilot --name "copilot-quest-build" --enable-memory --allow-all
+```
+
+14. Use this strong prompt boundary for the rest of the lab:
 
 ```text
-Review this SKILL.md draft as a repo-local Copilot skill. Make it beginner-friendly, focused on five-letter guess validation and feedback for Copilot Quest, and explicit about scope, constraints, definition of done, stop conditions, and acceptance gates. Do not add secrets, private data, or broad tool permissions.
+Task: Build Copilot Quest as a small Wordle-like CLI game.
+Scope: Create project instructions, one repo-local skill, one custom agent, one agentic loop, a small game implementation, tests, README updates, and usage evidence.
+Constraints: Prefer small testable changes, keep game rules deterministic, do not change dependencies or broad project structure without approval, and review every diff before acceptance.
+Definition of Done: Required artifacts exist, duplicate-letter scoring is validated, implementation evidence is captured, and usage/debug evidence is recorded.
+Off-Ramp: Stop and ask if validation fails twice, if dependency changes seem necessary, or if the selected surface cannot create the required artifact.
 ```
 
-10. Review the result. Confirm it includes target scope, task, constraints, definition of done, off-ramp, and at least one explicit acceptance gate such as "stop if tests fail" or "ask before changing dependencies."
-11. Use the Ask/Plan/Agent decision matrix to choose an execution mode for the validation/feedback task: Ask for locating or explaining the target, Plan for a reviewed implementation sequence, or Agent only if the task needs multi-step execution with evidence.
-12. If you use Agent mode, select **Configure Tools** in the chat input and enable only the tools needed for the chosen task. Keep **Default Approvals** unless your instructor approves a broader permission mode.
-13. Run the task once using the chosen mode and capture the evidence required by your definition of done. Evidence can be a copied command output, manual check result, diff summary, or Copilot response excerpt.
-14. Create `.github/skills/copilot-quest-guessing/notes.md` and paste this review note template.
-
-```markdown
-# Copilot Quest Guessing Skill Notes
-
-- Execution mode used: Ask / Plan / Agent
-- Tools enabled:
-- Permission mode:
-- Validation evidence captured:
-- If delegated, did delegation improve output quality? Yes/No
-- Review burden:
-- Token or tool overhead:
-- Guidance kept in instructions instead of `SKILL.md`:
-- Stable non-sensitive fact kept in memory instead of `SKILL.md`:
-- Repeatable behavior kept in `SKILL.md`:
-```
-
-15. Complete the note so it shows what stayed in instructions and memory rather than inside `SKILL.md`.
-
-**🛡️ Safety checkpoint**: Do not place secrets, sensitive data, regulated data, or non-negotiable policy in memory or inside the skill when it should live in instructions.
+**🛡️ Safety checkpoint**: Do not put secrets, personal data, customer data, credentials, or regulated data into memory, prompts, instructions, skills, custom agents, or session notes.
 
 ### ✅ Success Criteria
 
-- ✅ Wrote a strong prompt with Task, Scope, Constraints, Definition of Done, and Off-Ramp
-- ✅ Used the provided Copilot Quest validation/feedback task instead of inventing a task
-- ✅ Classified the task guidance into instructions, memory, and skill design
-- ✅ Created `.github/skills/copilot-quest-guessing/SKILL.md` with explicit trust boundaries
-- ✅ Used the Ask/Plan/Agent matrix to justify the execution mode
-- ✅ Captured evidence for the definition of done before acceptance
-- ✅ Saved a reusable Stage 5 skill asset to the repo-local kit
+- ✅ Created `README.md` with the Copilot Quest scenario
+- ✅ Created `PROJECT-PLAN.md` before creating or initializing Copilot instructions
+- ✅ Selected either the VS Code Chat path or Copilot CLI path
+- ✅ Opened the relevant setup surface: Configure Tools and `#` picker for Chat, or `copilot init` and interactive session for CLI
+- ✅ Captured a strong prompt with Task, Scope, Constraints, Definition of Done, and Off-Ramp
 
-## Exercise 2: Stage 6 Custom Agent Handoff and Tool-Control Drill
+## Exercise 2: Stage 6 Custom Agent, Skill, and Agentic Loop Handoff
 
 **⏱️ Time**: 10 min
-**📋 Objective**: Create a constrained custom agent and orchestrate a two-role workflow with bounded loops, constrained tool use, verifiable handoff contracts, and clear human checkpoints
+**📋 Objective**: Create durable Copilot instructions, request safe memory, create a repo-local skill, create a custom agent, and define a simple bounded agentic loop.
 
 **Warm-up (try this now)**:
 
 ```text
-Draft a two-role handoff for implementing guess feedback and verifying edge cases. Name each role, its allowed tools, loop stop condition, output, and evidence required before handoff.
+Draft a simple handoff for Copilot Quest that names the instruction file, memory fact, skill file, custom agent file, loop phases, validation evidence, and stop condition.
 ```
 
-Expected result: you should get a simple implementer-to-verifier contract with visible evidence expectations and explicit tool boundaries.
+Expected result: you should get a workflow kit outline with visible evidence expectations and explicit boundaries.
 
-1. Open VS Code Chat or Copilot CLI in the same repository and keep your Module 1 guardrail note nearby.
-2. In VS Code, open Chat, select the Configure gear, and review Agent Customizations > **Agents**. Notice built-in and custom agents, then return to the repository file you will create.
-3. Use the same Copilot Quest validation/feedback task from Exercise 1. Split it into two roles: the implementer proposes or makes the smallest approved validation/feedback change, and the verifier checks empty, non-alphabetic, wrong-length, and valid five-letter guess cases.
-4. Create the custom agent folder and file. In VS Code, you can right-click the Explorer and create folders manually, or run:
+1. Use your chosen path for every prompt in this exercise.
+2. If using **VS Code Chat**, paste prompts into Agent mode and review changes with the files changed bar, inline diff, **Keep**, **Undo**, **Undo All**, and Source Control view.
+3. If using **Copilot CLI**, paste prompts into the interactive session and review changes with:
 
-```powershell
-New-Item -ItemType Directory -Force -Path .github\agents
-New-Item -ItemType File -Force -Path .github\agents\copilot-quest-implementer.agent.md
+```text
+/diff
 ```
 
-5. Paste this starter definition into `.github/agents/copilot-quest-implementer.agent.md`, then customize the task names for your repo.
+4. Create or refine `.github\copilot-instructions.md`.
+
+```text
+Review README.md, PROJECT-PLAN.md, and any existing .github/copilot-instructions.md. Create or update .github/copilot-instructions.md with concise project instructions for Copilot Quest.
+
+Include:
+
+- Copilot Quest is a Wordle-like CLI word game.
+- Prefer small, testable changes.
+- Keep game rules readable and deterministic.
+- Validate scoring logic, especially duplicate letters.
+- Use the selected surface's review controls before accepting changes.
+- Before large edits, plan the next small change, validate it, review the diff, and decide whether to continue.
+```
+
+5. Request safe memory for the scenario.
+
+```text
+Remember this durable project fact if memory is enabled: Copilot Quest is a Wordle-like word guessing game, and repo-local Copilot agents and skills should use that scenario.
+
+Confirm whether memory was stored, unavailable, blocked by policy, or requires manual approval.
+```
+
+6. If using **Copilot CLI**, optionally inspect memory status:
+
+```text
+/memory
+```
+
+7. Create `.github\skills\copilot-quest\SKILL.md`.
+
+```text
+Create .github/skills/copilot-quest/SKILL.md as a repo-local Copilot skill for Copilot Quest, a Wordle-like CLI word game.
+
+Write the skill as Copilot-facing behavior instructions, not a participant lab. Include when to use the skill, what context to inspect, implementation preferences, game-rule constraints, testing expectations, safety checks, output format, and stop conditions.
+```
+
+8. Create `.github\agents\copilot-quest.agent.md`.
+
+```text
+Create .github/agents/copilot-quest.agent.md as a repo-local custom agent for Copilot Quest, a Wordle-like CLI word game.
+
+The agent should help plan, implement, review, and test Copilot Quest features. Include activation criteria, expected files to inspect, safety and review gates, validation expectations, stop conditions, and a concise response contract. Keep it focused on the game scenario and repo-local development.
+```
+
+9. Create `AGENTIC-LOOP.md`.
+
+```text
+Create AGENTIC-LOOP.md for Copilot Quest.
+
+Document a simple agentic loop with these phases:
+
+1. Observe: inspect README.md, PROJECT-PLAN.md, .github/copilot-instructions.md, the custom agent, the skill, and the current diff.
+2. Plan: choose the next smallest game change and name expected files plus validation.
+3. Act: make only that change.
+4. Validate: run the relevant test or command and capture the result.
+5. Review: inspect the selected surface's diff and source-control evidence.
+6. Decide: continue with the next loop, fix a failed validation, or stop and summarize.
+
+Keep the loop beginner-friendly and specific to Copilot Quest.
+```
+
+10. In VS Code, open the Chat Configure gear and **Agent Customizations** view. Confirm where Instructions, Skills, and Agents appear in your environment. If a surface is unavailable, record "not available in my environment."
+11. Capture one handoff note in `copilot-quest-workflow-kit-notes.md`.
 
 ```markdown
-# Copilot Quest Implementer Agent
+# Copilot Quest Workflow Kit Notes
 
-### Purpose
-
-Implement the approved Copilot Quest five-letter guess validation and feedback change after the human reviewer confirms the task scope.
-
-### Allowed Scope
-
-- Five-letter guess validation
-- Invalid-guess feedback behavior
-- Guess-related tests
-- Small documentation notes for the changed behavior
-
-### Disallowed Scope
-
-- Dependency changes
-- Broad architecture changes
-- Unrelated scoring, persistence, or UI changes
-
-### Allowed Tools
-
-- Read files
-- Propose plans
-- Edit files after approval
-- Run approved test or build commands
-
-### Approval Gate
-
-Ask before editing files, changing dependencies, or running commands that write outside the repository.
-
-### Stop Condition
-
-Stop after one failed validation attempt if the cause is unclear, then report the failure evidence.
-
-### Required Output
-
-- Files changed
-- Tests or checks run
-- Evidence from each check
-- Unresolved risks or follow-up questions
+- Selected surface: VS Code Chat / Copilot CLI
+- Copilot instructions created:
+- Memory result:
+- Skill path:
+- Custom agent path:
+- Agentic loop path:
+- Review controls used:
+- Stop condition:
+- Evidence captured:
 ```
 
-6. Select the custom agent from the Chat agent dropdown or reference it directly in chat if your VS Code version shows the new agent. Use **Configure Tools** to confirm its tools match the allowed scope before running it.
-7. Define a second verifier role in your notes with this checklist.
-
-```markdown
-# Copilot Quest Verifier Handoff
-
-- Implementation scope stayed within the approved five-letter validation/feedback task.
-- Evidence includes the command or manual check that was run.
-- Empty, non-alphabetic, wrong-length, and valid five-letter cases were checked.
-- Failed tests or unresolved risks are listed before acceptance.
-- No dependency, architecture, or unrelated behavior changes were made.
-- The verifier recommends accept, revise, or stop.
-```
-
-8. Run the workflow using the implementer role and verifier checklist. Capture one handoff artifact from each role, such as a diff summary, failed-test note, verification checklist, command output, or unresolved-risk list.
-9. If the agent edits files, review the files changed bar, inspect inline diffs, and use **Keep**, **Undo**, or **Undo All** before accepting changes.
-10. If the implementer and verifier disagree, write one decision note with the conflict, evidence reviewed, final decision, and human owner who approved it.
-11. Save the custom agent file and verifier checklist as the Stage 6 workflow kit so Module 3 can reuse it for orchestration of Copilot Quest.
-
-**🛡️ Safety checkpoint**: Treat tool invocation as a control point. Do not accept implementation output without separate verification evidence.
+**🛡️ Safety checkpoint**: Treat skills and custom agents as reusable workflow assets. Review their trust boundaries before using them for implementation work.
 
 ### ✅ Success Criteria
 
-- ✅ Created `.github/agents/copilot-quest-implementer.agent.md` as one workflow role
-- ✅ Located the custom agent in Agent Customizations or the Chat agent dropdown where available
-- ✅ Created role definitions with explicit handoff contracts
-- ✅ Documented allowed tools, constrained parameters, and loop stop conditions
-- ✅ Produced at least one validated artifact per role
-- ✅ Logged one conflict-resolution decision with rationale
-- ✅ Saved a reusable handoff template for later modules
+- ✅ Created or refined `.github\copilot-instructions.md`
+- ✅ Requested memory and recorded whether it was stored, unavailable, blocked, or approval-required
+- ✅ Created `.github\skills\copilot-quest\SKILL.md` with explicit trust boundaries
+- ✅ Created `.github\agents\copilot-quest.agent.md` with purpose, scope, validation, and stop conditions
+- ✅ Created `AGENTIC-LOOP.md` with observe, plan, act, validate, review, and decide phases
+- ✅ Located Agent Customizations where available
+- ✅ Saved `copilot-quest-workflow-kit-notes.md`
 
-## Exercise 3: Stage 6 to Stage 7 Guardrail Mapping
+## Exercise 3: Stage 6 to Stage 7 Guardrail Mapping and Usage Evidence
 
 **⏱️ Time**: 10 min
-**📋 Objective**: Evaluate whether your Stage 6 flow is ready for Stage 7 operational scaling and identify the controls needed for background/cloud execution, `/init` scaffolding, instruction layering, and validation cadence
+**📋 Objective**: Plan and execute the Wordle-like game using a bounded agentic loop, map guardrails for Stage 7 readiness, review the generated changes, and capture usage, context, debug, or credit evidence.
 
 **Warm-up (try this now)**:
 
 ```text
-Score a Stage 6 handoff for auditability, policy compliance, rollback path, execution mode, and validation cadence. Mark any missing evidence as "not Stage 7 ready."
+Score this workflow for readiness: project instructions exist, memory is requested, skill and custom agent files exist, the agentic loop has validation and review steps, and usage evidence will be captured before exit. Mark any missing evidence as "not Stage 7 ready."
 ```
 
-Expected result: you should get a quick readiness snapshot with at least one evidence gap or confirmation point.
+Expected result: you should get a readiness snapshot with at least one explicit evidence requirement.
 
-1. Create a notes file named `copilot-quest-stage-7-readiness.md` in your project notes, or add the template below to your existing workflow kit.
+1. Ask Copilot to plan before coding.
+2. If using **VS Code Chat**, paste this prompt into Agent mode.
+3. If using **Copilot CLI**, first enter plan mode:
+
+```text
+/plan
+```
+
+4. Use this planning prompt:
+
+```text
+Do not edit files yet. Create an implementation plan for Copilot Quest, a Wordle-like CLI word game.
+
+Use README.md, PROJECT-PLAN.md, .github/copilot-instructions.md, .github/agents/copilot-quest.agent.md, .github/skills/copilot-quest/SKILL.md, and AGENTIC-LOOP.md as context.
+
+Plan a small TypeScript or JavaScript command-line app with:
+
+- A five-letter secret word.
+- Six guesses.
+- Per-letter feedback for correct position, present in another position, and absent.
+- Input validation.
+- A replay-friendly game loop.
+- Unit tests for scoring duplicate letters.
+- A README section explaining how to run and test the game.
+
+Before coding, list the files you expect to create or modify, the validation commands you will run, and any assumptions.
+```
+
+5. Review the plan. Confirm it names expected files, validation commands, assumptions, and duplicate-letter scoring tests.
+6. Execute the plan with your selected surface.
+
+```text
+Execute the plan using the AGENTIC-LOOP.md workflow. Create the Copilot Quest CLI game, tests, and README updates. Keep the implementation small, readable, and runnable from this repository. Run the planned validation commands only after showing which command you will run, then report the result.
+```
+
+7. If validation fails, use a targeted correction prompt.
+
+```text
+Fix only the issues found in the current diff or validation output. Do not rewrite unrelated files. Re-run the relevant validation command after the fix.
+```
+
+8. Review the changes before acceptance:
+
+| Surface | Required review evidence |
+|---------|--------------------------|
+| VS Code Chat | Files changed bar, inline diff, **Keep**, **Undo**, **Undo All**, Source Control view, and Agent Debug evidence where available |
+| Copilot CLI | `/diff`, command output, validation result, `/context`, `/usage`, and `/share` transcript evidence |
+
+9. If using **VS Code Chat**, capture usage and debug evidence:
+
+```text
+Open the model picker, Copilot status menu, Developer: Open Agent Debug Panel or Show Agent Debug Logs, Show Chat Debug View, and record available model, usage, credit, debug, and tool-call evidence.
+```
+
+10. If using **Copilot CLI**, capture context and usage evidence:
+
+```text
+/context
+```
+
+```text
+/usage
+```
+
+```text
+/share copilot-quest-cli-session.md
+```
+
+11. Create the relevant session note file.
+12. For **VS Code Chat**, create `copilot-quest-vscode-session-notes.md`.
+13. For **Copilot CLI**, create `copilot-quest-cli-session.md` with `/share` or create a manual note if sharing is unavailable.
 
 ```markdown
-# Copilot Quest Stage 7 Readiness
+# Copilot Quest Session Notes
 
-### Baseline Workflow
+### Surface
 
-- Exercise 2 workflow used:
-- Implementer artifact:
-- Verifier artifact:
+- VS Code Chat / Copilot CLI:
 
-### Execution Mode Decision
+### Artifacts created
 
-- Recommended mode: Local synchronous / Background task / Cloud agent
-- Duration:
-- Parallelizable work:
-- Environment needs:
-- Data sensitivity:
-- Review path:
+- README.md:
+- PROJECT-PLAN.md:
+- .github/copilot-instructions.md:
+- .github/agents/copilot-quest.agent.md:
+- .github/skills/copilot-quest/SKILL.md:
+- AGENTIC-LOOP.md:
 
-### Readiness Score
+### Memory result
+
+- Stored, unavailable, blocked by policy, or manual approval required:
+
+### Plan summary
+
+- Files planned:
+- Validation commands planned:
+- Assumptions:
+
+### Implementation result
+
+- Files changed:
+- Validation result:
+- Review decision:
+
+### Usage and debug evidence
+
+- Model:
+- Context or token evidence:
+- AI credit, premium request, or usage evidence:
+- Debug or transcript evidence:
+
+### Stage 7 readiness
 
 | Check | Ready? | Evidence | Gap |
-| --- | --- | --- | --- |
+|-------|--------|----------|-----|
 | Auditability | Yes/No | | |
 | Policy compliance | Yes/No | | |
 | Rollback path | Yes/No | | |
 | Instruction-layer coverage | Yes/No | | |
 | Validation cadence | Yes/No | | |
-
-### Blocking Control Gap
-
-- Missing control:
-- Why it blocks Stage 7 scaling:
-- Owner:
-
-### Guardrail Improvement
-
-- Guardrail:
-- Enforced in:
-- Human approval required before:
-
-### Module 3 Handoff
-
-- What Module 3 can reuse:
-- What must remain human-approved:
 ```
 
-2. Use your Exercise 2 workflow as the baseline so the readiness discussion stays grounded in a real handoff pattern rather than a hypothetical one.
-3. In VS Code, open the Agent Sessions sidebar from the Activity Bar or select **Show Agent Sessions Sidebar** at the top of Chat. Record whether your current local session appears there and whether it shows pending file changes.
-4. Open the agent type or session type picker in the chat input. Compare **Local**, Copilot CLI/background, and **Cloud** options where available. If an option is not available, write "not available in my environment."
-5. Decide whether the workflow should remain local and synchronous, move to a background task, or move to a cloud agent. Fill the execution-mode fields using duration, parallelizability, environment needs, data sensitivity, and review path.
-6. If your environment supports handoff, note whether **Continue In** could carry the current session to another agent type, or whether a fresh **New Chat Session** is safer.
-7. Score the workflow against the five readiness checks in the table: auditability, policy compliance, rollback path, instruction-layer coverage, and validation cadence.
-8. Identify one missing control that would block Stage 7 scaling, such as missing approval gates, weak logging, unclear ownership, broad tool permissions, unclear instruction precedence, or no safe rollback plan.
-9. Propose one lightweight guardrail improvement and specify where it should be enforced, for example in organization or repository instructions, tool permissions, hooks, review steps, `/init` scaffolding, or the skill file.
-10. Complete the Module 3 handoff section with what can be reused and what must remain human-approved before broader rollout.
+14. Mark the workflow "not Stage 7 ready" if usage evidence, validation evidence, review evidence, or rollback evidence is missing.
 
-**🛡️ Safety checkpoint**: If readiness evidence is incomplete, mark the workflow as "not Stage 7 ready" and do not scale it to background or cloud execution.
+**🛡️ Safety checkpoint**: Do not scale this workflow to background or cloud execution unless data sensitivity, permissions, logs, usage, validation cadence, and review gates are approved.
 
 ### ✅ Success Criteria
 
-- ✅ Completed a readiness score across all five checks
-- ✅ Chose local, background, or cloud execution with a clear rationale
-- ✅ Located the Agent Sessions sidebar and agent/session type picker where available
-- ✅ Identified at least one blocking control gap
-- ✅ Proposed one concrete guardrail location to close the gap
-- ✅ Captured a handoff note for the orchestration/deployment module
+- ✅ Created a concrete implementation plan before coding
+- ✅ Executed the plan with a bounded agentic loop
+- ✅ Validated duplicate-letter scoring or recorded the validation gap
+- ✅ Reviewed generated changes before acceptance
+- ✅ Captured usage, context, debug, credit, or transcript evidence
+- ✅ Completed Stage 7 readiness notes across all five checks
+- ✅ Identified at least one blocker or confirmed the workflow is ready to carry into Module 3
 
 *Hands-on lab for Module 2: Intermediate (Agentic) — GitHub Copilot Developer Training*
