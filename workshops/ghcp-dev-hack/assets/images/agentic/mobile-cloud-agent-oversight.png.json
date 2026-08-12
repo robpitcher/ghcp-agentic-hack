@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "mobile-cloud-agent-oversight",
+  "kind": "image",
+  "provider": "gpt-image-2",
+  "deployment": "gpt-image-2",
+  "promptHash": "00d6a80843c2a9d8b50cb844e638306db0b14cac71a741667fe9e2ef138327dc",
+  "prompt": "Create one presentation-scale, text-free illustration for Slide 20, \"Manage Cloud Agents from GitHub Mobile.\"\r\n\r\nTEACHING JOB AND ACCEPTED V4 COMPOSITION\r\nRetain the accepted v4 blank-phone oversight composition. Agent Mergewell holds one generic phone with a blank dark screen at left. Four separate blank progress/evidence cards move along the documented route toward a review folio at his desk. Riley Relay performs bounded remote work on a separate track behind the evidence route. Final acceptance remains separate and human. No Purrmission or gadget.\r\n\r\nCANONICAL CHARACTER LOCK\r\nMergewell is the accountable adult human field agent: light tan skin; short neat evenly distributed dark-to-silver stubble appropriate to an adult field agent; thick rectangular glasses; wild dark-to-silver inventor hair; expressive brows and warm goofy professor-inventor demeanor; mid-thigh charcoal technical coat with green seams; dark trousers; practical shoes; compact quiet shoulder pod.\r\nRiley is the adult nonhuman software collaborator: canonical adult face; dark shoulder-length hair; purple temple light; synthetic neck seam; charcoal long coat with purple lining/cuffs; warm-white top; charcoal cropped trousers; black loafers; both mechanical forearms/hands and robotic lower legs visible; restrained purple-lit joints. She performs the bounded remote work, pauses, asks, iterates, and returns evidence; she never reviews for acceptance, authorizes, or merges.\r\n\r\nCOMPOSITION AND NATIVE BOUNDARY\r\nFull-width landscape 1536x1024 on soft off-white. Keep phone, route, four cards, Riley, desk, and Mergewell inside center 84 percent width and 82 percent height with 7 percent edge clearance. Leave route-label and lower-callout zones clear.\r\n\r\nAPPROVED STYLE BLOCK — VERBATIM\r\nHuman-centered 2D editorial cartoon, warm editorial illustration style, soft off-white background, slightly richer color palette with warm coat shadows, expressive face detail on characters, clean rounded outlines with gentle weight variation, GitHub-green and Copilot-purple accents, light grounding shadow under characters, professional but approachable and likable tone.\r\n\r\nHARD NEGATIVE CONSTRAINTS\r\nNo moustache, goatee, shaped beard, full beard, long beard, heavy beard, patchy facial hair, or changing facial-hair style. No text, notifications, status words, UI, fake phone UI, logos, mascots, copyrighted likenesses, chat bubbles, automatic review or merge, extra characters, hidden Riley mechanics, malformed anatomy, or photorealism.",
+  "source": "content/modules/02-agentic/media/prompts/images/mobile-cloud-agent-oversight-stubble-v3.txt",
+  "createdAt": "2026-08-11T18:15:31.966Z",
+  "reviewStatus": "approved",
+  "location": "assets/images/agentic/mobile-cloud-agent-oversight.png",
+  "width": 1536,
+  "height": 1024
+}

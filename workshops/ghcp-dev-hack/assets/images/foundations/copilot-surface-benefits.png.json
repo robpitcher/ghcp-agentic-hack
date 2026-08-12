@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "copilot-surface-benefits",
+  "kind": "image",
+  "provider": "gpt-image-2",
+  "deployment": "gpt-image-2",
+  "promptHash": "45becd1edf7bd447f7bce997db4650a842baeebd4ee576baddab5209e5ff039e",
+  "prompt": "Human-centered 2D editorial cartoon, warm editorial illustration style, soft off-white background, slightly richer color palette with warm coat shadows, expressive face detail on characters, clean rounded outlines with gentle weight variation, GitHub-green and Copilot-purple accents, light grounding shadow under characters, professional but approachable and likable tone.\r\n\r\nOriginal character Agent Mergewell: human field agent in a mid-length charcoal technical coat with GitHub-green seam accents, concealed mechanical deployment points at coat, wrist, forearm, and shoulder, thick rectangular glasses, wild Einstein-inspired inventor hair with dark-to-silver tones, light tan skin, clean-shaven face, warm expressive face, endearing goofy professor-inventor demeanor. Show only the one task-specific gadget currently invoked.\r\n\r\nBlack cat Purrmission with bright observant green eyes, minimal green collar tag with small hexagonal detail, proportional and expressive, rendered in the same warm editorial style as Agent Mergewell.\r\n\r\nScene: Exactly one Agent Mergewell and exactly one Purrmission stand at one central task-choice hub with no deployed gadget. Four simple color-coded lanes end in four large outcome objects, not rooms or device stations. The green lane ends with one selected puzzle piece fitting precisely into a larger coding assembly, showing focused editor flow. The purple lane ends with one local tool gear stopped at a review gate before an action lever, showing terminal-native control. The blue lane ends with one clean branching repository sculpture joined to a sealed review package, showing collaborative repository evidence. The orange lane ends with four distinct solid source tokens converging into one faceted briefing prism with four provenance cords, showing cross-context synthesis. Purrmission stands once at the shared hub and audits the lane choice. Use no desks, monitors, screens, paper, documents, books, calendars, speech bubbles, user-interface panels, text-like marks, repeated characters, or small decorative icons.\r\n\r\nFrame for a vertical-safe right pane: keep the hub and four large outcomes inside the center 75% width and center 80% height. Subject mass should fill 75-85% of frame height, with strong separation between lanes, soft negative space near all edges, and no critical detail in the outer 10%.\r\n\r\nNo model-generated logos, no mascots, no Octocat, no GitHub Copilot mascot, no generated readable text, no code, no fake or real product UI, no Inspector Gadget likeness, no Albert Einstein portrait recreation, no cluttered backgrounds.",
+  "source": "content/modules/01-foundations/media/prompts/images/copilot-surface-benefits-v3.txt",
+  "createdAt": "2026-08-04T20:26:38.683Z",
+  "reviewStatus": "approved",
+  "location": "assets/images/foundations/copilot-surface-benefits.png",
+  "width": 1792,
+  "height": 1024
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@ghcp/foundry-providers",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@azure/identity": "^4.10.1",
+    "@azure/storage-blob": "^12.28.0"
+  }
+}
+

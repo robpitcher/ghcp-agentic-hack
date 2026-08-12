@@ -1,0 +1,13 @@
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+workshops/**/assets/images/**/*.png filter=lfs diff=lfs merge=lfs -text
+workshops/**/assets/images/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+workshops/**/assets/images/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+workshops/**/assets/images/**/*.webp filter=lfs diff=lfs merge=lfs -text
+workshops/**/content/modules/**/media/references/**/*.png filter=lfs diff=lfs merge=lfs -text
+workshops/**/content/modules/**/media/references/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+workshops/**/content/modules/**/media/references/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+workshops/**/content/modules/**/media/references/**/*.webp filter=lfs diff=lfs merge=lfs -text
+workshops/**/content/storyboards/**/references/**/*.png filter=lfs diff=lfs merge=lfs -text
+workshops/**/content/storyboards/**/references/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+workshops/**/content/storyboards/**/references/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+workshops/**/content/storyboards/**/references/**/*.webp filter=lfs diff=lfs merge=lfs -text

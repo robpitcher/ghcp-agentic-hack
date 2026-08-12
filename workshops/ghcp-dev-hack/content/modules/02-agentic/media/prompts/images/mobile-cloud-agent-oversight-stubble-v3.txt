@@ -1,0 +1,17 @@
+Create one presentation-scale, text-free illustration for Slide 20, "Manage Cloud Agents from GitHub Mobile."
+
+TEACHING JOB AND ACCEPTED V4 COMPOSITION
+Retain the accepted v4 blank-phone oversight composition. Agent Mergewell holds one generic phone with a blank dark screen at left. Four separate blank progress/evidence cards move along the documented route toward a review folio at his desk. Riley Relay performs bounded remote work on a separate track behind the evidence route. Final acceptance remains separate and human. No Purrmission or gadget.
+
+CANONICAL CHARACTER LOCK
+Mergewell is the accountable adult human field agent: light tan skin; short neat evenly distributed dark-to-silver stubble appropriate to an adult field agent; thick rectangular glasses; wild dark-to-silver inventor hair; expressive brows and warm goofy professor-inventor demeanor; mid-thigh charcoal technical coat with green seams; dark trousers; practical shoes; compact quiet shoulder pod.
+Riley is the adult nonhuman software collaborator: canonical adult face; dark shoulder-length hair; purple temple light; synthetic neck seam; charcoal long coat with purple lining/cuffs; warm-white top; charcoal cropped trousers; black loafers; both mechanical forearms/hands and robotic lower legs visible; restrained purple-lit joints. She performs the bounded remote work, pauses, asks, iterates, and returns evidence; she never reviews for acceptance, authorizes, or merges.
+
+COMPOSITION AND NATIVE BOUNDARY
+Full-width landscape 1536x1024 on soft off-white. Keep phone, route, four cards, Riley, desk, and Mergewell inside center 84 percent width and 82 percent height with 7 percent edge clearance. Leave route-label and lower-callout zones clear.
+
+APPROVED STYLE BLOCK — VERBATIM
+Human-centered 2D editorial cartoon, warm editorial illustration style, soft off-white background, slightly richer color palette with warm coat shadows, expressive face detail on characters, clean rounded outlines with gentle weight variation, GitHub-green and Copilot-purple accents, light grounding shadow under characters, professional but approachable and likable tone.
+
+HARD NEGATIVE CONSTRAINTS
+No moustache, goatee, shaped beard, full beard, long beard, heavy beard, patchy facial hair, or changing facial-hair style. No text, notifications, status words, UI, fake phone UI, logos, mascots, copyrighted likenesses, chat bubbles, automatic review or merge, extra characters, hidden Riley mechanics, malformed anatomy, or photorealism.

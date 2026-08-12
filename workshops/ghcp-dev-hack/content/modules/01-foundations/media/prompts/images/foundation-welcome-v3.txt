@@ -1,0 +1,11 @@
+Human-centered 2D editorial cartoon, warm editorial illustration style, soft off-white background, slightly richer color palette with warm coat shadows, expressive face detail on characters, clean rounded outlines with gentle weight variation, GitHub-green and Copilot-purple accents, light grounding shadow under characters, professional but approachable and likable tone.
+
+Original character Agent Mergewell: human field agent in a mid-length charcoal technical coat with GitHub-green seam accents, concealed mechanical deployment points at coat, wrist, forearm, and shoulder, thick rectangular glasses, wild Einstein-inspired inventor hair with dark-to-silver tones, light tan skin, clean-shaven face, warm expressive face, endearing goofy professor-inventor demeanor. Show only the one task-specific gadget currently invoked.
+
+Black cat Purrmission with bright observant green eyes, minimal green collar tag with small hexagonal detail, proportional and expressive, rendered in the same warm editorial style as Agent Mergewell.
+
+Scene: A clean portrait-style welcome with exactly one Agent Mergewell and exactly one Purrmission. Mergewell stands front and center in a welcoming open-arms pose, visibly human and accountable, with all mechanical gadgets undeployed and quiet. Purrmission sits beside him on one plain low charcoal pedestal with no marks, writing surface, seams resembling letters, folders, papers, signs, or labels. Both face the viewer with warm personality; Mergewell is enthusiastic and Purrmission is composed and watchful. Use only the two characters, the plain pedestal, generous negative space, and light grounding shadows. Do not include dossiers, documents, books, screens, badges, plaques, symbols, letters, words, or repeated characters.
+
+Frame for a vertical-safe right pane: keep both characters inside the center 70% width and center 80% height. Their combined subject mass should fill 75-85% of frame height, with soft negative space near all edges and no critical detail in the outer 10%.
+
+No model-generated logos, no mascots, no Octocat, no GitHub Copilot mascot, no generated readable text, no code, no fake or real product UI, no Inspector Gadget likeness, no Albert Einstein portrait recreation, no cluttered backgrounds.

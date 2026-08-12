@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "tool-action-workbench",
+  "kind": "image",
+  "provider": "gpt-image-2",
+  "deployment": "gpt-image-2",
+  "promptHash": "8bfa1a80ebcfebb529d8b59e8e9dacce0e18d97bc949f267433f4a44d9a9114c",
+  "prompt": "Create one presentation-scale, text-free illustration for Slide 9, \"Tools.\"\r\n\r\nTEACHING JOB AND ACCEPTED V4 COMPOSITION\r\nRetain the accepted v4 compact workbench composition. Riley Relay selects exactly one plain action instrument while three other instruments remain separate and inactive. A separate blank workflow card remains visually distinct. Tools perform concrete actions; neither a tool nor the workflow card is a worker or decision-maker. No Mergewell, Purrmission, or gadget.\r\n\r\nCANONICAL CHARACTER LOCK\r\nRiley is the adult nonhuman software collaborator with her canonical adult human face, natural dark shoulder-length hair, small purple temple status light, subtle synthetic neck seam, charcoal long tailored coat with purple lining/cuffs, warm-white crew-neck top, charcoal cropped trousers, black loafers, both mechanical forearms/hands and both robotic lower legs visible, and refined purple-lit joints. She is shy but self-possessed and professionally capable. She performs only the bounded selected action, asks or stops when blocked, and returns evidence. Agent Mergewell remains off-frame and accountable for scope, review, acceptance, and merge; Riley never approves, validates, authorizes, accepts, or merges.\r\n\r\nCOMPOSITION AND NATIVE BOUNDARY\r\nRight-pane landscape 1536x1024, soft off-white stage. Keep Riley, separate workflow card, and all four instruments inside the center 70 percent width and center 80 percent height. Preserve clean upper-right native-label space. Instruments are non-branded physical metaphors with no glyphs.\r\n\r\nAPPROVED STYLE BLOCK — VERBATIM\r\nHuman-centered 2D editorial cartoon, warm editorial illustration style, soft off-white background, slightly richer color palette with warm coat shadows, expressive face detail on characters, clean rounded outlines with gentle weight variation, GitHub-green and Copilot-purple accents, light grounding shadow under characters, professional but approachable and likable tone.\r\n\r\nHARD NEGATIVE CONSTRAINTS\r\nNo text, symbols, code, terminal marks, UI, logos, mascots, copyrighted likeness, childlike or human-coworker read, armor, hidden Riley mechanics, malformed anatomy, independent tool action, extra characters, or photorealism.",
+  "source": "content/modules/02-agentic/media/prompts/images/tool-action-workbench-riley-v2.txt",
+  "createdAt": "2026-08-11T16:19:06.644Z",
+  "reviewStatus": "approved",
+  "location": "assets/images/agentic/tool-action-workbench.png",
+  "width": 1536,
+  "height": 1024
+}

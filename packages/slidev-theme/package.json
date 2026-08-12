@@ -1,0 +1,21 @@
+{
+  "name": "slidev-theme-ghcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.ts",
+  "slidev": {
+    "defaults": {
+      "fonts": {
+        "sans": "Inter"
+      }
+    }
+  },
+  "scripts": {
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@slidev/theme-default": "0.25.0"
+  }
+}

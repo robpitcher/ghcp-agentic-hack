@@ -1,0 +1,965 @@
+import catalog from "./catalog.json";
+import "./styles.css";
+
+export interface MissionHarness {
+  id: string;
+  title: string;
+  description: string;
+  instructions: string[];
+}
+
+export interface MissionClue {
+  id: string;
+  title: string;
+  points: number;
+  objectiveRef: string;
+  scene: string;
+  actions: string[];
+  routes: Array<{
+    harness: string;
+    instructions: string[];
+  }>;
+  evidence: string;
+  hints: string[];
+  safetyCheckpoint: string;
+}
+
+export interface CatalogMission {
+  id: string;
+  title: string;
+  durationMinutes: number;
+  route: string;
+  objectiveRefs: string[];
+  prerequisites: string[];
+  startingState: string;
+  goal?: string;
+  task: string;
+  constraints: string[];
+  evidence: string[];
+  safetyCheckpoints: string[];
+  corePath: string[];
+  stretchPath: string[];
+  debrief: string[];
+  validation: string[];
+  casePacket?: string[];
+  starterFile?: {
+    name: string;
+    content: string;
+  };
+  harnesses?: MissionHarness[];
+  coreClues?: MissionClue[];
+  bonusClues?: MissionClue[];
+  completionPoints?: number;
+  bonusPointCap?: number;
+  carryForward?: {
+    artifact: string;
+    produces: string[];
+    consumes: string[];
+    fallback?: string;
+  };
+  leaderboard?: {
+    optional: true;
+    aliasOnly: true;
+    instructions: string[];
+  };
+}
+
+export interface CatalogModule {
+  id: string;
+  title: string;
+  description: string;
+  duration: string;
+  totalMinutes?: number;
+  route: string;
+  status: string;
+  missions: CatalogMission[];
+}
+
+interface AgendaBlock {
+  id: string;
+  type: string;
+  title: string;
+  start: string;
+  end: string;
+  minutes: number;
+  module?: string;
+  moduleRoute?: string;
+}
+
+interface DeliveryDay {
+  id: string;
+  title: string;
+  start: string;
+  end: string;
+  totalMinutes: number;
+  agenda: AgendaBlock[];
+}
+
+interface DeliveryVariant {
+  id: string;
+  title: string;
+  description: string;
+  route: string;
+  totalMinutes: number;
+  days: DeliveryDay[];
+  modulePhases: Array<{
+    module: string;
+    title: string;
+    contentMinutes: number;
+    missionMinutes: number;
+  }>;
+}
+
+export interface CatalogWorkshop {
+  id: string;
+  title: string;
+  description: string;
+  duration: string;
+  format: string;
+  level: string;
+  tags: string[];
+  prerequisites: string[];
+  route: string;
+  defaultDeliveryVariant?: string;
+  deliveryVariants: DeliveryVariant[];
+  modules: CatalogModule[];
+}
+
+interface NormalizedCatalogMission extends CatalogMission {
+  casePacket: string[];
+  harnesses: MissionHarness[];
+  coreClues: MissionClue[];
+  bonusClues: MissionClue[];
+  bonusPointCap: number;
+}
+
+interface ScoredCatalogMission extends NormalizedCatalogMission {
+  goal: string;
+}
+
+export interface MissionProgress {
+  harness?: string;
+  completed: string[];
+  evidence: Record<string, string>;
+  alias: string;
+  followUp: string;
+}
+
+export interface MissionScore {
+  core: number;
+  bonus: number;
+  total: number;
+}
+
+export interface ModuleScoreSummary extends MissionScore {
+  moduleId: string;
+  moduleTitle: string;
+  scoredMissionCount: number;
+  completedMissionCount: number;
+}
+
+export interface WorkshopScoreSummary {
+  modules: ModuleScoreSummary[];
+  cumulative: MissionScore;
+}
+
+export interface StorageLike {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+  removeItem(key: string): void;
+}
+
+const STORAGE_KEY_PREFIX = "ghcp-mission-v1";
+const workshops = catalog.workshops as CatalogWorkshop[];
+const app = typeof document === "undefined" ? null : document.querySelector<HTMLElement>("#app");
+const base = import.meta.env.BASE_URL;
+
+bootPortal();
+
+function bootPortal(): void {
+  if (!app || typeof window === "undefined") return;
+
+  const route = window.location.pathname
+    .slice(new URL(base, window.location.origin).pathname.length)
+    .split("/")
+    .filter(Boolean);
+
+  if (route.length === 0) {
+    renderCatalog();
+  } else if (route[0] === "workshops" && route.length === 2) {
+    renderWorkshopDetail(route[1] ?? "");
+  } else if (route[0] === "workshops" && route[2] === "variants" && route.length === 4) {
+    renderVariantDetail(route[1] ?? "", route[3] ?? "");
+  } else if (route[0] === "workshops" && route[3] === "missions" && route.length === 5) {
+    renderMissionDetail(route[1] ?? "", route[2] ?? "", route[4] ?? "");
+  } else {
+    renderNotFound();
+  }
+}
+
+function renderCatalog(): void {
+  const variants = workshops.flatMap((workshop) =>
+    workshop.deliveryVariants.map((variant) => ({ workshop, variant }))
+  );
+  app!.innerHTML = `
+    ${hero("GitHub Copilot learning experiences", "Choose a workshop", "Hands-on modules for building practical, verifiable GitHub Copilot skills.")}
+    <section class="catalog" aria-labelledby="catalog-heading">
+      <div class="catalog__heading">
+        <h2 id="catalog-heading">Workshop catalog</h2>
+        <span>${variants.length} available</span>
+      </div>
+      <div class="workshop-grid">${variants.map(({ workshop, variant }) => renderVariantCard(workshop, variant)).join("")}</div>
+      ${renderSkills()}
+    </section>
+  `;
+}
+
+function renderVariantCard(workshop: CatalogWorkshop, variant: DeliveryVariant): string {
+  return `
+    <article class="workshop-card">
+      ${metadata([`${variant.days.length} day${variant.days.length === 1 ? "" : "s"}`, formatMinutes(variant.totalMinutes), workshop.level])}
+      <h3><a class="title-link" href="${url(variant.route)}">${escapeHtml(variant.title)}</a></h3>
+      <p>${escapeHtml(variant.description)}</p>
+      <div class="tags">${workshop.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+      <a class="button-link" href="${url(variant.route)}">View workshop</a>
+    </article>
+  `;
+}
+
+function renderWorkshopDetail(workshopId: string): void {
+  const workshop = workshops.find((candidate) => candidate.id === workshopId);
+  if (!workshop) return renderNotFound();
+  const visibleModules = workshop.modules.some((module) => module.status === "published")
+    ? workshop.modules.filter((module) => module.status === "published")
+    : workshop.modules;
+  app!.innerHTML = `
+    ${hero("Workshop", workshop.title, workshop.description, `<a class="back-link" href="${url("")}">← All workshops</a>`)}
+    <section class="catalog detail-grid">
+      <div>
+        <div class="catalog__heading"><h2>Delivery options</h2><span>${workshop.deliveryVariants.length}</span></div>
+        <div class="variant-grid">
+          ${workshop.deliveryVariants.length > 0
+            ? workshop.deliveryVariants.map((variant) => `
+              <article class="variant-card">
+                <p class="eyebrow">${formatMinutes(variant.totalMinutes)}</p>
+                <h3><a class="title-link" href="${url(variant.route)}">${escapeHtml(variant.title)}</a></h3>
+                <p>${escapeHtml(variant.description)}</p>
+                <a class="button-link" href="${url(variant.route)}">View agenda</a>
+              </article>`).join("")
+            : "<p>No delivery variants are currently published.</p>"}
+        </div>
+      </div>
+      <div>
+        <div class="catalog__heading"><h2>Modules</h2><span>${visibleModules.length}</span></div>
+        <ol class="module-list">${visibleModules.map(renderModule).join("")}</ol>
+      </div>
+    </section>
+  `;
+}
+
+function renderVariantDetail(workshopId: string, variantId: string): void {
+  const workshop = workshops.find((candidate) => candidate.id === workshopId);
+  const variant = workshop?.deliveryVariants.find((candidate) => candidate.id === variantId);
+  if (!workshop || !variant) return renderNotFound();
+  app!.innerHTML = `
+    ${hero("Delivery variant", variant.title, variant.description, `<a class="back-link" href="${url(workshop.route)}">← ${escapeHtml(workshop.title)}</a>`)}
+    <section class="catalog">
+      ${metadata([formatMinutes(variant.totalMinutes), `${variant.days.length} day${variant.days.length === 1 ? "" : "s"}`])}
+      <section class="detail-section">
+        <h2>Modules and missions</h2>
+        <ol class="module-list">${workshop.modules.map(renderModule).join("")}</ol>
+      </section>
+      <section class="detail-section">
+        <h2>Prerequisites</h2>
+        ${listItems(workshop.prerequisites)}
+      </section>
+      <div class="agenda-days">
+        ${variant.days.map((day) => `
+          <article class="agenda-day">
+            <div class="catalog__heading">
+              <h2>${escapeHtml(day.title)}</h2>
+              <span>${escapeHtml(day.start)}–${escapeHtml(day.end)}</span>
+            </div>
+            <ol class="agenda-list">
+              ${day.agenda.map((block) => `
+                <li>
+                  <time>${escapeHtml(block.start)}–${escapeHtml(block.end)}</time>
+                  <span class="agenda-list__type">${escapeHtml(block.type)}</span>
+                  <span><strong>${escapeHtml(block.title)}</strong>${block.moduleRoute ? `<a href="${url(block.moduleRoute)}">${escapeHtml(block.module ?? "")}</a>` : ""}</span>
+                  <span>${block.minutes} min</span>
+                </li>`).join("")}
+            </ol>
+          </article>`).join("")}
+      </div>
+      ${variant.id === "two-day" ? `
+        <section class="detail-section readout-contract">
+          <p class="eyebrow">Final 90 minutes</p>
+          <h2>Team project readout and demo</h2>
+          <p>Each team presents the problem statement, project scope, estimated impact in dollars with assumptions, and next-step actions, followed by a short demo. Dollar impact is a team estimate, not a guaranteed financial result. Presentation time per team is set after the final team count is known.</p>
+        </section>` : ""}
+    </section>
+  `;
+}
+
+function renderMissionDetail(workshopId: string, moduleId: string, missionId: string): void {
+  const workshop = workshops.find((candidate) => candidate.id === workshopId);
+  const module = workshop?.modules.find((candidate) => candidate.id === moduleId);
+  const mission = module?.missions.find((candidate) => candidate.id === missionId);
+  if (!workshop || !module || !mission) return renderNotFound();
+
+  const normalizedMission = normalizeMission(mission);
+  if (isScoredMission(normalizedMission)) {
+    app!.innerHTML = renderScoredMission(workshop, module, normalizedMission);
+    initializeMissionTracker(workshop, module, normalizedMission);
+    return;
+  }
+
+  app!.innerHTML = `
+    ${hero("Mission", normalizedMission.title, `${normalizedMission.durationMinutes} min · ${escapeHtml(module.title)}`, renderMissionBackLink(module))}
+    <section class="catalog mission-detail">
+      <section class="detail-section">
+        <h2>🎯 Task</h2>
+        <p>${escapeHtml(normalizedMission.task)}</p>
+      </section>
+      <section class="detail-section">
+        <h2>Starting state</h2>
+        <p>${escapeHtml(normalizedMission.startingState)}</p>
+      </section>
+      ${normalizedMission.prerequisites.length > 0 ? `<section class="detail-section"><h2>Prerequisites</h2>${listItems(normalizedMission.prerequisites)}</section>` : ""}
+      <section class="detail-section">
+        <h2>Core path</h2>
+        <ol>${normalizedMission.corePath.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
+      </section>
+      ${normalizedMission.stretchPath.length > 0 ? `<section class="detail-section"><h2>Stretch path</h2><ol>${normalizedMission.stretchPath.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol></section>` : ""}
+      <section class="detail-section">
+        <h2>Evidence to produce</h2>
+        ${listItems(normalizedMission.evidence)}
+      </section>
+      ${normalizedMission.safetyCheckpoints.length > 0 ? `<section class="detail-section"><h2>🔒 Safety checkpoints</h2>${listItems(normalizedMission.safetyCheckpoints)}</section>` : ""}
+      ${normalizedMission.constraints.length > 0 ? `<section class="detail-section"><h2>Constraints</h2>${listItems(normalizedMission.constraints)}</section>` : ""}
+      <section class="detail-section">
+        <h2>Debrief</h2>
+        ${listItems(normalizedMission.debrief)}
+      </section>
+      <section class="detail-section">
+        <h2>Objectives</h2>
+        ${listItems(normalizedMission.objectiveRefs)}
+      </section>
+    </section>
+  `;
+}
+
+export function renderMissionBackLink(module: Pick<CatalogModule, "route" | "title">): string {
+  return `<a class="back-link" href="${url(module.route)}">← Back to ${escapeHtml(module.title)}</a>`;
+}
+
+function renderScoredMission(workshop: CatalogWorkshop, module: CatalogModule, mission: ScoredCatalogMission): string {
+  const nextModuleTitle = getNextModuleTitle(workshop, module.id);
+  const clueCard = (clue: MissionClue, bonus: boolean): string => `
+    <article class="mission-clue" data-clue-card="${escapeHtml(clue.id)}">
+      <header class="mission-clue__header">
+        <label>
+          <input type="checkbox" data-mission-clue="${escapeHtml(clue.id)}" data-bonus="${bonus}">
+          <span>
+            <strong>${escapeHtml(clue.title)}</strong>
+            <small>${clue.points} points</small>
+          </span>
+        </label>
+      </header>
+      <blockquote>${escapeHtml(clue.scene)}</blockquote>
+      <h3>What to do</h3>
+      <ol>${clue.actions.map((action) => `<li>${escapeHtml(action)}</li>`).join("")}</ol>
+      ${clue.routes.map((route) => `
+        <section class="mission-route" data-harness-route="${escapeHtml(route.harness)}" hidden>
+          <h3>Gadget hint</h3>
+          <ul>${route.instructions.map((instruction) => `<li>${escapeHtml(instruction)}</li>`).join("")}</ul>
+        </section>`).join("")}
+      <p class="mission-evidence"><strong>Add to your case file:</strong> ${escapeHtml(clue.evidence)}</p>
+      <details class="mission-hints">
+        <summary>Need a hint?</summary>
+        <ol>${clue.hints.map((hint) => `<li>${escapeHtml(hint)}</li>`).join("")}</ol>
+        <p>Hints never reduce your score.</p>
+      </details>
+      <p class="mission-safety"><span class="purrmission-icon" aria-hidden="true">🐈‍⬛</span><strong>Purrmission check:</strong> ${escapeHtml(clue.safetyCheckpoint)}</p>
+      <label class="mission-notes">
+        <span>Your evidence (saved only on this device)</span>
+        <textarea rows="3" data-clue-evidence="${escapeHtml(clue.id)}"></textarea>
+      </label>
+    </article>`;
+
+  return `
+    ${hero("Mission", mission.title, `${mission.durationMinutes} min · ${escapeHtml(module.title)}`, renderMissionBackLink(module))}
+    <main class="catalog mission-detail mission-hunt">
+      <section class="detail-section mission-goal">
+        <p class="eyebrow">Mission goal</p>
+        <h2>${escapeHtml(mission.goal)}</h2>
+        <p>Hints are always available and never reduce your score. Asking for help is part of safe, effective engineering.</p>
+      </section>
+
+      <section class="detail-section">
+        <fieldset class="mission-harness-picker">
+          <legend>Choose your field gadget</legend>
+          <div class="mission-harnesses">
+            ${mission.harnesses.map((harness) => `
+              <label class="mission-harness">
+                <input type="radio" name="mission-harness" value="${escapeHtml(harness.id)}">
+                <span><strong>${escapeHtml(harness.title)}</strong><small>${escapeHtml(harness.description)}</small></span>
+              </label>`).join("")}
+          </div>
+        </fieldset>
+        <div id="mission-harness-help" class="mission-harness-help" role="status" aria-live="polite">Choose a gadget to reveal its route hints.</div>
+      </section>
+
+      <section class="detail-section">
+        <h2>Prepare your practice task</h2>
+        ${mission.casePacket.length > 0 ? listItems(mission.casePacket) : "<p>Prepare the approved practice task for this mission.</p>"}
+        ${mission.starterFile ? `
+          <section class="mission-starter">
+            <div>
+              <h3>Starter file: <code>${escapeHtml(mission.starterFile.name)}</code></h3>
+              <p>Save this file in your chosen practice location and paste the supplied content.</p>
+            </div>
+            <button id="mission-copy-starter" type="button">Copy starter content</button>
+            <pre><code>${escapeHtml(mission.starterFile.content)}</code></pre>
+            <p id="mission-starter-status" role="status"></p>
+          </section>` : ""}
+      </section>
+
+      <aside class="mission-score" aria-live="polite" aria-describedby="mission-score-status">
+        <div><span>${escapeHtml(module.title)} core</span><strong id="mission-module-core-score">0</strong></div>
+        <div><span>${escapeHtml(module.title)} bonus</span><strong id="mission-module-bonus-score">0</strong></div>
+        <div><span>${escapeHtml(module.title)} total</span><strong id="mission-module-total-score">0</strong></div>
+        <div><span>${escapeHtml(workshop.title)} total</span><strong id="mission-workshop-total-score">0</strong></div>
+        <p id="mission-score-status">Find ${mission.completionPoints ?? 0} core points to complete the mission.</p>
+      </aside>
+
+      <section class="detail-section mission-score-breakdown">
+        <div class="catalog__heading">
+          <h2>Workshop scorecard</h2>
+          <span>Local totals only</span>
+        </div>
+        <div id="mission-score-breakdown"></div>
+      </section>
+
+      <section class="mission-clues" aria-labelledby="core-clues-heading">
+        <div class="catalog__heading">
+          <h2 id="core-clues-heading">${mission.coreClues.length}-clue core hunt</h2>
+          <span>${mission.completionPoints ?? 0} points to complete</span>
+        </div>
+        ${mission.coreClues.map((clue) => clueCard(clue, false)).join("")}
+      </section>
+
+      ${mission.bonusClues.length > 0 ? `
+        <section class="mission-clues" aria-labelledby="bonus-clues-heading">
+          <div class="catalog__heading"><h2 id="bonus-clues-heading">Optional bonus operations</h2><span>${mission.bonusPointCap} point cap</span></div>
+          <p>Complete as many bonus operations as you want; only the capped bonus total counts toward the workshop score.</p>
+          ${mission.bonusClues.map((clue) => clueCard(clue, true)).join("")}
+        </section>` : ""}
+
+      ${mission.carryForward ? `
+        <section class="detail-section">
+          <h2>Carry the case forward${nextModuleTitle ? ` to ${escapeHtml(nextModuleTitle)}` : ""}</h2>
+          <p>Your <strong>${escapeHtml(mission.carryForward.artifact)}</strong> carries:</p>
+          <ul>${mission.carryForward.produces.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+          ${mission.carryForward.consumes.length > 0 ? `<p>This mission also consumes: ${escapeHtml(mission.carryForward.consumes.join(", "))}</p>` : ""}
+          ${mission.carryForward.fallback ? `<p>${escapeHtml(mission.carryForward.fallback)}</p>` : ""}
+        </section>` : ""}
+
+      <section class="detail-section mission-export">
+        <h2>Seal and export the case</h2>
+        <label>
+          <span>Alias (optional, local only)</span>
+          <input id="mission-alias" type="text" maxlength="40" autocomplete="off">
+        </label>
+        <label>
+          <span>${escapeHtml(nextModuleTitle ? `One bounded follow-up task for ${nextModuleTitle}` : "One bounded follow-up task")}</span>
+          <textarea id="mission-follow-up" rows="3"></textarea>
+        </label>
+        <label>
+          <span>Plain-text case file</span>
+          <textarea id="mission-case-file" rows="14" readonly spellcheck="false"></textarea>
+        </label>
+        <div class="mission-actions">
+          <button id="mission-copy" type="button">Copy case file</button>
+          <button id="mission-print" type="button" class="button-secondary">Print or save</button>
+          <button id="mission-reset" type="button" class="button-secondary">Reset mission</button>
+        </div>
+        <p id="mission-action-status" role="status">Your progress, totals, and evidence stay in this browser.</p>
+      </section>
+
+      ${mission.leaderboard ? `
+        <section class="detail-section">
+          <h2>Optional alias board</h2>
+          <ul>${mission.leaderboard.instructions.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+        </section>` : ""}
+    </main>`;
+}
+
+export function emptyMissionProgress(): MissionProgress {
+  return { completed: [], evidence: {}, alias: "", followUp: "" };
+}
+
+export function normalizeMission(mission: CatalogMission): NormalizedCatalogMission {
+  return {
+    ...mission,
+    casePacket: mission.casePacket ?? [],
+    harnesses: mission.harnesses ?? [],
+    coreClues: mission.coreClues ?? [],
+    bonusClues: mission.bonusClues ?? [],
+    bonusPointCap: mission.bonusPointCap ?? 0
+  };
+}
+
+export function isScoredMission(mission: NormalizedCatalogMission): mission is ScoredCatalogMission {
+  return typeof mission.goal === "string" && mission.goal.length > 0 && mission.coreClues.length > 0;
+}
+
+export function getMissionStorageKey(workshopId: string, moduleId: string, missionId: string): string {
+  return `${STORAGE_KEY_PREFIX}:${workshopId}:${moduleId}:${missionId}`;
+}
+
+export function parseMissionProgress(serialized: string): MissionProgress {
+  const parsed: unknown = JSON.parse(serialized);
+  if (!parsed || typeof parsed !== "object") throw new Error("Saved mission progress is not an object");
+  const record = parsed as Record<string, unknown>;
+  if (!Array.isArray(record.completed) || !record.completed.every((item) => typeof item === "string")) {
+    throw new Error("Saved mission clues are invalid");
+  }
+  if (!record.evidence || typeof record.evidence !== "object" || Array.isArray(record.evidence)) {
+    throw new Error("Saved mission evidence is invalid");
+  }
+
+  return {
+    harness: typeof record.harness === "string" ? record.harness : undefined,
+    completed: Array.from(new Set(record.completed)),
+    evidence: Object.fromEntries(
+      Object.entries(record.evidence).filter((entry): entry is [string, string] => typeof entry[1] === "string")
+    ),
+    alias: typeof record.alias === "string" ? record.alias : "",
+    followUp: typeof record.followUp === "string" ? record.followUp : ""
+  };
+}
+
+export function loadMissionProgress(storage: StorageLike, storageKey: string): { progress: MissionProgress; warning?: string } {
+  try {
+    const stored = storage.getItem(storageKey);
+    if (!stored) return { progress: emptyMissionProgress() };
+    return { progress: parseMissionProgress(stored) };
+  } catch (error) {
+    return {
+      progress: emptyMissionProgress(),
+      warning: `Local progress could not be loaded: ${error instanceof Error ? error.message : "unknown error"}`
+    };
+  }
+}
+
+export function calculateMissionScore(
+  mission: Pick<NormalizedCatalogMission, "coreClues" | "bonusClues" | "bonusPointCap">,
+  progress: Pick<MissionProgress, "completed">
+): MissionScore {
+  const selected = new Set(progress.completed);
+  const core = mission.coreClues
+    .filter((clue) => selected.has(clue.id))
+    .reduce((total, clue) => total + clue.points, 0);
+  const uncappedBonus = mission.bonusClues
+    .filter((clue) => selected.has(clue.id))
+    .reduce((total, clue) => total + clue.points, 0);
+  const bonus = Math.min(uncappedBonus, mission.bonusPointCap);
+  return { core, bonus, total: core + bonus };
+}
+
+export function summarizeWorkshopScores(
+  workshop: CatalogWorkshop,
+  storage: StorageLike,
+  currentProgress?: { moduleId: string; missionId: string; progress: MissionProgress }
+): WorkshopScoreSummary {
+  const modules = workshop.modules
+    .map((module) => {
+      const scoredMissions = module.missions.map(normalizeMission).filter(isScoredMission);
+      if (scoredMissions.length === 0) return null;
+
+      let core = 0;
+      let bonus = 0;
+      let completedMissionCount = 0;
+
+      for (const mission of scoredMissions) {
+        const progress = currentProgress && currentProgress.moduleId === module.id && currentProgress.missionId === mission.id
+          ? currentProgress.progress
+          : loadMissionProgress(storage, getMissionStorageKey(workshop.id, module.id, mission.id)).progress;
+        const score = calculateMissionScore(mission, progress);
+        core += score.core;
+        bonus += score.bonus;
+        if (score.core >= (mission.completionPoints ?? 0)) {
+          completedMissionCount += 1;
+        }
+      }
+
+      return {
+        moduleId: module.id,
+        moduleTitle: module.title,
+        core,
+        bonus,
+        total: core + bonus,
+        scoredMissionCount: scoredMissions.length,
+        completedMissionCount
+      };
+    })
+    .filter((entry): entry is ModuleScoreSummary => entry !== null);
+
+  return {
+    modules,
+    cumulative: modules.reduce<MissionScore>(
+      (totals, module) => ({
+        core: totals.core + module.core,
+        bonus: totals.bonus + module.bonus,
+        total: totals.total + module.total
+      }),
+      { core: 0, bonus: 0, total: 0 }
+    )
+  };
+}
+
+export function buildCaseFileText(
+  workshop: CatalogWorkshop,
+  module: CatalogModule,
+  mission: ScoredCatalogMission,
+  progress: MissionProgress,
+  summary: WorkshopScoreSummary
+): string {
+  const selected = new Set(progress.completed);
+  const missionScore = calculateMissionScore(mission, progress);
+  const completedEvidence = [...mission.coreClues, ...mission.bonusClues]
+    .filter((clue) => selected.has(clue.id))
+    .map((clue) => `- ${clue.title}: ${progress.evidence[clue.id] || "[add evidence]"}`);
+  const nextModuleTitle = getNextModuleTitle(workshop, module.id);
+
+  return [
+    "Agent Mergewell case file",
+    `Workshop: ${workshop.title}`,
+    `Module: ${module.title}`,
+    `Mission: ${mission.title}`,
+    `Alias: ${progress.alias || "not provided"}`,
+    `Gadget: ${mission.harnesses.find((harness) => harness.id === progress.harness)?.title ?? "not selected"}`,
+    "",
+    "Mission score",
+    `- Core: ${missionScore.core}`,
+    `- Bonus: ${missionScore.bonus}`,
+    `- Total: ${missionScore.total}`,
+    "",
+    "Module totals",
+    ...summary.modules.map((entry) => `- ${entry.moduleTitle}: core ${entry.core}, bonus ${entry.bonus}, total ${entry.total}`),
+    `Workshop cumulative total: core ${summary.cumulative.core}, bonus ${summary.cumulative.bonus}, total ${summary.cumulative.total}`,
+    "",
+    `Carry-forward artifact: ${mission.carryForward?.artifact ?? "Case file"}`,
+    mission.carryForward?.produces.length ? `Carry forward: ${mission.carryForward.produces.join("; ")}` : "",
+    mission.carryForward?.consumes.length ? `Consumed inputs: ${mission.carryForward.consumes.join("; ")}` : "",
+    "",
+    `Completed clues: ${progress.completed.join(", ") || "none"}`,
+    "Evidence",
+    ...(completedEvidence.length > 0 ? completedEvidence : ["- none yet"]),
+    "",
+    `${nextModuleTitle ? `Bounded follow-up task for ${nextModuleTitle}` : "Bounded follow-up task"}: ${progress.followUp || "[add bounded task]"}`,
+    "Local-only note: progress, evidence, and totals stay in this browser unless you copy or print this text."
+  ].filter(Boolean).join("\n");
+}
+
+function initializeMissionTracker(workshop: CatalogWorkshop, module: CatalogModule, mission: ScoredCatalogMission): void {
+  const storageKey = getMissionStorageKey(workshop.id, module.id, mission.id);
+  const clueInputs = Array.from(document.querySelectorAll<HTMLInputElement>("[data-mission-clue]"));
+  const evidenceInputs = Array.from(document.querySelectorAll<HTMLTextAreaElement>("[data-clue-evidence]"));
+  const harnessInputs = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="mission-harness"]'));
+  const aliasInput = document.querySelector<HTMLInputElement>("#mission-alias");
+  const followUpInput = document.querySelector<HTMLTextAreaElement>("#mission-follow-up");
+  const caseFileOutput = document.querySelector<HTMLTextAreaElement>("#mission-case-file");
+  const actionStatus = document.querySelector<HTMLElement>("#mission-action-status");
+  const scoreBreakdown = document.querySelector<HTMLElement>("#mission-score-breakdown");
+  if (!aliasInput || !followUpInput || !caseFileOutput || !actionStatus || !scoreBreakdown) {
+    throw new Error("Mission tracker controls are missing");
+  }
+
+  const loaded = loadMissionProgress(window.localStorage, storageKey);
+  let progress = loaded.progress;
+  if (loaded.warning) {
+    actionStatus.textContent = loaded.warning;
+  }
+
+  const validHarnessIds = new Set(mission.harnesses.map((harness) => harness.id));
+  if (progress.harness && !validHarnessIds.has(progress.harness)) {
+    progress.harness = undefined;
+  }
+
+  const validClueIds = new Set([...mission.coreClues, ...mission.bonusClues].map((clue) => clue.id));
+  progress.completed = progress.completed.filter((clueId) => validClueIds.has(clueId));
+  progress.evidence = Object.fromEntries(
+    Object.entries(progress.evidence).filter(([clueId]) => validClueIds.has(clueId))
+  );
+
+  const readProgressFromInputs = (): MissionProgress => ({
+    harness: harnessInputs.find((input) => input.checked)?.value,
+    completed: Array.from(new Set(
+      clueInputs
+        .filter((input) => input.checked)
+        .map((input) => input.dataset.missionClue ?? "")
+        .filter(Boolean)
+    )),
+    evidence: Object.fromEntries(
+      evidenceInputs
+        .map((input) => [input.dataset.clueEvidence ?? "", input.value] as const)
+        .filter(([key]) => key.length > 0)
+    ),
+    alias: aliasInput.value,
+    followUp: followUpInput.value
+  });
+
+  const showHarnessRoute = (): void => {
+    const selectedHarness = progress.harness;
+    document.querySelectorAll<HTMLElement>("[data-harness-route]").forEach((route) => {
+      route.hidden = route.dataset.harnessRoute !== selectedHarness;
+    });
+
+    const harness = mission.harnesses.find((candidate) => candidate.id === selectedHarness);
+    const help = document.querySelector<HTMLElement>("#mission-harness-help");
+    if (!help) return;
+    help.innerHTML = harness
+      ? `<strong>${escapeHtml(harness.title)}</strong><ul>${harness.instructions.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+      : "Choose a gadget to reveal its route hints.";
+  };
+
+  const updateRenderedState = (): void => {
+    const missionScore = calculateMissionScore(mission, progress);
+    const workshopScore = summarizeWorkshopScores(workshop, window.localStorage, {
+      moduleId: module.id,
+      missionId: mission.id,
+      progress
+    });
+    const moduleScore = workshopScore.modules.find((entry) => entry.moduleId === module.id) ?? {
+      moduleId: module.id,
+      moduleTitle: module.title,
+      core: missionScore.core,
+      bonus: missionScore.bonus,
+      total: missionScore.total,
+      scoredMissionCount: 1,
+      completedMissionCount: missionScore.core >= (mission.completionPoints ?? 0) ? 1 : 0
+    };
+
+    const moduleCore = document.querySelector<HTMLElement>("#mission-module-core-score");
+    const moduleBonus = document.querySelector<HTMLElement>("#mission-module-bonus-score");
+    const moduleTotal = document.querySelector<HTMLElement>("#mission-module-total-score");
+    const workshopTotal = document.querySelector<HTMLElement>("#mission-workshop-total-score");
+    const scoreStatus = document.querySelector<HTMLElement>("#mission-score-status");
+    if (!moduleCore || !moduleBonus || !moduleTotal || !workshopTotal || !scoreStatus) {
+      throw new Error("Mission score display is missing");
+    }
+
+    moduleCore.textContent = String(moduleScore.core);
+    moduleBonus.textContent = String(moduleScore.bonus);
+    moduleTotal.textContent = String(moduleScore.total);
+    workshopTotal.textContent = String(workshopScore.cumulative.total);
+    const target = mission.completionPoints ?? 0;
+    scoreStatus.textContent = missionScore.core >= target
+      ? `Core mission complete. ${module.title} totals now carry forward in your case file.`
+      : `${target - missionScore.core} more core points to complete the mission.`;
+    scoreBreakdown.innerHTML = renderWorkshopScoreBreakdown(workshopScore, module.id);
+    caseFileOutput.value = buildCaseFileText(workshop, module, mission, progress, workshopScore);
+    showHarnessRoute();
+  };
+
+  const persist = (successMessage = "Progress saved only in this browser."): void => {
+    progress = readProgressFromInputs();
+    try {
+      window.localStorage.setItem(storageKey, JSON.stringify(progress));
+      actionStatus.textContent = successMessage;
+    } catch (error) {
+      actionStatus.textContent = `Local progress could not be saved: ${error instanceof Error ? error.message : "unknown error"}`;
+    }
+  };
+
+  aliasInput.value = progress.alias;
+  followUpInput.value = progress.followUp;
+  harnessInputs.forEach((input) => {
+    input.checked = input.value === progress.harness;
+    input.addEventListener("change", () => {
+      progress = readProgressFromInputs();
+      updateRenderedState();
+      persist();
+    });
+  });
+  clueInputs.forEach((input) => {
+    const clueId = input.dataset.missionClue ?? "";
+    input.checked = progress.completed.includes(clueId);
+    input.addEventListener("change", () => {
+      progress = readProgressFromInputs();
+      updateRenderedState();
+      persist();
+    });
+  });
+  evidenceInputs.forEach((input) => {
+    input.value = progress.evidence[input.dataset.clueEvidence ?? ""] ?? "";
+    input.addEventListener("input", () => {
+      progress = readProgressFromInputs();
+      updateRenderedState();
+      persist();
+    });
+  });
+  aliasInput.addEventListener("input", () => {
+    progress = readProgressFromInputs();
+    updateRenderedState();
+    persist();
+  });
+  followUpInput.addEventListener("input", () => {
+    progress = readProgressFromInputs();
+    updateRenderedState();
+    persist();
+  });
+
+  document.querySelector<HTMLButtonElement>("#mission-reset")?.addEventListener("click", () => {
+    progress = emptyMissionProgress();
+    harnessInputs.forEach((input) => { input.checked = false; });
+    clueInputs.forEach((input) => { input.checked = false; });
+    evidenceInputs.forEach((input) => { input.value = ""; });
+    aliasInput.value = "";
+    followUpInput.value = "";
+    caseFileOutput.value = "";
+    try {
+      window.localStorage.removeItem(storageKey);
+      updateRenderedState();
+      actionStatus.textContent = "Mission progress reset.";
+    } catch (error) {
+      actionStatus.textContent = `Mission progress could not be reset: ${error instanceof Error ? error.message : "unknown error"}`;
+    }
+  });
+
+  document.querySelector<HTMLButtonElement>("#mission-copy")?.addEventListener("click", async () => {
+    progress = readProgressFromInputs();
+    updateRenderedState();
+    persist();
+    try {
+      await navigator.clipboard.writeText(caseFileOutput.value);
+      actionStatus.textContent = "Case file copied.";
+    } catch (error) {
+      caseFileOutput.focus();
+      caseFileOutput.select();
+      actionStatus.textContent = `Case file could not be copied: ${error instanceof Error ? error.message : "unknown error"}. The text is selected so you can copy or print it manually.`;
+    }
+  });
+
+  document.querySelector<HTMLButtonElement>("#mission-print")?.addEventListener("click", () => {
+    progress = readProgressFromInputs();
+    updateRenderedState();
+    persist();
+    window.print();
+    actionStatus.textContent = "Use the print dialog to print or save your case file.";
+  });
+
+  if (mission.starterFile) {
+    const starterStatus = document.querySelector<HTMLElement>("#mission-starter-status");
+    if (!starterStatus) throw new Error("Mission starter status is missing");
+    document.querySelector<HTMLButtonElement>("#mission-copy-starter")?.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(mission.starterFile?.content ?? "");
+        starterStatus.textContent = `${mission.starterFile?.name ?? "Starter file"} content copied.`;
+      } catch (error) {
+        starterStatus.textContent = `Starter content could not be copied: ${error instanceof Error ? error.message : "unknown error"}. Copy it manually from the text below.`;
+      }
+    });
+  }
+
+  updateRenderedState();
+}
+
+function renderWorkshopScoreBreakdown(summary: WorkshopScoreSummary, currentModuleId: string): string {
+  if (summary.modules.length === 0) {
+    return "<p>No scored modules are configured for this workshop yet.</p>";
+  }
+
+  return `
+    <ol class="mission-module-score-list">
+      ${summary.modules.map((module) => `
+        <li class="mission-module-score${module.moduleId === currentModuleId ? " mission-module-score--current" : ""}">
+          <div>
+            <strong>${escapeHtml(module.moduleTitle)}</strong>
+            <small>${module.completedMissionCount}/${module.scoredMissionCount} scored mission${module.scoredMissionCount === 1 ? "" : "s"} complete</small>
+          </div>
+          <div class="mission-module-score__totals">
+            <span>Core ${module.core}</span>
+            <span>Bonus ${module.bonus}</span>
+            <span>Total ${module.total}</span>
+          </div>
+        </li>`).join("")}
+    </ol>
+  `;
+}
+
+function getNextModuleTitle(workshop: CatalogWorkshop, currentModuleId: string): string | undefined {
+  const currentIndex = workshop.modules.findIndex((candidate) => candidate.id === currentModuleId);
+  return currentIndex >= 0 ? workshop.modules[currentIndex + 1]?.title : undefined;
+}
+
+function renderModule(module: CatalogModule): string {
+  const missionButtons = module.missions.map(
+    (mission) =>
+      `<a class="button-link button-link--secondary" href="${url(mission.route)}">Missions · ${mission.durationMinutes} min</a>`
+  ).join("");
+  return `<li class="module-list__item">
+    <div class="module-list__content">
+      <strong>${escapeHtml(module.title)}</strong>
+      <small>${escapeHtml(module.description)}</small>
+    </div>
+    <div class="module-list__actions">
+      <span class="module-list__duration">${escapeHtml(module.duration)}</span>
+      <a class="button-link" href="${url(module.route)}">Slides</a>
+      ${missionButtons}
+    </div>
+  </li>`;
+}
+
+function renderSkills(): string {
+  const roles = [
+    ["Software developer", "Implementation, code review, testing, and documentation"],
+    ["Technical lead / architect", "Architecture decisions, planning, security, and governance"],
+    ["QA / test engineer", "Test strategy, regression risk, accessibility, and release evidence"],
+    ["DevOps / platform engineer", "GitHub Actions, infrastructure, observability, and deployment"],
+    ["Product / program / project manager", "Requirements, issue planning, delivery summaries, and stakeholder communication"]
+  ];
+  return `<section class="skills-section" aria-labelledby="skills-heading">
+    <div class="catalog__heading"><h2 id="skills-heading">Skills by role persona</h2><a href="https://github.com/github/awesome-copilot">Explore Awesome Copilot</a></div>
+    <p>Start with the reusable skill areas most relevant to your role, then review the broader community catalog before adopting any resource.</p>
+    <div class="skills-grid">${roles.map(([role, focus]) => `<article class="skill-card"><h3>${escapeHtml(role ?? "")}</h3><p>${escapeHtml(focus ?? "")}</p><a href="https://github.com/github/awesome-copilot/tree/main/skills">Review skills</a></article>`).join("")}</div>
+  </section>`;
+}
+
+function hero(eyebrow: string, title: string, lede: string, before = ""): string {
+  return `<header class="hero"><div class="hero__content">${before}<p class="eyebrow">${escapeHtml(eyebrow)}</p><h1>${escapeHtml(title)}</h1><p class="hero__lede">${escapeHtml(lede)}</p></div></header>`;
+}
+
+function metadata(values: string[]): string {
+  return `<div class="workshop-card__meta">${values.map((value) => `<span>${escapeHtml(value)}</span>`).join("")}</div>`;
+}
+
+function listItems(items: string[]): string {
+  return items.length > 0 ? `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "";
+}
+
+function formatMinutes(minutes: number): string {
+  const hours = Math.floor(minutes / 60);
+  const remainder = minutes % 60;
+  return hours > 0 ? `${hours} hr${hours === 1 ? "" : "s"}${remainder ? ` ${remainder} min` : ""}` : `${minutes} min`;
+}
+
+function url(route: string): string {
+  return `${base}${route}`;
+}
+
+function renderNotFound(): void {
+  app!.innerHTML = `${hero("404", "Page not found", "The requested workshop delivery page does not exist.")}<section class="catalog"><a class="button-link" href="${url("")}">Return to workshops</a></section>`;
+}
+
+function escapeHtml(value: string): string {
+  return value.replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[character] ?? character);
+}
