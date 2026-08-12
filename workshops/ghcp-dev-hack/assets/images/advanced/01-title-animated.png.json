@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "01-title",
+  "kind": "image",
+  "provider": "gpt-image-2",
+  "deployment": "gpt-image-2",
+  "promptHash": "44404905e91211597f20e0b3715e14818636beaa6b251f1ce500d0fb8e94a3a8",
+  "prompt": "# Title hero\r\n\r\nCreate premium animated 16:9 key art for an advanced GitHub Copilot developer workshop, composed safely inside a 3:2 generation canvas. Render it as a cinematic 2.5D animated-film still with clean cel-shaded forms, expressive human characters, GitHub dark-mode atmosphere, subtle contribution-grid texture, branch-and-merge paths, and restrained Octicon-inspired geometry. Use approximately 80% near-black or off-white, 10% neutral gray, 5% GitHub green, and 5% Copilot purple with sophisticated rim lighting and generous negative space.\r\n\r\nShow a diverse software team on the right directing several luminous, bounded workstreams through branch, governance, verification, and merge checkpoints toward one approved outcome. Make the scene feel unmistakably GitHub through repository graph motion, contribution tiles, pull-request-style convergence, and the black, green, and purple visual system rather than logos or product UI. Keep the left 38% calm and dark enough for a large white title.\r\n\r\nNo generic robots, corporate dashboard infographic, glassmorphism UI, words, letters, product screenshots, unofficial logos, trademark adaptations, or watermarks.",
+  "source": "content/modules/03-advanced/image-prompts/01-title.md",
+  "createdAt": "2026-07-29T19:46:53.075Z",
+  "reviewStatus": "approved",
+  "location": "assets/images/advanced/01-title-animated.png",
+  "width": 1536,
+  "height": 1024
+}

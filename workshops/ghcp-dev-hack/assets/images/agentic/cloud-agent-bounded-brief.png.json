@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "cloud-agent-bounded-brief",
+  "kind": "image",
+  "provider": "gpt-image-2",
+  "deployment": "gpt-image-2",
+  "promptHash": "2f0303c6196a6225e22653d1a9fa8b5914a929584de2cab0c56da02bb0c06dd3",
+  "prompt": "Create one presentation-scale, text-free illustration for Slide 19, \"Cloud-Agent Handoffs.\"\r\n\r\nTEACHING JOB AND ACCEPTED V4 COMPOSITION\r\nRetain the accepted v4 secure-case composition. Agent Mergewell packs seven visibly separate blank inserts representing goal, current state, scope, permissions, checks, stops, and returned evidence. Riley Relay waits beyond the handoff line with empty hands and does not begin early. Mergewell defines and closes the boundary. No Purrmission or deployed gadget.\r\n\r\nCANONICAL CHARACTER LOCK\r\nMergewell is the accountable adult human field agent: light tan skin; short neat evenly distributed dark-to-silver stubble appropriate to an adult field agent; thick rectangular glasses; wild dark-to-silver inventor hair; expressive brows and warm goofy professor-inventor demeanor; mid-thigh charcoal technical coat with green seams; dark trousers; practical shoes; compact closed shoulder tool pod.\r\nRiley is the adult nonhuman software collaborator: canonical adult face; natural dark shoulder-length hair; purple temple status light; synthetic neck seam; charcoal long tailored coat with purple lining/cuffs; warm-white top; charcoal cropped trousers; black loafers; both mechanical forearms/hands and robotic lower legs visible; restrained purple-lit joints. She waits, asks if blocked, performs only the bounded work, and returns evidence; she never authorizes, approves, accepts, or merges.\r\n\r\nCOMPOSITION AND NATIVE BOUNDARY\r\nRight-pane landscape 1536x1024 on soft off-white. Keep complete case, seven inserts, both characters, and boundary inside center 70 percent width and 80 percent height, filling 75–85 percent height. Leave upper-right label space.\r\n\r\nAPPROVED STYLE BLOCK — VERBATIM\r\nHuman-centered 2D editorial cartoon, warm editorial illustration style, soft off-white background, slightly richer color palette with warm coat shadows, expressive face detail on characters, clean rounded outlines with gentle weight variation, GitHub-green and Copilot-purple accents, light grounding shadow under characters, professional but approachable and likable tone.\r\n\r\nHARD NEGATIVE CONSTRAINTS\r\nNo moustache, goatee, shaped beard, full beard, long beard, heavy beard, patchy facial hair, or changing facial-hair style. No text, pseudo-writing, UI, logos, mascots, copyrighted likenesses, signature briefcase design, deployed gadget, early work, extra characters, missing inserts, hidden Riley mechanics, malformed anatomy, or photorealism.",
+  "source": "content/modules/02-agentic/media/prompts/images/cloud-agent-bounded-brief-stubble-v3.txt",
+  "createdAt": "2026-08-11T18:13:48.067Z",
+  "reviewStatus": "approved",
+  "location": "assets/images/agentic/cloud-agent-bounded-brief.png",
+  "width": 1536,
+  "height": 1024
+}

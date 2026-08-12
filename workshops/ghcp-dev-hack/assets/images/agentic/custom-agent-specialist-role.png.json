@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "custom-agent-specialist-role",
+  "kind": "image",
+  "provider": "gpt-image-2",
+  "deployment": "gpt-image-2",
+  "promptHash": "a7a3611caf51aa969dabff3932a330b78e57ee3c6a4bb71a183fef38483ee278",
+  "prompt": "Create one presentation-scale, text-free illustration for Slide 8, \"Custom Agents.\"\r\n\r\nTEACHING JOB AND ACCEPTED V4 COMPOSITION\r\nRetain the accepted v4 dossier-first composition. Riley Relay stands beside one large blank specialist-role dossier with three separate compartments for permitted work, expected result, and stop boundary. The dossier defines a bounded recurring software role; it is not a worker, tool, identity card, or product interface. Riley may perform that bounded role and must stop at its boundary. No Mergewell, Purrmission, or gadget.\r\n\r\nCANONICAL CHARACTER LOCK\r\nRiley is the adult nonhuman software-agent collaborator: canonical adult human face and realistic adult proportions; natural dark shoulder-length hair; small purple temple status light; subtle synthetic neck seam; charcoal or near-black long tailored coat with restrained purple lining and cuff accents; plain warm-white crew-neck top; charcoal high-waisted cropped trousers; practical black loafers; both mechanical forearms and hands and both robotic lower legs clearly visible; refined articulated joints with restrained purple illumination. Her behavior is attentive, earnest, shy, slightly awkward, gently curious, self-possessed, and professionally capable. She performs bounded delegated work, asks when blocked, waits, and returns evidence. Agent Mergewell remains off-frame and accountable for scope, review, acceptance, and merge. Riley never authorizes, approves, validates, accepts, merges, or makes a final decision.\r\n\r\nCOMPOSITION AND NATIVE BOUNDARY\r\nRight-pane landscape 1536x1024 on a soft off-white stage. Keep Riley and the complete three-compartment dossier inside the center 70 percent width and center 80 percent height, filling 75–85 percent of height. Leave an upper-right native-label zone. Keep every compartment blank.\r\n\r\nAPPROVED STYLE BLOCK — VERBATIM\r\nHuman-centered 2D editorial cartoon, warm editorial illustration style, soft off-white background, slightly richer color palette with warm coat shadows, expressive face detail on characters, clean rounded outlines with gentle weight variation, GitHub-green and Copilot-purple accents, light grounding shadow under characters, professional but approachable and likable tone.\r\n\r\nHARD NEGATIVE CONSTRAINTS\r\nNo text, badge, pseudo-writing, UI, logos, mascots, copyrighted robot likeness, childlike proportions, human-coworker read, servant framing, armor, superhero styling, hidden mechanical hands or legs, malformed anatomy, tools in action, extra characters, or photorealism.",
+  "source": "content/modules/02-agentic/media/prompts/images/custom-agent-specialist-role-riley-v2.txt",
+  "createdAt": "2026-08-11T16:18:24.482Z",
+  "reviewStatus": "approved",
+  "location": "assets/images/agentic/custom-agent-specialist-role.png",
+  "width": 1536,
+  "height": 1024
+}

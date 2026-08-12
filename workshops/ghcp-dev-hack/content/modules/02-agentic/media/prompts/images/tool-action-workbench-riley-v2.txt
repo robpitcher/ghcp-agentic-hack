@@ -1,0 +1,16 @@
+Create one presentation-scale, text-free illustration for Slide 9, "Tools."
+
+TEACHING JOB AND ACCEPTED V4 COMPOSITION
+Retain the accepted v4 compact workbench composition. Riley Relay selects exactly one plain action instrument while three other instruments remain separate and inactive. A separate blank workflow card remains visually distinct. Tools perform concrete actions; neither a tool nor the workflow card is a worker or decision-maker. No Mergewell, Purrmission, or gadget.
+
+CANONICAL CHARACTER LOCK
+Riley is the adult nonhuman software collaborator with her canonical adult human face, natural dark shoulder-length hair, small purple temple status light, subtle synthetic neck seam, charcoal long tailored coat with purple lining/cuffs, warm-white crew-neck top, charcoal cropped trousers, black loafers, both mechanical forearms/hands and both robotic lower legs visible, and refined purple-lit joints. She is shy but self-possessed and professionally capable. She performs only the bounded selected action, asks or stops when blocked, and returns evidence. Agent Mergewell remains off-frame and accountable for scope, review, acceptance, and merge; Riley never approves, validates, authorizes, accepts, or merges.
+
+COMPOSITION AND NATIVE BOUNDARY
+Right-pane landscape 1536x1024, soft off-white stage. Keep Riley, separate workflow card, and all four instruments inside the center 70 percent width and center 80 percent height. Preserve clean upper-right native-label space. Instruments are non-branded physical metaphors with no glyphs.
+
+APPROVED STYLE BLOCK — VERBATIM
+Human-centered 2D editorial cartoon, warm editorial illustration style, soft off-white background, slightly richer color palette with warm coat shadows, expressive face detail on characters, clean rounded outlines with gentle weight variation, GitHub-green and Copilot-purple accents, light grounding shadow under characters, professional but approachable and likable tone.
+
+HARD NEGATIVE CONSTRAINTS
+No text, symbols, code, terminal marks, UI, logos, mascots, copyrighted likeness, childlike or human-coworker read, armor, hidden Riley mechanics, malformed anatomy, independent tool action, extra characters, or photorealism.

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "04-trusted-discovery",
+  "kind": "image",
+  "provider": "gpt-image-2",
+  "deployment": "gpt-image-2",
+  "promptHash": "ebdf92e86317b0b739acf7fef2f2bdec8319c039ea3aaccb456df8c10ac9fdc8",
+  "prompt": "# Trusted ecosystem discovery\r\n\r\nCRITICAL VISUAL RULE: communicate only through character action, abstract repository objects, color, gates, and spatial filtering. All gates and surfaces must be completely blank. Do not draw the GitHub logo, Octocat/Invertocat silhouette, wordmark, letters, numbers, code, charts, interface controls, badges, or labeled icons.\r\n\r\nCreate premium animated 16:9 GitHub key art, composed safely inside a 3:2 generation canvas. Render a polished 2.5D animated-film still with GitHub dark-mode atmosphere, cel-shaded characters, contribution-grid texture, repository-like objects, crisp Octicon-inspired geometry, and restrained depth. Use approximately 80% near-black or off-white, 10% neutral gray, 5% GitHub green, and 5% Copilot purple.\r\n\r\nShow an animated developer thoughtfully inspecting a broad constellation of reusable repository objects. Funnel those objects through four visually distinct but unlabeled trust gates using shield, balance, boundary, and building-inspired geometry; only a small reviewed set reaches the protected team workspace. The visual POV is broad discovery followed by narrow, evidence-based approval.\r\n\r\nKeep the right 38% calm for slide copy and place the character-led review scene on the left. No logos, mascots, generic corporate dashboard, words, letters, fake UI, screenshots, interface panels, or watermarks.",
+  "source": "content/modules/03-advanced/image-prompts/04-trusted-discovery.md",
+  "createdAt": "2026-07-29T19:55:15.464Z",
+  "reviewStatus": "approved",
+  "location": "assets/images/advanced/04-trusted-discovery-animated.png",
+  "width": 1536,
+  "height": 1024
+}

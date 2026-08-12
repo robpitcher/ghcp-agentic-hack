@@ -1,87 +1,79 @@
-name: Deploy to GitHub Pages
+name: Build and deploy public workshop site
 
 on:
   push:
     branches:
-      - '**'
-    paths:
-      - '.github/workflows/**'
-      - 'workshops/**'
-      - 'public/**'
-      - 'site/**'
-      - 'themes/**'
-      - 'scripts/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'playwright.config.ts'
-      - 'tests/**'
-  workflow_dispatch:
+      - main
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
 
+concurrency:
+  group: public-pages-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  lab-usability-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install Playwright browser
-        run: npx playwright install --with-deps chromium
-
-      - name: Run lab usability tests
-        run: npm run test:labs
-
-  build-and-deploy:
-    if: github.ref == 'refs/heads/main'
-    needs: lab-usability-tests
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm validate
+      - name: Build public site
+        run: pnpm build
+        env:
+          GITHUB_PAGES_BASE: /${{ github.event.repository.name }}/
+      - name: Upload Pages artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - name: Upload pull request review artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-slide-review-${{ github.event.pull_request.number }}
+          path: dist
+          retention-days: 7
+
+  deploy:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
       pages: write
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment_primary.outputs.page_url || steps.deployment_retry.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build site
-        run: node scripts/build-site.mjs
-        env:
-          BASE_PATH: /ghcp-agentic-hack/
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist/site
-
-      - name: Deploy to GitHub Pages
-        id: deployment_primary
-        continue-on-error: true
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: Retry deploy to GitHub Pages
-        id: deployment_retry
-        if: steps.deployment_primary.outcome == 'failure'
-        uses: actions/deploy-pages@v4
+      - name: Verify deployed routes
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="${{ steps.deployment.outputs.page_url }}"
+          base="${base%/}/"
+          curl --fail --retry 5 --retry-delay 5 "${base}site-routes.json" --output site-routes.json
+          jq -r '.routes[]' site-routes.json | while IFS= read -r route; do
+            curl --fail --retry 5 --retry-delay 5 "${base}${route}" > /dev/null
+          done

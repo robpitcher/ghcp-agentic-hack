@@ -1,0 +1,10 @@
+Human-centered 2D editorial cartoon, warm editorial illustration style, soft off-white background, slightly richer color palette with warm coat shadows, expressive face detail on characters, clean rounded outlines with gentle weight variation, GitHub-green and Copilot-purple accents, light grounding shadow under characters, professional but approachable and likable tone.
+
+Original character Agent Mergewell: mid-length charcoal technical coat with GitHub-green seam accents, compact shoulder tool pod with modular attachments, thick rectangular glasses, wild Einstein-inspired inventor hair with dark-to-silver tones, light tan skin, clean-shaven face, warm expressive face, endearing goofy professor-inventor demeanor.
+
+Black cat Purrmission with bright observant green eyes, minimal green collar tag with small hexagonal detail, proportional and expressive, rendered in the same warm editorial style as Agent Mergewell.
+
+Scene: Agent Mergewell stands on a four-rung ladder. Bottom rung labeled Completions (green), second rung Chat, third rung Plan (his foot planted here — deliberate choice), top rung Agent (orange caution tape). He looks up at the Agent rung, considers it, then his gaze returns to Plan — the right level for now. Purrmission sits at the very top of the ladder beside the Agent rung, one paw firmly on the orange caution tape — rollback plan first. A small downward arrow beside the ladder indicates easier to undo at the bottom. The concept: autonomy scales with reversibility — go only as high as your rollback confidence.
+
+No logos, no mascots, no Octocat, no GitHub Copilot mascot, no generated readable text beyond single-word rung labels, no real product UI, no Inspector Gadget likeness, no Albert Einstein portrait recreation, no cluttered backgrounds.
+

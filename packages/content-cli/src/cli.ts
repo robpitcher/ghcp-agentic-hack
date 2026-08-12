@@ -1,0 +1,342 @@
+#!/usr/bin/env node
+import { existsSync } from "node:fs";
+import path from "node:path";
+import { loadEnvFile } from "node:process";
+import { Command } from "commander";
+import { loadCatalog } from "@ghcp/content-schema";
+import { buildSite } from "./build.js";
+import { generatePortalCatalog } from "./catalog.js";
+import {
+  generateImageCandidate,
+  promoteImage,
+  publishVideo,
+  downloadVideo,
+  refreshVideoStatus,
+  submitVideo,
+  validateApprovedImageSidecars
+} from "./assets.js";
+import { repositoryRoot } from "./paths.js";
+import {
+  scaffoldCharacter,
+  scaffoldLab,
+  scaffoldLocation,
+  scaffoldMission,
+  scaffoldModule,
+  scaffoldStoryboard,
+  scaffoldWorkshop
+} from "./scaffold.js";
+import { compileStoryboardPrompt } from "./storyboard.js";
+import {
+  checkpointWorkshop,
+  pauseWorkshop,
+  resumeWorkshop,
+  workshopRunOfShow,
+  workshopStatus
+} from "./lifecycle.js";
+import { FoundryRequestError } from "@ghcp/foundry-providers";
+import {
+  filterCatalogForRelease,
+  exportPublicRelease,
+  loadReleaseManifest,
+  prepareRelease,
+  validateApprovedRelease,
+  validateRollbackTarget,
+  verifyReleaseRoutes
+} from "./release.js";
+
+const envFile = path.join(repositoryRoot, ".env");
+if (existsSync(envFile)) loadEnvFile(envFile);
+
+const program = new Command();
+program.name("content").description("Author, validate, generate, and build workshop content");
+
+program
+  .command("validate")
+  .description("Validate all workshop content and references")
+  .action(async () => {
+    const catalog = await loadCatalog(repositoryRoot);
+    const approvedImages = await validateApprovedImageSidecars();
+    console.log(`Validated ${catalog.workshops.length} workshop(s) and ${approvedImages} approved image(s).`);
+  });
+
+program
+  .command("catalog")
+  .description("Generate the landing-page catalog")
+  .action(async () => {
+    await generatePortalCatalog();
+    console.log("Generated the portal catalog.");
+  });
+
+program
+  .command("build")
+  .description("Build the landing page and all workshop decks")
+  .option("--release-manifest <path>", "Build only the approved portfolio release")
+  .action(async (options) => {
+    await buildSite(options.releaseManifest);
+    console.log("Built the workshop site.");
+  });
+
+program
+  .command("status")
+  .argument("<workshop-id>")
+  .description("Show durable workshop lifecycle and resume state")
+  .action(async (workshopId) => console.log(await workshopStatus(workshopId)));
+
+program
+  .command("pause")
+  .argument("<workshop-id>")
+  .requiredOption("--reason <reason>")
+  .description("Pause workshop work at its recorded resume task")
+  .action(async (workshopId, options) => {
+    await pauseWorkshop(workshopId, options.reason);
+    console.log(await workshopStatus(workshopId));
+  });
+
+program
+  .command("resume")
+  .argument("<workshop-id>")
+  .description("Verify and summarize the durable workshop resume state")
+  .action(async (workshopId) => console.log(await resumeWorkshop(workshopId)));
+
+program
+  .command("checkpoint")
+  .argument("<workshop-id>")
+  .description("Record a clean repository checkpoint for later sessions")
+  .action(async (workshopId) => {
+    await checkpointWorkshop(workshopId);
+    console.log(await workshopStatus(workshopId));
+  });
+
+program
+  .command("schedule")
+  .argument("<workshop-id>")
+  .option("--start <HH:mm>", "24-hour start time", "09:00")
+  .option("--variant <variant-id>", "Delivery variant to render")
+  .description("Render a validated legacy run of show or delivery variant")
+  .action(async (workshopId, options) =>
+    console.log(await workshopRunOfShow(workshopId, options.start, undefined, options.variant))
+  );
+
+const create = program.command("new").description("Scaffold workshop content");
+create
+  .command("workshop")
+  .argument("<id>")
+  .argument("<title>")
+  .action(async (id, title) => scaffoldWorkshop(id, title));
+create
+  .command("module")
+  .argument("<workshop-id>")
+  .argument("<folder>")
+  .argument("<id>")
+  .argument("<title>")
+  .action(async (workshopId, folder, id, title) => scaffoldModule(workshopId, folder, id, title));
+create
+  .command("lab")
+  .argument("<workshop-id>")
+  .argument("<group>")
+  .argument("<id>")
+  .argument("<title>")
+  .action(async (workshopId, group, id, title) => scaffoldLab(workshopId, group, id, title));
+create
+  .command("mission")
+  .argument("<workshop-id>")
+  .argument("<module-id>")
+  .argument("<id>")
+  .argument("<title>")
+  .action(async (workshopId, moduleId, id, title) => scaffoldMission(workshopId, moduleId, id, title));
+create
+  .command("location")
+  .argument("<workshop-id>")
+  .argument("<id>")
+  .argument("<title>")
+  .action(async (workshopId, id, title) => scaffoldLocation(workshopId, id, title));
+create
+  .command("storyboard")
+  .argument("<workshop-id>")
+  .argument("<id>")
+  .argument("<title>")
+  .action(async (workshopId, id, title) => scaffoldStoryboard(workshopId, id, title));
+create
+  .command("character")
+  .argument("<workshop-id>")
+  .argument("<id>")
+  .argument("<title>")
+  .action(async (workshopId, id, title) => scaffoldCharacter(workshopId, id, title));
+
+const release = program.command("release").description("Prepare and validate controlled portfolio releases");
+release
+  .command("prepare")
+  .argument("<release-id>")
+  .argument("<workshop-id>")
+  .description("Create a draft release manifest from a clean reviewed commit")
+  .action(async (releaseId, workshopId) => {
+    const catalog = await loadCatalog(repositoryRoot);
+    console.log(await prepareRelease(releaseId, workshopId, catalog));
+  });
+release
+  .command("validate")
+  .argument("<manifest>")
+  .description("Validate an approved release against the checked-out commit and catalog")
+  .action(async (manifestOption) => {
+    const manifest = await validateApprovedRelease(manifestOption);
+    const catalog = await loadCatalog(repositoryRoot);
+    filterCatalogForRelease(catalog, manifest);
+    console.log(`Validated approved release ${manifest.id}.`);
+  });
+release
+  .command("export")
+  .argument("<manifest>")
+  .requiredOption("--out <directory>", "Empty repository-relative output directory")
+  .description("Export approved release content as a sanitized buildable public source tree")
+  .action(async (manifestOption, options) => {
+    console.log(await exportPublicRelease(manifestOption, options.out));
+  });
+release
+  .command("show")
+  .argument("<manifest>")
+  .description("Show release state without authorizing deployment")
+  .action(async (manifestOption) => {
+    const { manifest } = await loadReleaseManifest(manifestOption);
+    console.log(JSON.stringify(manifest, null, 2));
+  });
+release
+  .command("verify")
+  .argument("<manifest>")
+  .requiredOption("--url <url>", "Deployed Pages base URL")
+  .description("Smoke-test the portal and every selected module route")
+  .action(async (manifestOption, options) => {
+    const catalog = await loadCatalog(repositoryRoot);
+    const routes = await verifyReleaseRoutes(manifestOption, options.url, catalog);
+    console.log(`Verified ${routes.length} release route(s).`);
+  });
+release
+  .command("rollback")
+  .argument("<manifest>")
+  .description("Validate a previously verified manifest as a rollback target")
+  .action(async (manifestOption) => {
+    const manifest = await validateRollbackTarget(manifestOption);
+    console.log(
+      `Rollback target ${manifest.id} is valid. Dispatch pages.yml from its verified release tag with release_manifest=${manifestOption}.`
+    );
+  });
+
+const generate = program.command("generate").description("Generate media candidates");
+generate
+  .command("storyboard")
+  .argument("<workshop-id>")
+  .argument("<storyboard-id>")
+  .action(async (workshopId, storyboardId) => {
+    console.log(await compileStoryboardPrompt(workshopId, storyboardId));
+  });
+generate
+  .command("image")
+  .argument("<workshop-id>")
+  .argument("<asset-id>")
+  .requiredOption("--prompt-file <path>")
+  .requiredOption("--source <path>")
+  .requiredOption("--module-id <id>")
+  .requiredOption("--cycle-id <id>")
+  .option("--provider <provider>", "gpt-image-2, flux-2-pro, or mai-image-2.5", "gpt-image-2")
+  .option("--width <pixels>", "image width", "1536")
+  .option("--height <pixels>", "image height", "1024")
+  .option("--format <format>", "png or jpeg", "png")
+  .option("--input-reference <path>", "PNG or JPEG source image for a MAI image edit")
+  .action(async (workshopId, assetId, options) => {
+    try {
+      const provider = options.provider as "gpt-image-2" | "flux-2-pro" | "mai-image-2.5";
+      const outputFormat = options.format as "png" | "jpeg";
+      if (!["gpt-image-2", "flux-2-pro", "mai-image-2.5"].includes(provider)) {
+        throw new Error(`Unsupported provider: ${provider}`);
+      }
+      if (!["png", "jpeg"].includes(outputFormat)) throw new Error(`Unsupported format: ${outputFormat}`);
+      console.log(
+        await generateImageCandidate({
+          workshopId,
+          moduleId: options.moduleId,
+          cycleId: options.cycleId,
+          assetId,
+          promptFile: options.promptFile,
+          source: options.source,
+          provider,
+          width: Number.parseInt(options.width, 10),
+          height: Number.parseInt(options.height, 10),
+          outputFormat,
+          inputReference: options.inputReference
+        })
+      );
+    } catch (error) {
+      if (error instanceof FoundryRequestError) {
+        console.error(`Foundry Error (${error.status}): ${error.message}`);
+        console.error(`Response Body: ${error.responseBody}`);
+      }
+      throw error;
+    }
+  });
+generate
+  .command("video")
+  .argument("<workshop-id>")
+  .argument("<asset-id>")
+  .requiredOption("--prompt-file <path>")
+  .requiredOption("--source <path>")
+  .requiredOption("--module-id <id>")
+  .requiredOption("--cycle-id <id>")
+  .option("--seconds <seconds>", "target duration: 4, 8, or 12", "8")
+  .option("--aspect-ratio <ratio>", "16:9, 9:16, or 1:1", "16:9")
+  .option("--input-reference <path>", "PNG, JPEG, or WebP image used as the first-frame reference")
+  .action(async (workshopId, assetId, options) => {
+    try {
+      const aspectRatio = options.aspectRatio as "16:9" | "9:16" | "1:1";
+      if (!["16:9", "9:16", "1:1"].includes(aspectRatio)) throw new Error(`Unsupported ratio: ${aspectRatio}`);
+      console.log(
+        await submitVideo({
+          workshopId,
+          moduleId: options.moduleId,
+          cycleId: options.cycleId,
+          assetId,
+          promptFile: options.promptFile,
+          source: options.source,
+          durationSeconds: Number.parseInt(options.seconds, 10),
+          aspectRatio,
+          inputReference: options.inputReference
+        })
+      );
+    } catch (error) {
+      if (error instanceof FoundryRequestError) {
+        console.error(`Foundry Error (${error.status}): ${error.message}`);
+        console.error(`Response Body: ${error.responseBody}`);
+      }
+      throw error;
+    }
+  });
+
+program
+  .command("promote-image")
+  .argument("<manifest>")
+  .argument("<target>")
+  .description("Promote a reviewed image candidate into its workshop")
+  .action(async (manifest, target) => promoteImage(manifest, target));
+
+program
+  .command("video-status")
+  .argument("<manifest>")
+  .description("Refresh a Sora job stored in a video manifest")
+  .action(refreshVideoStatus);
+
+program
+  .command("publish-video")
+  .argument("<manifest>")
+  .argument("<video-file>")
+  .description("Upload an approved video to Azure Blob Storage")
+  .action(publishVideo);
+
+program
+  .command("download-video")
+  .argument("<manifest>")
+  .argument("<output-file>")
+  .description("Download a completed Sora video to a local file")
+  .action(downloadVideo);
+
+program.parseAsync().catch((error: unknown) => {
+  console.error(error instanceof Error ? error.message : error);
+  process.exitCode = 1;
+});

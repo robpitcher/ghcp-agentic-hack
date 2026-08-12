@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "cloud-agent-parallel-handoff",
+  "kind": "image",
+  "provider": "gpt-image-2",
+  "deployment": "gpt-image-2",
+  "promptHash": "4d1c63120f87e8e853146d98467323c2c54b02943454ad4ea619aac9d411e561",
+  "prompt": "Create one presentation-scale, text-free illustration for Slide 18, \"Copilot Cloud Agent.\"\r\n\r\nTEACHING JOB AND ACCEPTED V4 COMPOSITION\r\nRetain the accepted v4 two separate parallel physical tracks. Agent Mergewell remains beside the local interactive track. Riley Relay performs eligible bounded background software work on the remote elevated track. Separate blank evidence packets from both tracks converge only at Mergewell's review desk; neither reaches an acceptance control automatically. No Purrmission or gadget.\r\n\r\nCANONICAL CHARACTER LOCK\r\nMergewell is the accountable adult human field agent: light tan skin; clean-shaven canonical face; thick rectangular glasses; wild dark-to-silver inventor hair; expressive brows and warm goofy professor-inventor demeanor; mid-thigh charcoal technical coat with green seams; dark trousers; practical shoes; compact quiet shoulder pod. Depict him once, at the review/local position, not duplicated.\r\nRiley is the adult nonhuman software collaborator: canonical adult face; dark shoulder-length hair; purple temple light; synthetic neck seam; charcoal long coat with purple lining/cuffs; warm-white top; charcoal cropped trousers; black loafers; visible mechanical forearms/hands and robotic lower legs; restrained purple-lit joints. She performs bounded remote work and returns evidence; she never reviews for acceptance, merges, or makes final decisions.\r\n\r\nCOMPOSITION AND NATIVE BOUNDARY\r\nRight-pane landscape 1536x1024 on soft off-white. Keep both tracks, both characters, packets, and review endpoint inside center 76 percent width and 80 percent height. Leave native-label zones above tracks.\r\n\r\nAPPROVED STYLE BLOCK — VERBATIM\r\nHuman-centered 2D editorial cartoon, warm editorial illustration style, soft off-white background, slightly richer color palette with warm coat shadows, expressive face detail on characters, clean rounded outlines with gentle weight variation, GitHub-green and Copilot-purple accents, light grounding shadow under characters, professional but approachable and likable tone.\r\n\r\nHARD NEGATIVE CONSTRAINTS\r\nNo text, branch names, UI, cloud logo, logos, mascots, copyrighted likenesses, duplicated Mergewell, automatic merge, shared track/body, extra characters, hidden Riley mechanics, malformed anatomy, or photorealism.",
+  "source": "content/modules/02-agentic/media/prompts/images/cloud-agent-parallel-handoff-riley-v2.txt",
+  "createdAt": "2026-08-11T17:44:49.152Z",
+  "reviewStatus": "approved",
+  "location": "assets/images/agentic/cloud-agent-parallel-handoff.png",
+  "width": 1536,
+  "height": 1024
+}

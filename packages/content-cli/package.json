@@ -1,0 +1,26 @@
+{
+  "name": "@ghcp/content-cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "content": "./src/cli.ts"
+  },
+  "scripts": {
+    "content": "tsx src/cli.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ghcp/content-schema": "workspace:*",
+    "@ghcp/foundry-providers": "workspace:*",
+    "commander": "^14.0.0",
+    "fast-glob": "^3.3.3",
+    "fs-extra": "^11.3.0",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "tsx": "^4.20.3"
+  }
+}

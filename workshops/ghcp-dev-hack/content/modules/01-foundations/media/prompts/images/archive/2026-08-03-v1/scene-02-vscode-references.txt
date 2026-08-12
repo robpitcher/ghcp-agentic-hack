@@ -1,0 +1,8 @@
+Human-centered 2D editorial cartoon, warm editorial illustration style, soft off-white background, slightly richer color palette with warm coat shadows, expressive face detail on characters, clean rounded outlines with gentle weight variation, GitHub-green and Copilot-purple accents, light grounding shadow under characters, professional but approachable and likable tone.
+
+Original character Agent Mergewell: mid-length charcoal technical coat with GitHub-green seam accents, compact shoulder tool pod with modular attachments, thick rectangular glasses, wild Einstein-inspired inventor hair with dark-to-silver tones, light tan skin, clean-shaven face, warm expressive face, endearing goofy professor-inventor demeanor.
+
+Scene: Agent Mergewell stands at a large evidence pinboard mapped into five clearly distinct zones arranged in a pentagon or cluster: IDE (top), Terminal (upper right), GitHub.com (lower right), Cloud (lower left), App (upper left). Each zone has a simple abstract icon glyph — no logos, no product UI. Thin rope lines connect all five zones to a central glowing green hub dot at the center of the board. Mergewell gestures at the board with one hand, expression explaining — this is the terrain map. The image concept: Copilot is not one place, it's five connected surfaces. Clear, bold, instructive.
+
+No logos, no mascots, no Octocat, no GitHub Copilot mascot, no generated readable text beyond single-word zone labels, no real product UI, no Inspector Gadget likeness, no Albert Einstein portrait recreation, no cluttered backgrounds.
+
