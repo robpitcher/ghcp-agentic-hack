@@ -269,6 +269,8 @@ export async function exportPublicRelease(
         ...module.data.assets
       ];
       for (const reference of references) await copyDependency(reference);
+      const slideStyle = path.posix.join(path.posix.dirname(module.data.slides), "style.css");
+      if (await pathExists(path.resolve(entry.root, slideStyle))) await copyDependency(slideStyle);
       for (const asset of module.data.assets) {
         const sidecarPath = path.resolve(entry.root, `${asset}.json`);
         if (!(await pathExists(sidecarPath))) continue;

@@ -256,40 +256,7 @@ class: agentic-priority-slide
 # The Agentic Loop
 ::content::
 
-<div class="agentic-static-stage agentic-static-stage--dense agentic-static-stage--with-band" role="group" aria-label="An observable six-stage loop branches to retry, ask, stop, recover, or Mergewell's human verification">
-  <img src="/images/observable-agentic-loop.png" alt="Riley follows a six-stage work loop whose evidence reaches Mergewell for verification">
-  <ol class="agentic-static-overlay agentic-static-overlay--six" aria-label="Observable loop stages">
-    <li class="agentic-static-chip"><b>Understand</b><span>Goal and limits</span></li>
-    <li class="agentic-static-chip"><b>Plan</b><span>Files · tools · checks</span></li>
-    <li class="agentic-static-chip"><b>Act</b><span>One allowed action</span></li>
-    <li class="agentic-static-chip"><b>Observe</b><span>Visible result</span></li>
-    <li class="agentic-static-chip agentic-static-chip--purple"><b>Adjust</b><span>Choose next route</span></li>
-    <li class="agentic-static-chip agentic-static-chip--green"><b>Verify</b><span>Human gate</span></li>
-  </ol>
-  <div class="agentic-static-overlay agentic-static-overlay--bottom">
-    <div class="agentic-static-chip agentic-static-chip--amber">↺ Retry · ? Ask · ⊣ Stop · ↩ Recover</div>
-    <div class="agentic-static-chip agentic-static-chip--green"><b>Mergewell · human verifier</b><span>Evidence—not a completion claim</span></div>
-  </div>
-  <div class="agentic-static-band">Inspect requests, outputs, diffs, logs, checks, and decisions—not hidden reasoning.</div>
-</div>
-
-<style>
-.agentic-loop-plate{--ink:#24211f;--muted:#625b54;--line:#d8cfc2;--paper:#fffdf7;--rail:#403a36;--purple:#7650b7;--green:#287a45;display:grid;grid-template-rows:auto auto auto;gap:.8rem;height:100%;align-content:center;color:var(--ink)}
-.agentic-loop-route{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.55rem;align-items:stretch;margin:0;padding:0;list-style:none}
-.agentic-loop-route .agentic-step{position:relative;min-height:5.6rem;padding:1rem .55rem .7rem;border:1px solid var(--line);border-top:5px solid var(--rail);border-radius:.7rem;background:var(--paper);box-shadow:0 5px 12px rgb(77 61 45 / 7%);text-align:left}
-.agentic-loop-route .agentic-step:not(:last-child)::after{content:"→";position:absolute;z-index:2;right:-.52rem;top:42%;color:var(--rail);font-weight:900}
-.agentic-loop-route .agentic-step b{display:block;font-size:.92rem}.agentic-loop-route .agentic-step span{display:block;margin-top:.28rem;color:var(--muted);font-size:.69rem;line-height:1.25}
-.agentic-loop-route .agentic-step--adjust{border-top-color:var(--purple)}.agentic-loop-route .agentic-step--verify{border-top-color:var(--green)}
-.agentic-route-condition{display:block;margin-bottom:.28rem;color:var(--muted);font-size:.62rem!important;font-weight:850;letter-spacing:.075em;line-height:1.15;text-transform:uppercase}
-.agentic-branch-zone{display:grid;grid-template-columns:2fr 1fr;gap:.7rem;align-items:start}
-.agentic-result-branch{grid-column:1;padding:.65rem .75rem .7rem;border:1px dashed #9d8f83;border-radius:.7rem;background:#fbf7f0}
-.agentic-result-branch::before{content:"Observed result changes the route";display:block;margin-bottom:.45rem;color:var(--muted);font-size:.63rem;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
-.agentic-branch-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.4rem;margin:0;padding:0;list-style:none}
-.agentic-branch-list li{padding:.42rem .3rem;border:1px solid var(--line);border-radius:999px;background:#fff;text-align:center;font-size:.69rem;font-weight:800}
-.agentic-branch-list li:nth-child(3){border-style:double;border-width:3px}.agentic-branch-list li:nth-child(4){border-radius:.25rem}
-.agentic-verifier{grid-column:2;padding:.58rem .65rem;border-left:5px solid var(--green);border-radius:.5rem;background:#eef8ef;font-size:.7rem;line-height:1.25}
-.agentic-loop-plate .agentic-callout{margin:0;padding:.65rem .8rem;border:1px solid var(--line);border-left:5px solid #3f78a8;border-radius:.55rem;background:#f3f7fa;box-shadow:0 4px 10px rgb(77 61 45 / 6%)}
-</style>
+<AgenticLoopNativeAnimation />
 
 <!--
 Follow the moving emphasis: from 0–4 seconds Mergewell frames the brief in Understand, from 4–8 he reviews Riley's bounded Plan, from 8–12 Riley Acts, and from 12–16 Riley Observes the consequential result and stops. From 16–20, Purrmission signals the Ask boundary but does not decide; accountable Mergewell chooses how to Adjust. From 20–24 Riley performs the narrowed Corrective Act, from 24–28 Mergewell Verifies the returned evidence, and the final two-second hold reinforces that verification does not itself imply acceptance. Retry, Ask, Stop, and Recover remain visible as deliberate evidence-based outcomes rather than mandatory steps in one linear path. Present this as an observable learner workflow synthesized from visible capabilities, not a universal internal state machine or a claim about hidden reasoning. [Sources: AGT-12; AGT-13; AGT-14.]

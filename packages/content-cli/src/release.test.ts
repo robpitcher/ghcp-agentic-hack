@@ -194,6 +194,10 @@ status: published
       "# Introduction"
     );
     await writeFile(
+      path.join(root, "workshops", "test-workshop", "content", "modules", "01-intro", "style.css"),
+      ".slidev-layout { color: rebeccapurple; }"
+    );
+    await writeFile(
       path.join(root, "workshops", "test-workshop", "content", "modules", "01-intro", "source.md"),
       "# Source"
     );
@@ -348,6 +352,12 @@ workshops:
         "utf8"
       )
     ).resolves.toContain("Generate a diagram");
+    await expect(
+      readFile(
+        path.join(output, "workshops", "test-workshop", "content", "modules", "01-intro", "style.css"),
+        "utf8"
+      )
+    ).resolves.toContain("rebeccapurple");
     await expect(
       readFile(
         path.join(
