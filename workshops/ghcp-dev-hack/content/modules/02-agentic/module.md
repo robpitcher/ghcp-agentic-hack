@@ -51,12 +51,12 @@ generation:
   manifest: content/modules/02-agentic/slide-manifest.md
   imageProvider: gpt-image-2
   visualStyle: >-
-    Native-first warm editorial Agent Mergewell world. Fourteen approved static
-    character-world images are integrated on their approved slides with
-    contained rendering and native Slidev overlays. Render labels, code,
-    commands, product UI, findings, and evidence as native Slidev or HTML; no
-    generated text, code, product UI, labels, logos, GitHub mascots or other
-    unapproved media.
+    Native-first warm editorial Agent Mergewell world. Thirteen approved static
+    character-world images and one approved native animation are integrated on
+    their approved slides with contained rendering and native Slidev overlays.
+    Render labels, code, commands, product UI, findings, and evidence as native
+    Slidev or HTML; no generated text, code, product UI, labels, logos, GitHub
+    mascots or other unapproved media.
 labs: []
 missions:
   - content/missions/agentic/agent-task.md
@@ -65,7 +65,6 @@ assets:
   - assets/images/agentic/instruction-conflict-human-resolution.png
   - assets/images/agentic/custom-agent-specialist-role.png
   - assets/images/agentic/tool-action-workbench.png
-  - assets/images/agentic/observable-agentic-loop.png
   - assets/images/agentic/plan-before-action-route.png
   - assets/images/agentic/approval-boundary-human-decision.png
   - assets/images/agentic/evidence-human-verification.png
@@ -142,11 +141,11 @@ totals for Advanced through `content/missions/agentic/agent-task.md`.
 
 ## Production boundary
 
-The 14 approved static images declared above remain promoted, portable, and
-integrated on slides 1, 5, 8-13, 17-20, 23, and 24 through contained
-module-public paths with native labels and evidence. The module-local
-stylesheet reproduces the owner-approved static deck without changing the
-shared theme. This recovery authorizes no additional prompts, generated
-pixels, images, video, animation, media placeholders, logos, mascot artwork,
-paid actions, candidate generation, publication, release, or shared-theme
-changes.
+The 13 approved static images declared above remain promoted, portable, and
+integrated on slides 1, 5, 8, 9, 11-13, 17-20, 23, and 24 through contained
+module-public paths with native labels and evidence. Slide 10 uses the approved
+deterministic native animation. The module-local stylesheet reproduces the
+owner-approved deck without changing the shared theme. This recovery authorizes
+no additional prompts, generated pixels, images, video, animation, media
+placeholders, logos, mascot artwork, paid actions, candidate generation,
+publication, release, or shared-theme changes.

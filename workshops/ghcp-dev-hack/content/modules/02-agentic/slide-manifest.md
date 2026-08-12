@@ -62,9 +62,10 @@ Expected slide count: **25**
 - Titles and order are exact; older counts and titles are historical only.
 - Every slide has exactly one immediately following 3–5 sentence,
   source-mapped speaker-notes HTML comment.
-- Fourteen approved static images are integrated on slides 1, 5, 8–13, 17–20,
-  23, and 24 through contained module-public paths and native overlays.
-  Product UI, code, commands, labels, diagrams, and evidence remain native; no
+- Thirteen approved static images are integrated on slides 1, 5, 8, 9, 11–13,
+  17–20, 23, and 24 through contained module-public paths and native overlays.
+  Slide 10 uses the approved deterministic 30-second native animation. Product
+  UI, code, commands, labels, diagrams, and evidence remain native; no
   additional media or generated teaching text is authorized.
 - Security is bounded to AGT-32–AGT-38 and excludes complete-audit,
   universal, automatic, clean-result acceptance, and merge-permission claims.
