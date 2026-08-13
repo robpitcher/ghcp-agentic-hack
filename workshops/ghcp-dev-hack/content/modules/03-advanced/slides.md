@@ -9,7 +9,7 @@ mdc: true
 ---
 
 <div class="advanced-brand-row">
-  <img src="../../../assets/brand/microsoft/microsoft-logo.png" alt="Microsoft" class="advanced-microsoft-logo" />
+  <img src="/images/microsoft-logo.png" alt="Microsoft" class="advanced-microsoft-logo" />
   <span class="advanced-github-text">GitHub</span>
 </div>
 
@@ -101,7 +101,7 @@ This handoff is time-neutral in repository metadata.
 
 ::visual::
 
-<img src="../../../assets/images/foundations/copilot-app-synthesis.png" alt="Agent Mergewell synthesizing evidence from configured work sources within the Copilot App" />
+<img src="/images/copilot-app-synthesis.png" alt="Agent Mergewell synthesizing evidence from configured work sources within the Copilot App" />
 
 <!--
 Introduce the guest without committing the repository to a name, biography, deck, portrait, or promised demonstration. Connect the handoff to the approved Foundations framing of the Copilot App as an agent-native desktop with inspectable work surfaces. Resume at the orchestration choice model when the live segment ends. Timebox this repository slide to 0 minutes. [Sources: Advanced workshop guide, Copilot App handoff; approved Foundations Copilot App raster.]
