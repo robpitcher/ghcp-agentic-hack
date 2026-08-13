@@ -4,8 +4,8 @@ kind: module
 id: advanced
 title: Advanced Workflows
 description: >-
-  Apply advanced Copilot orchestration, integration, review, debugging, and
-  deployment workflows with governance discipline.
+  Apply advanced Copilot orchestration, governed workplace-context integration,
+  evaluation, recovery, and parallel-work integration with human acceptance.
 duration: 1 hour 30 minutes
 totalMinutes: 90
 timing:
@@ -21,6 +21,8 @@ objectives:
   - Evaluate ecosystem resources and integration surfaces before enterprise use
   - Apply agent skills and MCP context to governed Copilot code review workflows
   - Debug agent behavior using narrowed context and observable evidence
+  - Evaluate agent outcomes against explicit acceptance criteria and recover to a known state
+  - Integrate parallel work with dependency ordering, combined validation, rollback, and human acceptance
   - 'Plan maintainable distribution, deployment, and Day 2 workflows'
 prerequisites:
   - Foundations module
@@ -32,31 +34,27 @@ sourceDocuments:
   - content/modules/03-advanced/product-update-brief.md
 slides: content/modules/03-advanced/slides.md
 generation:
-  expectedSlides: 23
+  expectedSlides: 20
   manifest: content/modules/03-advanced/slide-manifest.md
-  imageProvider: flux-2-pro
+  imageProvider: gpt-image-2
   visualStyle: >-
-    Human-centered 2D editorial cartoon animation on pure white backgrounds;
-    original human characters with expressive poses; crisp rounded outlines,
-    flat color, minimal shadows, restrained contribution-grid and
-    Octicon-inspired geometry; 85% white, 10% neutral gray, 3% GitHub green, 2%
-    Copilot purple; native Mona Sans labels and detailed speaker notes; no
-    generated text, product UI, logos, mascots, robots, or branded characters
+    Native Warm Editorial 2D on soft off-white and white stages; selective
+    original character role frames only for accountability, delegation, safety,
+    evidence handoff, or continuity; native object and process metaphors
+    elsewhere; crisp rounded outlines, warm minimal shadows, restrained
+    neutral, GitHub green, and Copilot purple accents; native Mona Sans labels
+    and detailed speaker notes; no generated text, product UI, logos, mascots,
+    robots, or branded characters
 labs: []
 missions:
   - content/missions/advanced/cross-cutting-change.md
 assets:
-  - assets/images/advanced/01-title-animated.png
-  - assets/images/advanced/03-multiagents-light-sample.png
-  - assets/images/advanced/03-multiagents-animated.png
-  - assets/images/advanced/04-trusted-discovery-animated.png
-  - assets/images/advanced/09-marketplace-trust-animated.png
-  - assets/images/advanced/10-mcp-light-sample.png
-  - assets/images/advanced/12-plugin-supply-chain-animated.png
-  - assets/images/advanced/14-debugging-light-sample.png
-  - assets/images/advanced/14-debugging-evidence-animated.png
-  - assets/images/advanced/16-day-2-plan-animated.png
-status: draft
+  - assets/brand/microsoft/microsoft-logo.png
+  - assets/images/advanced/accountable-trio-cover-anchor.png
+  - assets/images/advanced/parallel-integration-yard-anchor.png
+  - assets/images/advanced/role-return-merge-gate-anchor.png
+  - assets/images/foundations/copilot-app-synthesis.png
+status: review
 ---
 
 # Advanced Workflows

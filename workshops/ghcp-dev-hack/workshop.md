@@ -357,6 +357,64 @@ researchSources:
       Workshop owner supplied and authorized the official Microsoft logo for an
       unmodified native title-slide overlay.
   - type: other
+    title: Work IQ overview
+    url: >-
+      https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/work-iq/
+    reviewedAt: '2026-08-12'
+    notes: >-
+      Defines Work IQ as a permission-aware workplace-intelligence layer and
+      documents A2A, MCP, REST, tenant governance, and usage-based access.
+  - type: other
+    title: Microsoft Work IQ API
+    url: >-
+      https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/work-iq/api-overview
+    reviewedAt: '2026-08-12'
+    notes: >-
+      Verifies supported Microsoft 365 context, delegated authentication,
+      existing permission and compliance boundaries, and the absence of
+      application-only authentication.
+  - type: other
+    title: Work IQ MCP overview
+    url: >-
+      https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/work-iq/mcp/overview
+    reviewedAt: '2026-08-12'
+    notes: >-
+      Documents the remote MCP server and its governed, permission-dependent
+      tool boundary.
+  - type: other
+    title: Connect GitHub Copilot CLI to the Work IQ MCP server
+    url: >-
+      https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/work-iq/mcp/quickstart/github-copilot-cli
+    reviewedAt: '2026-08-12'
+    notes: >-
+      Officially documents GitHub Copilot CLI as a Work IQ MCP client; this does
+      not establish equivalent support in other GitHub Copilot surfaces.
+  - type: other
+    title: Enable your tenant for Work IQ
+    url: >-
+      https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/work-iq/enable-work-iq
+    reviewedAt: '2026-08-12'
+    notes: >-
+      Verifies tenant enablement, administrator setup, assigned-user, Azure, and
+      usage-based billing prerequisites.
+  - type: other
+    title: Usage-Based Billing and Cost Management for Copilot Credits
+    url: >-
+      https://learn.microsoft.com/en-us/microsoft-365/copilot/usage-based-billing-overview-copilot-credits
+    reviewedAt: '2026-08-12'
+    notes: >-
+      Verifies Work IQ API consumption through Copilot Credits and
+      administrative spending controls; exact workshop pricing claims remain
+      excluded.
+  - type: other
+    title: Announcing the new Work IQ APIs
+    url: >-
+      https://www.microsoft.com/en-us/microsoft-365/blog/2026/06/02/announcing-the-new-work-iq-apis/
+    reviewedAt: '2026-08-12'
+    notes: >-
+      Confirms Work IQ API general availability on June 16, 2026, and the
+      workplace-context categories described in presenter notes.
+  - type: other
     title: GitHub Brand Toolkit — Copilot
     url: 'https://brand.github.com/brand-identity/copilot'
     reviewedAt: '2026-08-04'
@@ -448,12 +506,29 @@ researchSources:
     title: GitHub Copilot CLI command reference
     url: >-
       https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference
-    reviewedAt: '2026-08-10'
+    reviewedAt: '2026-08-12'
     notes: >-
-      Approved for the Agentic security-slide boundary that treats
-      /security-review as a focused review of active CLI changes, not a complete
-      audit; organization policy applies and the command has no documented
-      release-status label.
+      Approved for the Agentic security boundary and Advanced CLI surface
+      boundary. Verifies /fleet, /tasks, /diff, and /session as Copilot CLI
+      commands; CLI availability must not be generalized to IDE Chat, inline
+      completions, or the Copilot App.
+  - type: other
+    title: Running tasks in parallel with the /fleet command
+    url: 'https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet'
+    reviewedAt: '2026-08-12'
+    notes: >-
+      Approved for Advanced slide 7. Verifies Copilot CLI parallel subagent
+      orchestration, independent-task fit, separate context windows, and
+      increased AI-credit exposure; the page has no visible preview or GA label.
+  - type: other
+    title: Speeding up task completion with /fleet
+    url: >-
+      https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/speed-up-task-completion
+    reviewedAt: '2026-08-12'
+    notes: >-
+      Approved for the native /fleet invocation and /tasks inspection path in
+      Copilot CLI. It does not establish support in VS Code Chat, inline
+      completions, or the Copilot App.
   - type: other
     title: About GitHub Copilot CLI
     url: >-
@@ -467,11 +542,12 @@ researchSources:
     title: Working with agent sessions in the GitHub Copilot app
     url: >-
       https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions
-    reviewedAt: '2026-08-10'
+    reviewedAt: '2026-08-12'
     notes: >-
-      Approved for focused review of current diffs in an active app agent
-      session with changes; the app workflow is public preview and findings
-      still require human validation.
+      Approved for focused review of session, worktree, branch, pull-request,
+      CI, and diff evidence in the app. Current app documentation does not
+      document /fleet, so the Advanced module does not infer command parity from
+      the app's CLI foundation.
   - type: other
     title: Slash commands for the GitHub Copilot app
     url: >-
@@ -613,7 +689,7 @@ researchSources:
     notes: >-
       Verified rollback as a CLI-specific capability supporting reversibility
       guidance.
-lastReviewed: '2026-08-07'
+lastReviewed: '2026-08-12'
 ---
 # GitHub Copilot Developer Hack
 

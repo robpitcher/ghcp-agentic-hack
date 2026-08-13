@@ -2,133 +2,163 @@
 theme: ghcp
 title: "Module 3: Advanced — Workshop Guide"
 layout: advanced-cover
+class: advanced-cover--plate
 transition: slide-left
 colorSchema: light
 mdc: true
 ---
 
+<div class="advanced-brand-row">
+  <img src="../../../assets/brand/microsoft/microsoft-logo.png" alt="Microsoft" class="advanced-microsoft-logo" />
+  <span class="advanced-github-text">GitHub</span>
+</div>
+
 <div class="advanced-kicker">GitHub Copilot · Advanced workflows</div>
 
 # Module 3: Advanced — Workshop Guide
 
-Practical orchestration for production-ready AI-assisted development
+Accountable orchestration, governed integration, evaluation, recovery, and final human acceptance
 
-**2 hours · Presentation + Hands-On**
+**60-minute teaching path · 30-minute mission**
 
 ::visual::
 
-![Advanced GitHub Copilot workshop orchestration](../../../assets/images/advanced/01-title-animated.png)
+<div class="advanced-semantic-plate advanced-semantic-plate--cover">
+  <img class="advanced-plate-image" src="/images/accountable-trio-cover-anchor.png" alt="Agent Mergewell, Riley Relay, and Purrmission gathered around a bounded case table" />
+  <span class="advanced-semantic-label advanced-cover-label--plan">Plan + scope</span>
+  <span class="advanced-semantic-label advanced-cover-label--evidence">Returned evidence</span>
+  <span class="advanced-semantic-label advanced-cover-label--safety">Safety boundary</span>
+  <span class="advanced-semantic-label advanced-semantic-label--human advanced-cover-label--acceptance">Human acceptance</span>
+</div>
 
 <!--
-This module focuses on practical orchestration and production-readiness patterns for scaled AI-assisted development. It covers multiagent choices, trusted resource discovery, governed integration surfaces, debugging methodology, deployment pathways, and Day 2 readiness. The audience has already completed Foundations and Intermediate Agentic content and understands instructions, tools, and agentic workflows. Frame every advanced technique as a bounded engineering choice with evidence, governance, and cost awareness.
-Timebox this opening slide to 2 minutes.
+Advanced moves from choosing an accountable orchestration pattern to governed integration, evaluation, recovery, and final acceptance. Agent Mergewell is the accountable human, Riley Relay represents bounded software-agent collaboration, and Purrmission guards consequential safety boundaries. The approved cover plate keeps the plan, returned evidence, safety boundary, and final acceptance visibly attached to those distinct roles. Timebox this opening to 1 minute. [Sources: Advanced workshop guide; visual intent; approved art direction and candidate review.]
 -->
 
 ---
 layout: advanced-content
 ---
 
-<div class="advanced-kicker">120-minute journey</div>
+<div class="advanced-kicker">20 slides · 60-minute teaching route</div>
 
 # Session Agenda
 
 <div class="advanced-agenda">
   <div class="advanced-agenda__item">
-    <div class="advanced-agenda__time">5</div>
-    <strong>Optimize first</strong>
-    <span>Models · prompts · context · cache</span>
+    <div class="advanced-agenda__time">2</div>
+    <strong>Open</strong>
+    <span>Orient · guest handoff at 0</span>
   </div>
   <div class="advanced-agenda__item advanced-agenda__item--focus">
-    <div class="advanced-agenda__time">35</div>
+    <div class="advanced-agenda__time">16</div>
     <strong>Orchestrate</strong>
-    <span>Multiagents · subagent evidence · fleet · worktrees</span>
+    <span>Choose · delegate · isolate</span>
   </div>
   <div class="advanced-agenda__item">
-    <div class="advanced-agenda__time">45</div>
-    <strong>Integrate safely</strong>
-    <span>Hooks · MCP · plugins · governed code review</span>
+    <div class="advanced-agenda__time">23</div>
+    <strong>Govern</strong>
+    <span>Surfaces · skills · MCP</span>
   </div>
   <div class="advanced-agenda__item advanced-agenda__item--focus">
-    <div class="advanced-agenda__time">35</div>
-    <strong>Operate</strong>
-    <span>Agents window · debug · deploy · Day 2</span>
+    <div class="advanced-agenda__time">17</div>
+    <strong>Evaluate + integrate</strong>
+    <span>Evidence · recover · prove</span>
+  </div>
+  <div class="advanced-agenda__item">
+    <div class="advanced-agenda__time">2</div>
+    <strong>Launch mission</strong>
+    <span>Separate 30-minute case</span>
   </div>
 </div>
 
-<div class="advanced-callout advanced-callout--optimization">
-<strong>Usage Optimization:</strong> Model choice, scoped context, and clear stopping conditions are the fastest levers before advanced orchestration begins.
+<div class="advanced-callout">
+The live Copilot App handoff is time-neutral; the teaching route totals 60 minutes before the mission.
 </div>
 
 <!--
-The agenda totals 120 minutes: a five-minute opening, 35 minutes for orchestration and trusted discovery, 45 minutes for governed integration surfaces, and 35 minutes for operations and Day 2 readiness. The three numbered sections each include a ten-minute hands-on pause, preserving 30 minutes of lab time inside the section budgets. Reconnect the opening to six optimization strategies: model choice, clear prompts, lean context, cache preservation, phased work, and captured learnings. Use the presenter-note timeboxes to protect practice time and shorten discussion rather than skipping required content.
-Timebox this agenda slide to 3 minutes.
+The route spends 2 minutes opening, 16 establishing accountable orchestration, 23 governing integration surfaces and workplace context, 17 evaluating and integrating evidence, and 2 launching the mission. The Copilot App guest handoff is time-neutral in repository metadata. The mission remains a separate 30-minute experience after teaching. Timebox this agenda to 1 minute. [Source: Advanced workshop guide, Session Agenda; slide manifest.]
 -->
 
 ---
-layout: advanced-concept
+layout: two-panel
 ---
 
-# Multiagents (what they are & when to use them) + Brady Gaster's Squad quick look
+::title::
+# Copilot App: Guest Deep Dive
 
-<div class="advanced-concept__reveal">
+::text::
 
-<div v-click class="advanced-callout advanced-callout--safety">
-<strong>AI Safety Moment:</strong> orchestration needs named ownership, bounded responsibilities, and explicit merge controls so parallel work does not create silent conflicts.
-</div>
+## Live product perspective
 
-<div v-click class="advanced-prompt advanced-prompt--reveal"><strong>Show me — choose multiagent, subagent, or fleet</strong>For this Copilot Quest scenario, decide whether to use one agent, subagents, multiagents, or fleet-style parallel execution. Explain the ownership model, boundaries, review evidence, and why the choice saves time or AICs without weakening merge control.</div>
+- Welcome the guest without fixing identity, biography, deck, or demo claims
+- Connect to an **agent-native desktop** with inspectable work surfaces
+- Keep the live segment event-neutral
+- Resume at **Multi-Agent Orchestration: Roles, Boundaries, and Merge Ownership**
 
+<div class="ghcp-callout">
+This handoff is time-neutral in repository metadata.
 </div>
 
 ::visual::
 
-<BrandedVisual 
-  src="../../../assets/images/advanced/03-multiagents-animated.png" 
-/>
+<img src="../../../assets/images/foundations/copilot-app-synthesis.png" alt="Agent Mergewell synthesizing evidence from configured work sources within the Copilot App" />
 
 <!--
-Multiagents coordinate multiple AI workers or roles around a shared objective only when ownership, evidence, and merge control can be separated cleanly. Use independent research, implementation, validation, or review lanes, but keep one human owner responsible for the final plan, merge, and escalation path. Brady Gaster's Squad is a quick ecosystem example of squad-style coordination rather than a required workshop dependency or automatic enterprise approval. Use the exact decision prompt to compare coordination cost with expected time or AIC savings before choosing this pattern.
-Timebox this slide to 4 minutes.
+Introduce the guest without committing the repository to a name, biography, deck, portrait, or promised demonstration. Connect the handoff to the approved Foundations framing of the Copilot App as an agent-native desktop with inspectable work surfaces. Resume at the orchestration choice model when the live segment ends. Timebox this repository slide to 0 minutes. [Sources: Advanced workshop guide, Copilot App handoff; approved Foundations Copilot App raster.]
+-->
+
+---
+layout: advanced-concept
+class: advanced-concept--role-return
+---
+
+<div class="advanced-kicker">Three obligations · one accountable merge</div>
+
+# Multi-Agent Orchestration: Roles, Boundaries, and Merge Ownership
+
+::visual::
+
+<div class="advanced-semantic-plate advanced-semantic-plate--role-return">
+  <img class="advanced-plate-image advanced-plate-image--role-return" src="/images/role-return-merge-gate-anchor.png" alt="Three bounded work lanes return evidence through Riley Relay to Agent Mergewell at a human-owned merge gate" />
+  <span class="advanced-semantic-label advanced-role-return-label--research">Research → Sources</span>
+  <span class="advanced-semantic-label advanced-role-return-label--implement">Implement → Diff</span>
+  <span class="advanced-semantic-label advanced-role-return-label--validate">Validate → Checks</span>
+  <span class="advanced-semantic-label advanced-role-return-label--evidence">Returned evidence</span>
+  <span class="advanced-semantic-label advanced-semantic-label--human advanced-role-return-label--gate">Human merge gate</span>
+  <span class="advanced-semantic-label advanced-semantic-label--human advanced-role-return-label--merge">Reconcile + merge</span>
+</div>
+
+<!--
+Multi-agent orchestration starts with a clear role, a defined return, and one human merge owner. Research returns sources, implementation returns a diff, and validation returns checks that the human can reconcile. Split work only when each role can be independently owned and its evidence can be reviewed without losing accountability. Timebox this role-and-return model to 3 minutes. [Source: Advanced workshop guide, slide 4 contract.]
 -->
 
 ---
 layout: advanced-content
 ---
 
-<div class="advanced-stage advanced-stage--visual-first">
-<div class="advanced-media advanced-media--contain">
-
-![Curated developer resources passing through enterprise trust review](../../../assets/images/advanced/04-trusted-discovery-animated.png)
-
-<div class="advanced-media__caption">Discovery accelerates exploration. Review authorizes use.</div>
-</div>
+<div class="advanced-stage advanced-stage--wide">
 <div>
 
 <div class="advanced-kicker">Discover broadly · approve narrowly</div>
 
 # Awesome Copilot List
 
-<div class="advanced-hero-quote">A curated list is a starting point—not a trust decision.</div>
+<div class="advanced-hero-quote">Discovery is input—not authorization.</div>
 
-<div class="advanced-chips">
-  <span class="advanced-chip">Credibility</span>
-  <span class="advanced-chip">License</span>
-  <span class="advanced-chip">Data handling</span>
-  <span class="advanced-chip advanced-chip--green">Compatibility</span>
+<div v-click class="advanced-prompt advanced-prompt--reveal"><strong>Vet one discovery resource</strong>Review this Copilot skill or ecosystem example as a discovery resource. Identify source credibility, enterprise compatibility, permissions, and what must be approved before the team uses it.</div>
+
 </div>
-
-<div class="advanced-callout advanced-callout--safety">
-<strong>AI Safety Moment:</strong> vet curated resources for source credibility, license posture, data handling, and enterprise compatibility before reuse.
-</div>
-
-<div v-click class="advanced-prompt advanced-prompt--reveal"><strong>Now you try — vet one discovery resource</strong>Review this Copilot skill or ecosystem example as a discovery resource. Identify source credibility, enterprise compatibility, permissions, and what must be approved before the team uses it.</div>
-
+<div class="advanced-gate-path">
+  <div>Curated discovery</div><span>→</span>
+  <div>Provenance + license</div><span>→</span>
+  <div>Permissions + data scope</div><span>→</span>
+  <div>Maintenance + enterprise fit</div><span>→</span>
+  <div class="advanced-gate-path__approved">Approved use</div>
 </div>
 </div>
 
 <!--
-The Awesome Copilot skills catalog is a discovery aid for skills, examples, prompts, and ecosystem ideas, not an enterprise approval mechanism. Separate finding a useful resource from deciding whether the team may install, enable, or reuse it. Review source credibility, license posture, data handling, permissions, and enterprise compatibility, and capture the evidence behind the decision. Use the exact learner prompt to create that trust record rather than relying on popularity or presentation quality.
-Timebox this slide to 4 minutes.
+Curated Copilot resource lists are useful discovery inputs for skills, prompts, and examples. Inclusion or popularity does not establish provenance, license posture, permissions, data handling, maintenance, or enterprise compatibility. Use the native gate path to turn a candidate into a review record before reuse. Timebox this slide to 2 minutes. [Source: Advanced workshop guide, Awesome Copilot List.]
 -->
 
 ---
@@ -142,34 +172,61 @@ layout: advanced-content
 
 # Subagents
 
-<div class="advanced-number">4</div>
-<div class="advanced-metric">elements of a strong delegation</div>
-
 <div class="advanced-chips">
   <span class="advanced-chip advanced-chip--purple">Narrow prompt</span>
-  <span class="advanced-chip">Limited context</span>
-  <span class="advanced-chip">Output contract</span>
-  <span class="advanced-chip advanced-chip--green">Acceptance checks</span>
+  <span class="advanced-chip">Minimal context</span>
+  <span class="advanced-chip">Minimal permissions</span>
+  <span class="advanced-chip advanced-chip--green">Acceptance criteria</span>
+</div>
+
+<div class="advanced-callout">
+Inspection evidence depends on the hosting surface; require what that surface can actually show.
+</div>
+
+</div>
+<div class="advanced-native-board">
+  <div class="advanced-owner-node">Delegating owner</div>
+  <div><span>Research · tests · docs · validation</span><em>No duplication of the parent task</em></div>
+  <div><span>Required output contract</span><em>Scope · artifacts · result · uncertainty · conflicts</em></div>
+  <div class="advanced-merge-node">Attributable return → owner checks acceptance</div>
+</div>
+</div>
+
+<!--
+A subagent receives a narrow prompt, minimal necessary context and permissions, an output shape, acceptance criteria, and a return path. Suitable slices include research, tests, documentation review, and independently checkable validation. Require attributable scope, artifacts, result, uncertainty, and conflicts, while recognizing that in-progress inspection evidence varies by hosting surface. Timebox this slide to 3 minutes. [Sources: Advanced workshop guide, Subagents; product update brief, VS Code agent workflows.]
+-->
+
+---
+layout: advanced-content
+---
+
+<div class="advanced-stage advanced-stage--wide">
+<div>
+
+<div class="advanced-kicker">Copilot CLI · interactive slash commands</div>
+
+# Parallel Subagents with Copilot CLI /fleet
+
+<div class="advanced-callout advanced-callout--optimization">
+<strong>AIC/time optimization:</strong> use parallel execution only when savings exceed task, review, and reconciliation cost.
 </div>
 
 <div class="advanced-callout advanced-callout--safety">
-<strong>AI Safety Moment:</strong> use scoped prompts and minimal permissions per subagent, and keep outputs attributable for auditability.
+Not VS Code Chat, inline completion, Copilot App, or an IDE-wide feature.
 </div>
 
 </div>
-<div class="advanced-orbit">
-  <div class="advanced-orbit__core">Parent</div>
-  <div class="advanced-orbit__node">Research</div>
-  <div class="advanced-orbit__node">Tests</div>
-  <div class="advanced-orbit__node">Docs</div>
-  <div class="advanced-orbit__node">Validate</div>
-  <div class="advanced-orbit__node">Evidence</div>
+<div class="advanced-native-board">
+  <div class="advanced-owner-node">COPILOT CLI</div>
+  <div><span><code>/fleet</code></span><em>Start independent parallel subagent tasks</em></div>
+  <div><span><code>/tasks</code></span><em>Inspect task state and returned evidence in Copilot CLI</em></div>
+  <div><span>Each return</span><em>Scope · changed artifacts · validation · uncertainty · conflicts</em></div>
+  <div class="advanced-merge-node">Human merge owner · review · reconcile · accept</div>
 </div>
 </div>
 
 <!--
-Subagents are scoped delegation units with narrow prompts, limited context, clear output contracts, and acceptance checks. They work best when a larger task can be decomposed into auditable slices such as research, test-writing, documentation review, or validation. A subagent should receive less context and authority than the parent workflow, not a copy of everything. Require every delegated branch to state scope, permissions, output format, and acceptance criteria, and keep every result attributable.
-Timebox this slide to 4 minutes.
+`/fleet` is an interactive slash command documented for GitHub Copilot CLI, and `/tasks` is its CLI inspection path. Use it only for sufficiently independent work where elapsed-time or AIC savings exceed execution, review, and reconciliation cost. It is not a VS Code Chat command, inline-completion feature, Copilot App command, or IDE-wide capability, and a CLI `/ide` connection does not change that ownership. Timebox this slide to 4 minutes. [Sources: Advanced product update brief, Copilot CLI `/fleet`; Advanced workshop guide, slide 7 contract.]
 -->
 
 ---
@@ -179,109 +236,28 @@ layout: advanced-content
 <div class="advanced-stage advanced-stage--wide">
 <div>
 
-<div class="advanced-kicker">Observe delegation while it runs</div>
-
-# Inspect Running Subagents
-
-<div class="advanced-hero-quote">Status is evidence, not decoration.</div>
-
-<div v-click class="advanced-prompt advanced-prompt--reveal"><strong>Human scenario</strong>You asked a teammate to investigate one failing test. Before accepting the answer, check what they are using, how long they have been working, what action is running, and whether the result matches the assignment.</div>
-
-</div>
-<div class="advanced-steps">
-  <div class="advanced-step"><div class="advanced-step__icon">M</div><div><strong>Model</strong><span>Confirm the intended capability and cost</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">T</div><div><strong>Elapsed time</strong><span>Spot stalls and coordination overhead</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">↻</div><div><strong>Active tool call</strong><span>See what the branch is doing now</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">✓</div><div><strong>Output contract</strong><span>Accept only attributable results</span></div></div>
-</div>
-</div>
-
-<!--
-VS Code can expose the model, elapsed time, and active tool call for a running subagent, making delegation inspectable while work is in progress. Use those signals to confirm that the branch has the intended capability, is not stalled, and is operating within its assigned scope. Distinguish a subagent delegated by a parent chat from a peer chat or a separate isolated agent session because ownership and context boundaries differ. Accept the result only when it satisfies the original output contract and remains attributable to the delegated branch.
-Timebox this slide to 4 minutes.
--->
-
----
-layout: advanced-content
----
-
-<div class="advanced-stage advanced-stage--wide">
-<div>
-
-<div class="advanced-kicker">Throughput, not complexity</div>
-
-# Fleet
-
-<div class="advanced-hero-quote">Parallelize only when independence is real.</div>
-
-<div class="advanced-callout advanced-callout--optimization">
-<strong>Usage Optimization:</strong> reserve fleet/parallel execution for high-volume independent tasks where parallelism yields net AIC/time savings.
-</div>
-
-</div>
-<div class="advanced-steps">
-  <div class="advanced-step"><div class="advanced-step__icon">A</div><div><strong>Similar refactors</strong><span>Independent files or bounded repositories</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">B</div><div><strong>Broad issue triage</strong><span>Many unrelated items, one review standard</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">C</div><div><strong>Independent checks</strong><span>Parallel evidence, centralized acceptance</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">✓</div><div><strong>Human merge control</strong><span>Count coordination, review, and merge cost</span></div></div>
-</div>
-</div>
-
-<div class="advanced-callout advanced-callout--optimization">
-<strong>Usage Optimization:</strong> Fleet and multiagent patterns help only when tasks are independent enough to reduce elapsed time or model spend after coordination, review, and merge costs are counted.
-</div>
-
-<!--
-Fleet-style execution runs many independent tasks or agents in parallel when the branches do not block one another. Reserve it for high-volume work such as similar refactors, broad issue triage, or many independent checks where coordination overhead is lower than the expected time and AIC savings. Fleet is a throughput pattern rather than a default response to complexity. Include coordination, review, and merge effort in the estimate, and keep a human owner for the plan, final merge, and escalation path.
-Timebox this slide to 4 minutes.
--->
-
----
-layout: advanced-content
----
-
-<div class="advanced-stage advanced-stage--wide">
-<div>
-
-<div class="advanced-kicker">Isolate concurrent change sets</div>
+<div class="advanced-kicker">Isolation is the start of proof</div>
 
 # Worktrees for Parallel Agent Sessions
 
-<div class="advanced-hero-quote">Separate working trees make overlap visible.</div>
+<div class="advanced-hero-quote">Separate directories do not guarantee compatible changes.</div>
 
 <div class="advanced-callout advanced-callout--safety">
-<strong>AI Safety Moment:</strong> isolation limits accidental file collisions but does not replace review, validation, or controlled merge ownership.
+One human merge owner decides the order and accepts the combined result.
 </div>
 
 </div>
-<div class="advanced-steps">
-  <div class="advanced-step"><div class="advanced-step__icon">1</div><div><strong>One task per worktree</strong><span>Bound scope and branch ownership</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">2</div><div><strong>Independent session</strong><span>Keep context and edits separate</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">3</div><div><strong>Review each diff</strong><span>Validate before integration</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">4</div><div><strong>Merge deliberately</strong><span>Resolve overlap under one owner</span></div></div>
+<div class="advanced-worktree-map">
+  <div class="advanced-repo-root">Repository</div>
+  <div><strong>Worktree A · branch A</strong><span>Isolated context · independent validation</span></div>
+  <div><strong>Worktree B · branch B</strong><span>Isolated context · independent validation</span></div>
+  <div><strong>Overlap + dependency check</strong><span>Files · APIs · schemas · tests · behavior</span></div>
+  <div class="advanced-merge-node"><strong>Compatibility proof</strong><span>Ordered integration · combined validation</span></div>
 </div>
 </div>
 
 <!--
-Worktrees provide an isolation boundary for multiple agent sessions by giving each task a separate working tree and branch. Use them when parallel sessions may edit the same repository but should not share an uncontrolled working directory. A worktree reduces accidental collisions without proving that concurrent changes are compatible, correct, or safe to merge. Keep one human merge owner, review each diff independently, run the required validation, and resolve overlap deliberately.
-Timebox this slide to 5 minutes.
--->
-
----
-layout: advanced-lab
----
-
-<span class="lab-badge">Hands-on · 10 minutes</span>
-
-# Exercise 1 — Stage 7 Orchestration and Discovery Plan
-
-Choose the smallest safe orchestration pattern.
-
-**Deliverable:** ownership · boundaries · review evidence · trusted-discovery gate
-
-<!--
-Students now apply the orchestration decision rather than discussing it abstractly. Require them to identify task independence, ownership, review evidence, and merge control before selecting multiagent, subagent, or fleet-style orchestration. Their trusted-discovery step must distinguish finding a resource from approving it for enterprise use. Keep the exercise within ten minutes and capture one decision artifact per team.
-Allow exactly 10 minutes for this exercise.
+Use one worktree and branch per independent session to isolate files, context, and diffs. Isolation prevents working-directory collision but does not prove independence, compatibility, correctness, or merge safety. Inspect dependencies and overlap, validate each branch independently, then prove compatibility through ordered combined validation. Timebox this slide to 4 minutes. [Sources: Advanced workshop guide, Worktrees for Parallel Agent Sessions; product update brief, VS Code agent workflows.]
 -->
 
 ---
@@ -291,36 +267,31 @@ layout: advanced-content
 <div class="advanced-stage advanced-stage--wide">
 <div>
 
-<div class="advanced-kicker">Deterministic guardrails</div>
+<div class="advanced-kicker">Deterministic lifecycle guardrails</div>
 
 # Hooks
 
-<div class="advanced-hero-quote">Make required checks part of the lifecycle.</div>
-
 <div class="advanced-chips">
   <span class="advanced-chip">.github/hooks/*.json</span>
-  <span class="advanced-chip advanced-chip--green">Validate</span>
-  <span class="advanced-chip advanced-chip--purple">Rollback</span>
+  <span class="advanced-chip">VS Code workspace hooks are separate</span>
 </div>
 
 <div class="advanced-callout advanced-callout--safety">
-<strong>AI Safety Moment:</strong> hooks provide enforceable guardrails through policy checks, secret scanning, and mandatory validation before changes are accepted.
+Require provenance, least privilege, observable failure behavior, validation, and rollback evidence.
 </div>
 
 </div>
-<div class="advanced-steps">
-  <div class="advanced-step"><div class="advanced-step__icon">1</div><div><strong>Before tool call</strong><span>Intercept the lifecycle moment</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">2</div><div><strong>Policy + secret checks</strong><span>Apply deterministic controls</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">3</div><div><strong>Validation evidence</strong><span>Prove the change is safe</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">4</div><div><strong>Accept or stop</strong><span>Keep rollback explicit</span></div></div>
+<div class="advanced-gate-path advanced-gate-path--vertical">
+  <div>Supported surface</div><span>↓</span>
+  <div>Policy + secret checks</div><span>↓</span>
+  <div>Validation evidence</div><span>↓</span>
+  <div>Stop on failure</div><span>↓</span>
+  <div class="advanced-gate-path__approved">Accept or roll back</div>
 </div>
 </div>
-
-<div v-click class="advanced-prompt advanced-prompt--reveal"><strong>Show me — set up and compare hooks, marketplace, MCP, API/CLI, and plugins</strong>For this scenario, compare hooks, Extension Marketplace, MCP, API/CLI, and plugins. Recommend the simplest safe option based on permissions, observability, data scope, enterprise review, and rollback.</div>
 
 <!--
-Hooks create deterministic lifecycle guardrails before a tool call, before a change is accepted, or before a workflow advances. Use them for policy checks, secret scanning, validation commands, and repeatable review gates that should not depend on prompt quality. Repository-level Copilot or agent hooks live in .github/hooks/*.json, can be created from the VS Code integrated terminal or another repository terminal, and need validation plus rollback evidence before they are trusted. Use the exact integration-selection prompt to compare hooks with Extension Marketplace, MCP, API/CLI, and plugins and prefer the narrowest safe surface.
-Timebox this slide to 4 minutes.
+Hooks provide deterministic lifecycle guardrails for policy checks, secret scanning, validation commands, and stop gates. Keep repository `.github/hooks/*.json` guidance scoped to supported cloud-agent and Copilot CLI use, with VS Code workspace hooks treated as a separate configuration. Trust a hook only after reviewing provenance, least privilege, observable failure behavior, validation, and rollback evidence. Timebox this slide to 3 minutes. [Source: Advanced workshop guide, Hooks.]
 -->
 
 ---
@@ -334,193 +305,23 @@ layout: advanced-content
 
 # Extension Marketplace
 
-<div class="advanced-hero-quote">Convenience is not enterprise onboarding.</div>
-
-<div class="advanced-chips">
-  <span class="advanced-chip">Publisher</span>
-  <span class="advanced-chip">Version</span>
-  <span class="advanced-chip">Permissions</span>
-  <span class="advanced-chip">Telemetry</span>
-  <span class="advanced-chip advanced-chip--green">Disable / uninstall</span>
-</div>
+<div class="advanced-hero-quote">Availability is not authorization.</div>
 
 <div class="advanced-callout advanced-callout--safety">
-<strong>AI Safety Moment:</strong> review publisher trust, permissions, data-access needs, support posture, and enterprise compatibility before enabling marketplace extensions.
+Enabling an extension can change permissions, telemetry, execution, and data access.
 </div>
 
-<div v-click class="advanced-prompt advanced-prompt--reveal"><strong>Now you try — change the trust boundary</strong>Re-run the integration decision after adding one new constraint: external data access, production credentials, third-party marketplace publisher, or plugin update risk. Explain whether the recommended surface changes.</div>
-
 </div>
-<div class="advanced-media advanced-media--contain">
-
-![Marketplace choices crossing governed trust gates](../../../assets/images/advanced/09-marketplace-trust-animated.png)
-
-<div class="advanced-media__caption">Prefer reversible, observable controls.</div>
+<div class="advanced-check-board">
+  <div><b>01</b><span>Publisher · version · trust signals</span></div>
+  <div><b>02</b><span>Permissions · telemetry · data handling</span></div>
+  <div><b>03</b><span>Support posture · enterprise policy</span></div>
+  <div><b>04</b><span>Disable / uninstall path</span></div>
 </div>
 </div>
 
 <!--
-Marketplace extensions can expand the developer environment and agent experience, but every addition can change trust, permissions, telemetry, and data-access boundaries. Open the VS Code Extensions view or extension details and inspect publisher, version, install or trust signals, permission and telemetry questions, support posture, and the disable or uninstall path. Treat marketplace enablement as an enterprise onboarding decision rather than an individual convenience choice. Use the exact learner prompt to change one trust-boundary constraint and decide whether the recommended integration surface should change.
-Timebox this slide to 4 minutes.
--->
-
----
-layout: advanced-concept
----
-
-# MCP (Model Context Protocol)
-
-<div class="advanced-concept__reveal">
-
-<div v-click class="advanced-callout advanced-callout--safety">
-<strong>AI Safety Moment:</strong> server onboarding is a security review event covering authentication, authorization, and data-scope controls.
-</div>
-
-</div>
-
-::visual::
-
-![GitHub Copilot requesting tools, resources, prompts, and context through controlled server gates](../../../assets/images/advanced/10-mcp-light-sample.png)
-
-<!--
-MCP is a conceptual protocol pattern for exposing tools, resources, prompts, and context to AI applications through an explicit server boundary. Governance starts with knowing what tools are exposed, what data can be read or changed, how authentication and authorization are enforced, and where configuration lives. Show the VS Code discovery surfaces by searching @mcp in Extensions and naming MCP: Open User Configuration, MCP: Open Workspace Folder Configuration, and MCP: List Servers. Keep MCP conceptual in this workshop and do not configure a live server.
-Timebox this slide to 4 minutes.
--->
-
----
-layout: advanced-content
----
-
-<div class="advanced-stage advanced-stage--wide">
-<div>
-
-<div class="advanced-kicker">Narrow · observable · scriptable</div>
-
-# API/CLI
-
-<div class="advanced-hero-quote">For deterministic work, simple interfaces often win.</div>
-
-<div class="advanced-callout advanced-callout--safety">
-<strong>AI Safety Moment:</strong> use least-privilege tokens, audit trails, and environment segregation for API/CLI automation.
-</div>
-
-</div>
-<div class="advanced-steps">
-  <div class="advanced-step"><div class="advanced-step__icon">&gt;_</div><div><strong>Read-only operation</strong><span>Approved command or endpoint</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">{ }</div><div><strong>Expected output</strong><span>Known, inspectable shape</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">◎</div><div><strong>Logging + approval</strong><span>Observable execution evidence</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">▣</div><div><strong>Scoped environment</strong><span>Least privilege by boundary</span></div></div>
-</div>
-</div>
-
-<div class="advanced-callout advanced-callout--optimization">
-<strong>Usage Optimization:</strong> Choose the narrowest integration surface that satisfies the task so tool descriptions, permission review, debugging effort, and coordination overhead stay small.
-</div>
-
-<!--
-APIs and CLIs are often the simplest integration path for deterministic tasks such as querying issues, running tests, collecting logs, or invoking known automation. Show one read-only command or endpoint pattern, the expected output shape, the logging or approval requirement, and why the operation is more observable than a broad plugin or agent action. Choose APIs or CLIs when commands are already approved, observable, scriptable, and easy to scope by environment. Least-privilege tokens, audit trails, and environment segregation keep the narrow interface safe.
-Timebox this slide to 4 minutes.
--->
-
----
-layout: advanced-content
----
-
-<div class="advanced-stage advanced-stage--visual-first">
-<div class="advanced-media advanced-media--contain">
-
-![Versioned plugin package moving through supply-chain controls](../../../assets/images/advanced/12-plugin-supply-chain-animated.png)
-
-<div class="advanced-media__caption">Treat workflow bundles like supply-chain components.</div>
-</div>
-<div>
-
-<div class="advanced-kicker">Package power with provenance</div>
-
-# Plugins
-
-<div class="advanced-hero-quote">One bundle can change many trust surfaces.</div>
-
-<div class="advanced-chips">
-  <span class="advanced-chip">Commands</span>
-  <span class="advanced-chip">Skills</span>
-  <span class="advanced-chip">Agents</span>
-  <span class="advanced-chip">Hooks</span>
-  <span class="advanced-chip">MCP definitions</span>
-</div>
-
-<div class="advanced-callout advanced-callout--safety">
-<strong>AI Safety Moment:</strong> require signing, version governance, controlled rollout, and supply-chain risk review for plugins.
-</div>
-
-</div>
-</div>
-
-<!--
-Plugins package slash commands, skills, custom agents, hooks, and MCP server definitions into installable workflow bundles, so govern them like supply-chain components. Show Agent Customizations > Plugins, the Extensions view's agent plugin surfaces where available, and plugin.json metadata before enablement. Review provenance, signing or source checks, versioning, rollout scope, telemetry, data scope, included customizations, support, and rollback as one decision. Controlled rollout limits the impact of a package that later fails review or behaves unexpectedly.
-Timebox this slide to 4 minutes.
--->
-
----
-layout: advanced-content
----
-
-<div class="advanced-stage advanced-stage--wide">
-<div>
-
-<div class="advanced-kicker">Repository guidance meets review context</div>
-
-# Copilot Code Review with Agent Skills and MCP
-
-<div class="advanced-hero-quote">Customize review with governed, repository-owned inputs.</div>
-
-<div class="advanced-chips">
-  <span class="advanced-chip advanced-chip--purple">Agent skills</span>
-  <span class="advanced-chip">MCP tools</span>
-  <span class="advanced-chip advanced-chip--green">Review comments</span>
-</div>
-
-</div>
-<div class="advanced-steps">
-  <div class="advanced-step"><div class="advanced-step__icon">1</div><div><strong>Repository skill</strong><span>Encode repeatable review expertise</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">2</div><div><strong>MCP tool</strong><span>Retrieve approved external context</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">3</div><div><strong>Copilot code review</strong><span>Apply context to the pull request</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">4</div><div><strong>Human decision</strong><span>Verify evidence before accepting</span></div></div>
-</div>
-</div>
-
-<!--
-Copilot code review can use repository agent skills and MCP tools as generally available customization paths for Copilot Pro, Pro+, Business, and Enterprise users. Skills encode reusable repository expertise, while MCP tools provide approved context that can strengthen a review comment. Treat both inputs as governed dependencies with explicit ownership, provenance, and scope rather than as an automatic source of truth. The reviewer remains responsible for checking the cited evidence and deciding whether the comment should change the pull request.
-Timebox this slide to 5 minutes.
--->
-
----
-layout: advanced-content
----
-
-<div class="advanced-stage advanced-stage--wide">
-<div>
-
-<div class="advanced-kicker">Inspect why a comment exists</div>
-
-# Review Attribution and Read-only Evidence
-
-<div class="advanced-hero-quote">A useful review comment should reveal its supporting context.</div>
-
-<div v-click class="advanced-prompt advanced-prompt--reveal"><strong>Follow one review comment</strong>A checkout pull request triggers a repository skill, a read-only policy lookup, and an attributed comment. Verify each source before deciding whether the code should change.</div>
-
-</div>
-<div class="advanced-steps">
-  <div class="advanced-step"><div class="advanced-step__icon">A</div><div><strong>Attribution</strong><span>Identify the skill or MCP context used</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">R</div><div><strong>Read-only MCP</strong><span>Tools can retrieve but not mutate</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">T</div><div><strong>Tools only</strong><span>Not MCP resources or prompts here</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">E</div><div><strong>Evidence check</strong><span>Verify relevance and provenance</span></div></div>
-</div>
-</div>
-
-<!--
-When Copilot code review uses a repository skill or MCP context, inspect the attribution attached to the resulting review comment. MCP calls made by code review are read-only, which limits mutation risk but does not remove confidentiality, provenance, or relevance concerns. In this GitHub review and cloud-agent context, MCP currently supplies tools rather than the protocol's broader resources or prompts capabilities. Verify the attributed source and supporting evidence before acting on the recommendation.
-Timebox this slide to 5 minutes.
+Marketplace extensions can change permissions, telemetry, execution, and data-access boundaries. Review publisher, version, trust signals, permissions, telemetry, support posture, enterprise policy, and data handling before enablement. Record the disable or uninstall path so the team can reverse the decision. Timebox this slide to 3 minutes. [Source: Advanced workshop guide, Extension Marketplace.]
 -->
 
 ---
@@ -530,46 +331,73 @@ layout: advanced-content
 <div class="advanced-stage">
 <div>
 
-<div class="advanced-kicker">Autonomy requires policy before execution</div>
+<div class="advanced-kicker">Govern the server boundary</div>
 
-# Govern Autonomous MCP Tools
-
-<div class="advanced-hero-quote">No approval prompt means controls must be designed upstream.</div>
+# MCP (Model Context Protocol)
 
 <div class="advanced-callout advanced-callout--safety">
-<strong>AI Safety Moment:</strong> allowlist tools, apply least privilege, protect secrets, and review shared repository configuration before enabling autonomous calls.
+Server onboarding is a security review event, not a convenience toggle.
+</div>
+
+<div class="advanced-chips">
+  <span class="advanced-chip">Provenance</span>
+  <span class="advanced-chip">Authentication</span>
+  <span class="advanced-chip">Authorization</span>
+  <span class="advanced-chip">Data scope</span>
+  <span class="advanced-chip">Rollback</span>
 </div>
 
 </div>
-<div class="advanced-chips">
-  <span class="advanced-chip advanced-chip--green">Allowlist</span>
-  <span class="advanced-chip">Least privilege</span>
-  <span class="advanced-chip">Provenance</span>
-  <span class="advanced-chip">Secrets</span>
-  <span class="advanced-chip advanced-chip--purple">Policy</span>
+<div class="advanced-hub">
+  <div class="advanced-hub__client">Consuming product</div>
+  <div class="advanced-hub__gate">Policy · auth · allowlist · logging</div>
+  <div class="advanced-hub__server">
+    <span>Tools<br><small>actions</small></span>
+    <span>Resources<br><small>context</small></span>
+    <span>Prompts<br><small>templates</small></span>
+    <span>Server boundary<br><small>scope + secrets</small></span>
+  </div>
 </div>
 </div>
 
 <!--
-Configured MCP tools can run during Copilot code review without an interactive approval prompt, so governance must be established before execution. Repository MCP configuration is shared with Copilot cloud agent, and GitHub and Playwright MCP servers are enabled by default unless policy changes their use. Review tool allowlists, least-privilege credentials, data scope, provenance, secret handling, and organization policy as one control set. Revisit the configuration whenever a server, tool definition, repository boundary, or policy changes.
-Timebox this slide to 5 minutes.
+MCP exposes tools, resources, and prompts as distinct capabilities behind explicit server boundaries. A consuming product may support only a subset, so do not treat the capability types as interchangeable. Review read and write scope, authentication, authorization, provenance, secrets, logging, allowlisting, enablement ownership, and rollback for each server. Timebox this slide to 4 minutes. [Source: Advanced workshop guide, MCP.]
 -->
 
 ---
-layout: advanced-lab
+layout: advanced-content
 ---
 
-<span class="lab-badge">Hands-on · 10 minutes</span>
+<div class="advanced-stage">
+<div>
 
-# Exercise 2 — Stage 7 Integration Due-Diligence Matrix
+<div class="advanced-kicker">One governed workplace-context example</div>
 
-Compare five integration surfaces and one code-review workflow.
+# Work IQ via MCP: Governed Microsoft 365 Context
 
-**Deliverable:** matrix · attribution · governance controls · justified selection
+<div class="advanced-chips">
+  <span class="advanced-chip">Permission-aware workplace intelligence</span>
+  <span class="advanced-chip advanced-chip--purple">Documented GitHub Copilot CLI path</span>
+</div>
+
+<div class="advanced-callout advanced-callout--safety">
+<strong>Permission to retrieve is not permission to present.</strong>
+</div>
+
+</div>
+<div>
+  <div class="advanced-flow">
+    <div>Permitted Microsoft 365 context</div><span>→</span>
+    <div>Work IQ</div><span>→</span>
+    <div>MCP</div><span>→</span>
+    <div>GitHub Copilot CLI</div>
+  </div>
+  <div class="advanced-hero-quote">identity · permissions · tenant policy</div>
+</div>
+</div>
 
 <!--
-Students compare hooks, Extension Marketplace, MCP, API/CLI, and plugins against one bounded scenario, then add a Copilot code-review row showing how a repository skill or read-only MCP tool contributes evidence. Their matrix must include permissions, provenance, data scope, observability, enterprise review, and rollback. They must also record attribution, tool allowlisting, least privilege, and secrets handling for the review workflow. The outcome is one justified selection with a complete code-review control set.
-Allow exactly 10 minutes for this exercise.
+Work IQ is Microsoft's permission-aware workplace-intelligence layer, distinct from Microsoft 365 Copilot, Microsoft Graph, connectors, agents, and MCP itself. Its documented interfaces include A2A, REST, and MCP, while this slide teaches only Microsoft's documented GitHub Copilot CLI remote-MCP path and does not imply support in other GitHub Copilot surfaces. Requests use delegated Microsoft Entra identity and remain permission-trimmed by existing Microsoft 365 access, sensitivity, compliance, and tenant controls; application-only authentication is unsupported. Work IQ APIs became generally available on June 16, 2026, and access can require tenant enablement and usage-based Copilot Credits, while exact pricing, geographic availability, and some regional controls remain variable. During this 3-minute slide, use fictional or synthetic examples only and never expose tenant screenshots, names, messages, meetings, files, customer data, identifiers, consent screens, tokens, admin settings, or write operations in the public workshop. [Sources: Advanced product update brief, Work IQ overview, API overview, MCP overview, GitHub Copilot CLI quickstart, enablement, and billing guidance.]
 -->
 
 ---
@@ -579,146 +407,250 @@ layout: advanced-content
 <div class="advanced-stage advanced-stage--wide">
 <div>
 
-<div class="advanced-kicker">Turn session history into inspectable evidence</div>
+<div class="advanced-kicker">Narrow · observable · deterministic</div>
 
-# Agents Window as Debugging Evidence
+# API/CLI
 
-<div class="advanced-hero-quote">Conversation and diff views show what changed and why.</div>
+<div class="advanced-hero-quote">Prefer the smallest interface that satisfies the acceptance test.</div>
 
-<div v-click class="advanced-prompt advanced-prompt--reveal"><strong>Trace the mistake</strong>A teammate reports that the agent changed the wrong file. Match the conversation decision and active tool call to the resulting diff, then isolate the first point where intent and action diverged.</div>
+<div class="advanced-callout advanced-callout--optimization">
+Narrow interfaces reduce permission review, tool descriptions, debugging effort, and coordination overhead.
+</div>
 
 </div>
 <div class="advanced-steps">
-  <div class="advanced-step"><div class="advanced-step__icon">C</div><div><strong>Conversation view</strong><span>Trace prompts, decisions, and tool activity</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">D</div><div><strong>Diff view</strong><span>Inspect the resulting repository changes</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">S</div><div><strong>Session boundary</strong><span>Separate peer chats and isolated runs</span></div></div>
-  <div class="advanced-step"><div class="advanced-step__icon">E</div><div><strong>Evidence map</strong><span>Connect cause, action, and output</span></div></div>
+  <div class="advanced-step"><div class="advanced-step__icon">&gt;_</div><div><strong>Approved operation</strong><span>Known command or endpoint</span></div></div>
+  <div class="advanced-step"><div class="advanced-step__icon">{ }</div><div><strong>Stable output</strong><span>Inspectable result shape</span></div></div>
+  <div class="advanced-step"><div class="advanced-step__icon">◎</div><div><strong>Audit evidence</strong><span>Logs and explicit failure handling</span></div></div>
+  <div class="advanced-step"><div class="advanced-step__icon">↶</div><div><strong>Safe retry / rollback</strong><span>Least privilege and environment separation</span></div></div>
 </div>
 </div>
 
 <!--
-The VS Code Agents window provides conversation and diff views that can be used as inspectable debugging evidence for agent sessions. Use the conversation view to trace prompts, decisions, and tool activity, then connect that history to the resulting repository diff. Keep peer chats, delegated subagents, and separate isolated sessions distinct so evidence is attributed to the correct execution boundary. The Agents window remains in public preview and the agent host is progressively rolling out, so facilitators should confirm availability before the demonstration.
-Timebox this slide and demonstration to 6 minutes.
+Prefer an approved API or CLI when it offers the narrowest observable path for a deterministic task. Require least-privilege credentials, environment separation, stable output, audit evidence, explicit failure handling, and a rollback or safe retry path. A narrow interface wins only when it still satisfies the acceptance criteria. Timebox this slide to 3 minutes. [Source: Advanced workshop guide, API/CLI.]
+-->
+
+---
+layout: advanced-content
+---
+
+<div class="advanced-stage">
+<div>
+
+<div class="advanced-kicker">Govern the bundle as supply chain</div>
+
+# Plugins
+
+<div class="advanced-hero-quote">One install can expand several trust boundaries.</div>
+
+<div class="advanced-callout advanced-callout--safety">
+Separate discovery and installation from organization authorization.
+</div>
+
+</div>
+<div class="advanced-package-path">
+  <div class="advanced-package">Plugin<br><small>versioned bundle</small></div><span>→</span>
+  <div>Commands · skills · agents</div><span>+</span>
+  <div>Hooks · MCP definitions</div><span>→</span>
+  <div>Provenance + data scope</div><span>→</span>
+  <div class="advanced-flow-stack__human">Rollout + rollback</div>
+</div>
+</div>
+
+<!--
+Plugins can bundle slash commands, skills, custom agents, hooks, and MCP server definitions. Govern provenance, package metadata, included customizations, executable hooks, automatically started servers, versioning, availability labels, telemetry, data scope, rollout ownership, and rollback. Discovery or installation does not establish organization authorization. Timebox this slide to 2 minutes. [Source: Advanced workshop guide, Plugins.]
+-->
+
+---
+layout: advanced-content
+---
+
+<div class="advanced-kicker">Two consumers · one governed repository boundary</div>
+
+# Govern Shared Skills and MCP Across Code Review and Cloud Agent
+
+<div class="advanced-route-grid advanced-route-grid--two">
+  <div>
+    <h2>Copilot code review</h2>
+    <p>Comments on changes; does not approve a pull request</p>
+    <small>Attributed skill or MCP tool · MCP calls read-only · tools, not broader resources/prompts</small>
+  </div>
+  <div>
+    <h2>Copilot cloud agent</h2>
+    <p>Separate workflow that can act on a branch</p>
+    <small>Shared repository MCP config · autonomous configured tools · separately enabled and governed</small>
+  </div>
+</div>
+
+<div class="advanced-flow-stack">
+  <div>Repository skills</div><span>+</span>
+  <div>Shared MCP configuration</div><span>→</span>
+  <div>Policy · allowlist · least privilege · secrets · provenance · data scope</div><span>→</span>
+  <div class="advanced-flow-stack__human">Human verifies evidence and accepts / rejects / merges</div>
+</div>
+
+<div class="advanced-callout advanced-callout--safety">
+GitHub and Playwright MCP servers may be enabled by default unless policy changes their use; default availability is not authorization.
+</div>
+
+<!--
+Copilot code review and Copilot cloud agent are distinct consumers of shared repository skills and MCP configuration: review leaves comments and uses read-only MCP calls, while cloud agent is a separate branch-working workflow whose configured tools can act autonomously without an approval prompt. Preserve contribution attribution, distinguish MCP tools from broader resources and prompts for these consumers, and remember that GitHub and Playwright servers may be enabled by default unless policy changes their use. Require separate enablement, allowlisting, least privilege, secrets controls, provenance, data-scope review, policy fit, observable evidence, and a human who keeps accept, reject, and merge authority. Timebox this consolidated governance slide to 5 minutes. [Sources: Advanced product update brief, code review skills and MCP; Advanced workshop guide, slide 15 contract.]
+-->
+
+---
+layout: advanced-content
+---
+
+<div class="advanced-stage advanced-stage--wide">
+<div>
+
+<div class="advanced-kicker">VS Code-specific evidence surface</div>
+
+# VS Code Agents Window as Debugging Evidence
+
+<div class="advanced-hero-quote">Trace delegated intent to the resulting diff.</div>
+
+<div class="advanced-callout">
+<strong>VS Code public preview:</strong> progressive rollout applies; confirm availability before a live demonstration.
+</div>
+
+</div>
+<div class="advanced-evidence-map">
+  <div>VS Code conversation</div><span>prompt · decisions</span>
+  <div>Running subagent</div><span>model · elapsed time</span>
+  <div>Active tool call</div><span>action · boundary</span>
+  <div>VS Code diff</div><span>changed files · result</span>
+  <div class="advanced-evidence-map__result">First VS Code evidence divergence</div>
+</div>
+</div>
+
+<!--
+In VS Code, the Agents window can connect conversation and diff review with a running subagent's model, elapsed time, active tool call, and conversation. Use that evidence to locate the first divergence between delegated intent and repository change without implying equivalent windows elsewhere. The surface remains in public preview and subject to progressive rollout, so confirm availability before demonstrating it. Timebox this VS Code-specific slide to 3 minutes. [Sources: Advanced product update brief, VS Code agent workflows; Advanced workshop guide, slide 15 contract.]
+-->
+
+---
+layout: advanced-content
+---
+
+<div class="advanced-kicker">Portable method · surface-native evidence</div>
+
+# Debugging Copilot Across Surfaces
+
+<div class="advanced-flow">
+  <div><strong>Acceptance test</strong><br>expected evidence</div><span>→</span>
+  <div><strong>Smallest repro</strong><br>one hypothesis</div><span>→</span>
+  <div><strong>Compare</strong><br>expected / actual</div><span>→</span>
+  <div><strong>Stop</strong><br>criterion fails</div><span>→</span>
+  <div><strong>Recover</strong><br>checkpoint / rollback</div>
+</div>
+
+<div class="advanced-check-board">
+  <div><b>VS</b><span>VS Code: Agents window conversation, tool activity, diff</span></div>
+  <div><b>CLI</b><span>Copilot CLI: <code>/tasks</code>, <code>/diff</code>, <code>/session</code></span></div>
+  <div><b>APP</b><span>Copilot App: session, worktree, branch, pull request, CI history</span></div>
+  <div><b>WEB</b><span>GitHub.com cloud agent: logs, tools, progress, usage, commits, diffs</span></div>
+  <div><b>JB</b><span>JetBrains: agent debug logs</span></div>
+</div>
+
+<div class="advanced-callout advanced-callout--optimization">
+Preserve a known-good checkpoint, change one variable, and rerun only the failed proof.
+</div>
+
+<!--
+Start with an explicit acceptance test, one failure hypothesis, the smallest safe reproduction, expected evidence, and a preserved checkpoint. Compare expected with actual surface-native evidence, change one variable, and stop rather than broadening context or tools when a criterion fails. Recover or roll back to the checkpoint, then rerun only the failed proof using VS Code, Copilot CLI, Copilot App, GitHub.com cloud-agent, or JetBrains evidence appropriate to that surface. Timebox this cross-surface loop to 5 minutes. [Sources: Advanced product update brief, cross-surface evidence boundary; Advanced workshop guide, Debugging Copilot Across Surfaces.]
 -->
 
 ---
 layout: advanced-concept
+class: advanced-concept--integration-yard
 ---
 
-# Debugging Chat and Agents
+<div class="advanced-kicker">Parallel output is not an integrated result</div>
 
-<div class="advanced-concept__reveal">
-
-<div v-click class="advanced-callout advanced-callout--optimization">
-<strong>Usage Optimization:</strong> minimal repro prompts and narrowed context avoid expensive trial-and-error.
-</div>
-
-<div v-click class="advanced-prompt advanced-prompt--reveal"><strong>Show me — create a minimal debug and deployment brief</strong>Review this failed agent run. Identify the likely context, tool-call order, permission, or instruction-conflict issue. Then propose the smallest safe repro prompt, name the VS Code or CLI evidence to inspect, and recommend GitHub Repo, Marketplace, or Agent Package Manager (APM) as the distribution or packaging path.</div>
-
-</div>
+# Integrating Parallel Agent Work
 
 ::visual::
 
-![A GitHub Copilot run narrowing five evidence streams to one verified repository cause](../../../assets/images/advanced/14-debugging-light-sample.png)
+<div class="advanced-semantic-plate advanced-semantic-plate--integration">
+  <img class="advanced-plate-image" src="/images/parallel-integration-yard-anchor.png" alt="Parallel branches pass through dependency ordering, conflict resolution, rollback, combined validation, and a human acceptance gate" />
+  <span class="advanced-semantic-label advanced-integration-label--parallel">Parallel branches</span>
+  <span class="advanced-semantic-label advanced-integration-label--dependency">Dependency order</span>
+  <span class="advanced-semantic-label advanced-integration-label--checks">Independent checks</span>
+  <span class="advanced-semantic-label advanced-semantic-label--warning advanced-integration-label--conflict">Overlap + conflict</span>
+  <span class="advanced-semantic-label advanced-integration-label--sequence">Sequence dependencies</span>
+  <span class="advanced-semantic-label advanced-semantic-label--safety advanced-integration-label--rollback">Rollback checkpoint</span>
+  <span class="advanced-semantic-label advanced-integration-label--combined">Combined validation</span>
+  <span class="advanced-semantic-label advanced-semantic-label--human advanced-integration-label--acceptance">Final human acceptance</span>
+</div>
 
 <!--
-Advanced debugging inspects context composition, tool-call order, instruction conflicts, permission failures, and loop dynamics before changing architecture. Start with the smallest reproducible prompt, add only the context needed to prove or disprove the issue, and avoid broad reruns. Inspect the observable VS Code or CLI evidence before introducing a more complex workflow. Use the exact debug and deployment prompt to connect failure evidence, a safe reproduction, and an appropriate GitHub Repo, Marketplace, or Agent Package Manager path.
-Timebox this slide to 6 minutes.
+Integration begins by recording dependency order and validating each branch independently. Detect overlap across files, APIs, schemas, tests, and behavior, then choose an ordered sequence with targeted checks after every step. Preserve a rollback point before combination, run combined validation, and expose unresolved uncertainty. Timebox this integration proof to 5 minutes. [Source: Advanced workshop guide, Integrating Parallel Agent Work.]
 -->
 
 ---
 layout: advanced-content
 ---
 
-<div class="advanced-kicker">Audience defines the distribution path</div>
-
-# Deploying Your Agents
-
-<div class="advanced-route-grid">
-  <div>
-    <div class="advanced-number">01</div>
-    <h2>GitHub Repo</h2>
-    <p>Source-controlled internal sharing</p>
-  </div>
-  <div>
-    <div class="advanced-number">02</div>
-    <h2>Marketplace</h2>
-    <p>Broader discoverability where approved</p>
-  </div>
-  <div>
-    <div class="advanced-number">03</div>
-    <h2>Agent Package Manager (APM)</h2>
-    <p>Reproducible ecosystem packaging</p>
-  </div>
-</div>
-
-<div class="advanced-callout advanced-callout--safety">
-<strong>AI Safety Moment:</strong> deployment requires policy compliance, permission review, provenance checks, documented ownership, and rollback planning.
-</div>
-
-<div v-click class="advanced-prompt advanced-prompt--reveal"><strong>Now you try — vary the failure and deployment audience</strong>Re-run the brief for a different failure signal and a different audience: internal team, broader organization, or public marketplace. Explain which deployment review gates change.</div>
-
-<!--
-Choose the distribution path based on audience, governance, maintainership, and provenance. GitHub Repo supports source-controlled internal sharing, Marketplace supports broader discoverability where approved, and Agent Package Manager is an ecosystem packaging option for reproducible agent, skill, prompt, plugin, and MCP configuration distribution. Require deploy-readiness evidence with provenance, permissions, owner, version, rollback, support expectations, and policy compliance before an agent leaves the build team. Use the exact learner prompt to change the failure signal and intended audience and identify which deployment gates must change.
-Timebox this slide to 6 minutes.
--->
-
----
-layout: advanced-content
----
-
-<div class="advanced-stage advanced-stage--visual-first">
-<div class="advanced-media advanced-media--left">
-
-![A bounded Day 2 hack roadmap with governance and demo gates](../../../assets/images/advanced/16-day-2-plan-animated.png)
-
-<div class="advanced-media__caption">Bound the ambition before the clock starts.</div>
-</div>
+<div class="advanced-stage">
 <div>
 
-<div class="advanced-kicker">Prepare the final mile</div>
+<div class="advanced-kicker">Bound the operating brief before pressure rises</div>
 
 # Preparing for Day 2 Hack
 
-<div class="advanced-hero-quote">Define success—and what you will not attempt.</div>
-
-<div class="advanced-chips">
-  <span class="advanced-chip">Narrow scope</span>
-  <span class="advanced-chip advanced-chip--purple">Model strategy</span>
-  <span class="advanced-chip">Success criteria</span>
-  <span class="advanced-chip">Fallback</span>
-  <span class="advanced-chip advanced-chip--green">Demo gate</span>
-</div>
+<div class="advanced-hero-quote">A fallback is part of readiness.</div>
 
 <div class="advanced-callout advanced-callout--optimization">
-<strong>Usage Optimization:</strong> predefine scope, model strategy, and success criteria to reduce churn during the hack.
+Package the decision; reuse the debugging and integration methods instead of repeating them here.
 </div>
 
 </div>
+<div class="advanced-readiness-route">
+  <div>Owner + narrow objective</div><span>→</span>
+  <div>Success criteria + evidence</div><span>→</span>
+  <div>Earliest stop signal</div><span>→</span>
+  <div>Fallback result</div><span>→</span>
+  <div class="advanced-readiness-route__gate">Human demo / acceptance gate</div>
 </div>
-
-<div class="advanced-callout advanced-callout--optimization">
-<strong>Usage Optimization:</strong> Debugging and deployment planning improve when the prompt, context, evidence, success criteria, and model strategy are small enough to inspect quickly.
 </div>
 
 <!--
-Preparing for Day 2 means predefining a narrow scope, model strategy, success criteria, fallback path, and final demo gate before the hack begins. The strongest plan identifies what will not be attempted, which model or agent pattern will be used, and how the team will prove the outcome safely. Day 2 remains a separate event context rather than a deliverable for this module. Do not let demo pressure bypass policy checks, evidence requirements, or fallback planning.
-Timebox this slide to 7 minutes.
+Day 2 readiness names a narrow objective, owner, orchestration pattern, model strategy, constraints, and evidence that counts as success. Record the earliest stop signal and a fallback that preserves a demonstrable result rather than expanding scope under pressure. This operating brief packages readiness while reusing, not duplicating, the debugging and integration methods. Timebox this slide to 4 minutes. [Source: Advanced workshop guide, Preparing for Day 2 Hack.]
 -->
 
 ---
-layout: advanced-lab
+layout: advanced-content
 ---
 
-<span class="lab-badge">Hands-on · 10 minutes</span>
+<div class="advanced-mission-stage">
+<div>
 
-# Exercise 3 — Stage 8 Capability Discovery and Debug Evidence
+<div class="advanced-kicker">Case File Ω-3 · 30-minute mission</div>
 
-Turn one failed run into a minimal, inspectable protocol.
+# Your Advanced Mission Starts Now
 
-**Deliverable:** repro · evidence map · capability surface · deployment path
+<p class="advanced-lede">Carry the Agentic case forward and prove four Advanced obligations.</p>
+
+<div class="advanced-chips">
+  <span class="advanced-chip">Accountable orchestration</span>
+  <span class="advanced-chip">Governed integration</span>
+  <span class="advanced-chip">Evaluate + recover</span>
+  <span class="advanced-chip advanced-chip--green">Final integration proof</span>
+</div>
+
+<div class="advanced-callout advanced-callout--safety">
+<strong>Purrmission safety check:</strong> preserve provenance, permissions, data scope, read-only boundaries, rollback, and separate module totals.
+</div>
+
+</div>
+<div class="advanced-role-stage advanced-role-stage--mission" aria-label="Pending owner art review; native mission scaffolding shows human ownership, delegated evidence, and safety">
+  <div class="advanced-role-card advanced-role-card--mergewell"><span class="advanced-silhouette advanced-silhouette--human">M</span><strong>Mergewell</strong><small>owns orchestration and acceptance</small></div>
+  <div class="advanced-role-card advanced-role-card--riley"><span class="advanced-silhouette advanced-silhouette--agent">R</span><strong>Riley</strong><small>returns bounded evidence</small></div>
+  <div class="advanced-role-card advanced-role-card--purrmission"><span class="advanced-silhouette advanced-silhouette--guardian">P</span><strong>Purrmission</strong><small>gates safety and rollback</small></div>
+  <div class="advanced-case-envelope">Agentic case → governed decisions → integrated evidence → final export</div>
+</div>
+</div>
 
 <!--
-Students finish by turning a failure into a minimal debug protocol and evidence checklist. They should identify the VS Code or CLI evidence that maps to context, tool-call order, permissions, instruction conflicts, or loop behavior. The final artifact includes capability-surface evidence and a justified deployment path based on the intended audience and governance boundary. Remind the group that Day 2 is a separate event and not a deliverable for this exercise.
-Allow exactly 10 minutes for this exercise.
+Launch the existing 30-minute cross-cutting-change mission using the exported Agentic case file or a facilitator-verified carry-forward case. Map its orchestration choice to accountable boundaries, its integration matrix and review controls to governed integration, and its debug protocol and rollback checkpoint to evaluation and recovery. The final case export supplies integration proof while preserving separate Foundations, Agentic, Advanced, and cumulative totals; the native trio scaffolding remains pending owner art review. Timebox this launch to 2 minutes. [Source: Advanced Workflow Evidence Mission, `cross-cutting-change`; Advanced workshop guide, mission mapping.]
 -->
