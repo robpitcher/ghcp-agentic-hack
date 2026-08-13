@@ -1167,10 +1167,10 @@
         {
           "id": "advanced",
           "title": "Advanced Workflows",
-          "description": "Apply advanced Copilot orchestration, integration, review, debugging, and deployment workflows with governance discipline.",
+          "description": "Apply advanced Copilot orchestration, governed workplace-context integration, evaluation, recovery, and parallel-work integration with human acceptance.",
           "duration": "1 hour 30 minutes",
           "totalMinutes": 90,
-          "status": "draft",
+          "status": "review",
           "route": "workshops/ghcp-dev-hack/advanced/",
           "missions": [
             {
@@ -1183,16 +1183,19 @@
                 "Evaluate ecosystem resources and integration surfaces before enterprise use",
                 "Apply agent skills and MCP context to governed Copilot code review workflows",
                 "Debug agent behavior using narrowed context and observable evidence",
+                "Evaluate agent outcomes against explicit acceptance criteria and recover to a known state",
+                "Integrate parallel work with dependency ordering, combined validation, rollback, and human acceptance",
                 "Plan maintainable distribution, deployment, and Day 2 workflows"
               ],
               "prerequisites": [
-                "Complete the Agentic mission or receive a facilitator-verified carry-forward case file."
+                "Complete the Agentic mission or use the clearly labeled legitimate Advanced fallback entry."
               ],
-              "startingState": "The participant has an exported Agentic case file with separate Foundations, Agentic, and cumulative totals plus one bounded Advanced follow-up scenario.",
-              "goal": "Carry the same case envelope through Advanced orchestration, integration, review, debugging, and deployment decisions, then export the final three-module total.",
-              "task": "Reuse the Agent Mergewell case file to make five governed Advanced decisions and preserve a final plain-text export with separate Foundations, Agentic, Advanced, and cumulative totals.",
+              "startingState": "The participant normally has an exported Agentic case file with separate Foundations, Agentic, and cumulative totals plus one bounded Advanced follow-up scenario; a legitimate fallback entry labels unavailable prior evidence and awards no unearned prior points.",
+              "goal": "Extend the same Agent Mergewell case through Advanced orchestration, governed integration and review, debugging and recovery, Day 2 operations, and a final human accept, revise, or reject decision.",
+              "task": "Reuse the carried-forward case or labeled fallback to complete five governed Advanced operations, integrate their evidence, make the final human decision, and preserve a plain-text export with separate Foundations, Agentic, Advanced, and cumulative totals.",
               "constraints": [
                 "Keep the same case envelope; do not reset the totals, invent missing evidence, or treat popularity as approval.",
+                "Count only earned or facilitator-verified prior points; a fallback records unavailable prior evidence and zero for any unverified prior total.",
                 "Keep external discovery, extension, MCP, plugin, or API evaluation read-only until the team has explicit approval.",
                 "Hints never reduce points, and there is no speed scoring."
               ],
@@ -1200,20 +1203,21 @@
                 "One orchestration decision with ownership and boundary notes",
                 "One integration matrix that compares the narrowest viable surfaces",
                 "One governed Copilot code-review control stack with attribution and least-privilege notes",
-                "One minimal debug protocol tied to visible evidence",
-                "One distribution or Day 2 recommendation plus the final cumulative export"
+                "One minimal debug and recovery record tied to visible evidence",
+                "One integrated acceptance and operations record with the explicit human decision plus the final score export"
               ],
               "safetyCheckpoints": [
                 "Purrmission checks provenance, permissions, data scope, and rollback before any integration or distribution recommendation is accepted.",
                 "Purrmission keeps code-review helpers read-only until the participant can explain attribution, secrets handling, and tool boundaries.",
+                "Purrmission requires combined evidence and an explicit human accept, revise, or reject decision before the case closes.",
                 "Purrmission requires the final export to preserve separate module totals rather than a single blended score."
               ],
               "corePath": [
                 "Choose whether the case needs one agent, a subagent, a multiagent split, or parallel lanes, then justify the boundary.",
                 "Compare hooks, marketplace extensions, MCP, API or CLI, plugins, or another approved surface and select the narrowest safe option.",
                 "Define how a skill, MCP surface, or read-only helper contributes evidence to code review without taking merge authority.",
-                "Turn one likely failure into a minimal debug protocol with visible evidence.",
-                "Recommend a distribution or Day 2 path, then export the final three-module score envelope."
+                "Test one likely failure with a minimal debug protocol, then record the visible evidence and recovery choice.",
+                "Integrate the operation evidence, choose a distribution or Day 2 path, make the final human accept, revise, or reject decision, and export the final three-module score envelope."
               ],
               "stretchPath": [
                 "Earn up to one capped bonus by comparing one alternate integration or distribution path with the same evidence and a tighter governance tradeoff."
@@ -1226,12 +1230,14 @@
               "validation": [
                 "The participant earns at least 40 core points or records the exact blocker that required facilitator help.",
                 "Each completed clue includes evidence, a Purrmission checkpoint, and a recorded human choice.",
+                "The fifth operation ends with an explicit human accept, revise, or reject decision grounded in integrated evidence.",
                 "The exported case file preserves separate Foundations, Agentic, Advanced, and cumulative totals."
               ],
               "casePacket": [
                 "Normal path: start from the exported Agentic case file and reuse the same envelope in place.",
-                "Facilitator-approved late entry may use a verified carry-forward case file that already contains Foundations and Agentic totals.",
-                "Keep public sharing alias-only and out of the repository; the mission evidence stays local."
+                "Legitimate fallback: if the Agentic export is unavailable, use a facilitator-provided bounded Advanced scenario; copy only earned or facilitator-verified prior totals, record zero for every unverified prior total, and label prior evidence unavailable rather than recreating it.",
+                "Optional leaderboard handoff: export only an alias plus separate Foundations, Agentic, and Advanced module scores and the calculated cumulative total; keep evidence, prompts, diffs, and repository content local.",
+                "Mission completion never depends on the optional leaderboard."
               ],
               "harnesses": [
                 {
@@ -1389,74 +1395,74 @@
                   "actions": [
                     "Name one likely failure mode for the carried-forward case, such as context, instruction conflict, tool order, or permission drift.",
                     "Write the smallest safe repro prompt or protocol that could confirm or disprove it.",
-                    "Record the exact evidence you would inspect before changing architecture."
+                    "Run the smallest safe repro when available, or walk it as a bounded tabletop check, then record the visible result and whether to recover, revise, or roll back before changing architecture."
                   ],
                   "routes": [
                     {
                       "harness": "copilot-cli",
                       "instructions": [
-                        "Keep the repro prompt short enough to prove one hypothesis at a time."
+                        "Keep the repro prompt short enough to prove one hypothesis at a time, and save the relevant command and output."
                       ]
                     },
                     {
                       "harness": "ide-extension",
                       "instructions": [
-                        "Tie the repro to visible files, outputs, or diffs instead of a conversational summary."
+                        "Tie the repro and recovery choice to visible files, outputs, or diffs instead of a conversational summary."
                       ]
                     },
                     {
                       "harness": "copilot-app",
                       "instructions": [
-                        "Use the visible canvases to note which evidence would confirm the failure mode."
+                        "Use the visible canvases to record the evidence that confirms or disproves the failure mode and the recovery choice."
                       ]
                     }
                   ],
-                  "evidence": "Add the failure hypothesis, the minimal repro, and the evidence map.",
+                  "evidence": "Add the failure hypothesis, minimal repro, visible result, and recover, revise, or rollback choice.",
                   "hints": [
                     "Debug one variable at a time: context, instruction order, tool call, or permission.",
                     "A smaller repro is usually safer than another full rerun.",
                     "Starter: I suspect ___. I would test it by ___. I would inspect ___ before changing the design."
                   ],
-                  "safetyCheckpoint": "Do not broaden the workflow or add new tools until the smaller repro tells you that the current evidence is insufficient."
+                  "safetyCheckpoint": "Stop before broadening the workflow or adding tools; preserve the known-good state and recover or roll back if the smaller repro fails its criterion."
                 },
                 {
                   "id": "ship-the-decision",
                   "title": "Operation Ship the Decision",
                   "points": 10,
-                  "objectiveRef": "Plan maintainable distribution, deployment, and Day 2 workflows",
-                  "scene": "Mergewell seals the final packet for Day 2 while Purrmission checks rollout, support, and rollback.",
+                  "objectiveRef": "Integrate parallel work with dependency ordering, combined validation, rollback, and human acceptance",
+                  "scene": "Mergewell assembles the governed evidence into the final Day 2 packet while Purrmission holds the case open until a human accepts, revises, or rejects it.",
                   "actions": [
-                    "Choose a distribution path such as repository sharing, Marketplace, Agent Package Manager, or another approved option.",
-                    "Record owner, audience, provenance, rollback, support expectation, and policy fit.",
-                    "Add Advanced core points, any capped bonus, and the final cumulative total to the case file."
+                    "Assemble the orchestration, integration-surface, governed-review, and debug or recovery evidence; record dependency order, combined acceptance checks, unresolved uncertainty, and the known-good rollback point.",
+                    "Choose a distribution or Day 2 path, then record owner, audience, provenance, policy fit, support expectation, rollout stop condition, and rollback.",
+                    "End the operation by comparing the integrated evidence with the acceptance checks, recording exactly one human decision—accept, revise, or reject—and sealing the export with separate Foundations, Agentic, Advanced, and cumulative totals plus the final integration and operations evidence."
                   ],
                   "routes": [
                     {
                       "harness": "copilot-cli",
                       "instructions": [
-                        "Keep the distribution note specific to the intended audience and maintenance boundary."
+                        "Keep the integrated evidence and distribution note specific to the intended audience and maintenance boundary, then record the human decision."
                       ]
                     },
                     {
                       "harness": "ide-extension",
                       "instructions": [
-                        "Use a small checklist or table so owner, rollback, and support fields remain explicit."
+                        "Use a small checklist or table so combined checks, owner, rollback, support, and final decision remain explicit."
                       ]
                     },
                     {
                       "harness": "copilot-app",
                       "instructions": [
-                        "Capture the rollout decision in the same envelope and keep the human support or rollback owner visible."
+                        "Capture the integrated proof and rollout path in the same envelope, keep the support and rollback owners visible, and record the final human decision."
                       ]
                     }
                   ],
-                  "evidence": "Add the distribution choice, owner and rollback notes, and the final three-module totals.",
+                  "evidence": "Add the integrated acceptance checks, operations path, owner and rollback notes, explicit accept, revise, or reject decision, and final separate module and cumulative totals.",
                   "hints": [
-                    "The right distribution path changes when the audience, support model, or rollback needs change.",
-                    "Bonus remains capped at 10 even if more than one bonus clue is completed.",
-                    "Starter: I would distribute this through ___ because ___. The final cumulative total is ___."
+                    "Start by putting the four earlier evidence records in dependency order; do not infer a passing combined result from separate checks.",
+                    "If an acceptance check is unresolved, choose revise or reject and keep the known-good rollback point rather than forcing acceptance.",
+                    "Starter: Combined evidence shows ___. I choose accept/revise/reject because ___. Day 2 owner: ___. Rollback: ___. Foundations: __ core + __ bonus = __; Agentic: __ core + __ bonus = __; Advanced: __/50 core + __/10 bonus = __; cumulative: ___."
                   ],
-                  "safetyCheckpoint": "Do not recommend deployment without provenance, owner, rollback, and support evidence."
+                  "safetyCheckpoint": "Stop if combined evidence is missing, a blocker remains unresolved, or provenance, owner, support, stop condition, and rollback are not explicit; do not deploy or label the case accepted."
                 }
               ],
               "bonusClues": [
@@ -1530,21 +1536,22 @@
                   "The orchestration choice and boundary rationale",
                   "The integration comparison and chosen surface",
                   "The governed review helper plan and human authority note",
-                  "The debug protocol and evidence map",
-                  "The distribution choice plus owner, rollback, and support notes"
+                  "The debug protocol, visible result, and recovery choice",
+                  "The integrated acceptance checks, distribution or Day 2 choice, owner, rollback, support notes, and explicit final human decision"
                 ],
                 "consumes": [
-                  "Exported Agentic case file"
+                  "Exported Agentic case file on the normal path",
+                  "Labeled facilitator-provided Advanced scenario on the legitimate fallback path"
                 ],
-                "fallback": "A facilitator may provide a verified carry-forward case file for legitimate late entry, but the final export must still preserve separate prior totals."
+                "fallback": "The legitimate fallback never recreates Agentic evidence or points; it preserves only earned or facilitator-verified prior totals, records zero for unverified prior totals, and labels prior evidence unavailable."
               },
               "leaderboard": {
                 "optional": true,
                 "aliasOnly": true,
                 "instructions": [
-                  "Export only alias-safe totals for the optional separately implemented event leaderboard.",
+                  "Export only an alias, separate Foundations, Agentic, and Advanced module scores, and the calculated cumulative total for the optional separately implemented event leaderboard.",
                   "Keep evidence, prompts, diffs, and repository content local.",
-                  "Highest verified cumulative totals are co-winners; there is no speed scoring."
+                  "Mission completion never depends on leaderboard submission; there is no speed or popularity scoring."
                 ]
               }
             }

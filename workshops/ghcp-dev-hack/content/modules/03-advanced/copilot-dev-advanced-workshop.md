@@ -1,186 +1,185 @@
 # Module 3: Advanced — Workshop Guide
 
-> **Slide generation instructions**:
+> **Authoritative text-only generation contract**
 >
-> - Apply the approved `art-direction.md` throughout the complete solution: human-centered 2D editorial cartoons on pure white backgrounds, original human characters, crisp rounded outlines, flat color, minimal shadows, 85% white, 10% neutral gray, 3% GitHub green, and 2% Copilot purple.
-> - Brand through GitHub-aligned color, Mona Sans typography, spacing, contribution-grid texture, and abstract Octicon-inspired geometry only. Never use Octocat, Mona character artwork, Invertocat, the Copilot mascot, or any other GitHub mascot or character in generated imagery, native Slidev layers, overlays, posters, or video. Mona Sans is a permitted typeface; it does not authorize Mona character imagery.
-> - Build premier presentation slides with one dominant idea and one dominant visual per slide. Prefer editorial composition, cinematic scale, generous negative space, and progressive disclosure over dense cards, tables, or bullet lists.
-> - Keep on-slide wording concise. Move supporting explanation, examples, facilitation guidance, and source detail into the required 3-5 sentence presenter notes while preserving the source meaning.
-> - Generate exactly 23 slides in the title order recorded by `slide-manifest.md`. This revised contract includes six approved product-update slides in addition to the original 17-slide sequence.
-> - Treat each `Slide topic` marker as required capability coverage. Use the manifest to place approved concept, demonstration, governance, and debugging additions without reordering the source teaching progression.
-> - Read every document declared by `module.md` under `sourceDocuments`. Every item in `product-update-brief.md` is approved and required; unapproved candidates remain only in `content/research/github-changelog-options.md`.
-> - Preserve every source requirement across slides and presenter notes. Condense explanatory prose on-slide when the full meaning remains source-mapped in the notes; never omit required prompts, commands, named features, numbers, safety callouts, optimization callouts, availability, or governance caveats.
-> - **Treat workshop meaning as authoritative.** Concise editorial labels may summarize explanatory prose on-slide, but the required presenter notes must preserve the complete meaning of the supporting declared source content.
-> - **Reproduce code blocks, prompts, commands, and numeric values verbatim** — never truncate or rewrite them.
-> - Preserve terminology exactly as written, including **AIC**, **AI Safety Moment**, **Usage Optimization**, **MCP**, **API/CLI**, **Extension Marketplace**, **Agent Package Manager (APM)**, and named feature labels.
-> - **Do not add product claims that are not in the declared source documents.** Do not add slides or transitions that are absent from the manifest.
-> - Do not introduce concepts, tools, commands, workflows, named features, or examples that are not present in the source documents declared by `module.md`.
-> - Do not use or infer content from other workshop modules.
-> - Preserve the section order and numbering exactly as written.
-> - Render **AI Safety Moment** and **Usage Optimization** callouts in distinct badged content boxes, keeping their wording verbatim so the tip category is instantly recognizable.
-> - Preserve prompt and code blocks verbatim on the corresponding "Show me" and "Now you try" slides.
-> - Generate 3-5 sentence speaker notes for every slide and map them to the matching manifest row and declared source content. Reject and regenerate any slide whose notes are generic, clipped, truncated, or unsupported.
-> - If content does not fit on its contracted slide, move supporting explanation into presenter notes or use progressive disclosure; do not add an unlisted slide or drop required content.
-> - Control slide layout deliberately so titles, visual anchors, callouts, prompts, and imagery align to the same grid on every slide.
-> - Generate or select visual imagery that directly represents the slide wording. Future image candidates must use the same approved GitHub palette and illustration language and must fit the layout without adding generated typography, fake UI, or unofficial logo treatments.
+> - Generate exactly 20 slides in the title order and minute allocation recorded by `slide-manifest.md`.
+> - Preserve the 60-minute teaching budget, time-neutral guest handoff, and separate 30-minute mission.
+> - Read every document declared by `module.md` under `sourceDocuments`. Treat every approved item in `product-update-brief.md` as required; do not incorporate candidate items from `content/research/github-changelog-options.md`.
+> - Preserve required prompts, commands, named features, safety meaning, optimization meaning, availability, and rollout caveats. Supporting detail belongs in one 3-5 sentence source-mapped presenter-notes block per slide.
+> - Do not add inline exercises, extra slides, optional August weekly-release candidates, `/side`, `/btw`, `/rewind`, stacked pull requests, hands-on code security, or content from Agentic.
+> - Do not create or request new media. Keep current declared assets and reuse the approved Copilot App raster only for the guest handoff.
 
-**Duration**: 2 hours (120 min)
-**Format**: Presentation + Hands-On
-**Audience**: Developers who completed Foundations and Intermediate (Agentic)
-**Prerequisites**: Working knowledge of instructions, tools, and agentic workflows
+**Duration**: 1 hour 30 minutes (60 min teaching + separate 30 min mission)
+**Format**: Presentation + Agent Mergewell mission
+**Audience**: Developers who completed Foundations and Agentic Development
+**Prerequisites**: Working knowledge of instructions, tools, agentic workflows, branch/diff review, and the carried-forward Agentic case file
 
-**Module summary**: This Advanced workshop focuses on practical orchestration and production-readiness patterns for scaled AI-assisted development. The module emphasizes multiagent choices, trusted resource discovery, governed integration surfaces, debugging methodology, deployment pathways, and Day 2 readiness as a separate event context. The content stays conceptual for emerging ecosystem surfaces while giving teams enough structure to make safe, cost-aware decisions.
+**Module summary**: Advanced teaches developers to choose the smallest accountable orchestration pattern, govern shared integration surfaces and permission-trimmed workplace context, debug with product-specific evidence, recover from failed criteria, and integrate parallel work under one human merge owner. Product labels and inspection evidence remain surface-specific. The module ends by launching the existing 30-minute case-file mission rather than adding inline practice.
 
-**Learning objectives**:
+## Learning outcomes
 
-- Select when multiagents, subagents, or fleet-style parallelism are appropriate
-- Vet ecosystem resources, extensions, marketplace entries, and plugins before enterprise use
-- Evaluate hooks, MCP, API/CLI, and deployment paths with governance discipline
-- Apply repository agent skills and read-only MCP tools to governed Copilot code review
-- Debug chat and agent behavior systematically using narrowed context and evidence
-- Capture advanced capability and debug evidence that can inform a separate Day 2 event without turning this module lab into event planning
+By the end of the teaching path, learners can:
 
-## Recap: Optimizing AI Usage
-
-Before diving into advanced orchestration, recap the efficiency and optimization learnings that frame every decision in this module. These six strategies — drawn from GitHub's optimizing AI usage guidance — maximize quality while reducing token consumption and AIC cost. **Learn more**: <https://docs.github.com/en/copilot/tutorials/optimize-ai-usage>
-
-| # | Strategy | What it covers |
-|---|----------|----------------|
-| 1 | Choose the right model for the right task | Match capability to work, configure reasoning level, use auto model selection, run subagents on cheaper models |
-| 2 | Provide clear guidance in your prompts | Clear task definition, relevant context upfront, an explicit stopping condition |
-| 3 | Keep your context lean | Start new conversations per problem, compact long sessions, custom instruction files, only the tools you need |
-| 4 | Preserve the cache | Avoid switching models or reasoning mid-session; cached tokens bill at a lower input rate |
-| 5 | Research, plan, then implement | Separate phases — plan with a reasoning model, implement with a cheaper one |
-| 6 | Utilize learnings to be more efficient | Capture repeatable prompt, tool, and cost lessons for the next workflow |
-
-> 💡 **Usage Optimization**: Model choice, scoped context, and clear stopping conditions are the fastest levers before advanced orchestration begins.
+1. Select among one agent, delegated subagents, independent sessions, and Copilot CLI `/fleet` using independence, ownership, evidence, cost, and reconciliation criteria.
+2. Evaluate discovery, governed workplace context, and integration surfaces for provenance, permissions, data scope, observability, enterprise fit, and rollback.
+3. Explain how repository skills and MCP tools are governed differently when consumed by Copilot code review and Copilot cloud agent.
+4. Debug across supported surfaces by comparing expected and actual evidence against predefined acceptance and stop criteria.
+5. Recover or roll back to a known state and integrate parallel results through ordered, independently validated, reversible steps.
+6. Define Day 2 success, fallback, and final human acceptance evidence.
 
 ## Session Agenda
 
-| Section | Topic | Time |
-|---------|-------|------|
-| — | Recap: optimizing AI usage from Modules 1–2 | 5 min |
-| 1 | Orchestration and trusted discovery: multiagents, subagent visibility, fleet, worktrees | 35 min |
-| 2 | Governed integration surfaces: hooks, Marketplace, MCP, plugins, Copilot code review | 45 min |
-| 3 | Operations and Day 2 readiness: Agents window evidence, debugging, deployment, hack preparation | 35 min |
+| Section | Slides | Time |
+|---|---:|---:|
+| Open and orient | 1-3 | 2 min teaching + time-neutral guest handoff |
+| Choose accountable orchestration | 4-8 | 16 min |
+| Govern integration surfaces | 9-15 | 23 min |
+| Debug, recover, integrate, and prepare | 16-19 | 17 min |
+| Launch the separate Advanced mission | 20 | 2 min |
 
-> **Timing note**: The agenda totals 120 min: 5 min opening + 35 min Section 1 + 45 min Section 2 + 35 min Section 3. Each numbered section includes a 10 min hands-on pause, so the module keeps 30 min of lab time inside the section budgets.
+Teaching arithmetic: `2 + 16 + 23 + 17 + 2 = 60 minutes`. The `cross-cutting-change` mission remains a separate 30-minute activity.
 
-## 1. Orchestration and Trusted Discovery (35 min)
+## Objective-to-source and objective-to-practice map
 
-### Key Points
+| Outcome | Teaching slides | Primary approved source boundary | Existing mission practice |
+|---|---|---|---|
+| Choose orchestration | 4, 6-8 | CLI command reference; VS Code agent-workflow sources | Existing orchestration-choice clue |
+| Govern discovery, workplace context, and integrations | 5, 9-14 | Workshop guide controls; official hooks, MCP, Work IQ, CLI, and plugin documentation | Operation Vet the Surface |
+| Govern review and cloud-agent customization | 15 | Approved code-review skills/MCP GA sources | Operation Govern the Review |
+| Evaluate and recover from failures | 16-17 | VS Code sources plus official CLI, App, cloud-agent, and troubleshooting sources | Existing debug clue, Purrmission rollback checkpoint, and recorded human choice |
+| Integrate parallel work | 8, 18 | Durable branch/worktree validation and human-acceptance contract | Existing orchestration and integration evidence combined in the final case export |
+| Prepare Day 2 and accept the result | 19-20 | This owner-approved contract and the declared mission | Operation Ship the Decision and final cumulative export |
 
-- **Slide topic (1 slide): Multiagents (what they are & when to use them) + Brady Gaster's Squad quick look** — multiagents coordinate multiple AI workers or roles around a shared objective when the work can be separated by ownership, evidence, and merge control. Use them for independent research, implementation, validation, or review lanes; avoid them when one focused workflow can finish safely. Include a quick look at Brady Gaster's Squad as an ecosystem example of multi-agent coordination and squad-style framing without treating it as a required dependency. **AI Safety Moment**: orchestration needs named ownership, bounded responsibilities, and explicit merge controls so parallel work does not create silent conflicts. **Learn more**: <https://github.com/bradygaster/squad>
-- **Slide topic (1 slide): Awesome Copilot List** — use curated Copilot resource lists as discovery aids for skills, examples, prompts, and ecosystem ideas, not as automatic enterprise approvals. Point learners to the Awesome Copilot skills catalog for exploration while separating discovery from governance review. **AI Safety Moment**: vet curated resources for source credibility, license posture, data handling, and enterprise compatibility before reuse. **Learn more**: <https://awesome-copilot.github.com/skills/>
-- **Slide topic (1 slide): Subagents** — subagents are scoped delegation units with narrow prompts, limited context, clear output contracts, and acceptance checks. They work best when a larger task can be decomposed into auditable slices such as research, test-writing, documentation review, or validation. **AI Safety Moment**: use scoped prompts and minimal permissions per subagent, and keep outputs attributable for auditability.
-- **Approved update (1 slide): Inspect Running Subagents** — use the visible model, elapsed time, active tool call, and output contract to decide whether delegated work remains healthy and in scope. Distinguish a delegated subagent from a peer chat or isolated session.
-- **Slide topic (1 slide): Fleet** — fleet-style execution means running many independent tasks or agents in parallel when the branches do not block one another. Reserve it for high-volume work such as similar refactors, broad issue triage, or many independent checks where coordination overhead is lower than the time and AIC savings. **Usage Optimization**: reserve fleet/parallel execution for high-volume independent tasks where parallelism yields net AIC/time savings.
-- **Approved update (1 slide): Worktrees for Parallel Agent Sessions** — use one worktree and branch per independent session to isolate concurrent edits, then review each diff and merge under one human owner. Isolation reduces collisions but does not prove compatibility or correctness.
+## Copilot App: Guest Deep Dive
 
-### 🛡️ Safety Moment
+Use one event-neutral handoff immediately after the agenda. Introduce the guest without a fixed name, biography, portrait, deck, or promised demo; connect the handoff to the approved Foundations framing of the GitHub Copilot App as an agent-native desktop with inspectable work surfaces; then resume at `Multi-Agent Orchestration: Roles, Boundaries, and Merge Ownership`. Reuse `assets/images/foundations/copilot-app-synthesis.png` unmodified and keep the live segment time-neutral in repository metadata.
 
-- Keep a human owner for the plan, final merge, and escalation path.
-- Require every delegated branch to state scope, permissions, output format, and acceptance criteria.
-- Treat external resource discovery as input to review, not as permission to install or enable.
+## Slide contracts
 
-### 🖥️ Demo: Choose an orchestration pattern
+### 4. Multi-Agent Orchestration: Roles, Boundaries, and Merge Ownership
 
-- **Show me — choose multiagent, subagent, or fleet** — facilitator demonstrates a decision prompt that compares decomposition, ownership, review evidence, and cost before choosing the smallest safe orchestration pattern.
+Teach one durable idea: multi-agent orchestration succeeds when work is split into clear roles, each role has a defined return, and one human owns reconciliation and merge.
 
-  ```text
-  For this Copilot Quest scenario, decide whether to use one agent, subagents, multiagents, or fleet-style parallel execution. Explain the ownership model, boundaries, review evidence, and why the choice saves time or AICs without weakening merge control.
-  ```
+Keep the slide itself to exactly three ideas:
 
-- **Now you try — vet one discovery resource** — attendees repeat the decision step, then add one curated resource or skill idea and document what enterprise review would be required before adoption.
+1. `Clear role`
+2. `Defined return`
+3. `One human merge owner`
 
-  ```text
-  Review this Copilot skill or ecosystem example as a discovery resource. Identify source credibility, enterprise compatibility, permissions, and what must be approved before the team uses it.
-  ```
+Split work only when roles can be independently owned and their outputs can be reconciled. Use three native role lanes—for example, research, implement, and validate—each returning one evidence object to a single human merge gate. Do not use a comparison matrix, reconciliation-cost scale, Squad framing, or detailed previews of subagents, Copilot CLI `/fleet`, or worktrees; presenter notes may state that later slides cover specific patterns.
 
-### 💡 Optimization Tip: Parallelize only when independence is real
+```text
+Define each role, the evidence it returns, and the one human merge owner.
+```
 
-> 💡 **Usage Optimization**: Fleet and multiagent patterns help only when tasks are independent enough to reduce elapsed time or model spend after coordination, review, and merge costs are counted.
+### 5. Awesome Copilot List
 
-### 🔬 LAB: Exercise 1 — Stage 7 Orchestration and Discovery Plan
+Use curated Copilot resource lists as discovery aids for skills, prompts, and examples, not as enterprise approvals. Require source credibility, license posture, permissions, data handling, maintenance, and enterprise-compatibility review before reuse. Preserve the boundary: popularity or inclusion in a list is not authorization.
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 1 (10 min) and deliver ownership, boundaries, review evidence, and a trusted-discovery gate for one bounded scenario.
+```text
+Review this Copilot skill or ecosystem example as a discovery resource. Identify source credibility, enterprise compatibility, permissions, and what must be approved before the team uses it.
+```
 
-## 2. Governed Integration Surfaces (45 min)
+### 6. Subagents
 
-### Key Points
+A subagent receives a narrow prompt, minimal necessary context and permissions, a required output shape, acceptance criteria, and a return path to the delegating owner. Suitable slices include research, tests, documentation review, or validation that can be checked independently. Keep outputs attributable and do not duplicate the parent task. Inspection evidence depends on the hosting surface; mention that boundary without recreating a standalone inspection slide.
 
-- **Slide topic (1 slide): Hooks** — hooks create deterministic lifecycle guardrails at moments such as before a tool call, before a change is accepted, or before a workflow advances. Use them for policy checks, secret scanning, validation commands, and repeatable review gates that should not depend on prompt quality. Show learners that Copilot/agent hooks are configured in `.github/hooks/*.json` for repository-level use, can be created from the VS Code integrated terminal or another repository terminal, and must include validation and rollback evidence before they are trusted. **AI Safety Moment**: hooks provide enforceable guardrails through policy checks, secret scanning, and mandatory validation before changes are accepted. **Learn more**: <https://docs.github.com/en/copilot/concepts/agents/hooks>
-- **Slide topic (1 slide): Extension Marketplace** — marketplace extensions can expand the developer environment and agent experience, but every addition can change trust, permissions, telemetry, and data-access boundaries. Show learners where to open the VS Code Extensions view or extension details and what to inspect: publisher, version, install/trust signals, permission or telemetry questions, and disable/uninstall path. Treat marketplace enablement as an enterprise onboarding decision rather than an individual convenience choice. **AI Safety Moment**: review publisher trust, permissions, data-access needs, support posture, and enterprise compatibility before enabling marketplace extensions.
-- **Slide topic (1 slide): MCP (Model Context Protocol)** — MCP is a conceptual protocol pattern for exposing tools, resources, prompts, and context to AI applications through explicit server boundaries. Keep MCP onboarding governed: know what tools are exposed, what data can be read or changed, how authentication and authorization are enforced, and where configuration would live in the learner's environment. Show learners the VS Code discovery surfaces, such as searching `@mcp` in Extensions, `MCP: Open User Configuration`, `MCP: Open Workspace Folder Configuration`, and `MCP: List Servers`, but do not configure a live MCP server in this workshop. **AI Safety Moment**: server onboarding is a security review event covering authentication, authorization, and data-scope controls. **Learn more**: <https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp-in-your-ide>
-- **Slide topic (1 slide): API/CLI** — APIs and CLIs are often the simplest integration path for deterministic tasks such as querying issues, running tests, collecting logs, or invoking known automation. Show one read-only command or endpoint pattern, expected output shape, logging or approval requirement, and why it is more observable than a broad plugin or agent action. Choose APIs/CLIs when commands are already approved, observable, scriptable, and easy to scope by environment. **AI Safety Moment**: use least-privilege tokens, audit trails, and environment segregation for API/CLI automation.
-- **Slide topic (1 slide): Plugins** — plugins package slash commands, skills, custom agents, hooks, and MCP server definitions into installable workflow bundles and should be governed like supply-chain components. Show learners Agent Customizations > Plugins, the Extensions view's agent plugin surfaces where available, and `plugin.json` metadata before enablement. Require provenance, signing or source checks, versioning, rollout scope, telemetry/data-scope questions, included customizations, and rollback before enablement. **AI Safety Moment**: require signing, version governance, controlled rollout, and supply-chain risk review for plugins.
-- **Approved update (1 slide): Copilot Code Review with Agent Skills and MCP** — show how a repository skill contributes maintained review expertise and how an MCP tool contributes approved context. Keep a human responsible for verifying the evidence and deciding whether the pull request should change.
-- **Approved update (1 slide): Review Attribution and Read-only Evidence** — inspect the skill or MCP attribution attached to a review comment, explain that code-review MCP calls are read-only, and distinguish tools from broader MCP resources or prompts.
-- **Approved update (1 slide): Govern Autonomous MCP Tools** — explain that configured tools can run without an interactive approval prompt and require tool allowlisting, least privilege, data-scope review, provenance, secrets handling, and organization policy before execution.
+### 7. Parallel Subagents with Copilot CLI `/fleet`
 
-### 🛡️ Safety Moment
+Teach `/fleet` as an exact GitHub Copilot CLI interactive slash command that runs subagents in parallel; inspect those tasks through CLI `/tasks`. Use it for independent tasks such as separable checks, similar bounded refactors, or issue triage only when parallel savings exceed AIC, review, and reconciliation cost. Keep a human merge owner and require each result to return scope, changed artifacts, validation evidence, uncertainty, and conflicts.
 
-- Make every new integration surface pass the same permission, provenance, data-scope, and rollback review.
-- Prefer reversible, observable controls over hidden one-off configuration.
-- Keep MCP conceptual in this workshop: discuss governance boundaries, not a specific server walkthrough.
+State explicitly: `/fleet` is not an IDE-wide option, a VS Code Chat command, an inline-completions feature, or a currently documented Copilot App command. A CLI `/ide` connection does not turn `/fleet` into a VS Code Chat feature, and the official CLI reference does not visibly label `/fleet` preview or GA.
 
-### 🖥️ Demo: Select the least risky integration surface
+### 8. Worktrees for Parallel Agent Sessions
 
-- **Show me — set up and compare hooks, marketplace, MCP, API/CLI, and plugins** — facilitator demonstrates a safe draft Copilot/agent hook configuration, validates the JSON, names the rollback command, then uses the integration selection prompt. The expected result is the simplest interface that meets requirements with explicit governance review.
+Use one worktree and branch per independent session to isolate files, context, and diffs. Isolation prevents accidental working-directory collision; it does not prove that branches are independent, compatible, correct, or safe to merge. Before integration, inspect dependency direction and overlap, validate each branch independently, then prove compatibility through ordered combined validation under one human merge owner.
 
-  ```text
-  For this scenario, compare hooks, Extension Marketplace, MCP, API/CLI, and plugins. Recommend the simplest safe option based on permissions, observability, data scope, enterprise review, and rollback.
-  ```
+### 9. Hooks
 
-- **Now you try — change the trust boundary** — attendees repeat the same comparison, then change one constraint such as external data access, production credentials, or marketplace publisher trust.
+Hooks provide deterministic lifecycle guardrails for repeatable policy checks, secret scanning, validation commands, and stop gates that should not depend on prompt quality. Keep repository `.github/hooks/*.json` guidance scoped to supported cloud-agent and Copilot CLI use, and treat VS Code workspace hooks as a separate supported-surface configuration. Require provenance, least privilege, observable output, failure behavior, validation, and rollback evidence before trusting a hook.
 
-  ```text
-  Re-run the integration decision after adding one new constraint: external data access, production credentials, third-party marketplace publisher, or plugin update risk. Explain whether the recommended surface changes.
-  ```
+### 10. Extension Marketplace
 
-### 💡 Optimization Tip: Simpler interfaces reduce review and token cost
+Marketplace extensions can change permissions, telemetry, execution, and data-access boundaries. Inspect publisher, version, trust signals, permissions, telemetry and data handling, support posture, enterprise policy, and disable/uninstall path. Availability in a marketplace is not authorization to enable it.
 
-> 💡 **Usage Optimization**: Choose the narrowest integration surface that satisfies the task so tool descriptions, permission review, debugging effort, and coordination overhead stay small.
+### 11. MCP (Model Context Protocol)
 
-### 🔬 LAB: Exercise 2 — Stage 7 Integration Due-Diligence Matrix
+MCP exposes tools, resources, and prompts through explicit server boundaries; those capability types are distinct and a consuming product may support only a subset. For any server, identify what can be read or changed, authentication and authorization, data scope, provenance, secrets handling, logging, allowlisting, enablement owner, and rollback. Keep this workshop conceptual rather than configuring a live server.
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 2 (10 min) and deliver a matrix, attribution, governance controls, and one justified selection.
+### 12. Work IQ via MCP: Governed Microsoft 365 Context
 
-## 3. Operations and Day 2 Readiness (35 min)
+Keep the slide itself to exactly these three teaching ideas:
 
-### Key Points
+1. **What it is:** a permission-aware Microsoft 365 workplace-intelligence layer.
+2. **How it connects here:** Microsoft officially documents GitHub Copilot CLI connecting to Work IQ through remote MCP.
+3. **Safety boundary:** `Permission to retrieve is not permission to present.` Existing user permissions and tenant controls apply; public workshop examples are fictional/synthetic only.
 
-- **Slide topic (1 slide): Debugging Chat and Agents** — advanced debugging inspects context composition, tool-call order, instruction conflicts, permission failures, and loop dynamics before changing architecture. Start with the smallest reproducible prompt, add only the context needed to prove or disprove the issue, and avoid broad reruns. **Usage Optimization**: minimal repro prompts and narrowed context avoid expensive trial-and-error.
-- **Approved update (1 slide): Agents Window as Debugging Evidence** — use conversation and diff views to connect prompts, decisions, tool activity, and repository changes. Keep peer chats, delegated subagents, and isolated sessions distinct, and confirm preview availability before the demonstration.
-- **Slide topic (1 slide): Deploying Your Agents** — choose the distribution path based on audience, governance, maintainership, and provenance. Name and compare the paths explicitly: GitHub Repo for source-controlled internal sharing, Marketplace for broader discoverability where approved, and Agent Package Manager (APM) as an ecosystem packaging option for reproducible agent, skill, prompt, plugin, and MCP configuration distribution. **AI Safety Moment**: deployment requires policy compliance, permission review, provenance checks, documented ownership, and rollback planning.
-- **Slide topic (1 slide): Preparing for Day 2 Hack** — predefine a narrow scope, model strategy, success criteria, fallback path, and final demo gate before the hack begins. The strongest plan identifies what will not be attempted, which model or agent pattern will be used, and how the team will prove the outcome safely. **Usage Optimization**: predefine scope, model strategy, and success criteria to reduce churn during the hack.
+Use one simple, character-free native flow: `Permitted Microsoft 365 context → Work IQ → MCP → GitHub Copilot CLI`. Add only the small boundary label `identity · permissions · tenant policy`. Do not add data-category lists, interface inventories, authentication mechanics, availability or billing details, Microsoft product screenshots, or generated UI to the slide.
 
-### 🛡️ Safety Moment
+Use this required five-sentence presenter-notes block for the supporting detail:
 
-- Require deploy-readiness evidence before sharing an agent beyond the build team.
-- Keep provenance, permissions, owner, version, rollback, and support expectations attached to the package.
-- Do not let Day 2 demo pressure bypass policy checks or fallback planning.
+1. Work IQ is not Microsoft 365 Copilot, Microsoft Graph, a connector, an agent, or MCP itself; its documented developer interfaces are A2A, REST, and MCP, while this slide teaches only the officially documented GitHub Copilot CLI remote-MCP path and makes no equivalent claim for VS Code, Copilot App, GitHub.com cloud agent, or code review.
+2. Calls use Microsoft Entra delegated authentication as the signed-in user and are permission-trimmed, application-only authentication is unsupported, and existing Microsoft 365 permissions, sensitivity labels, compliance controls, tenant policy, and tenant boundaries continue to apply.
+3. Permitted context can include email, meetings and calendar, OneDrive and SharePoint files, Teams messages and chats, people and organizational context, Planner, enterprise search, and approved connected business systems.
+4. Work IQ APIs became generally available on 2026-06-16, access can require tenant enablement and usage-based Copilot Credits, exact geographic availability and pricing are not established, and some administrative or MCP controls may vary by region.
+5. Work IQ in Copilot Studio remains preview and is not the teaching target; public delivery must not expose live tenant names, emails, meetings, chats, files, customer data, tenant IDs, consent screens, tokens, admin settings, or screenshots, and must not demonstrate write operations.
 
-### 🖥️ Demo: Debug, deploy, and inspect capability evidence
+### 13. API/CLI
 
-- **Show me — create a minimal debug and deployment brief** — facilitator demonstrates a prompt that turns a failed run into a minimal repro, debug-evidence checklist, and deployment path recommendation.
+Prefer an approved API or CLI when it provides the narrowest observable path for deterministic tasks such as querying issues, running tests, collecting logs, or invoking known automation. Require least-privilege credentials, environment separation, stable output, audit evidence, explicit failure handling, and a rollback or safe retry path. A narrow command is preferable to a broad plugin or autonomous action only when it still meets the acceptance criteria.
 
-  ```text
-  Review this failed agent run. Identify the likely context, tool-call order, permission, or instruction-conflict issue. Then propose the smallest safe repro prompt, name the VS Code or CLI evidence to inspect, and recommend GitHub Repo, Marketplace, or Agent Package Manager (APM) as the distribution or packaging path.
-  ```
+### 14. Plugins
 
-- **Now you try — vary the failure and deployment audience** — attendees repeat the same step, then change the failure signal and intended audience before finalizing their lab artifact.
+Plugins can bundle slash commands, skills, custom agents, hooks, and MCP server definitions, so govern them as supply-chain components. Inspect provenance, package metadata, included customizations, executable hooks, automatically started servers, versioning, preview or availability labels, telemetry and data scope, rollout ownership, and rollback before enablement. Separate discovery and installation from organization authorization.
 
-  ```text
-  Re-run the brief for a different failure signal and a different audience: internal team, broader organization, or public marketplace. Explain which deployment review gates change.
-  ```
+### 15. Govern Shared Skills and MCP Across Code Review and Cloud Agent
 
-### 💡 Optimization Tip: Narrow the final mile
+Teach two distinct consumers:
 
-> 💡 **Usage Optimization**: Debugging and deployment planning improve when the prompt, context, evidence, success criteria, and model strategy are small enough to inspect quickly.
+- **Copilot code review** leaves review comments and does not approve the pull request. Repository agent skills and MCP tools can inform a comment; preserve attribution, and remember that MCP calls made by code review are read-only.
+- **Copilot cloud agent** is a separate agent workflow. Repository MCP configuration is shared with it, and GitHub and Playwright MCP servers may be enabled by default unless policy changes their use.
 
-### 🔬 LAB: Exercise 3 — Stage 8 Capability Discovery and Debug Evidence
+For these consumers, distinguish MCP **tools** from broader **resources** and **prompts**. Configured tools can run autonomously without an approval prompt, so require separate enablement, explicit allowlisting, least privilege, secrets controls, provenance, data-scope review, policy fit, and observable evidence. Availability and enablement are not acceptance: a human verifies comments, diffs, checks, and tool evidence and keeps accept/reject/merge authority.
 
-> **Instructor**: Pause here for hands-on practice. Students complete Exercise 3 (10 min) and deliver a repro, evidence map, capability surface, and deployment path. Day 2 remains a separate event and is not a lab deliverable.
+```text
+For this repository, compare how one maintained agent skill and one allowlisted MCP tool would be consumed by Copilot code review and Copilot cloud agent. Record attribution, read/write boundary, permissions, secrets and data scope, autonomous execution risk, policy owner, evidence produced, and the final human acceptance decision.
+```
+
+### 16. VS Code Agents Window as Debugging Evidence
+
+Scope this slide to VS Code. The Agents window can expose conversation and diff review plus running-subagent model, elapsed time, active tool call, and subagent conversation, helping connect delegated work to repository changes. It remains public preview and subject to progressive rollout, so confirm availability before demonstrating and do not imply equivalent evidence elsewhere.
+
+### 17. Debugging Copilot Across Surfaces
+
+Apply one portable method:
+
+1. State one failure hypothesis and the smallest safe reproduction.
+2. Define acceptance tests and expected evidence before rerunning.
+3. Preserve a checkpoint or known-good state.
+4. Compare expected with actual evidence and change one variable at a time.
+5. Stop when a criterion fails; do not broaden context or tools by reflex.
+6. Recover, repair the session, or roll back to the checkpoint, then rerun only the failed proof.
+
+Use evidence native to the surface: VS Code Agents window; Copilot CLI `/tasks`, `/diff`, and `/session`; Copilot App session/worktree/branch/pull-request/CI history; GitHub.com cloud-agent agents panel, logs, tools, progress, token usage, session length, commits, and diffs; or JetBrains agent debug logs. Do not introduce `/rewind`, and do not claim equivalent evidence for Xcode or Eclipse.
+
+```text
+Review this failed agent run. State one hypothesis and the smallest safe repro. Define the acceptance tests and expected evidence before rerunning; name the surface-specific evidence to inspect, the checkpoint to preserve, the stop criterion, and how to recover or roll back to a known state if the criterion fails.
+```
+
+### 18. Integrating Parallel Agent Work
+
+Integration is a separate engineering phase, not the automatic result of isolated branches. Record dependency ordering; validate each branch independently; detect file, API, schema, test, and behavioral overlap; choose the integration sequence; and preserve a rollback point before combination. After each ordered integration step, run targeted checks, then run combined validation for cross-branch behavior. A human reviews remaining uncertainty and evidence before final acceptance or merge.
+
+```text
+Create an integration plan for these parallel branches. Record dependency order, independent validation, overlap and conflict checks, integration sequence, combined acceptance tests, rollback point, unresolved uncertainty, and the final human accept/revise/reject decision.
+```
+
+### 19. Preparing for Day 2 Hack
+
+Predefine the narrow objective, owner, orchestration pattern, model strategy, constraints, and evidence that will count as success. Record explicit success criteria, the earliest stop signal, a fallback that preserves a demonstrable result, and the final human demo/acceptance gate. Reuse the debugging and integration methods rather than repeating their steps; this slide packages readiness evidence for execution pressure.
+
+### 20. Your Advanced Mission Starts Now
+
+Launch the declared 30-minute `cross-cutting-change` mission after the 60-minute teaching path. Map the existing orchestration clue to accountable boundaries; the integration matrix and review-control stack to governed integration; the minimal debug protocol, rollback checkpoint, and recorded human choice to evaluation/recovery; and the consolidated case-file export to final integration proof. This mapping preserves the existing clues, scoring, evidence envelope, and duration without adding an inline exercise or changing the mission.
 
 *Workshop guide for Module 3: Advanced — GitHub Copilot Developer Training*
