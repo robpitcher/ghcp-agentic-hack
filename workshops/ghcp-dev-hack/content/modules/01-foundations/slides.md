@@ -12,22 +12,26 @@ mdc: true
 # GitHub Copilot Foundations
 ::text::
 
-## Meet Agent Mergewell and Purrmission
+## Meet Agent Mergewell, Purrmission, and Riley Relay
 
 <div class="foundations-title-brand">
+  <span class="foundations-title-brand__wordmark">GitHub</span>
   <img src="/images/microsoft-logo.png" alt="Microsoft" />
 </div>
 
 ::visual::
-<img src="/images/foundation-welcome.png" alt="Agent Mergewell welcoming learners while Purrmission watches beside him" />
+<img
+  src="/images/foundation-welcome-trio-camera-ready-v3.png"
+  alt="Agent Mergewell welcoming the audience with bare human hands beside Riley Relay, the synthetic collaborator, and Purrmission, the black cat safety guardian"
+/>
 
 <!--
-Agent Mergewell is the curious inventor who explores tools, context, and practical ways to get useful work done with Copilot. Purrmission is the observant safety guardian who watches permissions, policy, review, and rollback boundaries before a risky action proceeds. Together they make momentum and operating boundaries visible. [Sources: Foundations character documents; GitHub responsible-use guidance.]
-Use this title slide to establish the partnership: Mergewell creates momentum, while Purrmission makes the operating boundary visible.
+Agent Mergewell is the accountable human investigator who explores tools, context, and practical ways to get useful work done with Copilot. Purrmission is the observant safety guardian who watches permissions, policy, review, and rollback boundaries before a risky action proceeds. Riley Relay personifies bounded software-agent support that returns evidence for Mergewell's review without becoming an authority or literal product architecture. Use the trio to establish momentum, operating boundaries, and accountable delegation. [Sources: Agent Mergewell and Riley Relay character documents; GitHub responsible-use guidance.]
 -->
 
 ---
 layout: two-panel
+hide: true
 ---
 
 ::title::
@@ -57,6 +61,30 @@ layout: two-panel
 ---
 
 ::title::
+# Session Agenda
+::text::
+
+<div class="foundations-agenda">
+
+- **Where Copilot Lives**
+- **Copilot App: An Agent-native desktop**
+- **What is a Harness?**
+- **Model Routing: Match the Task**
+
+</div>
+
+::visual::
+<img src="/images/session-route.png" alt="Agent Mergewell and Purrmission following the session route from foundations to missions" />
+
+<!--
+This temporary route previews four Foundations teaching stops while preserving the approved full-session agenda for restoration. Begin with where Copilot lives, then move through the agent-native desktop and harness boundaries before returning to model routing. Tell learners that this agenda is a route map rather than a timing contract and that all other module content remains unchanged. [Sources: Foundations 24-slide generation manifest, slides 3, 4, 5, and 14; temporary agenda decision approved 2026-08-14.]
+-->
+
+---
+layout: two-panel
+---
+
+::title::
 # Where Copilot Lives
 ::text::
 
@@ -67,7 +95,18 @@ layout: two-panel
 - Choose the harness whose context, tools, permissions, and evidence best fit the task
 
 ::visual::
-<img src="/images/copilot-surface-benefits.png" alt="Connected workstations representing Copilot benefits across coding, terminal, collaboration, and app surfaces" />
+<div class="foundations-surface-choice">
+  <img
+    src="/images/copilot-surfaces-harness-choice-human-lock-v3.png"
+    alt="Agent Mergewell comparing four distinct working paths with Riley Relay and Purrmission beside him"
+  />
+  <div class="foundations-surface-choice__labels" aria-hidden="true">
+    <span>VS Code</span>
+    <span>CLI</span>
+    <span>GitHub + cloud</span>
+    <span>Copilot App</span>
+  </div>
+</div>
 
 <!--
 Copilot spans IDE, terminal, GitHub.com, cloud-agent, and app experiences, and each surface creates a different practical advantage. VS Code protects coding flow, CLI keeps terminal work local, GitHub and cloud surfaces create collaboration evidence, and the App can synthesize configured sources when available. These surfaces are not interchangeable because their context, tools, permissions, policy, and review evidence differ. [Sources: GitHub Docs, What is GitHub Copilot; Copilot CLI; About cloud agent.]
@@ -227,7 +266,13 @@ layout: two-panel
 - Escalate only when scope and rollback are clear
 
 ::visual::
-<img src="/images/interaction-autonomy.png" alt="Agent Mergewell directing distinct collaborators across increasing levels of action" />
+<div class="foundations-evidence-handoff">
+  <img
+    src="/images/copilot-surfaces-riley-human-lock-v2.png"
+    alt="Riley Relay returning an evidence folio to Agent Mergewell for accountable review while Purrmission observes the bounded handoff"
+  />
+  <span class="foundations-evidence-handoff__label">Evidence returned</span>
+</div>
 
 <!--
 Ask, Plan, and Agent are a useful mental model for increasing action and responsibility, but exact behavior depends on the host product and configuration. Escalate only when acceptance criteria, scope, permissions, and rollback are explicit. These labels are a teaching metaphor, not a claim about universal product architecture. [Sources: VS Code Copilot documentation; GitHub cloud agent documentation.]
@@ -248,7 +293,7 @@ layout: two-panel
 - Cached context when supported
 
 ::visual::
-<img src="/images/token-input-handoff.png" alt="Selected instructions, references, history, and tool results entering a bounded model handoff" />
+<TokenInputHandoffFlow />
 
 <!--
 Input tokens include prompt material, instructions, references, history, and tool results, while cached context may affect usage when supported. Every reference should earn its place by changing the decision or improving the evidence. The slide's blocks are conceptual categories rather than exact tokenizer boundaries. [Sources: GitHub Docs, Models and pricing; Foundations content verification.]
@@ -537,7 +582,17 @@ This is one continuous 45-minute scored mission rather than four independent cas
   display: flex;
   min-height: 0;
   margin-top: auto;
-  align-items: flex-end;
+  align-items: center;
+  gap: 0.72rem;
+}
+
+:global(.foundations-title-brand__wordmark) {
+  display: inline-flex;
+  align-items: center;
+  color: #228B4B;
+  font-size: clamp(1.2rem, 1.8vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
 
 :global(.foundations-title-brand img) {
@@ -586,22 +641,201 @@ This is one continuous 45-minute scored mission rather than four independent cas
   background: #ffffff;
 }
 
+:global(.foundations-review-placeholder) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.72rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  border: 2px dashed rgba(31, 136, 61, 0.48);
+  color: #1f2328;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(130, 80, 223, 0.12), transparent 28%),
+    linear-gradient(145deg, #fffaf0, #f3f8f4);
+  text-align: center;
+}
+
+:global(.foundations-review-placeholder > span) {
+  padding: 0.42rem 0.72rem;
+  border-radius: 999px;
+  color: #1a7f37;
+  background: rgba(255,255,255,.86);
+  border: 1px solid rgba(31, 136, 61, 0.32);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+:global(.foundations-review-placeholder strong) {
+  max-width: 82%;
+  font-size: 1.45rem;
+  line-height: 1.08;
+}
+
+:global(.foundations-review-placeholder p) {
+  max-width: 80%;
+  margin: 0;
+  color: #3b434d;
+  font-size: .86rem;
+  font-weight: 680;
+  line-height: 1.3;
+}
+
+:global(.foundations-review-placeholder small) {
+  max-width: 78%;
+  color: #6e40c9;
+  font-size: .64rem;
+  font-weight: 650;
+}
+
+:global(.foundations-agent-ladder__labels) {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 80%;
+}
+
+:global(.foundations-agent-ladder__labels span) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 0.42rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(31, 35, 40, 0.14);
+  color: #1f2328;
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+:global(.foundations-evidence-handoff) {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+:global(.foundations-evidence-handoff img) {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+:global(.foundations-evidence-handoff__label) {
+  position: absolute;
+  top: 46.5%;
+  left: 53.5%;
+  transform: translate(-50%, -50%) rotate(11deg);
+  padding: 0.24rem 0.48rem;
+  border: 1px solid rgba(31, 35, 40, 0.2);
+  border-radius: 0.3rem;
+  color: #1f2328;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 0.15rem 0.4rem rgba(31, 35, 40, 0.14);
+  font-size: 0.58rem;
+  font-weight: 760;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+:global(.foundations-surface-choice) {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+:global(.foundations-surface-choice img) {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+:global(.foundations-surface-choice__labels) {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+:global(.foundations-surface-choice__labels span) {
+  position: absolute;
+  padding: 0.22rem 0.45rem;
+  border: 1px solid rgba(31, 136, 61, 0.3);
+  border-radius: 999px;
+  color: #1f2328;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 0.12rem 0.35rem rgba(31, 35, 40, 0.12);
+  font-size: 0.52rem;
+  font-weight: 760;
+  white-space: nowrap;
+}
+
+:global(.foundations-surface-choice__labels span:nth-child(1)) {
+  top: 28%;
+  left: 6%;
+}
+
+:global(.foundations-surface-choice__labels span:nth-child(2)) {
+  top: 10%;
+  left: 47%;
+}
+
+:global(.foundations-surface-choice__labels span:nth-child(3)) {
+  top: 28%;
+  right: 3%;
+}
+
+:global(.foundations-surface-choice__labels span:nth-child(4)) {
+  bottom: 7%;
+  left: 42%;
+}
+
 :global(.ghcp-two-panel__text .foundations-compact li) {
   margin: 0.22rem 0;
   font-size: calc(0.92rem * var(--ghcp-panel-scale));
   line-height: 1.2;
 }
 
+:global(.ghcp-two-panel__text .foundations-agenda) {
+  height: 100%;
+  min-height: 0;
+  padding: 0.25rem 0.35rem 0.25rem 0;
+}
+
+:global(.ghcp-two-panel__text .foundations-agenda ul) {
+  display: grid;
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  height: 100%;
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
 :global(.ghcp-two-panel__text .foundations-agenda li) {
-  margin: 0.18rem 0;
-  font-size: calc(0.84rem * var(--ghcp-panel-scale));
-  line-height: 1.16;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0.42rem 0.1rem;
+  border-bottom: 1px solid rgba(84, 94, 108, 0.18);
+  font-size: calc(0.94rem * var(--ghcp-panel-scale));
+  line-height: 1.32;
+  text-align: left;
+}
+
+:global(.ghcp-two-panel__text .foundations-agenda li:last-child) {
+  border-bottom: 0;
 }
 
 :global(.foundations-model-guide) {
   display: grid;
   grid-template-rows: auto auto;
-  gap: 0.4rem;
+  gap: 0.5rem;
   height: auto;
 }
 

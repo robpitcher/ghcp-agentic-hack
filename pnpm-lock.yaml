@@ -72,6 +72,9 @@ importers:
 
   packages/content-schema:
     dependencies:
+      '@slidev/parser':
+        specifier: 52.18.0
+        version: 52.18.0(@nuxt/kit@3.21.9)(@vue/compiler-sfc@3.5.40)(esbuild@0.28.1)(rolldown@1.1.5)(rollup@4.62.2)(typescript@6.0.3)(vite@8.1.5(@types/node@22.20.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0))
       fast-glob:
         specifier: ^3.3.3
         version: 3.3.3

@@ -7,6 +7,7 @@ import {
   loadMissionProgress,
   normalizeMission,
   parseMissionProgress,
+  renderModule,
   renderMissionBackLink,
   summarizeWorkshopScores,
   type CatalogMission,
@@ -190,6 +191,22 @@ describe("mission navigation", () => {
     expect(renderMissionBackLink(agenticModule)).toContain(
       "Back to Agentic Development"
     );
+  });
+});
+
+describe("workshop module navigation", () => {
+  it("opens slides and missions in new tabs while preserving the workshop page", () => {
+    const foundationsModule = workshop.modules.find((module) => module.id === "foundations");
+    expect(foundationsModule).toBeDefined();
+    if (!foundationsModule) throw new Error("Foundations test module is missing");
+
+    const html = renderModule(foundationsModule);
+    expect(html).toContain(
+      `href="${import.meta.env.BASE_URL}workshops/ghcp-dev-hack/foundations/"`
+    );
+    expect(html).toContain('target="_blank" rel="noopener noreferrer"');
+    expect(html).toContain("Foundations slides (opens in new tab)");
+    expect(html).toContain("Foundations mission, 45 minutes (opens in new tab)");
   });
 });
 

@@ -895,10 +895,10 @@ function getNextModuleTitle(workshop: CatalogWorkshop, currentModuleId: string):
   return currentIndex >= 0 ? workshop.modules[currentIndex + 1]?.title : undefined;
 }
 
-function renderModule(module: CatalogModule): string {
+export function renderModule(module: CatalogModule): string {
   const missionButtons = module.missions.map(
     (mission) =>
-      `<a class="button-link button-link--secondary" href="${url(mission.route)}">Missions · ${mission.durationMinutes} min</a>`
+      `<a class="button-link button-link--secondary" href="${url(mission.route)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`${mission.title}, ${mission.durationMinutes} minutes (opens in new tab)`)}">Missions · ${mission.durationMinutes} min <span aria-hidden="true">↗</span></a>`
   ).join("");
   return `<li class="module-list__item">
     <div class="module-list__content">
@@ -907,7 +907,7 @@ function renderModule(module: CatalogModule): string {
     </div>
     <div class="module-list__actions">
       <span class="module-list__duration">${escapeHtml(module.duration)}</span>
-      <a class="button-link" href="${url(module.route)}">Slides</a>
+      <a class="button-link" href="${url(module.route)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`${module.title} slides (opens in new tab)`)}">Slides <span aria-hidden="true">↗</span></a>
       ${missionButtons}
     </div>
   </li>`;
