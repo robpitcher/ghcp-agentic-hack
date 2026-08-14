@@ -1,4 +1,4 @@
-import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
@@ -193,6 +193,88 @@ First sentence. Second sentence. Third sentence.
     );
 
     await expect(loadCatalog(root)).rejects.toThrow("expected 2 slides but found 1 H1 slide titles");
+
+    await writeFile(
+      path.join(moduleRoot, "slides.md"),
+      `---
+theme: ghcp
+---
+
+# Introduction
+
+<!--
+First sentence. Second sentence. Third sentence.
+-->
+
+---
+
+# Teach the project with \`/init\`
+
+<!--
+First sentence. Second sentence. Third sentence.
+-->
+`
+    );
+    await writeFile(
+      path.join(moduleRoot, "slide-manifest.md"),
+      `| # | Source | Topic | Type | Exact source title | Visual |
+|---:|---|---|---|---|---|
+| 1 | H1 | Intro | Cover | Introduction | Native |
+| 2 | H2 | Next | Content | Teach the project with \`/init\` | Native |
+`
+    );
+
+    await expect(loadCatalog(root)).resolves.toMatchObject({
+      workshops: [{ modules: [{ data: { id: "intro" } }] }]
+    });
+
+    await writeFile(
+      path.join(moduleRoot, "slides.md"),
+      `---
+theme: ghcp
+---
+
+# Introduction
+
+<!--
+First sentence. Second sentence. Third sentence.
+-->
+
+---
+hide: true
+---
+
+# Superseded introduction
+
+---
+
+# Teach the project with \`/init\`
+
+<!--
+First sentence. Second sentence. Third sentence.
+-->
+`
+    );
+
+    await expect(loadCatalog(root)).resolves.toMatchObject({
+      workshops: [{ modules: [{ data: { id: "intro" } }] }]
+    });
+
+    await writeFile(
+      path.join(moduleRoot, "slides.md"),
+      (await readFile(path.join(moduleRoot, "slides.md"), "utf8")).replace("hide: true", "disabled: true")
+    );
+
+    await expect(loadCatalog(root)).resolves.toMatchObject({
+      workshops: [{ modules: [{ data: { id: "intro" } }] }]
+    });
+
+    await writeFile(
+      path.join(moduleRoot, "slides.md"),
+      (await readFile(path.join(moduleRoot, "slides.md"), "utf8")).replace("disabled: true", "disabled: false")
+    );
+
+    await expect(loadCatalog(root)).rejects.toThrow("expected 2 slides but found 3 H1 slide titles");
   });
 
   it("reconciles delivery variant module phase minutes", async () => {

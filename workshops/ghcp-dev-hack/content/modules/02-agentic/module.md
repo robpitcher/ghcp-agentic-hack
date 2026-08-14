@@ -39,6 +39,7 @@ objectives:
 prerequisites:
   - Foundations module
 sourceDocuments:
+  - content/modules/02-agentic/opening-slides-concept.md
   - content/modules/02-agentic/visual-intent.md
   - content/research/agentic-content-verification.md
   - content/research/agentic-ai-credit-optimization.md
@@ -47,13 +48,15 @@ sourceDocuments:
   - content/missions/agentic/agent-task.md
 slides: content/modules/02-agentic/slides.md
 generation:
-  expectedSlides: 25
+  expectedSlides: 27
   manifest: content/modules/02-agentic/slide-manifest.md
   imageProvider: gpt-image-2
   visualStyle: >-
     Native-first warm editorial Agent Mergewell world. Thirteen approved static
     character-world images and one approved native animation are integrated on
-    their approved slides with contained rendering and native Slidev overlays.
+    their approved slides with contained rendering and native Slidev overlays;
+    the opening temporarily reuses the declared approval-boundary image until
+    the separately governed original title scene is accepted and promoted.
     Render labels, code, commands, product UI, findings, and evidence as native
     Slidev or HTML; no generated text, code, product UI, labels, logos, GitHub
     mascots or other unapproved media.
@@ -79,20 +82,23 @@ status: draft
 
 # Agentic Development
 
-## Current 25-slide generation contract
+## Current 27-slide generation contract
 
 `content/modules/02-agentic/visual-intent.md` is the current slide authority.
-The generated deck contains exactly 25 slides in its numbered order: one
-zero-minute cover, 23 instructional slides, and one separate 45-minute mission
-briefing. Earlier 27-, 28-, or 29-slide versions are historical production
-context only and do not define the current deck.
+The generated deck contains exactly 27 slides in its numbered order: two new
+zero-minute opening slides, the preserved zero-minute operating-split cover,
+23 instructional slides, and one separate 45-minute mission briefing. The
+current 27-slide contract is the exact human-approved
+`agentic-opening-slides-2026-08-13` revision; unrelated earlier 27-, 28-, or
+29-slide versions remain historical production context only.
 
-Slides 2–24 provide 75 minutes of instruction. Slides 5, 10, 12, 15, 20, and
-24 receive four minutes each because they carry a layered conflict, loop,
+Slides 4–26 provide 75 minutes of instruction. Slides 7, 12, 14, 17, 22, and
+26 receive four minutes each because they carry a layered conflict, loop,
 consequential approval, security lifecycle, Mobile lifecycle, or final
 acceptance decision. The other 17 instructional slides receive three minutes
-each: `(6 × 4) + (17 × 3) = 75`. Slide 1 contributes zero minutes, and slide
-25 is the separate 45-minute mission, so `0 + 75 + 45 = 120`.
+each: `(6 × 4) + (17 × 3) = 75`. Slides 1–3 contribute zero minutes, and
+slide 27 is the separate 45-minute mission, so
+`0 + 0 + 0 + 75 + 45 = 120`.
 
 ## Teaching and role boundaries
 
@@ -129,7 +135,7 @@ commands, labels, diagrams, and evidence remain native Slidev content.
 
 ## Mission boundary
 
-Slide 25 points to the separate `Your Mission: Hand Off Work with Confidence`
+Slide 27 points to the separate `Your Mission: Hand Off Work with Confidence`
 mission and
 does not duplicate its instructions. The mission now consumes the exported
 Foundations case file or the facilitator starter for legitimate catch-up,
@@ -142,10 +148,13 @@ totals for Advanced through `content/missions/agentic/agent-task.md`.
 ## Production boundary
 
 The 13 approved static images declared above remain promoted, portable, and
-integrated on slides 1, 5, 8, 9, 11-13, 17-20, 23, and 24 through contained
-module-public paths with native labels and evidence. Slide 10 uses the approved
-deterministic native animation. The module-local stylesheet reproduces the
-owner-approved deck without changing the shared theme. This recovery authorizes
-no additional prompts, generated pixels, images, video, animation, media
-placeholders, logos, mascot artwork, paid actions, candidate generation,
-publication, release, or shared-theme changes.
+integrated on shifted slides 3, 7, 10, 11, 13-15, 19-22, 25, and 26 through
+contained module-public paths with native labels and evidence. Slide 1
+temporarily reuses the already declared
+`approval-boundary-human-decision.png` contained and unmodified; it is a
+governed fallback and does not imply approval, promotion, or availability of
+the new original title scene. Slide 12 uses the approved deterministic native
+animation. The module-local stylesheet reproduces the owner-approved deck
+without changing the shared theme. The approved concept authorizes the new
+prompt and bounded paid-action packet only; it authorizes no generated pixels,
+candidates, promotion, publication, release, or shared-theme changes.

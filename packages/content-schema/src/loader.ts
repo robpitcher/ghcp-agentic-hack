@@ -1,5 +1,6 @@
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
+import { parseSync } from "@slidev/parser";
 import fg from "fast-glob";
 import matter from "gray-matter";
 import type { output, ZodTypeAny } from "zod";
@@ -111,7 +112,7 @@ function manifestTitles(source: string): string[] {
   if (titleIndex < 0) return [];
   return rows
     .filter((cells) => /^\d+$/.test(cells[0] ?? ""))
-    .map((cells) => cells[titleIndex]?.replace(/^`|`$/g, "") ?? "")
+    .map((cells) => cells[titleIndex] ?? "")
     .filter(Boolean);
 }
 
@@ -123,6 +124,12 @@ function slideTitles(source: string): Array<{ title: string; start: number }> {
     title: match[1] ?? "",
     start: match.index ?? 0
   }));
+}
+
+function visibleSlideSources(source: string, filePath: string): string[] {
+  return parseSync(source, filePath).slides
+    .filter((slide) => !slide.frontmatter.hide && !slide.frontmatter.disabled)
+    .map((slide) => slide.raw);
 }
 
 function sentenceCount(source: string): number {
@@ -147,7 +154,8 @@ async function validateGeneratedModule(
     readFile(slidesPath, "utf8"),
     readFile(manifestPath, "utf8")
   ]);
-  const slides = slideTitles(slidesSource);
+  const visibleSlides = visibleSlideSources(slidesSource, slidesPath);
+  const slides = visibleSlides.flatMap((slide) => slideTitles(slide));
   const expectedTitles = manifestTitles(manifestSource);
   const expectedSlides = module.data.generation.expectedSlides;
 
@@ -168,10 +176,8 @@ async function validateGeneratedModule(
     }
   }
 
-  for (let index = 0; index < slides.length; index += 1) {
-    const start = slides[index]?.start ?? 0;
-    const end = slides[index + 1]?.start ?? slidesSource.length;
-    const comments = Array.from(slidesSource.slice(start, end).matchAll(/<!--([\s\S]*?)-->/g));
+  for (let index = 0; index < visibleSlides.length; index += 1) {
+    const comments = Array.from((visibleSlides[index] ?? "").matchAll(/<!--([\s\S]*?)-->/g));
     if (comments.length !== 1) {
       issues.push(`${module.filePath}: slide ${index + 1} must have exactly one speaker-notes comment`);
       continue;

@@ -1,10 +1,63 @@
 ---
 theme: ghcp
-title: Agentic Development
+title: "Module 2: Agentic Development — Workshop Guide"
 layout: two-panel
 transition: slide-left
 mdc: true
 class: agentic-slide agentic-priority-slide
+---
+
+::title::
+# Module 2: Agentic Development — Workshop Guide
+::text::
+
+<div class="agentic-kicker">GitHub Copilot · Agentic development</div>
+
+## Direct bounded software work. Inspect the evidence. Keep the decision human.
+
+**2 hours · 75 min instruction + 45 min mission**
+
+::visual::
+<div class="agentic-static-stage" role="group" aria-label="Mergewell reviews a consequential request with Riley stopped beyond the boundary and Purrmission marking the stop line">
+  <img src="/images/approval-boundary-human-decision.png" alt="Agent Mergewell reviews a consequential request while Riley Relay waits beyond the boundary and Purrmission marks the stop line">
+</div>
+
+<!--
+Agentic Development moves from Foundations' bounded delegation into multi-step repository work where the human still owns the brief, boundaries, acceptance, and merge. Riley Relay represents the software-agent collaborator: she performs only delegated digital work, returns evidence, asks when blocked, and stops at stated boundaries. Purrmission appears only at the consequential permission or scope threshold; she does not replace Mergewell's decision or Riley's bounded-work role. Use this zero-minute opener to establish module identity and role hierarchy, not to teach literal product architecture. [Sources: module.md; visual-intent.md; agentic-content-verification.md AGT-12 and AGT-28; Agent Mergewell and Riley Relay character briefs.]
+-->
+
+---
+layout: two-panel
+class: agentic-agenda-slide
+---
+
+::title::
+# Session Agenda
+::text::
+
+<div class="agentic-stack" role="list" aria-label="Seventy-five-minute instruction route">
+  <div class="agentic-card" role="listitem"><b>1 · Who does what? — 15 min</b><span>Human accountability, bounded software work, reusable guidance, and tools</span></div>
+  <div class="agentic-card" role="listitem"><b>2 · Prepare a job worth delegating — 20 min</b><span>Instructions, context, scope, checks, stops, and evidence</span></div>
+  <div class="agentic-card" role="listitem"><b>3 · Choose and trust the helper — 20 min</b><span>Skills, custom agents, tool controls, planning, and approval boundaries</span></div>
+  <div class="agentic-card" role="listitem"><b>4 · Stay in charge of the result — 20 min</b><span>Observable loops, repository and cloud evidence, optimization, and the human call</span></div>
+</div>
+
+::visual::
+<div class="agentic-surface agentic-stack" role="region" aria-label="Separate forty-five-minute mission">
+  <div class="agentic-kicker">Mission · 45 min</div>
+  <div class="agentic-card agentic-green">
+    <b>Hand off work with confidence</b>
+    <span>Carry the Foundations case forward and return inspected evidence.</span>
+  </div>
+  <div class="agentic-callout agentic-safety"><b>Keep the mission time protected.</b><br>Detailed actions stay in the Missions experience.</div>
+</div>
+
+<!--
+The route keeps the current instruction budget at 75 minutes: 15 minutes for role clarity, then three 20-minute sections for briefing, helper and control choices, and evidence-based decisions. The separate 45-minute mission follows instruction and carries the Foundations case file forward without moving detailed mission actions into the deck. This agenda adapts the Foundations timed-route pattern while using Agentic's approved section architecture and current topic sequence. Protect the mission timebox by shortening discussion rather than dropping required content. [Sources: module.md timing; copilot-dev-agentic-workshop.md “Instruction architecture”; slide-manifest.md; Foundations slide 2.]
+-->
+
+---
+layout: two-panel
 ---
 
 ::title::
@@ -580,6 +633,7 @@ In GitHub Mobile, an eligible developer can start a GitHub Copilot cloud-agent s
 
 ---
 layout: single-panel
+class: agentic-init-title-slide
 ---
 
 ::title::

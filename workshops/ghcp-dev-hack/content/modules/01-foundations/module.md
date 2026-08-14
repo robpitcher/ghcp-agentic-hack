@@ -49,7 +49,7 @@ slides: content/modules/01-foundations/slides.md
 generation:
   expectedSlides: 24
   manifest: content/modules/01-foundations/slide-manifest.md
-  imageProvider: gpt-image-2
+  imageProvider: mai-image-2.5
   visualStyle: >-
     GitHub-aligned light editorial presentation with native Mona Sans text,
     accessible native tables and diagrams, original approved workshop-character
@@ -63,8 +63,12 @@ assets:
   - assets/brand/microsoft/microsoft-logo.png
   - assets/brand/vscode/code-stable.png
   - assets/images/foundations/foundation-welcome.png
+  - assets/images/foundations/foundation-welcome-trio-human-mergewell-v2.png
+  - assets/images/foundations/foundation-welcome-trio-camera-ready-v3.png
   - assets/images/foundations/session-route.png
   - assets/images/foundations/copilot-surface-benefits.png
+  - assets/images/foundations/copilot-surfaces-riley-human-lock-v2.png
+  - assets/images/foundations/copilot-surfaces-harness-choice-human-lock-v3.png
   - assets/images/foundations/copilot-app-synthesis.png
   - assets/images/foundations/copilot-harness.png
   - assets/images/foundations/vscode-grounding.png
