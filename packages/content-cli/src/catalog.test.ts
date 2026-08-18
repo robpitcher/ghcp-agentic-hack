@@ -1,8 +1,8 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { loadCatalog, type ContentCatalog } from "@ghcp/content-schema";
 import { repositoryRoot } from "./paths.js";
 import { workshopRunOfShow } from "./lifecycle.js";
-import { createPortalCatalog } from "./catalog.js";
+import { createPortalCatalog, resolveWorkshopEnvironment } from "./catalog.js";
 
 describe("reference content", () => {
   it("loads the reference workshop and ordered modules", async () => {
@@ -13,16 +13,14 @@ describe("reference content", () => {
     const generated = createPortalCatalog(catalog);
     const mission = generated.workshops[0]?.modules[0]?.missions[0];
     expect(mission).toMatchObject({
-      goal: expect.stringContaining("verified Copilot case file"),
+      goal: expect.stringContaining("five short scored experiments"),
       completionPoints: 40,
-      bonusPointCap: 10,
-      starterFile: {
-        name: "case-file.md"
-      }
+      bonusPointCap: 10
     });
+    expect(mission?.starterFile).toBeUndefined();
     expect(mission?.coreClues).toHaveLength(5);
-    expect(mission?.coreClues[0]?.hints).toHaveLength(3);
-    expect(mission?.harnesses.map((harness) => harness.id)).toEqual(["copilot-cli", "ide-extension", "copilot-app"]);
+    expect(mission?.coreClues[0]?.hints).toHaveLength(2);
+    expect(mission?.harnesses.map((harness) => harness.id)).toEqual(["ide-extension", "copilot-cli", "copilot-app"]);
   });
 
   it("includes scored mission catalog fields when authored content provides them", () => {
@@ -263,5 +261,98 @@ describe("reference content", () => {
         "| GitHub Workshop | 15:30 | 16:00 | 30 | mission | Mission: Orchestrate, integrate, and debug with evidence | advanced |"
       );
     });
+  });
+});
+
+describe("workshop leaderboard environments", () => {
+  const previousEnvironment = process.env.WORKSHOP_ENVIRONMENT;
+
+  beforeEach(() => {
+    delete process.env.WORKSHOP_ENVIRONMENT;
+  });
+
+  afterEach(() => {
+    if (previousEnvironment === undefined) {
+      delete process.env.WORKSHOP_ENVIRONMENT;
+    } else {
+      process.env.WORKSHOP_ENVIRONMENT = previousEnvironment;
+    }
+  });
+
+  const environments = {
+    test: {
+      repository: "mfm-se-dev-org/ghcp-dev-hack-leaderboard",
+      submissionUrl: "https://github.com/mfm-se-dev-org/ghcp-dev-hack-leaderboard/issues/new?template=leaderboard-submission.yml",
+      standingsUrl: "https://mfm-se-dev-org.github.io/ghcp-dev-hack-leaderboard/"
+    },
+    production: {
+      repository: "tammym-demos/ghcp-dev-hack-leaderboard",
+      submissionUrl: "https://github.com/tammym-demos/ghcp-dev-hack-leaderboard/issues/new?template=leaderboard-submission.yml",
+      standingsUrl: "https://tammym-demos.github.io/ghcp-dev-hack-leaderboard/"
+    }
+  };
+
+  const catalog = {
+    workshops: [
+      {
+        root: "workshops/test",
+        workshop: {
+          filePath: "workshop.md",
+          body: "",
+          data: {
+            schemaVersion: 1,
+            kind: "workshop",
+            id: "test",
+            title: "Test",
+            description: "Test workshop",
+            format: "custom",
+            duration: "1 hour",
+            level: "basic",
+            audience: ["Developers"],
+            prerequisites: [],
+            modules: [],
+            tags: [],
+            researchSources: [],
+            status: "draft",
+            leaderboard: { optional: true, aliasOnly: true, eventId: "ghcp-dev-hack", environments },
+            lastReviewed: "2026-08-11"
+          }
+        },
+        modules: [],
+        missions: [],
+        labs: [],
+        storyboards: [],
+        scenes: [],
+        characters: [],
+        locations: [],
+        complexTopicPlans: []
+      }
+    ]
+  } as unknown as ContentCatalog;
+
+  it("selects the test environment by default", () => {
+    const generated = createPortalCatalog(catalog);
+    expect(generated.environment).toBe("test");
+    expect(generated.workshops[0]?.leaderboard).toMatchObject({
+      environment: "test",
+      repository: environments.test.repository,
+      submissionUrl: environments.test.submissionUrl,
+      standingsUrl: environments.test.standingsUrl
+    });
+  });
+
+  it("selects the production environment when requested", () => {
+    const generated = createPortalCatalog(catalog, resolveWorkshopEnvironment("production"));
+    expect(generated.environment).toBe("production");
+    expect(generated.workshops[0]?.leaderboard).toMatchObject({
+      environment: "production",
+      repository: environments.production.repository,
+      standingsUrl: environments.production.standingsUrl
+    });
+  });
+
+  it("falls back to the test environment for unknown values", () => {
+    expect(resolveWorkshopEnvironment("staging")).toBe("test");
+    expect(resolveWorkshopEnvironment(undefined)).toBe("test");
   });
 });

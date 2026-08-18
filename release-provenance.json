@@ -1,4 +1,7 @@
 {
-  "releaseId": "ghcp-dev-hack-talk-track-2026-08-17b",
-  "sourceCommit": "f375721559f69fa684f17d3ba723c6f4cdda13bd"
+  "releaseId": "ghcp-dev-hack-leaderboard-2026-08-18b",
+  "sourceCommit": "f701f6f9e384f75671722aae51a48cf454dc6c03",
+  "workshops": [
+    "ghcp-dev-hack"
+  ]
 }

@@ -26,6 +26,7 @@ import {
   scaffoldWorkshop
 } from "./scaffold.js";
 import { compileStoryboardPrompt } from "./storyboard.js";
+import { publishLeaderboard } from "./leaderboard.js";
 import {
   checkpointWorkshop,
   pauseWorkshop,
@@ -306,6 +307,28 @@ generate
         console.error(`Response Body: ${error.responseBody}`);
       }
       throw error;
+    }
+  });
+
+program
+  .command("publish-leaderboard")
+  .argument("<workshop-id>")
+  .option("--environment <environment>", "test or production", "test")
+  .option("--dry-run", "Show the target repository and files without publishing")
+  .option("--message <message>", "Commit message used in the leaderboard repository")
+  .description("Publish the workshop leaderboard kit to its environment repository")
+  .action(async (workshopId, options) => {
+    const result = await publishLeaderboard(workshopId, options.environment, {
+      dryRun: options.dryRun,
+      message: options.message
+    });
+    console.log(`Leaderboard kit: ${result.kitDirectory} (${result.files.length} file(s))`);
+    console.log(`${result.environment} repository: ${result.repository}`);
+    console.log(`Standings: ${result.standingsUrl}`);
+    if (result.published) {
+      console.log(`Published commit ${result.commit}.`);
+    } else {
+      console.log(`Nothing published: ${result.reason}.`);
     }
   });
 

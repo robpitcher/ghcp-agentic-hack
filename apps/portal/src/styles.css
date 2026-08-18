@@ -166,6 +166,24 @@ h1 {
   color: #6639ba;
 }
 
+.leaderboard-pointer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid #d0d7de;
+  border-radius: 0.75rem;
+  background: #f6f8fa;
+}
+
+.leaderboard-pointer p {
+  flex: 1 1 18rem;
+  margin: 0;
+  color: #57606a;
+}
+
 .module-list {
   display: grid;
   gap: 0.75rem;
@@ -595,6 +613,59 @@ h1 {
 .mission-hints summary:focus-visible {
   outline: 3px solid #0969da;
   outline-offset: 3px;
+}
+
+.mission-submission__alias {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #bf8700;
+  border-radius: 0.5rem;
+  background: #fff8e5;
+  color: #4d2d00;
+}
+
+.mission-submission__alias code {
+  background: #fff2cc;
+}
+
+.mission-alias {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.mission-alias label {
+  font-weight: 600;
+  color: #3b434b;
+}
+
+.mission-alias__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.mission-alias input {
+  flex: 1 1 14rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #d0d7de;
+  border-radius: 0.5rem;
+  font: inherit;
+  background: white;
+  color: #1f2328;
+}
+
+.mission-alias input:focus-visible {
+  outline: 3px solid #0969da;
+  outline-offset: 2px;
+}
+
+.mission-alias #mission-alias-help,
+.mission-alias #mission-alias-status {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #57606a;
 }
 
 .mission-notes,

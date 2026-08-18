@@ -13,7 +13,8 @@
     "content": "pnpm --filter @ghcp/content-cli content",
     "minimax:h3": "node --env-file=.env scripts/minimax-h3-poc.mjs",
     "review:slides": "node scripts/preview-local.mjs",
-    "test": "pnpm -r test",
+    "test": "pnpm -r test && pnpm test:leaderboard-kit",
+    "test:leaderboard-kit": "node --test \"workshops/ghcp-dev-hack/artifacts/leaderboard-kit/test/*.test.mjs\"",
     "typecheck": "pnpm -r typecheck",
     "validate": "pnpm --filter @ghcp/content-cli content validate"
   },

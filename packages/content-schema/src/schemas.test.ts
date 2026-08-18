@@ -363,3 +363,95 @@ describe("moduleSchema", () => {
     }
   );
 });
+
+describe("leaderboard declarations", () => {
+  const workshopBase = {
+    schemaVersion: 1,
+    kind: "workshop",
+    id: "ghcp-dev-hack",
+    title: "GitHub Copilot Developer Hack",
+    description: "A hands-on GitHub Copilot workshop.",
+    format: "one-day",
+    duration: "7 hours",
+    level: "mixed",
+    audience: ["Software developers"],
+    prerequisites: [],
+    modules: ["foundations"],
+    tags: ["copilot"],
+    status: "draft",
+    lastReviewed: "2026-07-28"
+  } as const;
+
+  const environments = {
+    test: {
+      repository: "mfm-se-dev-org/ghcp-dev-hack-leaderboard",
+      submissionUrl: "https://github.com/mfm-se-dev-org/ghcp-dev-hack-leaderboard/issues/new?template=leaderboard-submission.yml",
+      standingsUrl: "https://mfm-se-dev-org.github.io/ghcp-dev-hack-leaderboard/"
+    },
+    production: {
+      repository: "tammym-demos/ghcp-dev-hack-leaderboard",
+      submissionUrl: "https://github.com/tammym-demos/ghcp-dev-hack-leaderboard/issues/new?template=leaderboard-submission.yml",
+      standingsUrl: "https://tammym-demos.github.io/ghcp-dev-hack-leaderboard/"
+    }
+  } as const;
+
+  it("accepts test and production leaderboard environments", () => {
+    const result = workshopSchema.safeParse({
+      ...workshopBase,
+      leaderboard: { optional: true, aliasOnly: true, eventId: "ghcp-dev-hack", environments }
+    });
+
+    expect(result.success).toBe(true);
+  });
+
+  it("requires both environments and https URLs", () => {
+    expect(workshopSchema.safeParse({
+      ...workshopBase,
+      leaderboard: { optional: true, aliasOnly: true, eventId: "ghcp-dev-hack", environments: { test: environments.test } }
+    }).success).toBe(false);
+
+    expect(workshopSchema.safeParse({
+      ...workshopBase,
+      leaderboard: {
+        optional: true,
+        aliasOnly: true,
+        eventId: "ghcp-dev-hack",
+        environments: {
+          ...environments,
+          test: { ...environments.test, standingsUrl: "http://example.com/board" }
+        }
+      }
+    }).success).toBe(false);
+  });
+
+  it("accepts a mission submission block and rejects an empty step list", () => {
+    const mission = {
+      schemaVersion: 1,
+      kind: "mission",
+      id: "context-and-prompts",
+      title: "Foundations mission",
+      module: "foundations",
+      durationMinutes: 45,
+      objectiveRefs: ["Objective"],
+      startingState: "Ready",
+      task: "Complete the clues",
+      evidence: ["Case file"],
+      corePath: ["Complete the clues"],
+      debrief: ["What changed?"],
+      validation: ["At least 40 core points"],
+      status: "draft",
+      leaderboard: {
+        optional: true,
+        aliasOnly: true,
+        instructions: ["Alias only."],
+        submission: { moduleOption: "Foundations", steps: ["Choose Foundations"] }
+      }
+    };
+
+    expect(missionSchema.safeParse(mission).success).toBe(true);
+    expect(missionSchema.safeParse({
+      ...mission,
+      leaderboard: { optional: true, aliasOnly: true, instructions: ["Alias only."], submission: { moduleOption: "Foundations", steps: [] } }
+    }).success).toBe(false);
+  });
+});

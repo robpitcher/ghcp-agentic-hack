@@ -1056,6 +1056,7 @@ layout: advanced-content
   <span class="advanced-chip">Governed integration</span>
   <span class="advanced-chip">Evaluate + recover</span>
   <span class="advanced-chip advanced-chip--green">Final integration proof</span>
+  <span class="advanced-chip">Optional alias-only leaderboard</span>
 </div>
 
 <div class="advanced-callout advanced-callout--safety">
@@ -1089,6 +1090,7 @@ Accept, revise, or reject. You make the call. Not Riley.
 Your export keeps provenance, permissions, data scope, read-only boundaries,
 rollback, and your module totals kept separate — Foundations, Agentic, Advanced,
 and cumulative.
+If you've been posting to the board, send Advanced the same way when you finish.
 One thing before you go. Look at your case: which obligation is already strong, and
 which one is still thin?
 

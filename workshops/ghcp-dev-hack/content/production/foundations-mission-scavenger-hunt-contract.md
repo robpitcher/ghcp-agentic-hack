@@ -1,8 +1,31 @@
 # Foundations Mission Scavenger Hunt Contract
 
-Status: approved by workshop owner on 2026-08-07
+Status: approved by workshop owner on 2026-08-07; partially superseded by workshop owner on 2026-08-18
 
 Initiative: `foundations-mission-scavenger-hunt`
+
+## Implementation status (2026-08-18)
+
+The workshop owner approved a revised Foundations mission on 2026-08-18. The
+implemented mission at
+`workshops/ghcp-dev-hack/content/missions/foundations/context-and-prompts.md`
+is now authoritative for clue titles, clue tasks, prompts, hints, the starter
+file decision, and body guidance. It replaces the five `Operation ...` clue
+sections below with five prompt-driven experiments, drops the copyable
+`case-file.md` starter in favour of participant-authored context, and adds a
+scoring table, glossary, and 45-minute timing guide.
+
+This contract remains authoritative for the participant promise, harness
+parity, the point bands, and the completion threshold. Those are unchanged and
+still match the leaderboard kit:
+
+- Core clues are worth 5, 10, 10, 10, and 15 points, for a core maximum of 50
+- Mission completion threshold is 40 core points
+- Optional bonus work is capped at 10 points
+- Hints are always free and never reduce points
+
+Sections below that describe clue titles, clue tasks, or the `case-file.md`
+starter are retained for history and are superseded by the implemented mission.
 
 ## Mission goal
 

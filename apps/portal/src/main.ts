@@ -61,6 +61,10 @@ export interface CatalogMission {
     optional: true;
     aliasOnly: true;
     instructions: string[];
+    submission?: {
+      moduleOption: string;
+      steps: string[];
+    };
   };
 }
 
@@ -110,6 +114,16 @@ interface DeliveryVariant {
   }>;
 }
 
+export interface WorkshopLeaderboard {
+  optional: true;
+  aliasOnly: true;
+  eventId: string;
+  environment: "test" | "production";
+  repository: string;
+  submissionUrl: string;
+  standingsUrl: string;
+}
+
 export interface CatalogWorkshop {
   id: string;
   title: string;
@@ -120,6 +134,7 @@ export interface CatalogWorkshop {
   tags: string[];
   prerequisites: string[];
   route: string;
+  leaderboard?: WorkshopLeaderboard;
   defaultDeliveryVariant?: string;
   deliveryVariants: DeliveryVariant[];
   modules: CatalogModule[];
@@ -141,7 +156,6 @@ export interface MissionProgress {
   harness?: string;
   completed: string[];
   evidence: Record<string, string>;
-  alias: string;
   followUp: string;
 }
 
@@ -221,9 +235,56 @@ function renderVariantCard(workshop: CatalogWorkshop, variant: DeliveryVariant):
       <h3><a class="title-link" href="${url(variant.route)}">${escapeHtml(variant.title)}</a></h3>
       <p>${escapeHtml(variant.description)}</p>
       <div class="tags">${workshop.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
-      <a class="button-link" href="${url(variant.route)}">View workshop</a>
+      <div class="module-list__actions">
+        <a class="button-link" href="${url(variant.route)}">View workshop</a>
+      </div>
     </article>
   `;
+}
+
+export function buildSubmissionUrl(
+  baseUrl: string,
+  fields: { eventId: string; moduleOption: string; core: number; bonus: number; alias?: string }
+): string {
+  const params = new URLSearchParams();
+  params.set("event-id", fields.eventId);
+  if (fields.alias?.trim()) params.set("opt-in-alias", fields.alias.trim());
+  params.set("module", fields.moduleOption);
+  params.set("core-points", String(fields.core));
+  params.set("bonus-points", String(fields.bonus));
+  const separator = baseUrl.includes("?") ? "&" : "?";
+  return `${baseUrl}${separator}${params.toString()}`;
+}
+
+export function renderMissionSubmission(
+  workshop: Pick<CatalogWorkshop, "leaderboard">,
+  mission: Pick<CatalogMission, "leaderboard">
+): string {
+  const leaderboard = workshop.leaderboard;
+  const submission = mission.leaderboard?.submission;
+  if (!leaderboard || !submission) return "";
+  return `
+    <section class="detail-section mission-submission">
+      <h2>Submit your score to the leaderboard</h2>
+      <p>Submitting is optional and alias-only. Choose <strong>${escapeHtml(submission.moduleOption)}</strong> as the module and use event id <code>${escapeHtml(leaderboard.eventId)}</code>.</p>
+      <p class="mission-submission__alias"><strong>Pick a made-up alias, not your real name.</strong> Your alias and score are published on the shared workshop board, and the issue you open is visible to everyone who can see the leaderboard repository. Choose something fun and non-identifying such as <code>mergewell-runner</code> or <code>night-shift-42</code>, and avoid your real name, work username, email, employer, or customer names. Use the same alias for all three modules so your scores add up into one standing.</p>
+      <div class="mission-alias">
+        <label for="mission-alias-input">Your leaderboard alias</label>
+        <div class="mission-alias__row">
+          <input id="mission-alias-input" type="text" maxlength="24" spellcheck="false" autocomplete="off" placeholder="mergewell-runner" aria-describedby="mission-alias-help">
+          <button id="mission-alias-copy" type="button" class="button-secondary">Copy alias</button>
+        </div>
+        <p id="mission-alias-help">Saved in this browser only and never transmitted. It appears on every mission page in this workshop so you can reuse the same alias when you submit each module.</p>
+        <p id="mission-alias-status" role="status"></p>
+      </div>
+      <ol>${submission.steps.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
+      <div class="module-list__actions">
+        <a id="mission-submit-link" class="button-link" href="${escapeHtml(leaderboard.submissionUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Open the leaderboard submission form (opens in new tab)">Submit your score <span aria-hidden="true">↗</span></a>
+        <a class="button-link button-link--secondary" href="${escapeHtml(leaderboard.standingsUrl)}" target="_blank" rel="noopener noreferrer" aria-label="View the current standings (opens in new tab)">View standings <span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="mission-submission__note">Your evidence, prompts, and repository content stay local. The board publishes only your alias and score.</p>
+      <p class="mission-submission__note">The button carries your alias and current totals into the form. Check them, then tick the two acknowledgements yourself before you submit.</p>
+    </section>`;
 }
 
 function renderWorkshopDetail(workshopId: string): void {
@@ -252,6 +313,7 @@ function renderWorkshopDetail(workshopId: string): void {
       <div>
         <div class="catalog__heading"><h2>Modules</h2><span>${visibleModules.length}</span></div>
         <ol class="module-list">${visibleModules.map(renderModule).join("")}</ol>
+        ${renderLeaderboardPointer(workshop)}
       </div>
     </section>
   `;
@@ -353,6 +415,16 @@ export function renderMissionBackLink(module: Pick<CatalogModule, "route" | "tit
   return `<a class="back-link" href="${url(module.route)}">← Back to ${escapeHtml(module.title)}</a>`;
 }
 
+export function renderLeaderboardPointer(workshop: Pick<CatalogWorkshop, "leaderboard">): string {
+  const leaderboard = workshop.leaderboard;
+  if (!leaderboard) return "";
+
+  return `
+    <div class="leaderboard-pointer">
+      <a class="button-link button-link--secondary" href="${escapeHtml(leaderboard.standingsUrl)}" target="_blank" rel="noopener noreferrer" aria-label="View the leaderboard standings (opens in new tab)">View leaderboard standings <span aria-hidden="true">↗</span></a>
+      <p>The leaderboard is optional and alias-only. Open your module's mission page to submit a score.</p>
+    </div>`;
+}
 function renderScoredMission(workshop: CatalogWorkshop, module: CatalogModule, mission: ScoredCatalogMission): string {
   const nextModuleTitle = getNextModuleTitle(workshop, module.id);
   const clueCard = (clue: MissionClue, bonus: boolean): string => `
@@ -439,6 +511,9 @@ function renderScoredMission(workshop: CatalogWorkshop, module: CatalogModule, m
           <span>Local totals only</span>
         </div>
         <div id="mission-score-breakdown"></div>
+        <div class="mission-actions">
+          <button id="mission-reset" type="button" class="button-secondary">Reset mission</button>
+        </div>
       </section>
 
       <section class="mission-clues" aria-labelledby="core-clues-heading">
@@ -456,21 +531,25 @@ function renderScoredMission(workshop: CatalogWorkshop, module: CatalogModule, m
           ${mission.bonusClues.map((clue) => clueCard(clue, true)).join("")}
         </section>` : ""}
 
-      ${mission.carryForward ? `
+      ${mission.carryForward ? (nextModuleTitle ? `
         <section class="detail-section">
-          <h2>Carry the case forward${nextModuleTitle ? ` to ${escapeHtml(nextModuleTitle)}` : ""}</h2>
-          <p>Your <strong>${escapeHtml(mission.carryForward.artifact)}</strong> carries:</p>
+          <h2>Carry the case forward to ${escapeHtml(nextModuleTitle)}</h2>
+          <p>Keep your <strong>${escapeHtml(mission.carryForward.artifact)}</strong> open. ${escapeHtml(nextModuleTitle)} picks it up with:</p>
           <ul>${mission.carryForward.produces.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
-          ${mission.carryForward.consumes.length > 0 ? `<p>This mission also consumes: ${escapeHtml(mission.carryForward.consumes.join(", "))}</p>` : ""}
-          ${mission.carryForward.fallback ? `<p>${escapeHtml(mission.carryForward.fallback)}</p>` : ""}
-        </section>` : ""}
+          <p>Starting the next module fresh is also fine. Each module is scored on its own.</p>
+        </section>` : `
+        <section class="detail-section">
+          <h2>Close the case</h2>
+          <p>This is the final module. Your completed <strong>${escapeHtml(mission.carryForward.artifact)}</strong> now holds:</p>
+          <ul>${mission.carryForward.produces.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+          <p>Nothing carries forward from here. Submit this module's score below to finish your standing.</p>
+        </section>`) : ""}
 
-      <section class="detail-section mission-export">
-        <h2>Seal and export the case</h2>
-        <label>
-          <span>Alias (optional, local only)</span>
-          <input id="mission-alias" type="text" maxlength="40" autocomplete="off">
-        </label>
+      ${renderMissionSubmission(workshop, mission)}
+
+      <details class="detail-section mission-export">
+        <summary>Optional: export your notes</summary>
+        <p>This is a local copy of your work for your own reference. It is not your leaderboard entry.</p>
         <label>
           <span>${escapeHtml(nextModuleTitle ? `One bounded follow-up task for ${nextModuleTitle}` : "One bounded follow-up task")}</span>
           <textarea id="mission-follow-up" rows="3"></textarea>
@@ -482,10 +561,9 @@ function renderScoredMission(workshop: CatalogWorkshop, module: CatalogModule, m
         <div class="mission-actions">
           <button id="mission-copy" type="button">Copy case file</button>
           <button id="mission-print" type="button" class="button-secondary">Print or save</button>
-          <button id="mission-reset" type="button" class="button-secondary">Reset mission</button>
         </div>
         <p id="mission-action-status" role="status">Your progress, totals, and evidence stay in this browser.</p>
-      </section>
+      </details>
 
       ${mission.leaderboard ? `
         <section class="detail-section">
@@ -496,7 +574,7 @@ function renderScoredMission(workshop: CatalogWorkshop, module: CatalogModule, m
 }
 
 export function emptyMissionProgress(): MissionProgress {
-  return { completed: [], evidence: {}, alias: "", followUp: "" };
+  return { completed: [], evidence: {}, followUp: "" };
 }
 
 export function normalizeMission(mission: CatalogMission): NormalizedCatalogMission {
@@ -518,6 +596,10 @@ export function getMissionStorageKey(workshopId: string, moduleId: string, missi
   return `${STORAGE_KEY_PREFIX}:${workshopId}:${moduleId}:${missionId}`;
 }
 
+export function getAliasStorageKey(workshopId: string): string {
+  return `${STORAGE_KEY_PREFIX}:${workshopId}:alias`;
+}
+
 export function parseMissionProgress(serialized: string): MissionProgress {
   const parsed: unknown = JSON.parse(serialized);
   if (!parsed || typeof parsed !== "object") throw new Error("Saved mission progress is not an object");
@@ -535,7 +617,6 @@ export function parseMissionProgress(serialized: string): MissionProgress {
     evidence: Object.fromEntries(
       Object.entries(record.evidence).filter((entry): entry is [string, string] => typeof entry[1] === "string")
     ),
-    alias: typeof record.alias === "string" ? record.alias : "",
     followUp: typeof record.followUp === "string" ? record.followUp : ""
   };
 }
@@ -638,7 +719,6 @@ export function buildCaseFileText(
     `Workshop: ${workshop.title}`,
     `Module: ${module.title}`,
     `Mission: ${mission.title}`,
-    `Alias: ${progress.alias || "not provided"}`,
     `Gadget: ${mission.harnesses.find((harness) => harness.id === progress.harness)?.title ?? "not selected"}`,
     "",
     "Mission score",
@@ -668,12 +748,11 @@ function initializeMissionTracker(workshop: CatalogWorkshop, module: CatalogModu
   const clueInputs = Array.from(document.querySelectorAll<HTMLInputElement>("[data-mission-clue]"));
   const evidenceInputs = Array.from(document.querySelectorAll<HTMLTextAreaElement>("[data-clue-evidence]"));
   const harnessInputs = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="mission-harness"]'));
-  const aliasInput = document.querySelector<HTMLInputElement>("#mission-alias");
   const followUpInput = document.querySelector<HTMLTextAreaElement>("#mission-follow-up");
   const caseFileOutput = document.querySelector<HTMLTextAreaElement>("#mission-case-file");
   const actionStatus = document.querySelector<HTMLElement>("#mission-action-status");
   const scoreBreakdown = document.querySelector<HTMLElement>("#mission-score-breakdown");
-  if (!aliasInput || !followUpInput || !caseFileOutput || !actionStatus || !scoreBreakdown) {
+  if (!followUpInput || !caseFileOutput || !actionStatus || !scoreBreakdown) {
     throw new Error("Mission tracker controls are missing");
   }
 
@@ -681,6 +760,69 @@ function initializeMissionTracker(workshop: CatalogWorkshop, module: CatalogModu
   let progress = loaded.progress;
   if (loaded.warning) {
     actionStatus.textContent = loaded.warning;
+  }
+
+  const aliasInput = document.querySelector<HTMLInputElement>("#mission-alias-input");
+  const aliasCopy = document.querySelector<HTMLButtonElement>("#mission-alias-copy");
+  const aliasStatus = document.querySelector<HTMLElement>("#mission-alias-status");
+  const submitLink = document.querySelector<HTMLAnchorElement>("#mission-submit-link");
+  const submissionBase = workshop.leaderboard?.submissionUrl;
+  const submissionModule = mission.leaderboard?.submission?.moduleOption;
+
+  const updateSubmissionLink = (score: MissionScore): void => {
+    if (!submitLink || !submissionBase || !submissionModule || !workshop.leaderboard) return;
+    submitLink.href = buildSubmissionUrl(submissionBase, {
+      eventId: workshop.leaderboard.eventId,
+      moduleOption: submissionModule,
+      core: score.core,
+      bonus: score.bonus,
+      alias: aliasInput?.value
+    });
+  };
+
+  if (aliasInput) {
+    const aliasKey = getAliasStorageKey(workshop.id);
+    let aliasPersists = true;
+    try {
+      aliasInput.value = window.localStorage.getItem(aliasKey) ?? "";
+    } catch {
+      aliasPersists = false;
+    }
+    aliasInput.addEventListener("input", () => {
+      const value = aliasInput.value.trim();
+      try {
+        if (value) {
+          window.localStorage.setItem(aliasKey, value);
+        } else {
+          window.localStorage.removeItem(aliasKey);
+        }
+        aliasPersists = true;
+      } catch {
+        aliasPersists = false;
+      }
+      updateSubmissionLink(calculateMissionScore(mission, progress));
+      if (aliasStatus) {
+        aliasStatus.textContent = aliasPersists
+          ? ""
+          : "This alias cannot be saved in this browser, so retype it on each mission page.";
+      }
+    });
+    aliasCopy?.addEventListener("click", () => {
+      const value = aliasInput.value.trim();
+      if (!value) {
+        if (aliasStatus) aliasStatus.textContent = "Enter an alias first.";
+        aliasInput.focus();
+        return;
+      }
+      void navigator.clipboard
+        .writeText(value)
+        .then(() => {
+          if (aliasStatus) aliasStatus.textContent = "Alias copied. Paste it into the submission form.";
+        })
+        .catch(() => {
+          if (aliasStatus) aliasStatus.textContent = "Copy failed. Select the alias and copy it manually.";
+        });
+    });
   }
 
   const validHarnessIds = new Set(mission.harnesses.map((harness) => harness.id));
@@ -707,7 +849,6 @@ function initializeMissionTracker(workshop: CatalogWorkshop, module: CatalogModu
         .map((input) => [input.dataset.clueEvidence ?? "", input.value] as const)
         .filter(([key]) => key.length > 0)
     ),
-    alias: aliasInput.value,
     followUp: followUpInput.value
   });
 
@@ -727,6 +868,7 @@ function initializeMissionTracker(workshop: CatalogWorkshop, module: CatalogModu
 
   const updateRenderedState = (): void => {
     const missionScore = calculateMissionScore(mission, progress);
+    updateSubmissionLink(missionScore);
     const workshopScore = summarizeWorkshopScores(workshop, window.localStorage, {
       moduleId: module.id,
       missionId: mission.id,
@@ -774,7 +916,6 @@ function initializeMissionTracker(workshop: CatalogWorkshop, module: CatalogModu
     }
   };
 
-  aliasInput.value = progress.alias;
   followUpInput.value = progress.followUp;
   harnessInputs.forEach((input) => {
     input.checked = input.value === progress.harness;
@@ -801,11 +942,6 @@ function initializeMissionTracker(workshop: CatalogWorkshop, module: CatalogModu
       persist();
     });
   });
-  aliasInput.addEventListener("input", () => {
-    progress = readProgressFromInputs();
-    updateRenderedState();
-    persist();
-  });
   followUpInput.addEventListener("input", () => {
     progress = readProgressFromInputs();
     updateRenderedState();
@@ -817,7 +953,6 @@ function initializeMissionTracker(workshop: CatalogWorkshop, module: CatalogModu
     harnessInputs.forEach((input) => { input.checked = false; });
     clueInputs.forEach((input) => { input.checked = false; });
     evidenceInputs.forEach((input) => { input.value = ""; });
-    aliasInput.value = "";
     followUpInput.value = "";
     caseFileOutput.value = "";
     try {

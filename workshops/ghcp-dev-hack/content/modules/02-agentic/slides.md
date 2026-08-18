@@ -1388,6 +1388,7 @@ class: agentic-slide
   <div class="agentic-card"><b>Hand Off Work with Confidence</b><span>50 core points · complete at 40 · bonus cap 10</span></div>
   <div class="agentic-card agentic-amber"><b>Purrmission safety checkpoint</b><span>Use one approved harness and keep the work inside the starter fixture.</span></div>
   <div class="agentic-card agentic-green"><b>Bring back evidence</b><span>Brief · diff · validation · Agentic + cumulative totals</span></div>
+  <div class="agentic-card"><b>Optional leaderboard</b><span>Alias-only · submit Agentic core and bonus from the mission page</span></div>
 </div>
 
 <div class="agentic-decision">MISSION ROUTE · workshops/ghcp-dev-hack/agentic/missions/agent-task/</div>
@@ -1407,6 +1408,9 @@ cost you nothing — no penalty, and there's no speed score, so don't rush past
 something you don't understand.
 Export the updated case with your totals kept separate: Foundations, Agentic, and
 cumulative. Advanced consumes this evidence. It does not restart the story.
+If you sent Foundations to the leaderboard, send Agentic the same way when you
+finish — same alias, module set to Agentic, one issue per module. Still optional,
+still alias-only.
 Before you start — which boundary from your Foundations case will you use first to
 judge the Agentic plan?
 
@@ -1417,7 +1421,9 @@ Audience question: Which boundary from your Foundations case will you use first 
 
 Response guidance: Ask for one concise boundary — named files, excluded access,
 success checks, rollback, or a stop condition. Then point participants to the
-matching mission route, and to the starter if they need it.
+matching mission route, and to the starter if they need it. If anyone asks about
+the board, remind them it shows aliases and scores only, and that nothing from
+their repository is published.
 Payoff: Every participant begins with a review criterion and produces the evidence envelope required for the Advanced handoff.
 Sources: content/missions/agentic/agent-task.md; content/modules/02-agentic/module.md
 -->

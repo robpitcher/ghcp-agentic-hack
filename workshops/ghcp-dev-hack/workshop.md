@@ -689,6 +689,22 @@ researchSources:
     notes: >-
       Verified rollback as a CLI-specific capability supporting reversibility
       guidance.
+leaderboard:
+  optional: true
+  aliasOnly: true
+  eventId: ghcp-dev-hack
+  kitPath: artifacts/leaderboard-kit
+  environments:
+    test:
+      repository: mfm-se-dev-org/ghcp-dev-hack-leaderboard
+      submissionUrl: >-
+        https://github.com/mfm-se-dev-org/ghcp-dev-hack-leaderboard/issues/new?template=leaderboard-submission.yml
+      standingsUrl: 'https://expert-adventure-386owy8.pages.github.io/'
+    production:
+      repository: tammym-demos/ghcp-dev-hack-leaderboard
+      submissionUrl: >-
+        https://github.com/tammym-demos/ghcp-dev-hack-leaderboard/issues/new?template=leaderboard-submission.yml
+      standingsUrl: 'https://tammym-demos.github.io/ghcp-dev-hack-leaderboard/'
 lastReviewed: '2026-08-12'
 ---
 # GitHub Copilot Developer Hack

@@ -38,6 +38,7 @@ jobs:
         run: pnpm build
         env:
           GITHUB_PAGES_BASE: /${{ github.event.repository.name }}/
+          WORKSHOP_ENVIRONMENT: production
       - name: Upload Pages artifact
         if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3

@@ -1,4 +1,5 @@
 {
+  "environment": "production",
   "workshops": [
     {
       "id": "ghcp-dev-hack",
@@ -19,6 +20,15 @@
         "Visual Studio Code"
       ],
       "route": "workshops/ghcp-dev-hack/",
+      "leaderboard": {
+        "optional": true,
+        "aliasOnly": true,
+        "eventId": "ghcp-dev-hack",
+        "environment": "production",
+        "repository": "tammym-demos/ghcp-dev-hack-leaderboard",
+        "submissionUrl": "https://github.com/tammym-demos/ghcp-dev-hack-leaderboard/issues/new?template=leaderboard-submission.yml",
+        "standingsUrl": "https://tammym-demos.github.io/ghcp-dev-hack-leaderboard/"
+      },
       "defaultDeliveryVariant": "one-day",
       "deliveryVariants": [
         {
@@ -399,7 +409,7 @@
           "missions": [
             {
               "id": "context-and-prompts",
-              "title": "Agent Mergewell's Foundations Scavenger Hunt",
+              "title": "Foundations Mission: Context, Cost & Control",
               "durationMinutes": 45,
               "route": "workshops/ghcp-dev-hack/foundations/missions/context-and-prompts/",
               "objectiveRefs": [
@@ -411,372 +421,370 @@
               ],
               "prerequisites": [],
               "startingState": "Participants have VS Code with GitHub Copilot, GitHub Copilot CLI, or the standalone GitHub Copilot app.",
-              "goal": "Build a verified Copilot case file by choosing a gadget, finding five operating clues, proving safe decisions, and carrying one bounded task into Agentic Development.",
-              "task": "Complete Agent Mergewell's five-clue scavenger hunt, bank evidence with every point, and export the case file for the next mission.",
+              "goal": "Get hands on prompt scoping, autonomy modes, cost gauges, context hygiene, and verification by running five short scored experiments directly in your Copilot chat or terminal.",
+              "task": "Complete the 5 experiments for up to 50 core points (40 completes the mission), attempt the bonus challenges for up to 10 more, then total your score and record your debrief.",
               "constraints": [
                 "Do not use confidential, customer, or unrelated repository content.",
                 "Do not guess organization policy, product availability, or unsupported commands.",
-                "Do not grant repository-wide, network, destructive, or unrelated-file access for the bounded case.",
+                "Do not grant repository-wide, network, destructive, or unrelated-file access to any Agent run.",
                 "Do not spend credits, install software, or broaden permissions merely to earn points."
               ],
               "evidence": [
-                "A local case file with the selected gadget, clues found, evidence, score, safety boundaries, verdict, and follow-up task",
-                "A short explanation of what the evidence proves and what it does not prove"
+                "Answers to the 5 guided experiment questions (prompt scoping, mode choice and withheld permission, model and routing rule, context rot test, verification verdict)",
+                "One bounded follow-up task and your Foundations point total, carried into Agentic Development"
               ],
               "safetyCheckpoints": [
-                "Purrmission checks context, permissions, product availability, spending, and the final accept/revise/reject decision."
+                "Purrmission checks context scoping, least-privilege permissions, credit/usage awareness, and the final verification verdict."
               ],
               "corePath": [
-                "Choose VS Code, Copilot CLI, or the GitHub Copilot app.",
-                "Complete the five core clues and record evidence for each.",
-                "Use progressive hints whenever the next safe step is unclear.",
-                "Export the case file and choose one bounded follow-up task for Agentic Development."
+                "Experiment 1 (5 pts): Scope context with one precise prompt instead of attaching whole workspaces.",
+                "Experiment 2 (10 pts): Climb the autonomy ladder (Ask → Plan → Agent) and withhold one permission.",
+                "Experiment 3 (10 pts): Read the model, token, and AI Credit gauges, then write one routing rule.",
+                "Experiment 4 (10 pts): Provoke context rot, then reset and re-anchor the session.",
+                "Experiment 5 (15 pts): Break the code with a harder input list, run a Revise cycle, and record your verdict and follow-up task."
               ],
               "stretchPath": [
-                "Earn one capped bonus by trying an unfamiliar approved Copilot harness, investigating the GitHub Copilot app, or completing the policy-safe app walkthrough."
+                "Bonus 1 (+10 pts) Model Showdown: compare a third model against the two you already ran.",
+                "Bonus 2 (+10 pts) Cross-Harness Test: run the same prompt in a second harness such as Copilot CLI or the Copilot app.",
+                "Bonus points are capped at 10 even if you finish both bonus challenges."
               ],
               "debrief": [
-                "Which clue changed how you will use Copilot?",
-                "Which piece of evidence made you accept, revise, or reject the result?",
-                "What will the software agent inherit from this case file in Agentic Development?"
+                "Which mode (Ask, Plan, or Agent) was the smallest tool that still did the job?",
+                "Which permission did you decide not to grant, and what would have gone wrong if you had?",
+                "What did the gauges tell you, and what did they not prove?",
+                "What was the first symptom of context rot before you reset the session?",
+                "What is your bounded follow-up task for Agentic Development, and what is your point total?"
               ],
               "validation": [
-                "The participant earns at least 40 core points or explains which blocked clue requires facilitator help.",
-                "Every completed clue has evidence and a Purrmission safety check.",
-                "The exported case file contains one bounded follow-up task for Agentic Development."
+                "The participant earns at least 40 core points, or records the exact blocker that required facilitator help.",
+                "The participant can explain their mode choice, withheld permission, model routing rule, and verification verdict.",
+                "Every experiment respects least-privilege context and permission boundaries.",
+                "The participant leaves with one bounded follow-up task and a recorded point total for Agentic Development."
               ],
               "casePacket": [
-                "Create a new safe local practice repository named `mergewell-field-notes` now; there is no repository to download or find.",
-                "Create a folder named `mergewell-field-notes` in an approved local location, open it in your selected gadget, initialize it as a Git repository, and add a README.",
-                "GitHub Copilot app route: add the local folder as a project and start a local session. The app keeps local sessions in isolated Git worktrees.",
-                "Publishing to GitHub.com is optional and must follow your organization policy; the mission works with the local repository.",
-                "Copy the supplied `case-file.md` starter into the repository, then ask Copilot to help complete its task."
+                "Open your preferred Copilot tool (VS Code, Copilot CLI, or the Copilot app).",
+                "No starter repository or file creation required — you can run every prompt directly in chat or an open scratch buffer.",
+                "Work through the 5 experiments in order. They are worth 5, 10, 10, 10, and 15 points, for 50 core points in total, and each prompt is copy-paste ready."
               ],
-              "starterFile": {
-                "name": "case-file.md",
-                "content": "# Agent Mergewell Field Notes\n\n## Task\n\nWrite a small function, in a language you know, that cleans this list of field-note topics:\n\n`[\"Context\", \"  Safety  \", \"context\", \"\", \"Models\"]`\n\n## Success checks\n\n- Trim extra spaces.\n- Remove empty items.\n- Remove duplicates regardless of capitalization.\n- Preserve the first-seen spelling and order.\n\nExpected result:\n\n`[\"Context\", \"Safety\", \"Models\"]`\n\nExplain the proposed result before accepting any change."
-              },
               "harnesses": [
-                {
-                  "id": "copilot-cli",
-                  "title": "GitHub Copilot CLI",
-                  "description": "Work with Copilot from the terminal.",
-                  "instructions": [
-                    "Use a focused session in a scratch or approved folder.",
-                    "State the allowed context and expected evidence before asking Copilot to act."
-                  ]
-                },
                 {
                   "id": "ide-extension",
                   "title": "VS Code",
-                  "description": "Work with GitHub Copilot in VS Code.",
+                  "description": "Work with GitHub Copilot in VS Code chat, inline chat, and editor canvases.",
                   "instructions": [
-                    "Open the `mergewell-field-notes` repository folder in VS Code.",
-                    "Select or attach only the content needed for the current clue."
+                    "Open VS Code and open the GitHub Copilot Chat pane (`Ctrl+Alt+I` / `Cmd+Alt+I`).",
+                    "Try prompts directly in chat or use inline chat (`Ctrl+I` / `Cmd+I`)."
+                  ]
+                },
+                {
+                  "id": "copilot-cli",
+                  "title": "GitHub Copilot CLI",
+                  "description": "Work with GitHub Copilot directly from your terminal.",
+                  "instructions": [
+                    "Open your terminal and run `copilot` or your installed Copilot CLI command.",
+                    "State clear context and expected constraints in your prompt."
                   ]
                 },
                 {
                   "id": "copilot-app",
                   "title": "GitHub Copilot app",
-                  "description": "Work with Copilot in its standalone agent-native desktop experience.",
+                  "description": "Work with Copilot in its standalone desktop workspace.",
                   "instructions": [
-                    "Add the `mergewell-field-notes` folder as a local project and start a local session.",
-                    "Use the app's files, terminal, plan, and diff canvases to steer and inspect the work."
+                    "Open the GitHub Copilot desktop app and start a new session.",
+                    "Use the plan, terminal, and diff canvases to inspect responses."
                   ]
                 }
               ],
               "coreClues": [
                 {
-                  "id": "pick-your-gadget",
-                  "title": "Operation Pick Your Gadget",
+                  "id": "context-scoping",
+                  "title": "Experiment 1: Context Scoping & Crafting the Prompt",
                   "points": 5,
-                  "objectiveRef": "Explain where GitHub Copilot lives across IDE, terminal, GitHub.com, cloud, and app surfaces and identify enterprise safety responsibilities",
-                  "scene": "Agent Mergewell reaches for the CLI and IDE gadgets at the same time. Purrmission puts one paw on the launch button.",
+                  "objectiveRef": "Apply VS Code chat references, inline completions, inline chat, and Ask/Plan/Agent modes to real engineering tasks",
+                  "scene": "Agent Mergewell crafts his opening prompt. Purrmission makes sure he feeds in only the context the task actually needs.",
                   "actions": [
-                    "Confirm the new `mergewell-field-notes` practice repository is open.",
-                    "Choose VS Code, Copilot CLI, or the GitHub Copilot app.",
-                    "Write down what you chose.",
-                    "Name one thing Copilot may use for this case and one thing it must not touch."
+                    "Copy this prompt into Copilot Chat and send it:",
+                    "> \"Write a function in [JavaScript/Python/language of choice] that takes this list: [\\\"Context\\\", \\\"  Safety  \\\", \\\"context\\\", \\\"\\\", \\\"Models\\\"]. Success rules: (1) Trim whitespace, (2) Remove empty strings, (3) Remove case-insensitive duplicates while preserving first-seen order and casing. Expected output: [\\\"Context\\\", \\\"Safety\\\", \\\"Models\\\"].\"",
+                    "Inspect the answer: did Copilot honor all 3 rules without you attaching any files or folders?",
+                    "Optional 30-second add-on: open any file, select a few lines, and use inline chat (Ctrl+I / Cmd+I) or a #file / #selection reference to see how a scoped reference differs from pasting the whole file."
                   ],
                   "routes": [
                     {
-                      "harness": "copilot-cli",
+                      "harness": "ide-extension",
                       "instructions": [
-                        "Open the `mergewell-field-notes` repository folder, then note the CLI version and allowed context."
+                        "Paste the prompt directly into VS Code Copilot Chat."
                       ]
                     },
                     {
-                      "harness": "ide-extension",
+                      "harness": "copilot-cli",
                       "instructions": [
-                        "Open the `mergewell-field-notes` repository folder, then note VS Code, the Copilot extension, and the allowed file, selection, or workspace."
+                        "Run the prompt in your Copilot CLI session."
                       ]
                     },
                     {
                       "harness": "copilot-app",
                       "instructions": [
-                        "Add or open `mergewell-field-notes` as a local project, start a local session, and note the app version, project, and allowed folder."
+                        "Send the prompt in a new Copilot app chat session."
                       ]
                     }
                   ],
-                  "evidence": "Add `My gadget`, `Copilot may use`, and `Copilot must not use` to the case file.",
+                  "evidence": "Record the prompt you used and whether Copilot produced working code without needing background project files.",
                   "hints": [
-                    "Create the `mergewell-field-notes` folder first, then open or add it in your selected gadget.",
-                    "Look for version/help information, the active Copilot extension, or the app's current local project and session.",
-                    "Starter: My practice repository is ___. My gadget is ___. Copilot may use ___. Copilot must not use ___."
+                    "Putting the input data and the success rules directly in the prompt gives you precision without dragging in noisy workspace context.",
+                    "Use #file or #selection when you genuinely need a specific file, but never attach whole unrelated folders."
                   ],
-                  "safetyCheckpoint": "Use only the new practice repository. If a location, account, or publishing option is unclear, write `confirm with administrator` and do not guess."
+                  "safetyCheckpoint": "Never paste production secrets, API keys, or private customer records into prompts."
                 },
                 {
-                  "id": "pack-the-clue-bag",
-                  "title": "Operation Pack the Clue Bag",
+                  "id": "mode-ladder",
+                  "title": "Experiment 2: The Autonomy Ladder (Ask → Plan → Agent)",
                   "points": 10,
-                  "objectiveRef": "Apply VS Code chat references, inline completions, inline chat, and Ask/Plan/Agent modes to real engineering tasks",
-                  "scene": "Mergewell's Clue Wrangler can carry an entire workspace. Stop him from packing the office coffee machine too.",
+                  "objectiveRef": "Apply the autonomy spectrum and least-privilege delegation before escalating to agentic patterns",
+                  "scene": "Mergewell wants Copilot to take over his whole machine. Purrmission shows him the three rungs of the ladder and holds back one key.",
                   "actions": [
-                    "For this clue, your context comes only from your prompt, the supplied `case-file.md`, and optionally one new file for the function.",
-                    "Explicitly attach or reference `case-file.md` in your selected gadget.",
-                    "Ask Copilot to propose a small function, in a language you know, that meets the four success checks in that file.",
-                    "Record what you gave Copilot and one unrelated file or piece of information you deliberately left out."
+                    "Rung 1 — Ask (explain, read-only). Prompt: \"Explain the edge cases when deduplicating strings case-insensitively while preserving first-seen casing.\"",
+                    "Rung 2 — Plan (design before code). Prompt: \"Give me a step-by-step implementation plan and unit test cases for this sanitizer.\"",
+                    "Before you climb to Agent, write down one permission you will deliberately NOT grant this run — for example repository-wide edits, terminal install commands, or network access.",
+                    "Rung 3 — Agent (acts on your files). Switch to Agent mode and prompt: \"Create a new file sanitize.js that implements the sanitizer, plus assertions covering all four success rules. Only create sanitize.js. Do not modify other files, install packages, or run network commands.\"",
+                    "Review the diff before you accept it: did it stay inside the scope you set, and do the assertions actually test all four rules?",
+                    "Compare the three rungs: which one was the smallest tool that still did the job? When would Agent write access be overkill?"
                   ],
                   "routes": [
                     {
-                      "harness": "copilot-cli",
+                      "harness": "ide-extension",
                       "instructions": [
-                        "From the practice repository, tell Copilot to use `case-file.md` and, if needed, one new implementation file. Do not assume every file in the folder is needed."
+                        "Toggle between Ask, Plan, and Agent mode in the chat interface, and review the proposed diff before you keep it."
                       ]
                     },
                     {
-                      "harness": "ide-extension",
+                      "harness": "copilot-cli",
                       "instructions": [
-                        "Attach or reference `case-file.md`; include one new implementation file only if Copilot needs somewhere to write the function."
+                        "Compare an explanation query with an execution command, and approve each suggested action deliberately."
                       ]
                     },
                     {
                       "harness": "copilot-app",
                       "instructions": [
-                        "In the local session, direct Copilot to use `case-file.md` and, if needed, one new implementation file. Keep unrelated project files out of the request."
+                        "Review the plan canvas in the Copilot app before allowing any file edits."
                       ]
                     }
                   ],
-                  "evidence": "Add the exact prompt, the files you supplied, and one unrelated item you intentionally excluded.",
+                  "evidence": "Record which mode was the smallest useful choice for this task, and the one permission you chose to withhold.",
                   "hints": [
-                    "Your first context item is your prompt. Your second is the supplied `case-file.md`.",
-                    "Reference or attach `case-file.md`, then add at most one new file where the function can be written.",
-                    "Starter: Read `case-file.md` and propose a ___ function that meets all four checks. Use only `case-file.md` and ___. Do not use or change other files."
+                    "Ask is read-only explanation: great for learning and debugging with no risk to your files.",
+                    "Plan structures multi-step work before any code is touched.",
+                    "Agent executes: it writes files and runs commands under your supervision, so scope it explicitly in the prompt.",
+                    "Least privilege means granting the narrowest access that still completes the task — the scope limiter sentence in the Agent prompt is doing exactly that."
                   ],
-                  "safetyCheckpoint": "Do not include secrets, customer code, unrelated files, or broad workspace context."
-                },
-                {
-                  "id": "right-sized-gadget",
-                  "title": "Operation Use the Right-Sized Gadget",
-                  "points": 10,
-                  "objectiveRef": "Apply VS Code chat references, inline completions, inline chat, and Ask/Plan/Agent modes to real engineering tasks",
-                  "scene": "Mergewell once deployed a shoulder launcher for a job that needed a sticky note. Purrmission still has the incident report.",
-                  "actions": [
-                    "Use the same field-notes task for three passes so you can compare increasing levels of action.",
-                    "Explain only: ask how to solve the task without changing files.",
-                    "Plan only: ask for implementation steps and validation checks without changing files.",
-                    "Bounded implementation: allow Copilot to write the function in one new file, then inspect the result.",
-                    "Decide which pass gave you enough help, which one took action, and what additional access the implementation required.",
-                    "Choose the smallest useful interaction for this task and explain when you would stop at explanation or planning instead."
-                  ],
-                  "routes": [
-                    {
-                      "harness": "copilot-cli",
-                      "instructions": [
-                        "Run three separate turns—instructions to explain only, plan only, and then make one bounded change. Use named modes only when they are available in the installed version."
-                      ]
-                    },
-                    {
-                      "harness": "ide-extension",
-                      "instructions": [
-                        "Use VS Code Ask, Plan, and Agent with the same task. Before using Agent, limit its change to one new implementation file."
-                      ]
-                    },
-                    {
-                      "harness": "copilot-app",
-                      "instructions": [
-                        "Run an explanation-only turn, use Plan for the second pass, and then allow one bounded implementation. Keep the permission mode no broader than that single-file change."
-                      ]
-                    }
-                  ],
-                  "evidence": "Add what each pass produced, which pass first gave you enough help, what extra access implementation required, and your smallest useful choice.",
-                  "hints": [
-                    "Start with the words `Explain how to solve this without changing any files.`",
-                    "Next request a plan with validation checks. Only after reviewing both should you allow one new file to be created.",
-                    "Starter: ___ was the smallest useful choice because it gave me ___. The implementation needed permission to ___, but it did not need ___."
-                  ],
-                  "safetyCheckpoint": "The implementation pass may change only one new file. Stop if Copilot reaches beyond the supplied task or requests broader access."
+                  "safetyCheckpoint": "Always review the diff before accepting Agent edits, and never approve a terminal command you cannot explain."
                 },
                 {
                   "id": "read-the-gauges",
-                  "title": "Operation Read the Gauges",
+                  "title": "Experiment 3: Read the Gauges and Make a Routing Call",
                   "points": 10,
                   "objectiveRef": "Interpret tokens, GitHub AI Credits, and model-routing tradeoffs for cost-aware daily execution",
-                  "scene": "A light blinks on Mergewell's console. He says it is probably encouraging. Purrmission would like evidence.",
+                  "scene": "Mergewell checks his dashboard gauges. Purrmission reminds him that gauges track cost and routing, never code truth.",
                   "actions": [
-                    "Find one thing the selected harness can show about context, model, usage, references, or a proposed change.",
-                    "Record exactly what you observed.",
-                    "Finish: This tells me ___, but it does not prove ___."
+                    "Read the model selector: which model is active right now? Write the exact name your picker shows.",
+                    "Read the usage gauges: look for token or reference counts on the turn, and check whether your account settings show AI Credit (AIC) consumption. If your harness exposes no counters, write \"no counters exposed\" — you still earn full points.",
+                    "Now run the same Experiment 1 prompt twice: once on a fast, lightweight model and once on a deeper reasoning model. Compare speed, code quality, and any cost signal you can see.",
+                    "Write one conditional routing rule in this shape: \"For ___ I will use a ___ model, because ___.\"",
+                    "Complete this sentence: \"The gauge tells me ___, but it does not prove ___.\""
                   ],
                   "routes": [
                     {
-                      "harness": "copilot-cli",
+                      "harness": "ide-extension",
                       "instructions": [
-                        "Use only controls documented for the installed version; record `not available` when a control is missing."
+                        "Use the model picker at the bottom of the chat box, and inspect the references attached to the turn."
                       ]
                     },
                     {
-                      "harness": "ide-extension",
+                      "harness": "copilot-cli",
                       "instructions": [
-                        "Inspect an available reference, model choice, usage view, or changed-content view and note any availability limit."
+                        "Check the active model indicator and any token counts in the CLI turn output."
                       ]
                     },
                     {
                       "harness": "copilot-app",
                       "instructions": [
-                        "Inspect an available model, permission mode, session detail, or canvas and record exactly what the app shows."
+                        "Inspect the model dropdown and session metadata in the desktop app."
                       ]
                     }
                   ],
-                  "evidence": "Add one observed fact and the completed `does not prove` sentence.",
+                  "evidence": "Record the two models you compared, your one-sentence routing rule, and your completed \"does not prove...\" sentence.",
                   "hints": [
-                    "Look for a visible reference, model name, context summary, usage indicator, or proposed-change view.",
-                    "Check the harness menu or help for controls available in your installed version. Missing information is useful when recorded honestly.",
-                    "Starter: I observed ___. This tells me ___, but it does not prove ___."
+                    "Fast, lightweight models cost fewer credits and suit boilerplate and repetitive edits; deeper reasoning models cost more and earn their keep on complex logic, debugging, and architecture.",
+                    "Auto routes for you based on task complexity and availability, which is a good default when you are unsure.",
+                    "Model names, availability, and credit rates change — trust your current picker and the module's model guide over any memorized list."
                   ],
-                  "safetyCheckpoint": "Do not spend credits just to earn points or treat one result as a universal rule."
+                  "safetyCheckpoint": "Do not run costly repetitive loops just to watch the quota move, and stay on models approved for your organization."
                 },
                 {
-                  "id": "seal-the-case",
-                  "title": "Operation Seal the Case",
-                  "points": 15,
-                  "objectiveRef": "Apply the autonomy spectrum and least-privilege delegation before escalating to agentic patterns",
-                  "scene": "Mergewell is ready to stamp the case SOLVED. Purrmission hides the stamp until the evidence is verified.",
+                  "id": "context-hygiene",
+                  "title": "Experiment 4: Context Rot & The Session Reset",
+                  "points": 10,
+                  "objectiveRef": "Detect context rot and apply context window hygiene practices",
+                  "scene": "Mergewell has been chatting for 40 turns. Copilot is now confusing today with last week. Purrmission hits Reset.",
                   "actions": [
-                    "Compare Copilot's answer or proposed change with all four success checks.",
-                    "Write one thing Copilot was allowed to do and one thing it was not allowed to do.",
-                    "Try the supplied field-note sample or explain how you would check it.",
-                    "Decide to accept, revise, or reject.",
-                    "Explain the evidence behind the decision."
+                    "Provoke context rot: in your current chat session, send 3 deliberately off-topic prompts — \"What is the capital of France?\", \"Write a poem about cats\", \"Give me 5 regex recipes\".",
+                    "Notice what happened: your conversation history is now full of irrelevant tokens competing for space in the context window.",
+                    "Ask one more on-topic question about your sanitizer and watch for drift — vague answers, forgotten rules, or invented variable names.",
+                    "Reset the context: start a fresh session (the \"+\" new chat button in VS Code, or a new session in the CLI or app).",
+                    "Re-anchor: send your original sanitization prompt into the clean session and compare the answer with the one you got from the cluttered session."
                   ],
                   "routes": [
                     {
-                      "harness": "copilot-cli",
+                      "harness": "ide-extension",
                       "instructions": [
-                        "Review the output and any proposed file or command scope before deciding."
+                        "Use the \"+\" new chat button, then re-send your prompt in the fresh session."
                       ]
                     },
                     {
-                      "harness": "ide-extension",
+                      "harness": "copilot-cli",
                       "instructions": [
-                        "Review the output and any proposed file, selection, or workspace scope before deciding."
+                        "Start a fresh CLI session without history."
                       ]
                     },
                     {
                       "harness": "copilot-app",
                       "instructions": [
-                        "Inspect the app's diff and any terminal or validation evidence before deciding whether to accept the result."
+                        "Click New Session in the desktop app."
                       ]
                     }
                   ],
-                  "evidence": "Add the allowed action, prohibited action, check result, decision, and reason.",
+                  "evidence": "Record the first symptom of drift you noticed and what changed after the reset.",
                   "hints": [
-                    "Read the four success checks one at a time and compare each with Copilot's result.",
-                    "Check extra spaces, an empty item, the `Context`/`context` duplicate, and the expected order. A failed check means revise or reject.",
-                    "Starter: I ___ this result because check ___ showed ___. Copilot was allowed to ___ but not ___."
+                    "Signs of context rot: Copilot repeats stale variable names, ignores instructions you just gave, drifts off the current task, or slows down.",
+                    "Rule of thumb: reset whenever you switch tasks, and re-anchor the new session with the essentials rather than the whole history."
                   ],
-                  "safetyCheckpoint": "This case does not need repository-wide write access, network access, destructive commands, or unrelated files."
+                  "safetyCheckpoint": "Regular resets protect your token budget and stop stale assumptions from leaking into new code."
+                },
+                {
+                  "id": "run-and-verify",
+                  "title": "Experiment 5: Verify, Decide, and Hand Off",
+                  "points": 15,
+                  "objectiveRef": "Explain where GitHub Copilot lives across IDE, terminal, GitHub.com, cloud, and app surfaces and identify enterprise safety responsibilities",
+                  "scene": "Mergewell wants to ship immediately. Purrmission runs the four-point inspection first, then writes the handoff note.",
+                  "actions": [
+                    "Run or read the generated code against all four success checks using the Experiment 1 list:",
+                    "Check 1 — extra spaces trimmed: \"  Safety  \" becomes \"Safety\".",
+                    "Check 2 — empty strings removed: \"\" is dropped.",
+                    "Check 3 — case-insensitive duplicates removed: \"context\" is dropped because \"Context\" came first.",
+                    "Check 4 — first-seen casing and order preserved: [\"Context\", \"Safety\", \"Models\"].",
+                    "Now break it. Run the same function against this harder list and predict the answer before you look: [\"Context\", \"CONTEXT\", \"\\tsafety\", \"Safety \", \"\", \"  \", \"Models\", \"models \"]. Most first attempts fail at least one rule here.",
+                    "If it failed, run one Revise cycle: tell Copilot exactly which check broke and which input exposed it, then re-verify. Do not accept a fix you have not re-run.",
+                    "Make your verdict: Accept, Revise, or Reject — and say what evidence backs it.",
+                    "Write one bounded follow-up task you would hand to an agent next — small, specific, and verifiable. You will reopen this in Agentic Development.",
+                    "Total your score and note your harness and active model."
+                  ],
+                  "routes": [
+                    {
+                      "harness": "ide-extension",
+                      "instructions": [
+                        "Run the code in the integrated terminal, or step through the logic and check each rule by hand."
+                      ]
+                    },
+                    {
+                      "harness": "copilot-cli",
+                      "instructions": [
+                        "Run the script and check the console output against all four checks."
+                      ]
+                    },
+                    {
+                      "harness": "copilot-app",
+                      "instructions": [
+                        "Execute the test in the terminal canvas."
+                      ]
+                    }
+                  ],
+                  "evidence": "Record what the harder list exposed, whether you needed a Revise cycle, your verdict (Accept, Revise, or Reject), your bounded follow-up task, and your point total.",
+                  "hints": [
+                    "Case-insensitive deduplication that preserves the original casing is the single most common place this task goes wrong.",
+                    "The harder list adds a tab character, a trailing-space duplicate, an all-caps duplicate, and a whitespace-only string. Trim before you compare, and compare on the lowercased trimmed value.",
+                    "If a check failed, reply: \"Please preserve the original first-seen casing and order, treat whitespace-only entries as empty, and show the output for my test list.\"",
+                    "A good bounded follow-up task names one file or function, one change, and one way to verify it.",
+                    "This experiment is worth 15 points — the most in the mission — because it requires verified evidence, not just a generated answer. Claim it only if you ran the harder list and recorded a verdict and follow-up task."
+                  ],
+                  "safetyCheckpoint": "Never trust AI-generated code without testing the edge cases — you remain accountable for what you ship."
                 }
               ],
               "bonusClues": [
                 {
-                  "id": "new-territory",
-                  "title": "Operation New Territory",
+                  "id": "model-showdown",
+                  "title": "Bonus 1: Model Showdown and Tradeoffs",
                   "points": 10,
-                  "objectiveRef": "Apply VS Code chat references, inline completions, inline chat, and Ask/Plan/Agent modes to real engineering tasks",
-                  "scene": "Mergewell finds an unfamiliar gadget. Surprisingly, Purrmission wants one carefully labeled button pressed.",
+                  "objectiveRef": "Interpret tokens, GitHub AI Credits, and model-routing tradeoffs for cost-aware daily execution",
+                  "scene": "Mergewell lines up a third contender against the two models he already ran.",
                   "actions": [
-                    "Repeat one meaningful step from clues 2–5 in a second approved Copilot harness.",
-                    "Record what felt different and which harness gave clearer evidence."
+                    "Pick a third model from your picker — ideally a different provider or a different size class from the two you compared in Experiment 3.",
+                    "Send the exact same prompt from Experiment 1.",
+                    "Compare all three on four axes: speed, code quality, explanation depth, and any visible cost signal.",
+                    "Decide whether your Experiment 3 routing rule still holds, or revise it."
                   ],
                   "routes": [],
-                  "evidence": "Add the repeated clue, second harness, meaningful result, and comparison.",
+                  "evidence": "Record the third model you tested, one notable difference, and whether your routing rule survived.",
                   "hints": [
-                    "Choose one clue you already completed successfully.",
-                    "Repeat only its smallest meaningful step in the second harness.",
-                    "Starter: In ___ I observed ___. In ___ I observed ___. The clearer evidence came from ___."
+                    "Different model families have real personality differences — some are terse and idiomatic, others explain more and plan better. Judge by task fit, not by a universal ranking.",
+                    "Try Auto as one of your contenders to see what it selects for this task."
                   ],
-                  "safetyCheckpoint": "Downloading, installing, signing in, or opening the product alone earns no points."
+                  "safetyCheckpoint": "Stick to models approved for your organization tenant."
                 },
                 {
-                  "id": "app-recon",
-                  "title": "Operation App Recon",
+                  "id": "cross-harness",
+                  "title": "Bonus 2: Cross-Harness Test (CLI or app)",
                   "points": 10,
                   "objectiveRef": "Explain where GitHub Copilot lives across IDE, terminal, GitHub.com, cloud, and app surfaces and identify enterprise safety responsibilities",
-                  "scene": "The standalone GitHub Copilot app has opened a new control room. Mergewell needs a careful field test.",
+                  "scene": "Mergewell steps out of the IDE and runs the same task from the terminal or the Copilot app.",
                   "actions": [
-                    "If the app was not your primary gadget, add `mergewell-field-notes` as a local project and start a local session.",
-                    "Repeat one meaningful step from clues 2–5 and inspect the resulting plan, file, terminal, or diff canvas.",
-                    "Explain what the app made easier to steer or verify."
+                    "Open GitHub Copilot CLI in your terminal, or the standalone Copilot app.",
+                    "Run the prompt from Experiment 1 there.",
+                    "Observe how the terminal or multi-canvas experience differs from IDE chat — where context comes from, how actions are approved, and what the surface is best at."
                   ],
                   "routes": [],
-                  "evidence": "Add the repeated clue, canvas evidence, and comparison with the primary gadget.",
+                  "evidence": "Record the second harness you tested and one thing it did better than your first harness.",
                   "hints": [
-                    "Choose one clue you already completed and repeat only its smallest meaningful step.",
-                    "Inspect the plan, Files, terminal, or diff canvas instead of trusting the chat summary alone.",
-                    "Starter: The app showed ___ in the ___ canvas. That helped me verify ___ better than ___."
+                    "The CLI is fast for shell and scripting work; the app gives dedicated space for plans and diffs; the IDE has the richest file context."
                   ],
-                  "safetyCheckpoint": "Downloading, installing, signing in, adding a project, or opening a session alone earns no bonus points."
-                },
-                {
-                  "id": "respect-the-perimeter",
-                  "title": "Operation Respect the Perimeter",
-                  "points": 10,
-                  "objectiveRef": "Explain where GitHub Copilot lives across IDE, terminal, GitHub.com, cloud, and app surfaces and identify enterprise safety responsibilities",
-                  "scene": "Purrmission blocks the installation. Going around her is not a bonus objective.",
-                  "actions": [
-                    "Use the facilitator's GitHub Copilot app walkthrough.",
-                    "Identify one app canvas you would use and one question you would ask before accepting a change.",
-                    "Explain why bypassing the restriction would be wrong."
-                  ],
-                  "routes": [],
-                  "evidence": "Add the capability, review question, and no-bypass explanation.",
-                  "hints": [
-                    "Watch how the app exposes plans, files, terminal activity, or diffs in a canvas.",
-                    "Ask what evidence you would need before accepting the session result.",
-                    "Starter: I would use ___ to check ___. I would not bypass the restriction because ___."
-                  ],
-                  "safetyCheckpoint": "Respect device policy, accessibility, Copilot plan, network, and setup constraints."
+                  "safetyCheckpoint": "Do not download unapproved tools on managed corporate devices."
                 }
               ],
               "completionPoints": 40,
               "bonusPointCap": 10,
               "carryForward": {
-                "artifact": "Agent Mergewell case file",
+                "artifact": "Foundations Experiment Findings",
                 "produces": [
-                  "Chosen Copilot gadget",
-                  "Clues found and total score",
-                  "Exact request and success checklist",
-                  "Shared and excluded context",
-                  "Interaction choice and reason",
-                  "Gauge reading and evidence limit",
-                  "Permission boundary and final verdict",
-                  "One bounded follow-up task for Agentic Development"
+                  "Chosen Copilot harness",
+                  "Autonomy mode comparison and the one permission you withheld",
+                  "Active model, gauge reading, and one conditional routing rule",
+                  "Context rot symptom and recovery observation",
+                  "Four-point verification verdict",
+                  "One bounded follow-up task to delegate in Agentic Development",
+                  "Foundations point total (core and bonus) for cumulative scoring"
                 ],
                 "consumes": [],
-                "fallback": "A facilitator-provided starter case file supports legitimate later-module entry without replacing the normal progressive path."
+                "fallback": "A facilitator starter summary supplies a harness, a verdict, and a bounded follow-up task so anyone can enter Agentic Development directly."
               },
               "leaderboard": {
                 "optional": true,
                 "aliasOnly": true,
                 "instructions": [
-                  "Scoring stays in the local scorecard unless the participant opts into the external alias leaderboard.",
-                  "Use a participant-selected alias and self-reported total only.",
-                  "The facilitator may provide an event-specific leaderboard outside the repository.",
-                  "No speed score or time-based tie-breaker applies.",
-                  "Public ranking and swag are optional; the mission never promises a prize."
-                ]
+                  "Scoring is tracked locally on your honor unless you choose to share your score on the event leaderboard.",
+                  "Submit using a participant-selected alias and self-reported total only.",
+                  "The leaderboard is completely optional and never required to complete the workshop.",
+                  "No speed score or time-based tie-breakers apply."
+                ],
+                "submission": {
+                  "moduleOption": "Foundations",
+                  "steps": [
+                    "Finish the experiments and calculate your core points (up to 50) and bonus points (up to 10). 40 core points completes the module.",
+                    "Open the leaderboard submission form and select `Foundations`.",
+                    "Choose a made-up alias rather than your real name. Your alias and score are published on the shared workshop board, so avoid your real name, work username, email, employer, or customer names.",
+                    "Save that alias in the alias box on this page so every module page shows the same one, then copy it.",
+                    "Enter your event id, chosen alias, core points in 5-point steps from 0 to 50, and bonus points (0 or 10).",
+                    "Reuse this same alias for the Agentic and Advanced modules so your three scores add up into one standing.",
+                    "Submit your issue to see your alias on the live board."
+                  ]
+                }
               }
             }
           ]
@@ -1159,7 +1167,20 @@
                   "Keep any public or shared leaderboard alias-only; mission evidence and repository content stay local.",
                   "Export only the totals needed for the optional separately implemented event board.",
                   "Co-winners are based on the highest verified cumulative total; there is no speed scoring."
-                ]
+                ],
+                "submission": {
+                  "moduleOption": "Agentic",
+                  "steps": [
+                    "Finish the mission and read your Agentic core and bonus totals from the scorecard.",
+                    "Open the leaderboard submission form and choose `Agentic` as the module.",
+                    "Use a made-up alias rather than your real name. Your alias and score are published on the shared workshop board, so avoid your real name, work username, email, employer, or customer names.",
+                    "Copy the alias saved in the alias box on this page so it matches the one you used for Foundations.",
+                    "Submit one issue for this module using the same alias you used for Foundations, so your module scores add up into one standing.",
+                    "Agentic clues are worth 10 points each, so core totals use 10-point values.",
+                    "To correct a score, edit that same issue; to withdraw, close it.",
+                    "Submitting is optional and never required to complete the mission or carry the case file into Advanced."
+                  ]
+                }
               }
             }
           ]
@@ -1187,15 +1208,13 @@
                 "Integrate parallel work with dependency ordering, combined validation, rollback, and human acceptance",
                 "Plan maintainable distribution, deployment, and Day 2 workflows"
               ],
-              "prerequisites": [
-                "Complete the Agentic mission or use the clearly labeled legitimate Advanced fallback entry."
-              ],
-              "startingState": "The participant normally has an exported Agentic case file with separate Foundations, Agentic, and cumulative totals plus one bounded Advanced follow-up scenario; a legitimate fallback entry labels unavailable prior evidence and awards no unearned prior points.",
-              "goal": "Extend the same Agent Mergewell case through Advanced orchestration, governed integration and review, debugging and recovery, Day 2 operations, and a final human accept, revise, or reject decision.",
-              "task": "Reuse the carried-forward case or labeled fallback to complete five governed Advanced operations, integrate their evidence, make the final human decision, and preserve a plain-text export with separate Foundations, Agentic, Advanced, and cumulative totals.",
+              "prerequisites": [],
+              "startingState": "The participant either reopens an exported Agentic case file with separate Foundations, Agentic, and cumulative totals, or copies the self-serve Advanced starter brief from this mission page and begins immediately. Unearned prior totals are recorded as zero and prior evidence is labeled unavailable.",
+              "goal": "Extend an Agent Mergewell case through Advanced orchestration, governed integration and review, debugging and recovery, Day 2 operations, and a final human accept, revise, or reject decision.",
+              "task": "Use your carried-forward case or the Advanced starter brief to complete five governed Advanced operations, integrate their evidence, make the final human decision, and preserve a plain-text export with separate Foundations, Agentic, Advanced, and cumulative totals.",
               "constraints": [
                 "Keep the same case envelope; do not reset the totals, invent missing evidence, or treat popularity as approval.",
-                "Count only earned or facilitator-verified prior points; a fallback records unavailable prior evidence and zero for any unverified prior total.",
+                "Count only earned or verified prior points; starting standalone records unavailable prior evidence and zero for any unverified prior total.",
                 "Keep external discovery, extension, MCP, plugin, or API evaluation read-only until the team has explicit approval.",
                 "Hints never reduce points, and there is no speed scoring."
               ],
@@ -1235,10 +1254,15 @@
               ],
               "casePacket": [
                 "Normal path: start from the exported Agentic case file and reuse the same envelope in place.",
-                "Legitimate fallback: if the Agentic export is unavailable, use a facilitator-provided bounded Advanced scenario; copy only earned or facilitator-verified prior totals, record zero for every unverified prior total, and label prior evidence unavailable rather than recreating it.",
+                "Standalone path: copy the Advanced starter brief below into your harness and begin immediately. No facilitator, no Agentic export, and no prior module are required.",
+                "Prior totals: copy only earned or verified prior totals, record zero for every unverified prior total, and label prior evidence unavailable rather than recreating it.",
                 "Optional leaderboard handoff: export only an alias plus separate Foundations, Agentic, and Advanced module scores and the calculated cumulative total; keep evidence, prompts, diffs, and repository content local.",
                 "Mission completion never depends on the optional leaderboard."
               ],
+              "starterFile": {
+                "name": "advanced-case-brief.md",
+                "content": "# Advanced Case Brief — Operation Wide Net\n\nUse this brief if you are starting at Advanced, or if your Agentic export is\nnot available. It is deliberately small, self-contained, and safe to reason\nabout without cloning a real system. You do not need to build it.\n\n## The situation\n\nAgent Mergewell's team runs a small internal service made of four parts:\n\n| Part | What it does | Owner |\n| --- | --- | --- |\n| `case-api` | HTTP endpoints for case records | Team A |\n| `case-worker` | Background jobs that update cases | Team A |\n| `notify-svc` | Sends case notifications | Team B |\n| `shared-logging` | Logging helper used by all three | Nobody, effectively |\n\n## The requested change\n\nCompliance has asked for one cross-cutting change:\n\n> Every case record read or write must emit a structured audit event with the\n> actor, the case id, the action, and a timestamp. Audit events must never\n> include case body text or personal data.\n\nThis touches all four parts. `shared-logging` must change first, and the\nother three must adopt it. `notify-svc` belongs to another team.\n\n## What is already known\n\n- `case-api` and `case-worker` have tests. `notify-svc` has almost none.\n- `shared-logging` has no owner and no release process.\n- There is a code-review bottleneck: one reviewer approves everything.\n- A previous audit-logging attempt leaked case body text into logs and was\n  rolled back. Nobody wrote down why it happened.\n- The team wants this in production within two weeks.\n\n## Your Advanced scenario\n\nTreat this as the case you are carrying. Across the five operations you will:\n\n1. Decide how to split this work across agent runs, and where each run stops.\n2. Choose the narrowest integration surface for getting audit evidence out.\n3. Decide how an automated review helper contributes without taking merge authority.\n4. Plan the minimal debug protocol for the \"leaked case body text\" failure.\n5. Integrate the evidence, choose the Day 2 path, and record the final human decision.\n\n## Prior module totals\n\n- Foundations total: ___ (record 0 if you did not complete or verify it)\n- Agentic total: ___ (record 0 if you did not complete or verify it)\n- Prior evidence: available / unavailable\n\nRecording zero here is honest and costs you nothing. Your Advanced score is\nearned entirely inside this mission.\n\n## Advanced evidence log\n\n- Operation 1 — orchestration choice:\n- Operation 2 — integration surface:\n- Operation 3 — governed review path:\n- Operation 4 — debug protocol and recovery:\n- Operation 5 — integration, Day 2 choice, and final human decision:\n- Advanced core total: ___ / 50\n- Advanced bonus total: ___ / 10"
+              },
               "harnesses": [
                 {
                   "id": "copilot-cli",
@@ -1540,10 +1564,10 @@
                   "The integrated acceptance checks, distribution or Day 2 choice, owner, rollback, support notes, and explicit final human decision"
                 ],
                 "consumes": [
-                  "Exported Agentic case file on the normal path",
-                  "Labeled facilitator-provided Advanced scenario on the legitimate fallback path"
+                  "Exported Agentic case file on the continuing path",
+                  "Self-serve Advanced starter brief on the standalone path"
                 ],
-                "fallback": "The legitimate fallback never recreates Agentic evidence or points; it preserves only earned or facilitator-verified prior totals, records zero for unverified prior totals, and labels prior evidence unavailable."
+                "fallback": "The standalone path never recreates Agentic evidence or points; it preserves only earned or verified prior totals, records zero for unverified prior totals, and labels prior evidence unavailable."
               },
               "leaderboard": {
                 "optional": true,
@@ -1552,7 +1576,20 @@
                   "Export only an alias, separate Foundations, Agentic, and Advanced module scores, and the calculated cumulative total for the optional separately implemented event leaderboard.",
                   "Keep evidence, prompts, diffs, and repository content local.",
                   "Mission completion never depends on leaderboard submission; there is no speed or popularity scoring."
-                ]
+                ],
+                "submission": {
+                  "moduleOption": "Advanced",
+                  "steps": [
+                    "Finish the mission and read your Advanced core and bonus totals from the scorecard.",
+                    "Open the leaderboard submission form and choose `Advanced` as the module.",
+                    "Use a made-up alias rather than your real name. Your alias and score are published on the shared workshop board, so avoid your real name, work username, email, employer, or customer names.",
+                    "Copy the alias saved in the alias box on this page so it matches the one you used for Foundations and Agentic.",
+                    "Submit one issue for this module using the same alias you used for Foundations and Agentic, so your module scores add up into one standing.",
+                    "Advanced clues are worth 10 points each, so core totals use 10-point values.",
+                    "Submit each module separately; the board adds your three module totals into the cumulative standing.",
+                    "Only verified module submissions count toward final standings, and tied highest verified totals are announced as co-winners after the event closes."
+                  ]
+                }
               }
             }
           ]
