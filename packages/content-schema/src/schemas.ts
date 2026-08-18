@@ -34,6 +34,32 @@ const baseContent = z.object({
   status: z.enum(["draft", "review", "published"]).default("draft")
 });
 
+const httpsUrl = z
+  .string()
+  .url()
+  .refine((value) => value.startsWith("https://"), { message: "Use an https URL" });
+
+const leaderboardEnvironment = z.object({
+  repository: z
+    .string()
+    .regex(/^[A-Za-z0-9][A-Za-z0-9._-]*\/[A-Za-z0-9][A-Za-z0-9._-]*$/, "Use an owner/repository reference"),
+  submissionUrl: httpsUrl,
+  standingsUrl: httpsUrl
+});
+
+export const leaderboardEnvironmentSchema = leaderboardEnvironment;
+
+export const workshopLeaderboardSchema = z.object({
+  optional: z.literal(true),
+  aliasOnly: z.literal(true),
+  eventId: id,
+  kitPath: relativePath.optional(),
+  environments: z.object({
+    test: leaderboardEnvironment,
+    production: leaderboardEnvironment
+  })
+});
+
 export const timingBudgetSchema = z.object({
   instructionMinutes: z.number().int().nonnegative(),
   missionMinutes: z.number().int().nonnegative(),
@@ -175,6 +201,7 @@ export const workshopSchema = baseContent
     modules: z.array(id).min(1),
     tags: z.array(z.string().min(1)).default([]),
     researchSources: z.array(researchSource).default([]),
+    leaderboard: workshopLeaderboardSchema.optional(),
     lastReviewed: dateString
   })
   .superRefine((workshop, context) => {
@@ -358,7 +385,13 @@ export const missionSchema = baseContent
     leaderboard: z.object({
       optional: z.literal(true),
       aliasOnly: z.literal(true),
-      instructions: z.array(z.string().min(1)).min(1)
+      instructions: z.array(z.string().min(1)).min(1),
+      submission: z
+        .object({
+          moduleOption: z.string().min(1),
+          steps: z.array(z.string().min(1)).min(1)
+        })
+        .optional()
     }).optional()
   })
   .superRefine((mission, context) => {

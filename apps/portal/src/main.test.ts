@@ -3,12 +3,16 @@ import {
   buildCaseFileText,
   calculateMissionScore,
   getMissionStorageKey,
+  buildSubmissionUrl,
+  getAliasStorageKey,
   isScoredMission,
   loadMissionProgress,
   normalizeMission,
   parseMissionProgress,
   renderModule,
+  renderLeaderboardPointer,
   renderMissionBackLink,
+  renderMissionSubmission,
   summarizeWorkshopScores,
   type CatalogMission,
   type CatalogModule,
@@ -216,13 +220,11 @@ describe("mission progress helpers", () => {
       harness: "copilot-cli",
       completed: ["clue-1", "clue-1", "clue-2"],
       evidence: { "clue-1": "Saved evidence", bad: 1 },
-      alias: "mergewell",
       followUp: "Review the diff"
     }))).toEqual({
       harness: "copilot-cli",
       completed: ["clue-1", "clue-2"],
       evidence: { "clue-1": "Saved evidence" },
-      alias: "mergewell",
       followUp: "Review the diff"
     });
   });
@@ -233,7 +235,6 @@ describe("mission progress helpers", () => {
       progress: {
         completed: [],
         evidence: {},
-        alias: "",
         followUp: ""
       },
       warning: expect.stringContaining("Local progress could not be loaded")
@@ -256,7 +257,6 @@ describe("score summaries", () => {
           "foundations-mission-bonus-2"
         ],
         evidence: {},
-        alias: "mergewell",
         followUp: "Carry it forward"
       } satisfies MissionProgress)
     });
@@ -271,7 +271,6 @@ describe("score summaries", () => {
         "agentic-mission-bonus-2"
       ],
       evidence: {},
-      alias: "mergewell",
       followUp: "Prepare the next task"
     };
 
@@ -337,7 +336,6 @@ describe("score summaries", () => {
       harness: "copilot-cli",
       completed: ["agentic-mission-core-1", "agentic-mission-bonus-1"],
       evidence: { "agentic-mission-core-1": "Tracked the delegated change." },
-      alias: "mergewell",
       followUp: "Verify the next module handoff"
     };
     const scoredMission = normalizeMission(agenticMission);
@@ -358,5 +356,104 @@ describe("score summaries", () => {
     expect(caseFile).toContain("- Agentic Development: core 30, bonus 10, total 40");
     expect(caseFile).toContain("Workshop cumulative total: core 70, bonus 20, total 90");
     expect(caseFile).toContain("Bounded follow-up task: Verify the next module handoff");
+  });
+});
+
+describe("leaderboard surfaces", () => {
+  const leaderboard = {
+    optional: true,
+    aliasOnly: true,
+    eventId: "ghcp-dev-hack",
+    environment: "test",
+    repository: "mfm-se-dev-org/ghcp-dev-hack-leaderboard",
+    submissionUrl: "https://github.com/mfm-se-dev-org/ghcp-dev-hack-leaderboard/issues/new?template=leaderboard-submission.yml",
+    standingsUrl: "https://mfm-se-dev-org.github.io/ghcp-dev-hack-leaderboard/"
+  } as const;
+
+  it("renders per-module submission guidance with the submission form link", () => {
+    const mission = {
+      leaderboard: {
+        optional: true,
+        aliasOnly: true,
+        instructions: ["Alias only."],
+        submission: {
+          moduleOption: "Foundations",
+          steps: ["Choose Foundations", "Submit one issue"]
+        }
+      }
+    } as unknown as CatalogMission;
+
+    const markup = renderMissionSubmission({ leaderboard }, mission);
+    expect(markup).toContain(leaderboard.submissionUrl);
+    expect(markup).toContain(leaderboard.standingsUrl);
+    expect(markup).toContain("Foundations");
+    expect(markup).toContain("ghcp-dev-hack");
+    expect(markup).toContain("Submit one issue");
+  });
+
+  it("links to the standings from the workshop page without offering submission there", () => {
+    const markup = renderLeaderboardPointer({ leaderboard });
+
+    expect(markup).toContain(leaderboard.standingsUrl);
+    expect(markup).toContain("View leaderboard standings");
+    expect(markup).toContain("mission page to submit");
+    expect(markup).not.toContain(leaderboard.submissionUrl);
+    expect(renderLeaderboardPointer({ leaderboard: undefined })).toBe("");
+  });
+
+  it("prefills the submission form with the event, alias, module, and totals", () => {
+    const url = buildSubmissionUrl(
+      "https://github.com/org/repo/issues/new?template=leaderboard-submission.yml",
+      { eventId: "ghcp-dev-hack", moduleOption: "Foundations", core: 45, bonus: 10, alias: "night-shift-42" }
+    );
+
+    expect(url).toContain("template=leaderboard-submission.yml");
+    expect(url).toContain("event-id=ghcp-dev-hack");
+    expect(url).toContain("opt-in-alias=night-shift-42");
+    expect(url).toContain("module=Foundations");
+    expect(url).toContain("core-points=45");
+    expect(url).toContain("bonus-points=10");
+    expect(url.indexOf("?")).toBe(url.lastIndexOf("?"));
+  });
+
+  it("omits an empty alias and encodes one containing spaces", () => {
+    const base = "https://github.com/org/repo/issues/new?template=t.yml";
+    const withoutAlias = buildSubmissionUrl(base, { eventId: "e", moduleOption: "Agentic", core: 40, bonus: 0, alias: "   " });
+    expect(withoutAlias).not.toContain("opt-in-alias");
+    expect(withoutAlias).toContain("core-points=40");
+
+    const spaced = buildSubmissionUrl(base, { eventId: "e", moduleOption: "Agentic", core: 40, bonus: 0, alias: "night shift" });
+    expect(spaced).toContain("opt-in-alias=night+shift");
+  });
+
+  it("offers a workshop-scoped alias field with privacy guidance", () => {
+    const mission = {
+      leaderboard: {
+        optional: true,
+        aliasOnly: true,
+        instructions: ["Alias only."],
+        submission: { moduleOption: "Advanced", steps: ["Choose Advanced"] }
+      }
+    } as unknown as CatalogMission;
+
+    const markup = renderMissionSubmission({ leaderboard }, mission);
+    expect(markup).toContain('id="mission-alias-input"');
+    expect(markup).toContain("Your leaderboard alias");
+    expect(markup).toContain("Pick a made-up alias, not your real name.");
+    expect(markup).toContain("never transmitted");
+  });
+
+  it("keeps the alias key workshop-scoped so every module reuses one alias", () => {
+    const aliasKey = getAliasStorageKey("ghcp-dev-hack");
+    expect(aliasKey).toContain("ghcp-dev-hack");
+    expect(aliasKey).not.toContain("foundations");
+    expect(getAliasStorageKey("ghcp-dev-hack")).toBe(aliasKey);
+    expect(getMissionStorageKey("ghcp-dev-hack", "foundations", "context-and-prompts")).not.toBe(aliasKey);
+  });
+
+  it("omits submission guidance when either the workshop or mission does not opt in", () => {
+    const mission = { leaderboard: { optional: true, aliasOnly: true, instructions: ["Alias only."] } } as unknown as CatalogMission;
+    expect(renderMissionSubmission({ leaderboard }, mission)).toBe("");
+    expect(renderMissionSubmission({}, mission)).toBe("");
   });
 });

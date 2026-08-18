@@ -313,7 +313,7 @@ export async function exportPublicRelease(
   );
   await writeJson(
     path.join(output, "release-provenance.json"),
-    { releaseId: manifest.id, sourceCommit: manifest.commit },
+    { releaseId: manifest.id, sourceCommit: manifest.commit, workshops: manifest.workshops.map((selection) => selection.id) },
     { spaces: 2 }
   );
   await loadCatalog(output);

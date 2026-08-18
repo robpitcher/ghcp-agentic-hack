@@ -13,14 +13,13 @@ objectiveRefs:
   - Evaluate agent outcomes against explicit acceptance criteria and recover to a known state
   - Integrate parallel work with dependency ordering, combined validation, rollback, and human acceptance
   - Plan maintainable distribution, deployment, and Day 2 workflows
-prerequisites:
-  - Complete the Agentic mission or use the clearly labeled legitimate Advanced fallback entry.
-startingState: The participant normally has an exported Agentic case file with separate Foundations, Agentic, and cumulative totals plus one bounded Advanced follow-up scenario; a legitimate fallback entry labels unavailable prior evidence and awards no unearned prior points.
-goal: Extend the same Agent Mergewell case through Advanced orchestration, governed integration and review, debugging and recovery, Day 2 operations, and a final human accept, revise, or reject decision.
-task: Reuse the carried-forward case or labeled fallback to complete five governed Advanced operations, integrate their evidence, make the final human decision, and preserve a plain-text export with separate Foundations, Agentic, Advanced, and cumulative totals.
+prerequisites: []
+startingState: The participant either reopens an exported Agentic case file with separate Foundations, Agentic, and cumulative totals, or copies the self-serve Advanced starter brief from this mission page and begins immediately. Unearned prior totals are recorded as zero and prior evidence is labeled unavailable.
+goal: Extend an Agent Mergewell case through Advanced orchestration, governed integration and review, debugging and recovery, Day 2 operations, and a final human accept, revise, or reject decision.
+task: Use your carried-forward case or the Advanced starter brief to complete five governed Advanced operations, integrate their evidence, make the final human decision, and preserve a plain-text export with separate Foundations, Agentic, Advanced, and cumulative totals.
 constraints:
   - Keep the same case envelope; do not reset the totals, invent missing evidence, or treat popularity as approval.
-  - Count only earned or facilitator-verified prior points; a fallback records unavailable prior evidence and zero for any unverified prior total.
+  - Count only earned or verified prior points; starting standalone records unavailable prior evidence and zero for any unverified prior total.
   - Keep external discovery, extension, MCP, plugin, or API evaluation read-only until the team has explicit approval.
   - Hints never reduce points, and there is no speed scoring.
 evidence:
@@ -53,9 +52,78 @@ validation:
   - The exported case file preserves separate Foundations, Agentic, Advanced, and cumulative totals.
 casePacket:
   - 'Normal path: start from the exported Agentic case file and reuse the same envelope in place.'
-  - 'Legitimate fallback: if the Agentic export is unavailable, use a facilitator-provided bounded Advanced scenario; copy only earned or facilitator-verified prior totals, record zero for every unverified prior total, and label prior evidence unavailable rather than recreating it.'
+  - 'Standalone path: copy the Advanced starter brief below into your harness and begin immediately. No facilitator, no Agentic export, and no prior module are required.'
+  - 'Prior totals: copy only earned or verified prior totals, record zero for every unverified prior total, and label prior evidence unavailable rather than recreating it.'
   - 'Optional leaderboard handoff: export only an alias plus separate Foundations, Agentic, and Advanced module scores and the calculated cumulative total; keep evidence, prompts, diffs, and repository content local.'
   - Mission completion never depends on the optional leaderboard.
+starterFile:
+  name: advanced-case-brief.md
+  content: |-
+    # Advanced Case Brief — Operation Wide Net
+
+    Use this brief if you are starting at Advanced, or if your Agentic export is
+    not available. It is deliberately small, self-contained, and safe to reason
+    about without cloning a real system. You do not need to build it.
+
+    ## The situation
+
+    Agent Mergewell's team runs a small internal service made of four parts:
+
+    | Part | What it does | Owner |
+    | --- | --- | --- |
+    | `case-api` | HTTP endpoints for case records | Team A |
+    | `case-worker` | Background jobs that update cases | Team A |
+    | `notify-svc` | Sends case notifications | Team B |
+    | `shared-logging` | Logging helper used by all three | Nobody, effectively |
+
+    ## The requested change
+
+    Compliance has asked for one cross-cutting change:
+
+    > Every case record read or write must emit a structured audit event with the
+    > actor, the case id, the action, and a timestamp. Audit events must never
+    > include case body text or personal data.
+
+    This touches all four parts. `shared-logging` must change first, and the
+    other three must adopt it. `notify-svc` belongs to another team.
+
+    ## What is already known
+
+    - `case-api` and `case-worker` have tests. `notify-svc` has almost none.
+    - `shared-logging` has no owner and no release process.
+    - There is a code-review bottleneck: one reviewer approves everything.
+    - A previous audit-logging attempt leaked case body text into logs and was
+      rolled back. Nobody wrote down why it happened.
+    - The team wants this in production within two weeks.
+
+    ## Your Advanced scenario
+
+    Treat this as the case you are carrying. Across the five operations you will:
+
+    1. Decide how to split this work across agent runs, and where each run stops.
+    2. Choose the narrowest integration surface for getting audit evidence out.
+    3. Decide how an automated review helper contributes without taking merge authority.
+    4. Plan the minimal debug protocol for the "leaked case body text" failure.
+    5. Integrate the evidence, choose the Day 2 path, and record the final human decision.
+
+    ## Prior module totals
+
+    - Foundations total: ___ (record 0 if you did not complete or verify it)
+    - Agentic total: ___ (record 0 if you did not complete or verify it)
+    - Prior evidence: available / unavailable
+
+    Recording zero here is honest and costs you nothing. Your Advanced score is
+    earned entirely inside this mission.
+
+    ## Advanced evidence log
+
+    - Operation 1 — orchestration choice:
+    - Operation 2 — integration surface:
+    - Operation 3 — governed review path:
+    - Operation 4 — debug protocol and recovery:
+    - Operation 5 — integration, Day 2 choice, and final human decision:
+    - Advanced core total: ___ / 50
+    - Advanced bonus total: ___ / 10
 harnesses:
   - id: copilot-cli
     title: GitHub Copilot CLI
@@ -259,9 +327,9 @@ carryForward:
     - The debug protocol, visible result, and recovery choice
     - The integrated acceptance checks, distribution or Day 2 choice, owner, rollback, support notes, and explicit final human decision
   consumes:
-    - Exported Agentic case file on the normal path
-    - Labeled facilitator-provided Advanced scenario on the legitimate fallback path
-  fallback: The legitimate fallback never recreates Agentic evidence or points; it preserves only earned or facilitator-verified prior totals, records zero for unverified prior totals, and labels prior evidence unavailable.
+    - Exported Agentic case file on the continuing path
+    - Self-serve Advanced starter brief on the standalone path
+  fallback: The standalone path never recreates Agentic evidence or points; it preserves only earned or verified prior totals, records zero for unverified prior totals, and labels prior evidence unavailable.
 leaderboard:
   optional: true
   aliasOnly: true
@@ -269,6 +337,17 @@ leaderboard:
     - Export only an alias, separate Foundations, Agentic, and Advanced module scores, and the calculated cumulative total for the optional separately implemented event leaderboard.
     - Keep evidence, prompts, diffs, and repository content local.
     - Mission completion never depends on leaderboard submission; there is no speed or popularity scoring.
+  submission:
+    moduleOption: Advanced
+    steps:
+      - Finish the mission and read your Advanced core and bonus totals from the scorecard.
+      - Open the leaderboard submission form and choose `Advanced` as the module.
+      - 'Use a made-up alias rather than your real name. Your alias and score are published on the shared workshop board, so avoid your real name, work username, email, employer, or customer names.'
+      - Copy the alias saved in the alias box on this page so it matches the one you used for Foundations and Agentic.
+      - Submit one issue for this module using the same alias you used for Foundations and Agentic, so your module scores add up into one standing.
+      - Advanced clues are worth 10 points each, so core totals use 10-point values.
+      - Submit each module separately; the board adds your three module totals into the cumulative standing.
+      - Only verified module submissions count toward final standings, and tied highest verified totals are announced as co-winners after the event closes.
 status: draft
 ---
 
@@ -280,24 +359,53 @@ status: draft
 
 Extend the same Agent Mergewell case through Advanced orchestration, governed integration and review, debugging and recovery, Day 2 operations, and a final human accept, revise, or reject decision.
 
+## Choose your starting point
+
+- **Continuing from Agentic:** reopen the case already in your chosen harness and keep your earlier module totals intact.
+- **Starting with Advanced:** copy the Advanced starter brief on this page into your chosen harness and begin immediately. You do not need a facilitator, an Agentic export, or any earlier module.
+- **Your score:** starting fresh does not reduce your Advanced score, but unearned earlier points remain zero.
+
 ## Carry-forward envelope
 
 Reuse the exported Agentic case file in place. Preserve separate Foundations, Agentic, and cumulative totals when you begin, then add Advanced totals without resetting or blending the earlier modules.
 
-If the Agentic export is unavailable, use the clearly labeled legitimate fallback: a facilitator-provided bounded Advanced scenario. Carry forward only earned or facilitator-verified prior totals, record zero for unverified prior totals, and label prior evidence unavailable instead of recreating it.
+If the Agentic export is unavailable, copy the Advanced starter brief from this mission page instead. Carry forward only earned or verified prior totals, record zero for unverified prior totals, and label prior evidence unavailable instead of recreating it. Recording zero costs you nothing here; your Advanced score is earned entirely inside this mission.
 
 ## Scoring and close
 
-The five core operations are worth 10 points each, for 50 core points total; 40 core points completes the mission. Optional bonus work is capped at 10 points, and hints never reduce points. The fifth operation closes the case only after you integrate the evidence and record an explicit human accept, revise, or reject decision.
+Each module is scored and submitted on its own. Missing Foundations or Agentic never blocks you here.
+
+| Item | Points |
+| --- | --- |
+| Operation Split the Squad | 10 |
+| Operation Vet the Surface | 10 |
+| Operation Govern the Review | 10 |
+| Operation Debug the Failure | 10 |
+| Operation Ship the Decision | 10 |
+| **Core total** | **50** |
+| Bonus work (capped) | 10 |
+| **Module maximum** | **60** |
+
+Forty core points completes the mission. Hints are always free and never reduce your score, and there is no speed or popularity scoring. Submit this module's total separately; the board adds your three module totals together. Overall leaders are the people who complete every module and pick up the bonus points, so finishing at 40 is a pass, not a podium.
+
+Operation Ship the Decision closes the case only after you integrate the evidence and record an explicit human accept, revise, or reject decision.
 
 ## Timing guide
 
-- **0-5 minutes:** verify the normal or legitimate fallback entry, reopen the case, and choose the Advanced scenario.
+- **0-5 minutes:** open your carried-forward case or copy the starter brief, then choose the Advanced scenario.
 - **5-10 minutes:** make the orchestration decision.
 - **10-15 minutes:** compare and choose the narrowest safe integration surface.
 - **15-20 minutes:** define the governed code-review helper path.
 - **20-25 minutes:** run or walk the minimal debug protocol and record the recovery choice.
 - **25-30 minutes:** integrate the evidence, choose the Day 2 path, make the final human accept, revise, or reject decision, and export separate module and cumulative totals.
+
+## Words used in this mission
+
+- **Orchestration** — splitting one large job across more than one agent run or session, and deciding where each run stops.
+- **Integration surface** — the connection you open to an outside system. The narrowest one that still does the job is usually the right one.
+- **Governed review helper** — automated review that advises, while a named human keeps the authority to accept or reject.
+- **Debug protocol** — the smallest repeatable set of steps that makes a failure visible before you try to fix it.
+- **Day 2 operations** — everything after the change ships: ownership, telemetry, rollback, and support.
 
 ## Accessibility and fallback
 

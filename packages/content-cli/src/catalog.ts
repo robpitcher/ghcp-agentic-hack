@@ -12,8 +12,13 @@ function elapsedMinutes(start: string, end: string): number {
   return toMinutes(end) - toMinutes(start);
 }
 
-export function createPortalCatalog(catalog: ContentCatalog) {
+export function resolveWorkshopEnvironment(value = process.env.WORKSHOP_ENVIRONMENT): "test" | "production" {
+  return value === "production" ? "production" : "test";
+}
+
+export function createPortalCatalog(catalog: ContentCatalog, environment = resolveWorkshopEnvironment()) {
   return {
+    environment,
     workshops: catalog.workshops.map((entry) => {
       const workshopId = entry.workshop.data.id;
       const modules = entry.workshop.data.modules.map((moduleId) => {
@@ -95,6 +100,18 @@ export function createPortalCatalog(catalog: ContentCatalog) {
           }))
         };
       });
+      const workshopLeaderboard = entry.workshop.data.leaderboard;
+      const leaderboard = workshopLeaderboard
+        ? {
+            optional: workshopLeaderboard.optional,
+            aliasOnly: workshopLeaderboard.aliasOnly,
+            eventId: workshopLeaderboard.eventId,
+            environment,
+            repository: workshopLeaderboard.environments[environment].repository,
+            submissionUrl: workshopLeaderboard.environments[environment].submissionUrl,
+            standingsUrl: workshopLeaderboard.environments[environment].standingsUrl
+          }
+        : undefined;
       return {
         id: workshopId,
         title: entry.workshop.data.title,
@@ -105,6 +122,7 @@ export function createPortalCatalog(catalog: ContentCatalog) {
         tags: entry.workshop.data.tags,
         prerequisites: entry.workshop.data.prerequisites,
         route: `workshops/${workshopId}/`,
+        leaderboard,
         defaultDeliveryVariant: entry.workshop.data.defaultDeliveryVariant,
         deliveryVariants,
         modules

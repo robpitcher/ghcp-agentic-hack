@@ -1157,6 +1157,7 @@ layout: two-panel
 - Hunt five clues and bank evidence with every point
 - Try another Copilot gadget for bonus evidence
 - Carry one bounded case file into Agentic Development
+- Optional: send me your alias and score from the mission page
 
 ::visual::
 <img src="/images/mission-readiness.png" alt="Agent Mergewell and Purrmission preparing learners to start the Foundations scavenger hunt" />
@@ -1179,6 +1180,10 @@ The numbers. Fifty core points on the table. Forty completes the mission. One
 optional route adds up to ten bonus.
 And export your case file at the end. Do not skip that. The bounded follow-up task
 inside it is your starting evidence for Agentic Development after the break.
+One more thing, and it's completely optional. When you finish, your mission page
+has a Submit your score button. Pick an alias, choose Foundations, send your core
+and bonus points. That's how the board on my screen fills up. Nothing else leaves
+your machine — no evidence, no prompts, no code.
 Before you start — which gadget, and what's the first piece of evidence you're
 going to record?
 
@@ -1190,6 +1195,8 @@ Audience question: Which gadget are you choosing, and what is the first piece of
 Response guidance: Take a quick show of hands by gadget and point each group to its
 matching route in Missions. If someone is blocked on setup, move them to the
 approved fallback — do not invent commands or policy answers to unblock them.
+If someone asks whether the leaderboard is required, say plainly: it is optional,
+it is alias-only, and it changes nothing about completing the mission.
 Payoff: Every participant begins with a declared harness and evidence target, and the resulting case file creates the cross-module handoff.
 Sources: content/missions/foundations/context-and-prompts.md; content/production/foundations-mission-scavenger-hunt-contract.md
 -->

@@ -342,6 +342,17 @@ leaderboard:
     - Keep any public or shared leaderboard alias-only; mission evidence and repository content stay local.
     - Export only the totals needed for the optional separately implemented event board.
     - Co-winners are based on the highest verified cumulative total; there is no speed scoring.
+  submission:
+    moduleOption: Agentic
+    steps:
+      - Finish the mission and read your Agentic core and bonus totals from the scorecard.
+      - Open the leaderboard submission form and choose `Agentic` as the module.
+      - 'Use a made-up alias rather than your real name. Your alias and score are published on the shared workshop board, so avoid your real name, work username, email, employer, or customer names.'
+      - Copy the alias saved in the alias box on this page so it matches the one you used for Foundations.
+      - Submit one issue for this module using the same alias you used for Foundations, so your module scores add up into one standing.
+      - Agentic clues are worth 10 points each, so core totals use 10-point values.
+      - To correct a score, edit that same issue; to withdraw, close it.
+      - Submitting is optional and never required to complete the mission or carry the case file into Advanced.
 status: draft
 ---
 
@@ -359,6 +370,23 @@ Carry your Foundations case forward and confidently delegate, monitor, and verif
 - **Starting with Agentic:** copy the Agentic starter case below into your chosen harness. You can begin immediately without completing Foundations first.
 - **Your score:** starting fresh does not reduce your Agentic score, but unearned Foundations points remain zero.
 
+## Scoring
+
+Each module is scored and submitted on its own. Missing Foundations never blocks you here.
+
+| Item | Points |
+| --- | --- |
+| Operation Open the Case | 10 |
+| Operation Write the Brief | 10 |
+| Operation Watch the Loop | 10 |
+| Operation Verify the Evidence | 10 |
+| Operation Close the Handoff | 10 |
+| **Core total** | **50** |
+| Bonus work (capped) | 10 |
+| **Module maximum** | **60** |
+
+Forty core points completes the mission. Hints are always free and never reduce your score, and there is no speed or popularity scoring. Submit this module's total separately; the board adds your three module totals together. Overall leaders are the people who complete every module and pick up the bonus points, so finishing at 40 is a pass, not a podium.
+
 ## Timing guide
 
 - **0-5 minutes:** open your case and practice task, then confirm the scope and validation method.
@@ -370,6 +398,14 @@ Carry your Foundations case forward and confidently delegate, monitor, and verif
 ## Accessibility and fallback
 
 Hints are always available and never reduce points. Pair with a facilitator or partner if you need help copying the starter case, reviewing changes, or working around a device or accessibility limit. If your environment has no runnable validation, use the supplied no-runtime verification checklist and record that path honestly.
+
+## Words used in this mission
+
+- **Harness** — the place you run Copilot: the IDE extension, the CLI, or the Copilot app.
+- **Delegation brief** — the written instruction you hand the agent: the goal, the boundary, and how you will check the result.
+- **Pre-run control** — a limit you set *before* the agent starts, such as which files it may touch or whether it may run commands.
+- **Scope drift** — the agent quietly widening the job beyond what you asked for. Catching it early is the skill.
+- **No-runtime verification** — checking the work by reading the diff and the evidence when you cannot actually run the code.
 
 ## Recovery-only completed reference
 
