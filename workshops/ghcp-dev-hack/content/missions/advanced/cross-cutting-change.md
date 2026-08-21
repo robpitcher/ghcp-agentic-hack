@@ -177,7 +177,7 @@ coreClues:
     objectiveRef: Evaluate ecosystem resources and integration surfaces before enterprise use
     scene: Mergewell lines up five integration doors while Purrmission checks the badges, locks, and rollback handles.
     actions:
-      - Compare at least three relevant surfaces: hooks react to events; marketplace extensions add packaged capabilities; MCP supplies governed context or tools; Work IQ via MCP adds permission-aware Microsoft 365 context; API or CLI offers a narrow explicit operation; plugins bundle reusable capabilities.
+      - 'Compare at least three relevant surfaces: hooks react to events; marketplace extensions add packaged capabilities; MCP supplies governed context or tools; Work IQ via MCP adds permission-aware Microsoft 365 context; API or CLI offers a narrow explicit operation; plugins bundle reusable capabilities.'
       - If you discover an option in the Awesome Copilot list or another catalog, treat the listing as a lead to vet, not as approval.
       - Record permissions, provenance, data scope, observability, enterprise review, and rollback for each option.
       - Choose the narrowest surface that still satisfies the case.
@@ -232,7 +232,7 @@ coreClues:
     actions:
       - Name one likely failure mode for the carried-forward case, such as context, instruction conflict, tool order, or permission drift.
       - Write the smallest safe repro prompt or protocol that could confirm or disprove it.
-      - Choose the visible evidence source that fits the failure: the VS Code Agents window, a CLI transcript, an app plan or diff canvas, or repository and check output. Do not claim hidden reasoning.
+      - 'Choose the visible evidence source that fits the failure: the VS Code Agents window, a CLI transcript, an app plan or diff canvas, or repository and check output. Do not claim hidden reasoning.'
       - Run the smallest safe repro when available, or walk it as a bounded tabletop check, then record the visible result and whether to recover, revise, or roll back before changing architecture.
     routes:
       - harness: copilot-cli
@@ -369,7 +369,6 @@ Extend the same Agent Mergewell case through Advanced orchestration, governed in
 ## Choose your starting point
 
 - **Continuing from Agentic:** reopen the case already in your chosen harness and keep your earlier module totals intact.
-- **Starting with Advanced:** copy the Advanced starter brief on this page into your chosen harness and begin immediately. You do not need a facilitator, an Agentic export, or any earlier module.
 - **Starting with Advanced:** in VS Code or the Copilot app, create `advanced-case-brief.md` and copy the full starter brief into it. In Copilot CLI, paste the full brief into a fresh session. You do not need to build the fictional system.
 - **Your score:** starting fresh does not reduce your Advanced score, but unearned earlier points remain zero.
 
