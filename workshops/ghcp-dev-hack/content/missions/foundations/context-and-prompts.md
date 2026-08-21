@@ -47,7 +47,8 @@ validation:
   - Every experiment respects least-privilege context and permission boundaries.
   - The participant leaves with one bounded follow-up task and a recorded point total for Agentic Development.
 casePacket:
-  - Open your preferred Copilot tool (VS Code, Copilot CLI, or the Copilot app).
+  - 'Quick start: open a fresh session in VS Code, Copilot CLI, or the Copilot app. Use a scratch location with no confidential or unrelated files.'
+  - 'Before Experiment 1, write one line naming your chosen harness, why it fits, and the policy boundary you will keep. Do not wait for a starter repository.'
   - No starter repository or file creation required — you can run every prompt directly in chat or an open scratch buffer.
   - Work through the 5 experiments in order. They are worth 5, 10, 10, 10, and 15 points, for 50 core points in total, and each prompt is copy-paste ready.
 harnesses:
@@ -76,10 +77,11 @@ coreClues:
     objectiveRef: Apply VS Code chat references, inline completions, inline chat, and Ask/Plan/Agent modes to real engineering tasks
     scene: Agent Mergewell crafts his opening prompt. Purrmission makes sure he feeds in only the context the task actually needs.
     actions:
+      - 'Take a 60-second surface check: IDE means editor and code context; CLI means terminal-native work; GitHub.com means repository and pull-request work; a cloud agent means bounded background delegation; the Copilot app means a dedicated multi-canvas workspace. Choose the smallest surface that fits this experiment.'
       - 'Copy this prompt into Copilot Chat and send it:'
       - '> "Write a function in [JavaScript/Python/language of choice] that takes this list: [\"Context\", \"  Safety  \", \"context\", \"\", \"Models\"]. Success rules: (1) Trim whitespace, (2) Remove empty strings, (3) Remove case-insensitive duplicates while preserving first-seen order and casing. Expected output: [\"Context\", \"Safety\", \"Models\"]."'
       - 'Inspect the answer: did Copilot honor all 3 rules without you attaching any files or folders?'
-      - 'Optional 30-second add-on: open any file, select a few lines, and use inline chat (Ctrl+I / Cmd+I) or a #file / #selection reference to see how a scoped reference differs from pasting the whole file.'
+      - 'Try one scoped editor feature: use inline chat (`Ctrl+I` / `Cmd+I`), a `#file` or `#selection` reference, or accept one inline completion in a scratch file. If your harness does not offer editor features, record `not available` and explain that these features use the active file or selection rather than a whole workspace.'
     routes:
       - harness: ide-extension
         instructions:
@@ -90,7 +92,7 @@ coreClues:
       - harness: copilot-app
         instructions:
           - Send the prompt in a new Copilot app chat session.
-    evidence: Record the prompt you used and whether Copilot produced working code without needing background project files.
+    evidence: Record your surface choice, the scoped editor feature you tried or marked unavailable, the prompt you used, and whether Copilot produced working code without needing background project files.
     hints:
       - Putting the input data and the success rules directly in the prompt gives you precision without dragging in noisy workspace context.
       - 'Use #file or #selection when you genuinely need a specific file, but never attach whole unrelated folders.'
@@ -181,7 +183,7 @@ coreClues:
     title: 'Experiment 5: Verify, Decide, and Hand Off'
     points: 15
     objectiveRef: Explain where GitHub Copilot lives across IDE, terminal, GitHub.com, cloud, and app surfaces and identify enterprise safety responsibilities
-    scene: Mergewell wants to ship immediately. Purrmission runs the four-point inspection first, then writes the handoff note.
+    scene: Mergewell has code that passed the first list. Purrmission deliberately adds harder whitespace and casing inputs, then runs the four-point inspection and writes the handoff note.
     actions:
       - 'Run or read the generated code against all four success checks using the Experiment 1 list:'
       - 'Check 1 — extra spaces trimmed: "  Safety  " becomes "Safety".'
@@ -192,6 +194,7 @@ coreClues:
       - 'If it failed, run one Revise cycle: tell Copilot exactly which check broke and which input exposed it, then re-verify. Do not accept a fix you have not re-run.'
       - 'Make your verdict: Accept, Revise, or Reject — and say what evidence backs it.'
       - 'Write one bounded follow-up task you would hand to an agent next — small, specific, and verifiable. You will reopen this in Agentic Development.'
+      - 'Copy this handoff starter and fill the blanks: "Harness: ___. Allowed context: ___. Withheld permission: ___. Verified result: ___. Bounded Agentic follow-up: change ___ in one named file or function; verify it by ___."'
       - 'Total your score and note your harness and active model.'
     routes:
       - harness: ide-extension
@@ -207,6 +210,7 @@ coreClues:
     hints:
       - Case-insensitive deduplication that preserves the original casing is the single most common place this task goes wrong.
       - 'The harder list adds a tab character, a trailing-space duplicate, an all-caps duplicate, and a whitespace-only string. Trim before you compare, and compare on the lowercased trimmed value.'
+      - The harder list is intentionally more demanding. Finding a failure here is useful evidence and is your signal to revise, not a reason to hide the first result.
       - 'If a check failed, reply: "Please preserve the original first-seen casing and order, treat whitespace-only entries as empty, and show the output for my test list."'
       - 'A good bounded follow-up task names one file or function, one change, and one way to verify it.'
       - 'This experiment is worth 15 points — the most in the mission — because it requires verified evidence, not just a generated answer. Claim it only if you ran the harder list and recorded a verdict and follow-up task.'
@@ -312,7 +316,9 @@ Points are weighted by difficulty, so finishing is not the same as topping the b
 - **18-26 minutes:** Experiment 3 — read the gauges, make a routing call.
 - **26-33 minutes:** Experiment 4 — context rot and reset.
 - **33-43 minutes:** Experiment 5 — break it, revise it, verify it, hand it off.
-- **43-45 minutes:** total your score and post to the leaderboard if you want to.
+- **43-45 minutes:** total your score and save the handoff for Agentic.
+
+Leaderboard posting is optional and can happen after the mission. Do not use verification time to submit it.
 
 **Finished early?** Do not stop at 50. Go straight to the bonus challenges — a third model in Bonus 1, or a second harness in Bonus 2 — for the last 10 points on the board.
 

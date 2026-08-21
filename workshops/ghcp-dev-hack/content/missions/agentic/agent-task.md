@@ -7,7 +7,10 @@ module: agentic
 durationMinutes: 45
 objectiveRefs:
   - Apply instructions, memory boundaries, context hierarchy, and strong prompts to long-running agentic work
+  - Explain the different jobs of the developer, a software agent, a reusable skill, a custom agent, and a tool
   - Operate an observable agentic loop with deliberate planning, tool control points, progress checks, stop decisions, and recovery
+  - Use GitHub Enterprise Cloud repository state, GitHub Actions, pull requests, and cloud-agent handoffs as connected workflow evidence
+  - Distinguish GitHub Code Quality, Copilot code review, and cloud-agent work, then retain human authority over acceptance and merge
   - Choose a supported product control before an agentic task and verify afterward whether the result justified the AI credits used
 prerequisites: []
 startingState: The participant has an approved Copilot harness with either their Foundations case already available or the copyable Agentic starter case, plus the Agentic practice task.
@@ -44,12 +47,12 @@ validation:
   - Every completed clue includes evidence, a Purrmission checkpoint, and an explicit human decision or stop note.
   - The exported case file preserves separate Foundations, Agentic, and cumulative totals for Advanced.
 casePacket:
-  - 'Continuing from Foundations: resume the case already in your harness and use its recorded follow-up task.'
-  - 'Starting with Agentic: copy the browser app below into a file named `case-dashboard.html`, open it in a browser, and use it as your practice task. No installation, repository access, or Foundations catch-up is required.'
+  - 'CONTINUING FROM FOUNDATIONS — Open the handoff you saved in Experiment 5. Confirm that it names a harness, allowed context, withheld permission, verified result, bounded follow-up, and check. Use that follow-up as this mission''s practice task.'
+  - 'STARTING WITH AGENTIC — Copy the browser app below into a new file named `case-dashboard.html`, save it, and open it in a browser. Confirm that you see the Case handoff notes form and one existing note. No installation, repository access, or Foundations catch-up is required.'
   - 'Starter situation: a workshop team records verified case notes in this dashboard. The current note-submission experience is not safe or reliable enough to hand to the next teammate.'
   - 'Starter outcome: improve note submission so blank notes are rejected with useful feedback, user-entered characters are shown as text rather than interpreted as page markup, a valid note appears once, and the form is ready for another note.'
   - 'Starter boundary: keep the solution inside `case-dashboard.html`; preserve the existing purpose and visual design; do not add packages, network calls, or unrelated features.'
-  - 'Starter no-runtime verification: open the file in a browser; try a blank note, a normal note, and `<strong>field report</strong>`; inspect the behavior and the changed file before deciding whether the result meets the outcome.'
+  - 'Starter browser verification: open the file in a browser; try a blank note, a normal note, and `<strong>field report</strong>`; inspect the behavior and the changed file before deciding whether the result meets the outcome. If you cannot open a browser, walk the same three cases through the code and label the result `no-runtime verification`.'
   - If you continue from Foundations, use the outcome, boundaries, and validation appropriate to your carried-forward task instead of the starter checks.
 starterFile:
   name: case-dashboard.html
@@ -165,6 +168,7 @@ coreClues:
     actions:
       - 'Your decision: What does Copilot need to know about the intended outcome, useful context, evidence of success, and limits before it can propose an approach? Capture that shared understanding in a short boundary note.'
       - 'How to approach it: Read the case as the person who must approve the result. Describe the change in behavior you need, the context Copilot may use, the evidence you will inspect, and where the work must stop. Leave implementation choices open.'
+      - 'Name the roles before work begins: you are the developer and decision owner; the software agent performs this delegated task; a skill is a reusable procedure; a custom agent is a recurring specialist role; and a tool performs one concrete action. Record only the roles this run actually uses.'
       - 'Why it matters: Without a clear starting agreement, plausible work can still solve the wrong problem. The note gives you something concrete to compare with the plan and final result.'
     routes:
       - harness: copilot-cli
@@ -180,6 +184,7 @@ coreClues:
     hints:
       - Keep an untouched copy of the practice content so you can recover from a bad run.
       - Continue with the Foundations case already in your harness, or paste the copyable Agentic starter case to begin fresh.
+      - 'Copy-paste boundary note: "Outcome: ___. Allowed context: ___. Evidence I will inspect: ___. Stop if: ___. Human decision owner: ___. Agent role: ___. Tools allowed: ___."'
       - 'Unrelated example: For an onboarding-document update, a useful boundary note could explain that a new teammate must complete setup successfully, that only the onboarding document is relevant, and that build scripts are outside the task. It would not dictate the wording of the revised document.'
     safetyCheckpoint: Stop if the harness opens unrelated folders, asks for network or package access, or blurs which files are in scope.
   - id: write-the-brief
@@ -190,6 +195,7 @@ coreClues:
     actions:
       - 'Your decision: How will you explain the problem and boundaries while leaving the solution open? Choose an available model, context, reasoning, or session control that fits the work, then ask Copilot to propose a plan.'
       - 'How to approach it: Build the brief from your boundary note, then ask for a plan rather than an immediate change. Look for a plan that connects the requested outcome to relevant work and validation without introducing extra goals.'
+      - 'Label the instruction layers that matter: repository instructions or policy, remembered context, the current case, and this turn''s prompt. If two layers conflict, stop and ask the human owner to resolve the conflict instead of guessing.'
       - 'Why it matters: The proposed plan is your first opportunity to discover whether Copilot understood the handoff before changes are made.'
     routes:
       - harness: copilot-cli
@@ -205,6 +211,7 @@ coreClues:
     hints:
       - The brief should explain the problem and boundaries, not prescribe the solution Copilot must discover.
       - The plan is your first evidence that Copilot understood the handoff; disagreement here is a reason to clarify, not push ahead.
+      - 'Copy-paste delegation brief: "Goal: ___. Use only: ___. Do not: ___. First return a plan. Validate with: ___. Stop and ask if: ___. Return the diff, checks, and open questions; do not accept or merge."'
     safetyCheckpoint: Do not let Copilot infer scope from the whole workspace; the brief must name the boundary, checks, and stop conditions.
   - id: watch-the-loop
     title: Operation Watch the Loop
@@ -238,6 +245,7 @@ coreClues:
     actions:
       - 'Your decision: What evidence do you need before you can judge this result? Examine the changes yourself and use available validation—or the no-runtime checklist—to test the claims that matter.'
       - 'How to approach it: Review the changed content separately from Copilot''s summary. Test the expected behavior, at least one edge case, and the agreed boundary; then identify any important claim that your checks did not establish.'
+      - 'Connect the evidence without blending it: repository state shows what changed; GitHub Actions shows configured automation results; a pull request carries the diff, checks, and questions; a cloud agent returns delegated work for review. Record `not used` for any part that is outside your practice setup.'
       - 'Why it matters: A passing check can answer one question while missing another. Human review connects the evidence back to the original intent and exposes uncertainty that still needs attention.'
     routes:
       - harness: copilot-cli
@@ -253,6 +261,7 @@ coreClues:
     hints:
       - Revisit your original intent if the result looks plausible but the evidence does not answer the question you meant to test.
       - 'Different evidence answers different questions: scope, correctness, usability, and safety are not interchangeable.'
+      - 'Copy-paste evidence map: "Repository/diff: ___. Actions or local check: ___. Pull-request handoff: ___. Cloud-agent handoff: ___. Not used or unavailable: ___."'
     safetyCheckpoint: Do not accept a green result if the diff widened scope, hid uncertainty, or skipped the recorded human review.
   - id: close-the-handoff
     title: Operation Close the Handoff
@@ -262,6 +271,7 @@ coreClues:
     actions:
       - 'Your decision: Does the complete case record justify accepting the result, revising it, rejecting it, stopping, or recovering? Also decide what unresolved question, risk, or opportunity Advanced should inherit.'
       - 'How to approach it: Compare the final result and validation with the original brief. If an important gap remains, choose the response that fits the evidence rather than forcing an acceptance. Record the score only after making that decision.'
+      - 'Keep three jobs separate: GitHub Code Quality supplies quality findings, Copilot code review comments on a proposed change, and a cloud agent performs bounded delegated work. All three provide evidence; none takes your acceptance or merge authority.'
       - 'Why it matters: Closing a handoff means owning the decision, not merely receiving output. Preserving the reasoning and remaining uncertainty lets the next mission build on real evidence.'
     routes:
       - harness: copilot-cli
@@ -277,6 +287,7 @@ coreClues:
     hints:
       - Closing the handoff means taking responsibility for the decision and preserving enough context for the next mission.
       - Bonus points are capped at 10 even if you finish more than one bonus clue.
+      - 'Copy-paste Advanced export: "Foundations: __ core + __ bonus = __. Agentic: __ core + __ bonus = __. Cumulative: __. Boundary: __. Brief: __. Plan versus result: __. Validation: __. Final human decision: __ because __. Advanced question: ___."'
     safetyCheckpoint: Do not claim a fixed credit saving, speed advantage, or universal model behavior from one mission run.
 bonusClues:
   - id: tighten-and-retry
@@ -367,7 +378,7 @@ Carry your Foundations case forward and confidently delegate, monitor, and verif
 ## Choose your starting point
 
 - **Continuing from Foundations:** reopen the case already in your chosen harness and use the follow-up task you recorded.
-- **Starting with Agentic:** copy the Agentic starter case below into your chosen harness. You can begin immediately without completing Foundations first.
+- **Starting with Agentic:** create `case-dashboard.html`, copy the Agentic starter code into it, save it, and open it in a browser. When the form and its existing note appear, begin Operation Open the Case.
 - **Your score:** starting fresh does not reduce your Agentic score, but unearned Foundations points remain zero.
 
 ## Scoring
@@ -394,6 +405,22 @@ Forty core points completes the mission. Hints are always free and never reduce 
 - **15-30 minutes:** observe the plan and the main implementation pass, then stop or recover if scope drifts.
 - **30-38 minutes:** review the diff and run validation.
 - **38-45 minutes:** make the final decision and export separate Foundations, Agentic, and cumulative totals for Advanced.
+
+Keep each topic check to one or two lines. The goal is to connect the slide concepts to your case, not to start extra agent runs.
+
+## Copy-paste handoff for Advanced
+
+```text
+Foundations: __ core + __ bonus = __
+Agentic: __ core + __ bonus = __
+Cumulative: __
+Boundary and roles: __
+Delegation brief: __
+Plan versus result: __
+Validation evidence: __
+Final human decision: __ because __
+Advanced question or scenario: __
+```
 
 ## Accessibility and fallback
 

@@ -52,7 +52,7 @@ validation:
   - The exported case file preserves separate Foundations, Agentic, Advanced, and cumulative totals.
 casePacket:
   - 'Normal path: start from the exported Agentic case file and reuse the same envelope in place.'
-  - 'Standalone path: copy the Advanced starter brief below into your harness and begin immediately. No facilitator, no Agentic export, and no prior module are required.'
+  - 'Standalone path: in VS Code or the Copilot app, create `advanced-case-brief.md` and copy the full starter brief below into it; in Copilot CLI, paste the full brief into a fresh session. No facilitator, Agentic export, build, or prior module is required.'
   - 'Prior totals: copy only earned or verified prior totals, record zero for every unverified prior total, and label prior evidence unavailable rather than recreating it.'
   - 'Optional leaderboard handoff: export only an alias plus separate Foundations, Agentic, and Advanced module scores and the calculated cumulative total; keep evidence, prompts, diffs, and repository content local.'
   - Mission completion never depends on the optional leaderboard.
@@ -152,6 +152,7 @@ coreClues:
     actions:
       - Choose whether the case needs a single focused flow, a subagent, a multiagent split, or parallel work.
       - Name the ownership boundary, expected evidence, and merge control for that choice.
+      - Choose the execution shape only after the split is clear. A sequential run is simplest; `/fleet` can coordinate independent CLI tasks; separate worktrees isolate parallel file changes. Record the cost or coordination limit that stops you from creating more lanes.
       - Explain one pattern you rejected and why it would be too broad or too costly.
     routes:
       - harness: copilot-cli
@@ -167,6 +168,7 @@ coreClues:
     hints:
       - Start with the smallest pattern that can still keep the evidence attributable.
       - A subagent or parallel split should narrow work, not duplicate the parent context.
+      - Use parallel lanes only for independent work. Put shared dependencies first and keep final integration under one named human owner.
       - 'Starter: I chose ___ because ___. I rejected ___ because ___.'
     safetyCheckpoint: Stop if a proposed pattern widens scope without a clearer owner, evidence contract, or merge gate.
   - id: vet-the-surface
@@ -175,7 +177,8 @@ coreClues:
     objectiveRef: Evaluate ecosystem resources and integration surfaces before enterprise use
     scene: Mergewell lines up five integration doors while Purrmission checks the badges, locks, and rollback handles.
     actions:
-      - Compare at least three relevant surfaces such as hooks, marketplace extensions, MCP, API or CLI, plugins, or another approved option.
+      - Compare at least three relevant surfaces: hooks react to events; marketplace extensions add packaged capabilities; MCP supplies governed context or tools; Work IQ via MCP adds permission-aware Microsoft 365 context; API or CLI offers a narrow explicit operation; plugins bundle reusable capabilities.
+      - If you discover an option in the Awesome Copilot list or another catalog, treat the listing as a lead to vet, not as approval.
       - Record permissions, provenance, data scope, observability, enterprise review, and rollback for each option.
       - Choose the narrowest surface that still satisfies the case.
     routes:
@@ -192,6 +195,7 @@ coreClues:
     hints:
       - Read-only evidence surfaces usually beat broader write-capable integrations when they meet the task.
       - A useful discovery resource is not yet an approval record.
+      - Permission to retrieve workplace context is not permission to present it. Check audience, sensitivity, tenant policy, and data scope before recommending Work IQ or another MCP source.
       - 'Starter: I chose ___ because it needed ___ permissions and still provided ___ evidence.'
     safetyCheckpoint: Do not recommend an integration whose provenance, permissions, or rollback path you cannot explain.
   - id: govern-the-review
@@ -202,6 +206,7 @@ coreClues:
     actions:
       - Decide whether a skill, MCP surface, or another read-only helper adds evidence to code review for this case.
       - Record attribution, tool allowlisting, least privilege, secrets handling, and what the helper must not decide.
+      - State whether the same governed skill or MCP source may be used by Copilot code review, a cloud agent, both, or neither. Keep each consumer's permissions and evidence separate.
       - Explain how the human reviewer keeps acceptance and merge authority.
     routes:
       - harness: copilot-cli
@@ -227,6 +232,7 @@ coreClues:
     actions:
       - Name one likely failure mode for the carried-forward case, such as context, instruction conflict, tool order, or permission drift.
       - Write the smallest safe repro prompt or protocol that could confirm or disprove it.
+      - Choose the visible evidence source that fits the failure: the VS Code Agents window, a CLI transcript, an app plan or diff canvas, or repository and check output. Do not claim hidden reasoning.
       - Run the smallest safe repro when available, or walk it as a bounded tabletop check, then record the visible result and whether to recover, revise, or roll back before changing architecture.
     routes:
       - harness: copilot-cli
@@ -250,7 +256,7 @@ coreClues:
     objectiveRef: Integrate parallel work with dependency ordering, combined validation, rollback, and human acceptance
     scene: Mergewell assembles the governed evidence into the final Day 2 packet while Purrmission holds the case open until a human accepts, revises, or rejects it.
     actions:
-      - Assemble the orchestration, integration-surface, governed-review, and debug or recovery evidence; record dependency order, combined acceptance checks, unresolved uncertainty, and the known-good rollback point.
+      - Assemble the orchestration, integration-surface, governed-review, and debug or recovery evidence; record dependency order, worktree or lane ownership when used, combined acceptance checks, unresolved uncertainty, and the known-good rollback point.
       - Choose a distribution or Day 2 path, then record owner, audience, provenance, policy fit, support expectation, rollout stop condition, and rollback.
       - End the operation by comparing the integrated evidence with the acceptance checks, recording exactly one human decision—accept, revise, or reject—and sealing the export with separate Foundations, Agentic, Advanced, and cumulative totals plus the final integration and operations evidence.
     routes:
@@ -268,6 +274,7 @@ coreClues:
       - Start by putting the four earlier evidence records in dependency order; do not infer a passing combined result from separate checks.
       - If an acceptance check is unresolved, choose revise or reject and keep the known-good rollback point rather than forcing acceptance.
       - 'Starter: Combined evidence shows ___. I choose accept/revise/reject because ___. Day 2 owner: ___. Rollback: ___. Foundations: __ core + __ bonus = __; Agentic: __ core + __ bonus = __; Advanced: __/50 core + __/10 bonus = __; cumulative: ___.'
+      - 'Copy-paste closeout: "Dependency order: ___. Combined checks: ___. Unresolved: ___. Known-good rollback: ___. Distribution: ___. Owner/support: ___. Stop condition: ___. Human decision: accept/revise/reject because ___."'
     safetyCheckpoint: Stop if combined evidence is missing, a blocker remains unresolved, or provenance, owner, support, stop condition, and rollback are not explicit; do not deploy or label the case accepted.
 bonusClues:
   - id: compare-one-narrower-route
@@ -363,6 +370,7 @@ Extend the same Agent Mergewell case through Advanced orchestration, governed in
 
 - **Continuing from Agentic:** reopen the case already in your chosen harness and keep your earlier module totals intact.
 - **Starting with Advanced:** copy the Advanced starter brief on this page into your chosen harness and begin immediately. You do not need a facilitator, an Agentic export, or any earlier module.
+- **Starting with Advanced:** in VS Code or the Copilot app, create `advanced-case-brief.md` and copy the full starter brief into it. In Copilot CLI, paste the full brief into a fresh session. You do not need to build the fictional system.
 - **Your score:** starting fresh does not reduce your Advanced score, but unearned earlier points remain zero.
 
 ## Carry-forward envelope
@@ -398,6 +406,23 @@ Operation Ship the Decision closes the case only after you integrate the evidenc
 - **15-20 minutes:** define the governed code-review helper path.
 - **20-25 minutes:** run or walk the minimal debug protocol and record the recovery choice.
 - **25-30 minutes:** integrate the evidence, choose the Day 2 path, make the final human accept, revise, or reject decision, and export separate module and cumulative totals.
+
+Use short matrix entries and one-sentence decisions. You are designing and evaluating a governed workflow in 30 minutes, not implementing the fictional four-service system.
+
+## Copy-paste final export
+
+```text
+Foundations: __ core + __ bonus = __ (evidence available/unavailable)
+Agentic: __ core + __ bonus = __ (evidence available/unavailable)
+Advanced: __ core + __ bonus = __
+Cumulative: __
+Orchestration and owner: __
+Chosen integration and governance reason: __
+Review helper and human authority: __
+Debug evidence and recovery: __
+Day 2 owner, stop condition, and rollback: __
+Final human decision: accept/revise/reject because __
+```
 
 ## Words used in this mission
 
