@@ -47,8 +47,8 @@ validation:
   - Every completed clue includes evidence, a Purrmission checkpoint, and an explicit human decision or stop note.
   - The exported case file preserves separate Foundations, Agentic, and cumulative totals for Advanced.
 casePacket:
-  - 'CONTINUING FROM FOUNDATIONS — Open the handoff you saved in Experiment 5. Confirm that it names a harness, allowed context, withheld permission, verified result, bounded follow-up, and check. Use that follow-up as this mission''s practice task.'
-  - 'STARTING WITH AGENTIC — Copy the browser app below into a new file named `case-dashboard.html`, save it, and open it in a browser. Confirm that you see the Case handoff notes form and one existing note. No installation, repository access, or Foundations catch-up is required.'
+  - 'Continuing from Foundations — Open the handoff you saved in Experiment 5. Confirm that it names a harness, allowed context, withheld permission, verified result, bounded follow-up, and check. Use that follow-up as this mission''s practice task.'
+  - 'Starting with Agentic — Copy the browser app below into a new file named `case-dashboard.html`, save it, and open it in a browser. Confirm that you see the Case handoff notes form and one existing note. No installation, repository access, or Foundations catch-up is required.'
   - 'Starter situation: a workshop team records verified case notes in this dashboard. The current note-submission experience is not safe or reliable enough to hand to the next teammate.'
   - 'Starter outcome: improve note submission so blank notes are rejected with useful feedback, user-entered characters are shown as text rather than interpreted as page markup, a valid note appears once, and the form is ready for another note.'
   - 'Starter boundary: keep the solution inside `case-dashboard.html`; preserve the existing purpose and visual design; do not add packages, network calls, or unrelated features.'
