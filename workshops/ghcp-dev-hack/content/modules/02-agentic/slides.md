@@ -188,8 +188,8 @@ wrong makes everything downstream inconsistent. Some guidance is durable. It's
 true today and it'll still be true next quarter. That belongs in a file.
 Repository-wide conventions go in `.github/copilot-instructions.md`. Guidance
 that only applies to certain files goes in `.github/instructions`, in a file
-ending `.instructions.md`. Behavior for a role you use repeatedly goes in an
-agent file. Other guidance is only about today's job, so the goal, the limits,
+ending `.instructions.md`. Behavior for a role you use repeatedly goes in a
+custom agent file. Other guidance is only about today's job, so the goal, the limits,
 the checks, and when to stop. That travels with the task, not the repository.
 One caveat worth saying out loud: which files are supported depends on where
 you're running Copilot. Check what applies to your setup instead of assuming
