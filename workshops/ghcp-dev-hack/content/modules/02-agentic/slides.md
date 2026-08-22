@@ -284,7 +284,7 @@ layout: two-panel
 <!--
 Timebox: 2 minutes
 
-Talk track: A good handoff carries six things: the goal, current repository state,
+Talk track: A good handoff carries several things: the goal, current repository state,
 reviewed decisions, open questions, relevant files, and applicable checks. It
 drops stale logs, unrelated files, and old plans. In the CLI, you can use
 `/context` to check window capacity and `/compact` to summarize the conversation.
@@ -497,10 +497,9 @@ layout: two-panel
 Timebox: 3 minutes
 
 Talk track: A custom agent is a reusable profile for a role you need again and
-again. You define five things: what it's for, how it should behave, what it's
+again. You define several things: what it's for, how it should behave, what it's
 expected to produce, which tools it can use, and what should make it stop.
-Supported settings differ by environment, so check yours before you promise your
-team anything. Now the part that catches people out. If you leave the tools list
+Now the part that catches people out. If you leave the tools list
 out entirely, the agent gets every tool that's available. If you set it to an
 empty list, it gets none. So the two things that both look like “I didn't
 specify” do opposite things, and one of them hands your specialist the whole
@@ -552,13 +551,11 @@ how and when to use tools.
 <!--
 Timebox: 3 minutes
 
-Talk track: Let's finish the vocabulary. Three words, three different things. A
-tool does one concrete action, so search, read, edit, or run. A skill is the
+Talk track: A tool does one concrete action, search, read, edit, or run. A skill is the
 reviewed procedure that says how and when to use those actions. And the agent is
 the worker carrying the task. Keep those separate and delegation stays easy to
-reason about. Two cautions before we move on. Tool defaults and approval prompts
-vary depending on where you're running Copilot, so check rather than assume. And
-reading isn't automatically safe. A read can pull sensitive data into the
+reason about. Tool defaults and approval prompts vary depending on where you're running 
+Copilot, so be mindful of that. And reading isn't automatically safe. A read can pull sensitive data into the
 conversation just by looking at it. Being allowed to do something isn't proof
 it's safe to do.
 
@@ -601,9 +598,7 @@ decide what to do about it. Purrmission marks where the agent should ask instead
 of continue. Mergewell decides how to adjust, Riley does the narrowed work, and
 Mergewell checks what came back. Notice the last step holds. Verified isn't the
 same as accepted. You can confirm something is true and still decide not to take
-it. One caution on wording. Retry, ask, stop and recover are choices you make
-from evidence. They aren't fixed stages in an internal state machine. There
-isn't one.
+it.
 
 Transition: The first big control in that loop is reviewing the route before any
 edits start.
