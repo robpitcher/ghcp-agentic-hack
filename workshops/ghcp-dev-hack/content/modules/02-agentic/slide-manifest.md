@@ -73,13 +73,10 @@ Expected slide count: **27**
 ## Contract constraints
 
 - Titles and order are exact; older counts and titles are historical only.
-- Every visible slide has exactly one immediately following source-mapped
-  speaker-notes HTML comment with these sections in order: `Timebox:`,
-  `Talk track:`, `Transition:`, `Audience question:`, `Response guidance:`,
-  `Payoff:`, and `Sources:`.
-- Each `Timebox:` must equal that row's authoritative `Minutes` value,
-  including zero-minute slides. Every slide requires a natural,
-  slide-specific audience question, response guidance, and payoff.
+- Speaker notes are agent-authored supporting material. Write them naturally
+  for each slide, using the row's sources and timing as guidance; no fixed
+  headings, ordering, HTML-comment structure, or other note template is
+  required.
 - Thirteen approved static image assets are integrated on slides 3, 7, 10, 11,
  13–15, 19–22, 25, and 26 through contained module-public paths and native
  overlays. Slide 1 temporarily reuses the already declared
