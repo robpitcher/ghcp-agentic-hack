@@ -1275,16 +1275,26 @@ layout: single-panel
 <!--
 Timebox: 3 minutes
 
-Talk track: Optimizing agentic work is about the workflow. It isn't model
-shopping. Picture the two paths side by side. The noisy one drags along context
-that isn't relevant, runs broad checks after every single edit, and repeats
-attempts without any new information. That last one is the real killer, because
-trying again is not evidence. The focused one carries what's relevant, runs a
-targeted check before the broad one, and can explain what changed before each
-retry. Let me be careful about the claim, though. These habits can cut out
-unnecessary work. They don't guarantee quality, and they don't guarantee a fixed
-saving in credits. Compare what you can actually observe, and don't put the win
-down to model magic.
+Talk track: Same model, same task, two different runs — and the difference is
+the workflow, not the model. Walk the three rows. Row one, context: the noisy
+run is still carrying the last, unrelated task, and the brief is "here's the
+repo, go find it"; the focused run starts a fresh session and names the two or
+three files that actually matter. Row two, checks: the noisy run fires the full
+suite and the linter after every single edit; the focused run runs one targeted
+test now and saves the full suite for the handoff. Row three is the one to take
+home. The noisy run's third attempt is the same prompt again. Trying again is
+not evidence. If you retry without being able to name the one thing you
+changed — the context, the brief, the tools, or the model — you have learned
+nothing and you have paid for it twice. So the walk-away is a single rule: never
+retry unchanged. One honest caveat before we move on. These are habits that cut
+out unnecessary work. They do not guarantee a better answer, and they do not
+guarantee a fixed saving in credits. Compare what you can actually observe in
+your own runs, and don't put the win down to model magic.
+
+Presenter note: the on-slide callout is authoring guidance, not a line to read
+out. Do not quote a percentage saving or a success rate. Keep the comparison to
+observable behavior — irrelevant context, check scope, repeated attempts, and
+proof quality.
 
 Transition: The same right-sizing applies to the controls you set before work
 even starts.
