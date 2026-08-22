@@ -946,15 +946,12 @@ layout: single-panel
 <!--
 Timebox: 3 minutes
 
-Talk track: Let me clear up a misconception I hear a lot. A workflow runs
-because a configured repository event fired, so a push or a pull request. That's
-it. Copilot didn't run CI for you, and it doesn't do CI on its own. What you get
-back is attached to that commit: passed, failed, skipped, or a check that never
-ran at all. Watch for that last one especially. A missing check is not a passing
-check. And cloud-agent runs and product review runs have their own environments
-and rules, even though the output looks the same. Then use the result to decide
-whether to continue, revise, or stop. What you shouldn't do is turn a failure
-into a blind retry. Same input, same code, hoping. That isn't a strategy.
+Talk track: An agent telling you the work is
+done is a claim. A CI run is evidence. So the fastest way to keep an agentic
+loop honest is to let ordinary GitHub Actions grade the work: the same build,
+the same tests, the same linters your team already trusts, running the same way
+whether a human or Copilot wrote the commit. That's what makes it useful. It's
+deterministic and it's independent of the thing that produced the code.
 
 Transition: A pull request packages that evidence with the change and hands it
 to another person.
