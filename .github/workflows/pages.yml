@@ -1,18 +1,19 @@
 name: Build and deploy public workshop site
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch to build and deploy
+        required: true
+        default: main
+        type: string
 
 permissions:
   contents: read
 
 concurrency:
-  group: public-pages-${{ github.ref }}
+  group: public-pages-${{ inputs.branch }}
   cancel-in-progress: true
 
 jobs:
@@ -23,6 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ inputs.branch }}
           lfs: true
       - uses: pnpm/action-setup@v4
         with:
@@ -40,20 +42,11 @@ jobs:
           GITHUB_PAGES_BASE: /${{ github.event.repository.name }}/
           WORKSHOP_ENVIRONMENT: production
       - name: Upload Pages artifact
-        if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-      - name: Upload pull request review artifact
-        if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v4
-        with:
-          name: public-slide-review-${{ github.event.pull_request.number }}
-          path: dist
-          retention-days: 7
 
   deploy:
-    if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     permissions:
