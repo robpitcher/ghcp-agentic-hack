@@ -134,8 +134,7 @@ Talk track: Here's the one idea the whole module rests on. Agentic work hands
 off the execution. It doesn't hand off the accountability. The human writes the
 brief, sets the boundaries, and says what done looks like. Inside those
 boundaries the agent can plan, edit files, use the tools it's allowed to use,
-and bring back evidence. Then the human decides whether to accept it. One thing
-worth clearing up early, because it saves confusion all day: Mergewell is a
+and bring back evidence. Then the human decides whether to accept it. As a reminder: Mergewell is a
 human. He's a field agent, an investigator. He isn't the software agent. He
 directs them.
 
@@ -183,17 +182,14 @@ layout: two-panel
 <!--
 Timebox: 2 minutes
 
-Talk track: There's a sorting problem underneath all of this, and getting it
-wrong makes everything downstream inconsistent. Some guidance is durable. It's
-true today and it'll still be true next quarter. That belongs in a file.
-Repository-wide conventions go in `.github/copilot-instructions.md`. Guidance
-that only applies to certain files goes in `.github/instructions`, in a file
-ending `.instructions.md`. Behavior for a role you use repeatedly goes in a
-custom agent file. Other guidance is only about today's job, so the goal, the limits,
-the checks, and when to stop. That travels with the task, not the repository.
-One caveat worth saying out loud: which files are supported depends on where
-you're running Copilot. Check what applies to your setup instead of assuming
-it's the same everywhere.
+Talk track: Getting instructions sorted correctly makes everything downstream
+consistent. Durable guidance—what's true today and next quarter—belongs in files.
+Repository-wide conventions go in `.github/copilot-instructions.md`, path-specific
+rules go in `.github/instructions/*.instructions.md`, and recurring roles go in
+custom agent files. However, guidance about today's specific job (goals, limits,
+checks, stop points) travels with the task itself. Keep in mind that supported
+instruction files vary by Copilot surface (IDE vs CLI vs web), so always check
+your setup.
 
 Transition: Durable files give you continuity. Copilot Memory can help too, but
 it's selective.
@@ -288,14 +284,12 @@ layout: two-panel
 <!--
 Timebox: 2 minutes
 
-Talk track: A good handoff carries six things. The goal. The current state of
-the repository. The decisions you've already reviewed. The questions still open.
-The files that matter. And the checks that apply. It leaves behind stale logs,
-unrelated files, and plans you've already replaced. In the CLI you get some help
-here. `/context` shows how full the context window is, and `/compact` summarizes
-the conversation to free up room. Both are CLI-specific. And neither one gets
-you out of restating the important facts. A compacted session is a summary, not
-a complete record.
+Talk track: A good handoff carries six things: the goal, current repository state,
+reviewed decisions, open questions, relevant files, and applicable checks. It
+drops stale logs, unrelated files, and old plans. In the CLI, you can use
+`/context` to check window capacity and `/compact` to summarize the conversation.
+But remember, compacting creates a summary, not a complete record—you still need
+to clearly restate the most important facts for a complex handoff.
 
 Transition: Missing guidance is one problem. Guidance that contradicts itself is
 a different one.
@@ -335,22 +329,18 @@ layout: single-panel
 <!--
 Timebox: 4 minutes
 
-Talk track: Several instruction sources can apply to the same task, so the
-obvious question is which one wins. There is a partial answer. For Copilot on
-GitHub.com, GitHub documents an order of precedence: personal instructions
-first, then repository instructions, and inside those it's path-specific, then
-repository-wide, then agent files like `AGENTS.md`, with organization
-instructions last. All of them still get sent to Copilot. The order sets
-priority, it doesn't exclude anything. There's a second documented rule too:
-when several `AGENTS.md` files exist, the nearest one in the folder tree wins.
-What GitHub does not document is one order that holds across the IDEs, the CLI,
-code review, and the cloud agent. So don't teach a universal hierarchy. GitHub's
-own advice is to avoid writing conflicting instructions in the first place. One
-rule, one home. When you do hit a conflict, find out what actually loaded. Ask
-the agent to list the instruction files it read and quote the lines it's
-applying. Then fix the source rather than re-arguing it on every task. And keep
-the documented caveat in mind: these models aren't deterministic, so Copilot may
-not follow the same instruction the same way every time.
+Talk track: When several instruction sources apply to the same task, the
+obvious question is: which one wins? Rather than memorizing a complex hierarchy,
+the best practice is simple: avoid writing conflicting instructions in the first
+place. Strive for "one rule, one home." Because Copilot surfaces (IDE, CLI,
+GitHub.com) might weigh instructions slightly differently, there isn't one
+universal "winner." All applicable instructions get sent to the model.
+
+When you do hit a conflict, find out what actually loaded. Ask the agent to
+list the instruction files it read and quote the lines it's applying. Then fix
+the source rather than re-arguing it on every task. And keep the documented
+caveat in mind: these models aren't deterministic, so Copilot may not follow
+the same instruction the same way every time.
 
 Transition: Once the guidance is consistent, the task itself still needs a
 strong brief.
@@ -399,16 +389,12 @@ layout: two-panel
 <!--
 Timebox: 3 minutes
 
-Talk track: A strong agentic request isn't a well-worded prompt. It's a work
-order, and the difference shows once a task runs twenty steps instead of one.
-Say what the outcome is in terms you can observe. Give the context that matters.
-Say what may change and what must not. Say what evidence has to come back, so
-the diff, the checks, and the open questions. And say what should make the agent
-stop and ask rather than press on. Those last three, the non-goals, the
-evidence, and the stop points, are our workshop's framing rather than a
-documented product feature. We added them because multi-step work is otherwise
-impossible to review. Most people write what success looks like and skip when to
-stop trying.
+Talk track: A strong agentic request is a work order, not just a prompt. This is
+crucial for multi-step tasks. Define observable outcomes, necessary context, and
+what must NOT change. Specify the required evidence (diffs, checks) and exactly
+when the agent should stop and ask for human input. Most people write what
+success looks like but forget to define boundaries and stop conditions, making
+long-running work nearly impossible to review.
 
 Transition: When part of that work repeats, the question becomes whether it
 belongs in a reusable skill.
@@ -671,17 +657,13 @@ layout: two-panel
 <!--
 Timebox: 3 minutes
 
-Talk track: Planning starts with looking. The agent should inspect the relevant
-parts of the repository and propose a route before it changes anything. A useful
-plan names five things: the behavior it's targeting, the files it expects to
-touch, the checks it'll run, the risks it can see, and the points where it
-should stop. That gives you something concrete to review. Notice what it doesn't
-give you, which is access to the model's reasoning. You're reviewing the
-proposal, not the thinking behind it. And this is the bit I most want you to
-take from this slide. Approval isn't “that plan sounded confident.” Confidence
-is a writing style. Approval is you deciding this route stays inside the brief
-and can produce the evidence you asked for. Those are completely different
-tests.
+Talk track: Planning starts with looking. The agent must inspect the repository
+and propose a route before making edits. A useful plan includes five elements:
+target behavior, expected file changes, planned checks, visible risks, and stop
+points. This gives you concrete details to review. Remember: you are reviewing
+the *proposed actions*, not the model's internal reasoning. "Confident-sounding"
+text doesn't mean the plan is correct. Only approve a plan if the actions align
+with your brief and will produce the required evidence.
 
 Transition: Even an approved plan needs boundaries set in advance for actions
 that turn consequential.
@@ -1025,16 +1007,13 @@ layout: two-panel
 <!--
 Timebox: 3 minutes
 
-Talk track: This might be the biggest shift in the whole module. A pull request
-is a handoff, not a finish line. You're not completing something, you're passing
-it to another person, and it has to arrive in a state they can act on. So the
-package explains what you intended, what changed, which checks ran, what passed
-and what failed, what's still uncertain, and what review you're asking for.
-Commits, logs, diffs, test output, and discussion all strengthen it. But be
-clear about what opening it does. Opening a pull request starts an evaluation. A
-Copilot code review also starts an evaluation, and it always leaves a Comment
-review, never an approval, so it doesn't count toward required approvals and it
-doesn't block a merge. Nothing here accepts the change for you.
+Talk track: This is a major shift: a pull request is a handoff, not a finish
+line. You're passing work to another person, so it must be actionable. A strong
+PR explains the intent, the actual changes, test results, open uncertainties, and
+the specific review needed. Opening a PR starts an evaluation; it does not
+constitute acceptance. Even a Copilot code review only leaves comments—it never
+grants a formal approval and doesn't block merges. The final decision always
+remains human.
 
 Transition: If the pull request is the handoff, the next question is when a
 cloud agent should produce it.
@@ -1143,17 +1122,13 @@ layout: two-panel
 <!--
 Timebox: 3 minutes
 
-Talk track: A cloud handoff is a complete assignment, not a short instruction
-sent somewhere further away. And it has to be complete because you won't be
-there. Nobody's going to tap you on the shoulder halfway through and ask what
-you meant. So repeat all of it. The outcome. The current state of the
-repository. The references it needs. The scope and what's out of scope. The
-checks. The permissions. The stop conditions. And the evidence you expect back.
-Two specifics worth calling out. Secrets and variables have to be configured for
-the agent's environment, because your ordinary Actions secrets aren't
-automatically available and people assume they are. And this is exactly where
-Purrmission's marker belongs: more autonomy means tighter limits, not looser
-ones.
+Talk track: A cloud agent handoff is a complete asynchronous assignment. You
+won't be there to answer questions, so the brief must be comprehensive. Include
+the goal, repository state, scope (and non-goals), checks, permissions, stop
+conditions, and expected evidence. Note that secrets and variables must be
+explicitly configured for the agent's environment—your standard Actions secrets
+aren't automatically available. Remember: giving an agent more autonomy requires
+*tighter* limits and clearer boundaries, not looser ones.
 
 Transition: Once work can run away from your desk, GitHub Mobile gives you a way
 to keep an eye on it.
@@ -1359,20 +1334,14 @@ layout: single-panel
 <!--
 Timebox: 3 minutes
 
-Talk track: Cost-conscious doesn't mean cheap. It means deliberate. The failure
-mode to avoid is spending less and getting a result you can't use, because that
-isn't a saving. You'll pay for it twice. So, practically. Start with the regular
-context and reasoning settings and only turn them up when the task genuinely
-needs it. Use Auto where it's supported; on paid plans it currently gives a 10%
-discount on model costs, though what it routes to still depends on policy, the
-available models, and the task. Start a fresh session for unrelated work instead
-of dragging history along. And for a bounded CLI run you can set a soft ceiling
-with `/limits set max-ai-credits`. Two honest caveats. A discount isn't a
-promise of the cheapest successful result, and successful is the word doing the
-work in that sentence. And the limit is soft, so a response already in progress
-finishes and a run can end slightly over. Plan for that rather than being
-surprised. Then check two things before continuing: was the result good, and
-what does the usage show?
+Talk track: Being cost-conscious means being deliberate. Spending less but
+getting an unusable result isn't a saving—you'll end up paying twice. Start with
+standard context and reasoning settings; only increase them when necessary. Start
+a fresh session for new tasks instead of dragging irrelevant history along. For
+CLI runs, you can set a soft limit with `/limits set max-ai-credits` (note that
+in-progress responses will finish, so it may go slightly over). After a run,
+always evaluate two things: was the result high-quality, and what was the actual
+credit usage?
 
 Transition: The final decision combines that cost awareness with several
 separate quality signals.
