@@ -191,7 +191,12 @@ function parseSpeakerNotes(source: string): ParsedSpeakerNotes {
     const match = /^([^:]+):(.*)$/.exec(trimmed);
     if (!match) continue;
 
-    const name = (match[1] ?? "").trim();
+    const label = (match[1] ?? "").trim();
+    // A label may carry a bracketed qualifier, e.g. "Audience question [ask]:".
+    // The qualifier is presenter guidance; the section name is what is validated.
+    // Colons are excluded so the value below still starts at the label's colon.
+    const qualified = /^(.*?)\s*\[[^\]:]*\]$/.exec(label);
+    const name = qualified ? (qualified[1] ?? "").trim() : label;
     const isRequiredHeading = speakerNoteSections.some(
       (section) => section.toLowerCase() === name.toLowerCase()
     );

@@ -60,11 +60,16 @@
   3 diff/check review + 2 debrief/restore = 20` minutes. The producer must
   script the human checkpoints and fallback without changing visible slide
   text or expanding product claims.
-- Speaker notes are agent-authored supporting material. Write them naturally
-  for each slide, using the row's sources and timing as guidance; no fixed
-  headings, ordering, HTML-comment structure, or other note template is
-  required. Each visible slide still carries exactly one speaker-notes HTML
-  comment immediately after it, mapped to that row's sources.
+- Speaker notes are agent-authored supporting material. Write them naturally for
+  each slide, using the row's sources and timing as guidance; wording, length,
+  and voice are free.
+- Note structure is machine-validated by `pnpm validate`, so it is not optional.
+  Each visible slide carries exactly one speaker-notes HTML comment directly
+  after its content, holding these sections in this order with none left blank:
+  `Timebox:`, `Talk track:`, `Transition:`, `Audience question:`,
+  `Response guidance:`, `Payoff:`, `Sources:`. A section label may carry a
+  bracketed qualifier, for example `Audience question [ask]:`, and extra
+  supporting lines are allowed between sections.
 - The `Minutes` column and the timing arithmetic above remain authoritative for
-  the schedule, whether or not a note states a timebox.
+  the schedule, and each `Timebox:` must equal its row's minutes.
 - All labels, commands, numbers, rates, model names, caveats, and decisions remain native HTML.

@@ -514,6 +514,61 @@ ${notes}
     await expect(loadCatalog(root)).rejects.toThrow(expectedIssue);
   });
 
+  it("accepts a bracketed qualifier on a required section label", async () => {
+    const notes = validSpeakerNotes(3).replace(
+      "Audience question:",
+      "Audience question [ask]:"
+    );
+    const { root } = await createGeneratedModuleFixture({
+      slides: `---
+theme: ghcp
+---
+
+# Introduction
+
+${notes}
+`,
+      manifest: `| # | Minutes | Source | Topic | Type | Exact source title | Visual |
+|---:|---:|---|---|---|---|---|
+| 1 | 3 | H1 | Intro | Cover | Introduction | Native |
+`
+    });
+
+    await expect(loadCatalog(root)).resolves.toMatchObject({
+      workshops: [{ modules: [{ data: { id: "intro" } }] }]
+    });
+  });
+
+  it.each([
+    ["a qualified section that is blank", "Audience question [if time]:", "must not be blank"],
+    [
+      "a qualified section whose name is miscased",
+      "Audience Question [ask]: What would you apply from this slide?",
+      'unexpected or malformed section heading "Audience Question:"'
+    ]
+  ])("rejects %s", async (_label, replacement, expectedIssue) => {
+    const notes = validSpeakerNotes(3).replace(
+      "Audience question: What would you apply from this slide?",
+      replacement
+    );
+    const { root } = await createGeneratedModuleFixture({
+      slides: `---
+theme: ghcp
+---
+
+# Introduction
+
+${notes}
+`,
+      manifest: `| # | Minutes | Source | Topic | Type | Exact source title | Visual |
+|---:|---:|---|---|---|---|---|
+| 1 | 3 | H1 | Intro | Cover | Introduction | Native |
+`
+    });
+
+    await expect(loadCatalog(root)).rejects.toThrow(expectedIssue);
+  });
+
   it("accepts colon-leading narration that is not a required section", async () => {
     const notes = validSpeakerNotes(3).replace(
       "Talk track: Introduce the topic in a natural speaking voice.",
