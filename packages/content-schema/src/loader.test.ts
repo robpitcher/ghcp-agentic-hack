@@ -359,7 +359,7 @@ ${validSpeakerNotes(2)}
 | 2 | 3 | Slide topic | Content | Teach the project with \`/init\` | Preserve the command |
 `
     ]
-  ])("accepts seven-section notes with %s", async (_label, manifest) => {
+  ])("accepts manifest tables using %s", async (_label, manifest) => {
     const { root } = await createGeneratedModuleFixture({
       expectedSlides: 2,
       slides: `---
@@ -436,66 +436,34 @@ ${validSpeakerNotes(3)}
   });
 
   it.each([
-    ["a missing notes comment", "", "must have exactly one speaker-notes comment"],
+    ["a missing notes comment", ""],
     [
       "duplicate notes comments",
       `${validSpeakerNotes(3)}
-${validSpeakerNotes(3)}`,
-      "must have exactly one speaker-notes comment"
+${validSpeakerNotes(3)}`
     ],
     [
       "notes before remaining slide content",
       `${validSpeakerNotes(3)}
-<p>Content after the notes.</p>`,
-      "speaker-notes comment must appear directly after the slide content"
+<p>Content after the notes.</p>`
     ],
     [
-      "an unterminated style tag after the notes",
-      `${validSpeakerNotes(3)}
-<style scoped>`,
-      "speaker-notes comment must appear directly after the slide content"
+      "notes missing the historical sections",
+      `<!--
+Just a few thoughts I want to remember while presenting this one.
+-->`
     ],
     [
-      "interleaved style markup left over after removing a style block",
-      `${validSpeakerNotes(3)}
-<sty<style scoped>.a { color: red; }</style>le>`,
-      "speaker-notes comment must appear directly after the slide content"
-    ],
-    [
-      "a missing required section",
-      validSpeakerNotes(3).replace(/^Sources:.*\r?\n?/m, ""),
-      'speaker notes are missing "Sources:"'
-    ],
-    [
-      "a duplicate required section",
-      validSpeakerNotes(3).replace(/^Payoff:.*$/m, (line) => `${line}\nPayoff: Duplicate payoff.`),
-      'speaker notes contain duplicate "Payoff:" sections'
-    ],
-    [
-      "reordered required sections",
-      validSpeakerNotes(3)
-        .replace(
-          /^Transition: (.*)\r?\nAudience question: (.*)$/m,
-          "Audience question: $2\nTransition: $1"
-        ),
-      "speaker-note sections must appear in order"
-    ],
-    [
-      "a malformed required heading",
-      validSpeakerNotes(3).replace("Audience question:", "Audience Question:"),
-      'unexpected or malformed section heading "Audience Question:"'
-    ],
-    [
-      "a malformed timebox",
-      validSpeakerNotes(3).replace("Timebox: 3 minutes", "Timebox: three minutes"),
-      'Timebox must be "Timebox: 3 minutes"'
-    ],
-    [
-      "a mismatched numeric timebox",
-      validSpeakerNotes(3).replace("Timebox: 3 minutes", "Timebox: 4 minutes"),
-      'Timebox must be "Timebox: 3 minutes"'
+      "notes with freely ordered, repeated, and blank labels",
+      `<!--
+Sources: whatever I felt like citing
+Payoff:
+Talk track: something
+Talk track: something else
+Timebox: about ten-ish minutes
+-->`
     ]
-  ])("rejects %s", async (_label, notes, expectedIssue) => {
+  ])("accepts free-form speaker notes with %s", async (_label, notes) => {
     const { root } = await createGeneratedModuleFixture({
       slides: `---
 theme: ghcp
@@ -511,10 +479,12 @@ ${notes}
 `
     });
 
-    await expect(loadCatalog(root)).rejects.toThrow(expectedIssue);
+    await expect(loadCatalog(root)).resolves.toMatchObject({
+      workshops: [{ modules: [{ data: { id: "intro" } }] }]
+    });
   });
 
-  it("accepts a bracketed qualifier on a required section label", async () => {
+  it("accepts a bracketed qualifier on a section label", async () => {
     const notes = validSpeakerNotes(3).replace(
       "Audience question:",
       "Audience question [ask]:"
@@ -540,13 +510,12 @@ ${notes}
   });
 
   it.each([
-    ["a qualified section that is blank", "Audience question [if time]:", "must not be blank"],
+    ["a qualified section that is blank", "Audience question [if time]:"],
     [
       "a qualified section whose name is miscased",
-      "Audience Question [ask]: What would you apply from this slide?",
-      'unexpected or malformed section heading "Audience Question:"'
+      "Audience Question [ask]: What would you apply from this slide?"
     ]
-  ])("rejects %s", async (_label, replacement, expectedIssue) => {
+  ])("accepts %s", async (_label, replacement) => {
     const notes = validSpeakerNotes(3).replace(
       "Audience question: What would you apply from this slide?",
       replacement
@@ -566,10 +535,12 @@ ${notes}
 `
     });
 
-    await expect(loadCatalog(root)).rejects.toThrow(expectedIssue);
+    await expect(loadCatalog(root)).resolves.toMatchObject({
+      workshops: [{ modules: [{ data: { id: "intro" } }] }]
+    });
   });
 
-  it("accepts colon-leading narration that is not a required section", async () => {
+  it("accepts colon-leading narration that is not a historical section", async () => {
     const notes = validSpeakerNotes(3).replace(
       "Talk track: Introduce the topic in a natural speaking voice.",
       "Talk track: Introduce the topic in a natural speaking voice.\nExample: Walk through one concrete case.\nPresenter cue 1: Pause before the result."
@@ -602,7 +573,7 @@ ${notes}
     "Response guidance",
     "Payoff",
     "Sources"
-  ])("rejects a blank %s section", async (section) => {
+  ])("accepts a blank %s section", async (section) => {
     const notes = validSpeakerNotes(3).replace(
       new RegExp(`^${section.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}:.*$`, "m"),
       `${section}:`
@@ -622,7 +593,9 @@ ${notes}
 `
     });
 
-    await expect(loadCatalog(root)).rejects.toThrow(`speaker-note section "${section}:" must not be blank`);
+    await expect(loadCatalog(root)).resolves.toMatchObject({
+      workshops: [{ modules: [{ data: { id: "intro" } }] }]
+    });
   });
 
   it("rejects a generated manifest without numeric Minutes values", async () => {

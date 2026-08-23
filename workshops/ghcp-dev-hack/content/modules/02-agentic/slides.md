@@ -797,8 +797,8 @@ which checks nobody ran. Then compare all of it against the acceptance criteria
 in your original brief. Each of those answers a different question, and drift
 usually only becomes visible when you line the answers up next to each other.
 
-Transition: Your repository gives you named places to pause, review, and
-recover while you gather that evidence.
+Transition: Around the push boundary, the evidence you gather picks up several
+more security checkpoints.
 
 Audience question [ask]: What does one passing focused test prove, and what
 does it leave unproven?
@@ -816,6 +816,7 @@ AGT-28; content/modules/02-agentic/visual-intent.md slide 15
 
 ---
 layout: single-panel
+hide: true
 ---
 
 ::title::
@@ -1083,8 +1084,8 @@ don't run on its pull request until someone with write access clicks Approve
 and run workflows. Same accountability we started the module with. Just further
 from your desk.
 
-Transition: Background work only succeeds when the handoff carries enough
-context, limits, checks, and stops.
+Transition: Background work only succeeds when the repository already carries
+the durable facts Copilot needs, so let's teach it those next.
 
 Audience question [if time]: What is one backlog task you would delegate to a
 cloud agent, and one task you would keep behind closer human oversight?
@@ -1102,6 +1103,7 @@ AGT-20; content/modules/02-agentic/visual-intent.md slide 20
 
 ---
 layout: two-panel
+hide: true
 ---
 
 ::title::
@@ -1159,6 +1161,7 @@ AGT-21; content/modules/02-agentic/visual-intent.md slide 21
 
 ---
 layout: single-panel
+hide: true
 ---
 
 ::title::
@@ -1252,8 +1255,8 @@ there's nothing to look at, so you get nothing worth keeping. Treat the output
 like generated code. Read it, correct it, then decide whether to commit it. The
 command writes the file. Committing your team's guidance is still your call.
 
-Transition: With repository context written down, optimization becomes a
-workflow question.
+Transition: With repository context written down, the next question is the
+controls you set before work even starts.
 
 Audience question [if time]: How much of your team’s coding and validation
 guidance is documented, and how much still lives in someone’s head?
@@ -1270,6 +1273,7 @@ content/modules/02-agentic/visual-intent.md slide 23
 
 ---
 layout: single-panel
+hide: true
 ---
 
 ::title::

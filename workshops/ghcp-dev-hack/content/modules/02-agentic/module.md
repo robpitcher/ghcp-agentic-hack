@@ -48,7 +48,7 @@ sourceDocuments:
   - content/missions/agentic/agent-task.md
 slides: content/modules/02-agentic/slides.md
 generation:
-  expectedSlides: 27
+  expectedSlides: 23
   manifest: content/modules/02-agentic/slide-manifest.md
   imageProvider: gpt-image-2
   visualStyle: >-
@@ -82,26 +82,31 @@ status: draft
 
 # Agentic Development
 
-## Current 27-slide generation contract
+## Current 23-slide generation contract
 
 `content/modules/02-agentic/visual-intent.md` is the current slide authority.
-The generated deck contains exactly 27 slides in its numbered order: two new
-one-minute opening slides, the preserved one-minute operating-split cover,
-23 additional instructional slides, and one separate 45-minute mission
-briefing. The exact 27-slide count, title, and order remain the human-approved
-`agentic-opening-slides-2026-08-13` revision; the opening allocations are the
-approved timing correction for
-`ghcp-dev-hack-speaker-notes-talk-track-2026-08-17`. Unrelated earlier 27-,
-28-, or 29-slide versions remain historical production context only.
+The presented deck contains exactly 23 visible slides in their numbered order:
+two one-minute opening slides, the preserved one-minute operating-split cover,
+19 additional instructional slides, and one separate 45-minute mission
+briefing. Four previously numbered slides — `Repository State as a Checkpoint`,
+`Cloud-Agent Handoffs`, `Manage Cloud Agents from GitHub Mobile`, and
+`Agentic Optimization` — remain authored in `slides.md` with `hide: true` and
+are excluded from the presented deck and from
+`content/modules/02-agentic/slide-manifest.md`. Unrelated earlier 27-, 28-, or
+29-slide versions remain historical production context only.
 
-Slides 1–26 provide 75 minutes of instruction. Slides 1–3 receive one minute
-each; adjacent slides 4–6 receive two minutes each. Slides 7, 12, 14, 17, 22,
-and 26 receive four minutes each because they carry a layered conflict, loop,
-consequential approval, security lifecycle, Mobile lifecycle, or final
-acceptance decision. The remaining 14 instructional slides receive three
-minutes each:
-`(3 × 1) + (3 × 2) + (6 × 4) + (14 × 3) = 75`. Slide 27 is the separate
-45-minute mission, so `75 + 45 = 120`.
+Slides 1–22 provide 62 minutes of instruction. Slides 1–3 receive one minute
+each; adjacent slides 4–6 receive two minutes each. Slides 7, 12, 14, 16, and
+22 receive four minutes each because they carry a layered conflict, loop,
+consequential approval, security lifecycle, or final acceptance decision. The
+remaining 11 instructional slides receive three minutes each:
+`(3 × 1) + (3 × 2) + (5 × 4) + (11 × 3) = 62`. Slide 23 is the separate
+45-minute mission, so the presented total is `62 + 45 = 107`. The module and
+workshop schedules still reserve 120 minutes; the 13 minutes released by the
+hidden slides stay as facilitator buffer for discussion, questions, and setup.
+
+Speaker notes are free-form presenter material. `pnpm validate` checks slide
+count, titles, order, and manifest minutes, not note structure or wording.
 
 ## Teaching and role boundaries
 
@@ -138,7 +143,7 @@ commands, labels, diagrams, and evidence remain native Slidev content.
 
 ## Mission boundary
 
-Slide 27 points to the separate `Your Mission: Hand Off Work with Confidence`
+Slide 23 points to the separate `Your Mission: Hand Off Work with Confidence`
 mission and
 does not duplicate its instructions. The mission now consumes the exported
 Foundations case file or the facilitator starter for legitimate catch-up,
@@ -150,9 +155,11 @@ totals for Advanced through `content/missions/agentic/agent-task.md`.
 
 ## Production boundary
 
-The 13 approved static images declared above remain promoted, portable, and
-integrated on shifted slides 3, 7, 10, 11, 13-15, 19-22, 25, and 26 through
-contained module-public paths with native labels and evidence. Slide 1
+The 13 approved static images declared above remain promoted and portable.
+Eleven are integrated on visible slides 3, 7, 10, 11, 13-15, 18, 19, 21, and 22
+through contained module-public paths with native labels and evidence;
+`cloud-agent-bounded-brief.png` and `mobile-cloud-agent-oversight.png` now sit
+on hidden slides and are not presented. Slide 1
 temporarily reuses the already declared
 `approval-boundary-human-decision.png` contained and unmodified; it is a
 governed fallback and does not imply approval, promotion, or availability of

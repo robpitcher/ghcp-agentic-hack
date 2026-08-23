@@ -102,36 +102,12 @@ function agendaMinutes(start: string, end: string): number {
   return toMinutes(end) - toMinutes(start);
 }
 
-function contentOutsideStyleBlocks(source: string): string {
-  const stylePattern = /<style(?:\s[^>]*)?>[\s\S]*?<\/style>/gi;
-  let cursor = 0;
-  let outside = "";
-  for (const match of source.matchAll(stylePattern)) {
-    const start = match.index ?? 0;
-    outside += source.slice(cursor, start);
-    cursor = start + match[0].length;
-  }
-  return outside + source.slice(cursor);
-}
-
 interface ManifestSlideContract {
   number: number;
   title: string;
   minutes?: number;
   rawMinutes?: string;
 }
-
-const speakerNoteSections = [
-  "Timebox",
-  "Talk track",
-  "Transition",
-  "Audience question",
-  "Response guidance",
-  "Payoff",
-  "Sources"
-] as const;
-
-type SpeakerNoteSection = (typeof speakerNoteSections)[number];
 
 function manifestSlideContracts(source: string): ManifestSlideContract[] {
   const rows = source
@@ -175,59 +151,6 @@ function visibleSlideSources(source: string, filePath: string): string[] {
   return parseSync(source, filePath).slides
     .filter((slide) => !slide.frontmatter.hide && !slide.frontmatter.disabled)
     .map((slide) => slide.raw);
-}
-
-interface ParsedSpeakerNotes {
-  headings: Array<{ name: string; line: string; lineIndex: number }>;
-  values: Partial<Record<SpeakerNoteSection, string>>;
-}
-
-function parseSpeakerNotes(source: string): ParsedSpeakerNotes {
-  const lines = source.replace(/\r\n/g, "\n").split("\n");
-  const headings: ParsedSpeakerNotes["headings"] = [];
-
-  for (const [lineIndex, line] of lines.entries()) {
-    const trimmed = line.trim();
-    const match = /^([^:]+):(.*)$/.exec(trimmed);
-    if (!match) continue;
-
-    const label = (match[1] ?? "").trim();
-    // A label may carry a bracketed qualifier, e.g. "Audience question [ask]:".
-    // The qualifier is presenter guidance; the section name is what is validated.
-    // Colons are excluded so the value below still starts at the label's colon.
-    const qualified = /^(.*?)\s*\[[^\]:]*\]$/.exec(label);
-    const name = qualified ? (qualified[1] ?? "").trim() : label;
-    const isRequiredHeading = speakerNoteSections.some(
-      (section) => section.toLowerCase() === name.toLowerCase()
-    );
-    if (!isRequiredHeading) continue;
-
-    headings.push({
-      name,
-      line: trimmed,
-      lineIndex
-    });
-  }
-
-  const values: ParsedSpeakerNotes["values"] = {};
-  for (const [headingIndex, heading] of headings.entries()) {
-    if (!speakerNoteSections.includes(heading.name as SpeakerNoteSection)) continue;
-    const separatorIndex = lines[heading.lineIndex]?.indexOf(":") ?? -1;
-    const firstLine = separatorIndex >= 0 ? lines[heading.lineIndex]?.slice(separatorIndex + 1) ?? "" : "";
-    const nextHeadingLine = headings[headingIndex + 1]?.lineIndex ?? lines.length;
-    values[heading.name as SpeakerNoteSection] = [
-      firstLine,
-      ...lines.slice(heading.lineIndex + 1, nextHeadingLine)
-    ]
-      .join("\n")
-      .trim();
-  }
-
-  return { headings, values };
-}
-
-function canonicalMinutes(minutes: number): string {
-  return `${minutes} ${minutes === 1 ? "minute" : "minutes"}`;
 }
 
 async function validateGeneratedModule(
@@ -278,76 +201,8 @@ async function validateGeneratedModule(
     }
   }
 
-  for (let index = 0; index < visibleSlides.length; index += 1) {
-    const comments = Array.from((visibleSlides[index] ?? "").matchAll(/<!--([\s\S]*?)-->/g));
-    if (comments.length !== 1) {
-      issues.push(`${module.filePath}: slide ${index + 1} must have exactly one speaker-notes comment`);
-      continue;
-    }
-
-    const trailingSource = contentOutsideStyleBlocks(
-      (visibleSlides[index] ?? "").slice((comments[0]?.index ?? 0) + (comments[0]?.[0].length ?? 0))
-    ).trim();
-    if (trailingSource.length > 0) {
-      issues.push(
-        `${module.filePath}: slide ${index + 1} speaker-notes comment must appear directly after the slide content`
-      );
-    }
-
-    const parsedNotes = parseSpeakerNotes(comments[0]?.[1] ?? "");
-    const exactHeadings = parsedNotes.headings.filter((heading) =>
-      speakerNoteSections.includes(heading.name as SpeakerNoteSection)
-    );
-
-    for (const heading of parsedNotes.headings) {
-      if (!speakerNoteSections.includes(heading.name as SpeakerNoteSection)) {
-        issues.push(
-          `${module.filePath}: slide ${index + 1} speaker notes contain unexpected or malformed section heading "${heading.name}:"`
-        );
-      }
-    }
-
-    let hasExactSectionSet = true;
-    for (const section of speakerNoteSections) {
-      const count = exactHeadings.filter((heading) => heading.name === section).length;
-      if (count === 0) {
-        hasExactSectionSet = false;
-        issues.push(`${module.filePath}: slide ${index + 1} speaker notes are missing "${section}:"`);
-      } else if (count > 1) {
-        hasExactSectionSet = false;
-        issues.push(`${module.filePath}: slide ${index + 1} speaker notes contain duplicate "${section}:" sections`);
-      }
-    }
-
-    if (
-      hasExactSectionSet &&
-      exactHeadings.map(({ name }) => name).join("|") !== speakerNoteSections.join("|")
-    ) {
-      issues.push(
-        `${module.filePath}: slide ${index + 1} speaker-note sections must appear in order: ${speakerNoteSections.map((section) => `${section}:`).join(", ")}`
-      );
-    }
-
-    for (const section of speakerNoteSections) {
-      if ((parsedNotes.values[section] ?? "").trim().length === 0) {
-        issues.push(`${module.filePath}: slide ${index + 1} speaker-note section "${section}:" must not be blank`);
-      }
-    }
-
-    const manifestMinutes = manifestSlides[index]?.minutes;
-    if (manifestMinutes !== undefined) {
-      const expectedTimebox = `Timebox: ${canonicalMinutes(manifestMinutes)}`;
-      const timeboxHeading = exactHeadings.find(({ name }) => name === "Timebox");
-      if (
-        timeboxHeading?.line !== expectedTimebox ||
-        parsedNotes.values.Timebox !== canonicalMinutes(manifestMinutes)
-      ) {
-        issues.push(
-          `${module.filePath}: slide ${index + 1} Timebox must be "${expectedTimebox}" to match manifest Minutes`
-        );
-      }
-    }
-  }
+  // Speaker notes are free-form presenter material. Titles, order, slide count,
+  // and manifest minutes stay contractual; note wording and structure do not.
 }
 
 async function loadMany<S extends ZodTypeAny>(
