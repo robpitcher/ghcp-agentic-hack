@@ -34,15 +34,20 @@ radius. That split holds no matter how much we hand over.
 
 Transition: Let's look at how the session is laid out.
 
-Audience question: Which one Foundations artifact must the software collaborator
-inherit before work starts?
+Facilitator note: Questions marked [ask] are the seven worth protecting time
+for. Everything marked [if time] is optional, so drop it without apology
+when you are behind. The talk tracks run about a third of each timebox and
+the rest is discussion, so the schedule only holds if you actually skip.
 
-Response guidance: Take one artifact and tie it back to the carried-forward
-case. Don't open an implementation discussion here. If nobody answers, use the
-bounded task as your example and keep moving.
+Audience question [if time]: Which one Foundations artifact must the
+software collaborator inherit before work starts?
 
-Payoff: The module opens with continuity from Foundations and one concrete input
-to human-directed work.
+Response guidance: In the opening minute ask this rhetorically rather than
+waiting for hands, because the room is not warm yet. Name the bounded task
+yourself as the example and keep moving.
+
+Payoff: Opens with continuity from Foundations and one concrete input to the
+work ahead.
 
 Sources: content/modules/02-agentic/module.md;
 content/modules/02-agentic/visual-intent.md slides 1 and 3;
@@ -78,23 +83,24 @@ class: agentic-agenda-slide
 <!--
 Timebox: 1 minute
 
-Talk track: For this session we'll spend about an hour to an hour and a half on
-agentic development: who does what, preparing a task worth delegating, actually
-handing that task off, and staying in charge of the result, because as the human
-we're ultimately responsible for the output. After the content there's a mission
+Talk track: For this session we'll spend seventy-five minutes on agentic development:
+who does what, preparing a task worth delegating, choosing and trusting the
+helper you hand it to, and staying in charge of the result, because as the
+human we're ultimately responsible for the output. After the content there's a mission
 where you put this into practice, building on the case from the Foundations
 module.
 
 Transition: We start by making the split between human work and agent work
 explicit.
 
-Audience question: Which route checkpoint deserves your closest attention today?
+Audience question [ask]: Which route checkpoint deserves your closest
+attention today?
 
 Response guidance: Let people pick privately rather than polling the room. Ask
 them to check their pick against the evidence they see later in the module.
 
-Payoff: Learners enter the route with a personal diagnostic focus while the
-protected mission timing remains clear.
+Payoff: Everyone picks something to watch for, and the mission timing is
+already clear.
 
 Sources: content/modules/02-agentic/module.md timing;
 content/modules/02-agentic/copilot-dev-agentic-workshop.md “Instruction
@@ -141,15 +147,15 @@ directs them.
 Transition: The first real control is putting your durable guidance somewhere
 the agent will find it.
 
-Audience question: When delegated work returns with evidence, who owns the
-acceptance decision?
+Audience question [ask]: When delegated work returns with evidence, who owns
+the acceptance decision?
 
 Response guidance: Reinforce “the human” straight away. If a different answer
 comes back, draw the line between producing evidence and holding the decision,
 then move on. This isn't the slide to debate it.
 
-Payoff: The audience states the accountability boundary before any configuration
-detail appears.
+Payoff: The room says who owns acceptance before any configuration detail
+appears.
 
 Sources: content/modules/02-agentic/module.md;
 content/modules/02-agentic/visual-intent.md slide 3;
@@ -194,14 +200,14 @@ your setup.
 Transition: Durable files give you continuity. Copilot Memory can help too, but
 it's selective.
 
-Audience question: Where should a one-time bug-fix acceptance criterion live?
+Audience question [if time]: Where should a one-time bug-fix acceptance
+criterion live?
 
 Response guidance: Steer toward the current task. If the room splits, ask the
 deciding question out loud: should this still apply after this job is done? That
 usually settles it without a long discussion.
 
-Payoff: Learners sort temporary acceptance detail away from durable repository
-and role guidance.
+Payoff: One-off detail stops leaking into the durable repository files.
 
 Sources: content/research/agentic-content-verification.md AGT-01 and AGT-02;
 content/modules/02-agentic/visual-intent.md slide 4
@@ -236,8 +242,8 @@ Talk track: Copilot Memory is in public preview. It holds on to facts about a
 repository and preferences about you. Repository facts stay with that
 repository. Your preferences can follow you across repositories. It pulls
 entries back when they look relevant, and entries that go unused are deleted
-after 28 days. Now read that description again for what it doesn't say. Not
-permanent. Not complete. Not a transcript of everything you've done. So the
+after 28 days. Now read that description again for what it doesn't promise. Nothing there
+says permanent, complete, or a full record of what you've done. So the
 working rule is simple. Memory is a bonus. What you actually depend on is your
 reviewed instruction files and the task you write today. If a fact matters for
 this job, say it again.
@@ -245,16 +251,16 @@ this job, say it again.
 Transition: Because memory is selective, long-running work still needs a
 deliberate handoff.
 
-Audience question: Which current-task fact would you never leave to selective
-memory retrieval?
+Audience question [if time]: Which current-task fact would you never leave
+to selective memory retrieval?
 
 Response guidance: Look for the outcome, the limits, the current repository
 state, key references, the checks, or the stop conditions. If anyone suggests
 memory guarantees complete recall, correct it. That assumption gets expensive
 later.
 
-Payoff: Learners separate optional retained clues from the task-critical facts
-they must provide deliberately.
+Payoff: Nobody leaves assuming memory will supply a fact the task depends
+on.
 
 Sources: content/research/agentic-content-verification.md AGT-04 and AGT-05;
 content/modules/02-agentic/visual-intent.md slide 5
@@ -294,14 +300,14 @@ to clearly restate the most important facts for a complex handoff.
 Transition: Missing guidance is one problem. Guidance that contradicts itself is
 a different one.
 
-Audience question: Which stale item would you remove first from a handoff, and
-what current evidence replaces it?
+Audience question [if time]: Which stale item would you remove first from a
+handoff, and what current evidence replaces it?
 
 Response guidance: Accept a stale log, an unrelated file, a superseded plan, or
 an old mistake, but only when they also name what current fact replaces it.
 Dropping without replacing is half an answer.
 
-Payoff: The audience practices preserving continuity without preserving noise.
+Payoff: Practice at keeping continuity without dragging noise along.
 
 Sources: content/research/agentic-content-verification.md AGT-06 and AGT-07;
 content/modules/02-agentic/visual-intent.md slide 6
@@ -345,22 +351,22 @@ the same instruction the same way every time.
 Transition: Once the guidance is consistent, the task itself still needs a
 strong brief.
 
-Audience question: If repository guidance and the current task appear to
-conflict, what should happen before the agent edits anything?
+Audience question [if time]: If repository guidance and the current task
+appear to conflict, what should happen before the agent edits anything?
 
 Response guidance: Listen for stopping and surfacing the conflict. Then push
 further: who resolves it, and which surface are you actually on? Don't let the
 room invent a universal winner, and don't hand them one.
 
-Payoff: Learners get a conflict-handling method that matches what GitHub
-actually documents, without overstating cross-surface precedence.
+Payoff: A conflict-handling method that matches the docs, without inventing
+precedence that isn't there.
 
 Sources: content/research/agentic-content-verification.md AGT-01 and AGT-02;
 content/modules/02-agentic/visual-intent.md slide 7;
 https://docs.github.com/en/copilot/concepts/prompting/response-customization
-(precedence of custom instructions, GitHub.com; verified 2026-08-22). Note:
-AGT-03 predates the documented GitHub.com precedence order and needs
-re-verification.
+(precedence of custom instructions, GitHub.com; verified 2026-08-22). AGT-03 does not conflict with that page: AGT-03 blocks a universal
+cross-surface hierarchy, while the documented order is scoped to GitHub.com
+alone. If asked for the order, give it as a GitHub.com-only answer.
 -->
 
 ---
@@ -399,15 +405,15 @@ long-running work nearly impossible to review.
 Transition: When part of that work repeats, the question becomes whether it
 belongs in a reusable skill.
 
-Audience question: Which brief field would prevent the most damaging kind of
-drift in a task you know?
+Audience question [if time]: Which brief field would prevent the most
+damaging kind of drift in a task you know?
 
 Response guidance: There's no universally right answer, so accept different
 ones. But ask every speaker to name the specific failure their chosen field
 prevents. That turns it from opinion into diagnosis.
 
-Payoff: Learners connect each part of the brief to a concrete failure mode
-instead of treating prompting as wordsmithing.
+Payoff: Each part of the brief gets tied to a failure it prevents, so this
+stops being wordsmithing.
 
 Sources: content/research/agentic-content-verification.md AGT-08;
 content/modules/02-agentic/copilot-dev-agentic-workshop.md section 2
@@ -454,15 +460,15 @@ product feature.
 Transition: A skill captures a procedure. A custom agent captures a recurring
 role.
 
-Audience question: What repeated procedure on your team might justify a skill
-instead of another one-off request?
+Audience question [if time]: What repeated procedure on your team might
+justify a skill instead of another one-off request?
 
 Response guidance: Look for something stable, reviewable, and genuinely
 repeated. Challenge examples that are really a one-off task, or that are an
 open-ended role rather than a procedure.
 
-Payoff: The audience distinguishes reusable procedure from worker and begins
-applying a test for justified reuse.
+Payoff: Procedure and worker stay separate, and people get a test for when
+reuse is justified.
 
 Sources: content/research/agentic-content-verification.md AGT-09;
 content/modules/02-agentic/visual-intent.md slide 9
@@ -509,15 +515,15 @@ job.
 Transition: The profile says what the role may do. Tools are the actions it
 actually takes.
 
-Audience question: What risk appears when a custom agent’s tool list is left
-implicit?
+Audience question [if time]: What risk appears when a custom agent’s tool
+list is left implicit?
 
 Response guidance: Steer toward unnecessary or all-available tools. Then flip it
 and ask which actions the named role genuinely needs. Most rooms find the list
 is shorter than they assumed.
 
-Payoff: Learners see tool selection as part of role design rather than an
-implementation detail discovered after delegation.
+Payoff: Tool selection becomes part of designing the role, not something
+discovered afterwards.
 
 Sources: content/research/agentic-content-verification.md AGT-10;
 content/modules/02-agentic/visual-intent.md slide 10
@@ -562,15 +568,15 @@ it's safe to do.
 Transition: Roles, procedures, and actions are separated. Now let's watch them
 work together.
 
-Audience question: In “run the focused tests using our test-triage procedure,”
-which part is the tool and which part is the skill?
+Audience question [ask]: In “run the focused tests using our test-triage
+procedure,” which part is the tool and which part is the skill?
 
 Response guidance: Running the tests is the tool action. Test triage is the
 reusable procedure. Correct any answer that turns either one into the worker,
 because that's the confusion this slide exists to prevent.
 
-Payoff: The question locks in the worker-skill-tool distinction before the loop
-puts all three into motion.
+Payoff: Locks in worker, skill, and tool before the loop puts all three into
+motion.
 
 Sources: content/research/agentic-content-verification.md AGT-09 and AGT-11;
 content/modules/02-agentic/visual-intent.md slide 11
@@ -603,15 +609,15 @@ it.
 Transition: The first big control in that loop is reviewing the route before any
 edits start.
 
-Audience question: If the observation reveals an unexpected dependency change,
-what should happen next?
+Audience question [if time]: If the observation reveals an unexpected
+dependency change, what should happen next?
 
 Response guidance: Favor stopping or asking at the boundary, inspecting the new
 consequence, and re-briefing if it warrants one. Don't let the answer imply an
 automatic recovery control exists.
 
-Payoff: Learners use an observable change in evidence to choose a control action
-inside the loop.
+Payoff: A change in the evidence, not a hunch, drives the next control
+action.
 
 Sources: content/research/agentic-content-verification.md AGT-12, AGT-13, and
 AGT-14; content/modules/02-agentic/visual-intent.md slide 12
@@ -663,15 +669,14 @@ with your brief and will produce the required evidence.
 Transition: Even an approved plan needs boundaries set in advance for actions
 that turn consequential.
 
-Audience question: What would make you stop and revise a plan before the first
-edit?
+Audience question [if time]: What would make you stop and revise a plan
+before the first edit?
 
 Response guidance: Draw out unexplained files, scope that's too broad, missing
 validation, dependency or public-contract changes, unclear access, and absent
 stop points. Several of these go unmentioned until you name them.
 
-Payoff: Learners identify plan-quality evidence before tool activity makes a
-weak route expensive to unwind.
+Payoff: Weak plans get caught while they are still cheap to change.
 
 Sources: content/research/agentic-content-verification.md AGT-08 and AGT-13;
 content/modules/02-agentic/visual-intent.md slide 13
@@ -735,15 +740,15 @@ chooses. Allow it, narrow it, reject it, or stop.
 Transition: Once an action is allowed and work comes back, remember that a
 completion message isn't evidence.
 
-Audience question: If the collaborator proposes installing a package that the
-brief excluded, which boundary applies and what do you do?
+Audience question [ask]: If the collaborator proposes installing a package
+that the brief excluded, which boundary applies and what do you do?
 
 Response guidance: It's ask-first or not-allowed depending on how the boundary
 was written. Push for narrow, reject, or stop, and name approval-by-momentum out
 loud, because that's the failure mode under pressure.
 
-Payoff: The group rehearses a consequential decision before encountering it in
-mission work.
+Payoff: The room rehearses a consequential decision before meeting one in
+the mission.
 
 Sources: content/research/agentic-content-verification.md AGT-11 and AGT-14;
 content/modules/02-agentic/visual-intent.md slide 14
@@ -790,15 +795,15 @@ usually only becomes visible when you line the answers up next to each other.
 Transition: Your repository gives you named places to pause, review, and recover
 while you gather that evidence.
 
-Audience question: What does one passing focused test prove, and what does it
-leave unproven?
+Audience question [ask]: What does one passing focused test prove, and what
+does it leave unproven?
 
 Response guidance: Hold the answer to the specific behavior that test exercised.
 Then get one unproven area named out loud, whether that's adjacent behavior,
 security, integration, or scope. The pairing is the point.
 
-Payoff: Learners stop treating a green signal as universal proof and begin
-assembling an evidence stack.
+Payoff: A green check stops being universal proof and becomes one item of
+evidence.
 
 Sources: content/research/agentic-content-verification.md AGT-12, AGT-16, and
 AGT-28; content/modules/02-agentic/visual-intent.md slide 15
@@ -841,15 +846,15 @@ route has to match the consequence, not just the code.
 Transition: Around the push boundary, security evidence adds several more
 checkpoints.
 
-Audience question: What would you record at a checkpoint so another reviewer
-could recover or continue confidently?
+Audience question [if time]: What would you record at a checkpoint so
+another reviewer could recover or continue confidently?
 
 Response guidance: Look for the branch or commit, the reviewed diff, the exact
 validation results, and the open risks, plus any external side effect listed
 with its own recovery step. That last one is usually missing.
 
-Payoff: Learners turn “we can roll back” into a named, evidence-backed recovery
-point with explicit limits.
+Payoff: “We can roll back” becomes a named recovery point with stated
+limits.
 
 Sources: content/research/agentic-content-verification.md AGT-14 and AGT-15;
 content/modules/02-agentic/visual-intent.md slide 16
@@ -910,15 +915,15 @@ human still reads the result. Clean is a finding too, and it also has a scope.
 Transition: That's one family of evidence. Ordinary GitHub Actions gives us a
 broader one.
 
-Audience question: If `/security-review` reports no finding, what does that
-result still not prove?
+Audience question [if time]: If `/security-review` reports no finding, what
+does that result still not prove?
 
 Response guidance: Reinforce that it doesn't clear the whole repository, the
 dependency set, the history, secrets, or every class of vulnerability, and that
 it grants no permission to merge. Say that last part explicitly.
 
-Payoff: Learners keep a focused Copilot command distinct from repository
-security controls and final acceptance.
+Payoff: A focused command stays distinct from repository security controls,
+and from acceptance.
 
 Sources: content/research/agentic-content-verification.md AGT-32 through AGT-38
 -->
@@ -956,15 +961,15 @@ deterministic and it's independent of the thing that produced the code.
 Transition: A pull request packages that evidence with the change and hands it
 to another person.
 
-Audience question: When a configured check fails, what new evidence should guide
-the next attempt?
+Audience question [if time]: When a configured check fails, what new
+evidence should guide the next attempt?
 
 Response guidance: Ask for the failing step, the exact output, the affected
 behavior, the assumption that changed, and a targeted next check. If someone
 says “just run it again,” name that as the anti-pattern this slide exists for.
 
-Payoff: Learners use Actions as feedback for the loop instead of treating CI as
-an automatic agent capability.
+Payoff: Actions becomes feedback for the loop, not something the agent is
+assumed to run.
 
 Sources: content/research/agentic-content-verification.md AGT-16 and AGT-17;
 content/modules/02-agentic/visual-intent.md slide 18
@@ -1010,15 +1015,15 @@ remains human.
 Transition: If the pull request is the handoff, the next question is when a
 cloud agent should produce it.
 
-Audience question: If a software agent submitted a pull request now, what
-evidence would you need before you felt comfortable approving it?
+Audience question [if time]: If a software agent submitted a pull request
+now, what evidence would you need before you felt comfortable approving it?
 
 Response guidance: Expect tests, security results, a clear change summary, a
 scoped diff, and open risks. Group them as separate evidence streams and resist
 any framing where one of them is enough on its own.
 
-Payoff: The audience defines a practical review package and sees evidence,
-questions, and code as equal parts of the handoff.
+Payoff: The room defines a review package where evidence, open questions,
+and code all count.
 
 Sources: content/research/agentic-content-verification.md AGT-15, AGT-20, and
 AGT-28; content/modules/02-agentic/visual-intent.md slide 19
@@ -1069,15 +1074,15 @@ your desk.
 Transition: Background work only succeeds when the handoff carries enough
 context, limits, checks, and stops.
 
-Audience question: What is one backlog task you would delegate to a cloud agent,
-and one task you would keep behind closer human oversight?
+Audience question [if time]: What is one backlog task you would delegate to
+a cloud agent, and one task you would keep behind closer human oversight?
 
 Response guidance: Make people justify both halves using scope, reversibility,
 repository fit, permissions, and the evidence they'd need back. Don't let it
 become a contest about which tasks are boring.
 
-Payoff: The paired answer creates a natural autonomy boundary grounded in the
-audience’s own work.
+Payoff: The paired answer draws an autonomy boundary out of the room’s own
+work.
 
 Sources: content/research/agentic-content-verification.md AGT-18, AGT-19, and
 AGT-20; content/modules/02-agentic/visual-intent.md slide 20
@@ -1125,16 +1130,16 @@ aren't automatically available. Remember: giving an agent more autonomy requires
 Transition: Once work can run away from your desk, GitHub Mobile gives you a way
 to keep an eye on it.
 
-Audience question: For a cloud task allowed to change one named file, what exact
-stop sentence belongs in the handoff?
+Audience question [if time]: For a cloud task allowed to change one named
+file, what exact stop sentence belongs in the handoff?
 
 Response guidance: Listen for something like “if this needs another file or
 broader permission, stop and ask before continuing.” Accept any version that
 names the boundary and demands a stop. Reject anything that allows silent
 expansion.
 
-Payoff: Learners leave with an operational stop clause they can place directly
-into a bounded cloud-agent handoff.
+Payoff: Everyone leaves with a stop clause they can paste straight into a
+handoff.
 
 Sources: content/research/agentic-content-verification.md AGT-08, AGT-19, and
 AGT-21; content/modules/02-agentic/visual-intent.md slide 21
@@ -1182,15 +1187,16 @@ evening, and bounded work could have started hours earlier.
 Transition: Better remote results still come down to teaching Copilot the
 durable facts about your repository.
 
-Audience question: What useful bug or improvement have you discovered away from
-your desk that could have benefited from starting bounded work sooner?
+Audience question [if time]: What useful bug or improvement have you
+discovered away from your desk that could have benefited from starting
+bounded work sooner?
 
 Response guidance: Take one or two examples, then ask what repository, scope,
 and review boundary would need setting before starting. Don't let enthusiasm
 imply mobile controls that aren't documented.
 
-Payoff: Learners connect Mobile to reduced idle time while retaining exact
-product and human-review boundaries.
+Payoff: Mobile gets tied to reclaimed idle time without inflating what it
+can do.
 
 Sources: content/research/agentic-content-verification.md AGT-39 through AGT-46;
 content/modules/02-agentic/visual-intent.md slide 22
@@ -1237,15 +1243,15 @@ file. Committing your team's guidance is still your call.
 Transition: With repository context written down, optimization becomes a
 workflow question.
 
-Audience question: How much of your team’s coding and validation guidance is
-documented, and how much still lives in someone’s head?
+Audience question [if time]: How much of your team’s coding and validation
+guidance is documented, and how much still lives in someone’s head?
 
 Response guidance: Take a rough proportion or a show of hands, then ask which
 single stable command or convention should be captured first. Keep it about
 practices, never about individuals.
 
-Payoff: The question exposes undocumented project knowledge that can otherwise
-make every agentic handoff inconsistent.
+Payoff: Surfaces the undocumented knowledge that makes handoffs
+inconsistent.
 
 Sources: content/research/agentic-content-verification.md AGT-01 and AGT-22;
 content/modules/02-agentic/visual-intent.md slide 23
@@ -1289,16 +1295,16 @@ down to model magic.
 Transition: The same right-sizing applies to the controls you set before work
 even starts.
 
-Audience question: When a response misses the mark, what evidence would help you
-decide whether the problem is context, the brief, the tools, or the model?
+Audience question [if time]: When a response misses the mark, what evidence
+would help you decide whether the problem is context, the brief, the tools,
+or the model?
 
 Response guidance: Accept a mix of factors, but insist on one diagnostic
 observation before anyone changes anything, whether that's irrelevant context,
 misread acceptance criteria, unavailable tools, or repeated model failure.
 Changing four things at once teaches you nothing.
 
-Payoff: Learners replace blind retry and reflexive model switching with
-evidence-led workflow diagnosis.
+Payoff: Blind retries and reflexive model switching give way to diagnosis.
 
 Sources: content/research/agentic-content-verification.md AGT-23, AGT-24, and
 AGT-31; content/modules/02-agentic/visual-intent.md slide 24
@@ -1338,16 +1344,17 @@ credit usage?
 Transition: The final decision combines that cost awareness with several
 separate quality signals.
 
-Audience question: For a bounded Copilot CLI typo fix, which pre-run control
-would you choose first, and what evidence would decide whether to continue?
+Audience question [if time]: For a bounded Copilot CLI typo fix, which
+pre-run control would you choose first, and what evidence would decide
+whether to continue?
 
 Response guidance: Favor regular context and reasoning, a fresh relevant
 session, Auto where supported, or a justified soft ceiling. Then require both
 halves of the answer, result quality and usage. Don't let any single choice be
 framed as guaranteeing the cheapest successful run.
 
-Payoff: Learners connect one proportionate pre-run choice to the two post-run
-checks that support a continue-or-stop decision.
+Payoff: One pre-run choice, two post-run checks, and a decision to continue
+or stop.
 
 Sources: content/research/agentic-ai-credit-optimization.md CREDIT-01 and
 CREDIT-03 through CREDIT-08; content/modules/02-agentic/visual-intent.md slide
@@ -1401,17 +1408,17 @@ and merge are still Mergewell's.
 Transition: We're ready to put the whole handoff-and-decision pattern into the
 mission.
 
-Audience question: Which is riskier: a pull request that passed every automated
-check but received no human review, or one an expert reviewed while a security
-scan still failed—and why?
+Audience question [ask]: Which is riskier: a pull request that passed every
+automated check but received no human review, or one an expert reviewed
+while a security scan still failed—and why?
 
 Response guidance: Let the debate run briefly, because it's a genuinely good
 argument. Then land it: both are risky, because human review and automated
 findings answer different questions and neither one cancels the other. That's
 the takeaway, not a winner.
 
-Payoff: The question makes separate evidence streams and retained human
-authority memorable at the module’s culmination.
+Payoff: Separate evidence streams and retained human authority land together
+at the end.
 
 Sources: content/research/agentic-content-verification.md AGT-25 through AGT-30;
 content/modules/02-agentic/visual-intent.md slide 26
@@ -1459,8 +1466,8 @@ set to Agentic. Still optional, still alias-only.
 Transition: Start the forty-five-minute clock now. Keep your final export open
 when the mission closes so Module 3 can pick it straight up.
 
-Audience question: Which boundary from your Foundations case will you use first
-to judge the Agentic plan?
+Audience question [ask]: Which boundary from your Foundations case will you
+use first to judge the Agentic plan?
 
 Response guidance: Ask for one concise boundary: named files, excluded access,
 success checks, rollback, or a stop condition. Then point people to the matching
@@ -1468,8 +1475,8 @@ mission route, and to the starter if they need it. If anyone asks about the
 board, remind them it shows aliases and scores only, and nothing from their
 repository is published.
 
-Payoff: Every participant begins with a review criterion and produces the
-evidence envelope required for the Advanced handoff.
+Payoff: Everyone starts with a review criterion and finishes with the
+evidence Module 3 needs.
 
 Sources: content/missions/agentic/agent-task.md;
 content/modules/02-agentic/module.md
