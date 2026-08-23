@@ -47,11 +47,11 @@ Expected slide count: **19**
 - Keep VS Code Agents window evidence VS Code-specific. Use surface-specific evidence rather than claiming parity across products.
 - Keep Copilot code review and Copilot cloud agent distinct, and keep final acceptance and merge authority with a human.
 - Reuse only the approved Foundations Copilot App raster and the module's currently declared assets; this contract does not authorize new media.
-- Every visible slide requires exactly one immediately following
-  source-mapped speaker-notes HTML comment with these sections in order:
-  `Timebox:`, `Talk track:`, `Transition:`, `Audience question:`,
-  `Response guidance:`, `Payoff:`, and `Sources:`.
-- Each `Timebox:` must equal that row's authoritative `Minutes` value.
-  Every slide requires a natural,
-  slide-specific audience question, response guidance, and payoff.
+- Speaker notes are agent-authored supporting material. Write them naturally
+  for each slide, using the row's sources and timing as guidance; no fixed
+  headings, ordering, HTML-comment structure, or other note template is
+  required. Each visible slide still carries exactly one speaker-notes HTML
+  comment immediately after it, mapped to that row's sources.
+- The `Minutes` column and the timing arithmetic above remain authoritative for
+  the schedule, whether or not a note states a timebox.
 

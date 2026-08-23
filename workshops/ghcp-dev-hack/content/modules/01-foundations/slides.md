@@ -41,13 +41,19 @@ built.
 Transition: Good, that's the range I needed. Let's look at the route through
 this module.
 
-Audience question: In one word, are you new, occasional, or daily with Copilot?
+Facilitator note: Questions marked [ask] are the nine worth protecting time
+for; everything marked [if time] is optional, so drop it without apology when
+you are behind. Three of the nine sit inside their own protected blocks (the
+twenty-minute Ask/Plan/Agent stage, the video, and the mission launch) and cost
+nothing from the tighter teaching sections.
 
-Response guidance: Protect this one — it costs fifteen seconds and calibrates
-everything after it. Ask for one word only and do not invite stories.
-Acknowledge the spread you actually hear rather than characterizing experience
-nobody stated. If the room is quiet after about three seconds, say "quiet room,
-that's fine" and move on without re-asking.
+Audience question [ask]: In one word, are you new, occasional, or daily with
+Copilot?
+
+Response guidance: Ask for one word only and do not invite stories. Acknowledge
+the spread you actually hear rather than characterizing experience nobody
+stated. If the room is quiet after about three seconds, say "quiet room, that's
+fine" and move on without re-asking.
 
 Payoff: A fast read on the room, and human accountability established before a
 single tool appears.
@@ -90,7 +96,7 @@ that's how long you've got.
 
 Transition: First stop — the places Copilot can meet your work.
 
-Audience question: Which stop is your listening target?
+Audience question [if time]: Which stop is your listening target?
 
 Response guidance: Ask this as a private choice rather than a poll — it costs
 nothing and gives everyone a thread to follow. Give a real three-second pause.
@@ -147,13 +153,13 @@ surface can do.
 Transition: Let's look closer at that fourth one — what the App adds when the
 work spans contexts.
 
-Audience question: For explaining one selected function without edits, which
-surface would you start in?
+Audience question [if time]: For explaining one selected function without
+edits, which surface would you start in?
 
-Response guidance: Optional; drop it if you're running behind. The editor is
-the likely narrow answer, so accept it quickly. Accept any other surface only
-when the participant ties it to a concrete task or evidence reason. Take one
-response — don't rank all four surfaces.
+Response guidance: The editor is the likely narrow answer, so accept it
+quickly. Accept any other surface only when the participant ties it to a
+concrete task or evidence reason. Take one response — don't rank all four
+surfaces.
 
 Payoff: One quick surface choice made from task fit rather than habit.
 
@@ -198,13 +204,13 @@ or your final review. Coordination is not approval.
 Transition: To compare this surface with the others fairly, we need one shared
 idea. The harness.
 
-Audience question: What coordination task and control boundary complete the
-sentence "I'd use the App for ___, after verifying ___"?
+Audience question [if time]: What coordination task and control boundary
+complete the sentence "I'd use the App for ___, after verifying ___"?
 
-Response guidance: Optional. Allow a real five seconds of private reflection.
-If someone volunteers, connect their answer briefly to access, data scope,
-worktree isolation, or acceptance evidence, then move on. Don't let a
-one-minute overview turn into a feature discussion.
+Response guidance: Allow a real five seconds of private reflection. If someone
+volunteers, connect their answer briefly to access, data scope, worktree
+isolation, or acceptance evidence, then move on. Don't let a one-minute
+overview turn into a feature discussion.
 
 Payoff: A possible App use gets paired with a control boundary, without the
 overview turning into a feature debate.
@@ -249,11 +255,11 @@ anyone argues about which model, name the four.
 Transition: Let's make that concrete, starting where most of you already live —
 the editor.
 
-Audience question: Can you name the host, context, one tool, and one guardrail
-in the harness around your next task?
+Audience question [ask]: Can you name the host, context, one tool, and one
+guardrail in the harness around your next task?
 
-Response guidance: Protect this one — it's the frame the rest of the module
-hangs on. Take one example and fill in aloud whatever category the participant
+Response guidance: This is the frame the rest of the module hangs on, so give
+it room. Take one example and fill in aloud whatever category the participant
 skipped. Keep product-specific behavior tied to the surface they actually named
 rather than generalizing across harnesses. If nobody volunteers, walk the four
 parts yourself using "reviewing a pull request" as the worked example.
@@ -304,13 +310,12 @@ transformation — not a general conversation.
 Transition: Same idea — context and control — different room. Let's go to the
 terminal.
 
-Audience question: For a question about one function, what is the smallest
-useful context you would provide first?
+Audience question [if time]: For a question about one function, what is the
+smallest useful context you would provide first?
 
-Response guidance: Optional if time is tight. Favor a selection or a single
-file when that's genuinely sufficient. If someone proposes broader context, ask
-what additional decision that extra context actually enables. If they can't
-name one, that's the lesson.
+Response guidance: Favor a selection or a single file when that's genuinely
+sufficient. If someone proposes broader context, ask what additional decision
+that extra context actually enables. If they can't name one, that's the lesson.
 
 Payoff: Precise grounding lands as a way to cut noise and review effort, not as
 a style preference.
@@ -352,13 +357,13 @@ press enter.
 Transition: That's the control you hold. Your organization's policy can narrow
 it further.
 
-Audience question: What is the first side effect you check before running a
-generated terminal command?
+Audience question [if time]: What is the first side effect you check before
+running a generated terminal command?
 
-Response guidance: Protect this one — it rehearses the habit the whole CLI
-section exists to build. Listen for file changes, package installation,
-credentials, network or remote-system effects, and anything destructive. Add
-whichever high-consequence category the room misses.
+Response guidance: This rehearses the habit the whole CLI section exists to
+build. Listen for file changes, package installation, credentials, network or
+remote-system effects, and anything destructive. Add whichever high-consequence
+category the room misses.
 
 Payoff: Terminal convenience gets paired with deliberate review instead of
 treating generated commands as trusted output.
@@ -401,14 +406,14 @@ administrator confirmation, and you stop. Not knowing is fine. Assuming is not.
 Transition: Policy draws the outside line. The next question is who's
 accountable for what happens inside it.
 
-Audience question: Which Copilot policy or data-handling boundary would you
-verify before using a new surface with work content?
+Audience question [ask]: Which Copilot policy or data-handling boundary would
+you verify before using a new surface with work content?
 
-Response guidance: Protect this one. Ask for categories, not confidential
-policy details. Accept answers like repository access, retention, content
-exclusion, data scope, or cloud eligibility, and confirm them without implying
-the controls are uniform across surfaces. If someone starts quoting a specific
-internal policy, thank them, restate it as a category, and move on.
+Response guidance: Ask for categories, not confidential policy details. Accept
+answers like repository access, retention, content exclusion, data scope, or
+cloud eligibility, and confirm them without implying the controls are uniform
+across surfaces. If someone starts quoting a specific internal policy, thank
+them, restate it as a category, and move on.
 
 Payoff: Uncertainty becomes visible before it turns into a privacy, policy, or
 approval failure.
@@ -446,13 +451,13 @@ becomes approval.
 Transition: Accountability's fixed. Now we can talk about how much action to
 hand over.
 
-Audience question: What evidence would you need before accepting an AI-assisted
-change into your repository?
+Audience question [ask]: What evidence would you need before accepting an
+AI-assisted change into your repository?
 
-Response guidance: Protect this one — it sets the standard the next twenty
-minutes are graded against. Collect two or three answers: a reviewed diff,
-tests, security evidence, provenance, policy fit. Then point out that no single
-item on that list answers every question, which is why it's a list.
+Response guidance: This sets the standard the next twenty minutes are graded
+against. Collect two or three answers: a reviewed diff, tests, security
+evidence, provenance, policy fit. Then point out that no single item on that
+list answers every question, which is why it's a list.
 
 Payoff: An evidence standard exists before the module introduces
 higher-autonomy interactions.
@@ -572,16 +577,16 @@ repository is back at its starter state, and stop the clock at twenty minutes.
 Transition: Bounded edit reviewed, starter restored. Now let's look at what
 each of those interactions actually consumed.
 
-Audience question: Which interaction was the smallest sufficient one for each
-part of this task, and which human checkpoint changed your decision?
+Audience question [ask]: Which interaction was the smallest sufficient one for
+each part of this task, and which human checkpoint changed your decision?
 
-Response guidance: Protect this one — it is the debrief the whole block was
-built for, and it belongs in the final two minutes. Listen for Ask as
-explanation without change, Plan as a reviewable route, and Agent only after
-explicit approval. Accept a different stopping point when the participant ties
-it to scope, evidence, and rollback; the reasoning matters more than matching
-your answer. If nobody responds, walk the five checkpoints yourself: no-change,
-plan approval, diff review, acceptance, restore.
+Response guidance: This is the debrief the whole block was built for, and it
+belongs in the final two minutes. Listen for Ask as explanation without change,
+Plan as a reviewable route, and Agent only after explicit approval. Accept a
+different stopping point when the participant ties it to scope, evidence, and
+rollback; the reasoning matters more than matching your answer. If nobody
+responds, walk the five checkpoints yourself: no-change, plan approval, diff
+review, acceptance, restore.
 
 Payoff: Autonomy gets experienced as a timed sequence of human decisions —
 scope, approval, stop, review, acceptance, restore — rather than as a shortcut
@@ -621,12 +626,12 @@ doesn't, it isn't context. It's clutter.
 
 Transition: Inputs are only half the story. What comes back costs you too.
 
-Audience question: Looking at a long-running session, which input would you
-remove first if it no longer changes the decision?
+Audience question [if time]: Looking at a long-running session, which input
+would you remove first if it no longer changes the decision?
 
-Response guidance: Optional if you're behind. Favor stale history, unrelated
-files, duplicate references, or obsolete tool output. Then turn it around and
-ask what they'd deliberately preserve — that's the harder half of the question.
+Response guidance: Favor stale history, unrelated files, duplicate references,
+or obsolete tool output. Then turn it around and ask what they'd deliberately
+preserve — that's the harder half of the question.
 
 Payoff: Context starts being treated as a curated engineering input instead of
 free background material.
@@ -667,9 +672,10 @@ workflow up, not after.
 Transition: GitHub turns all of this — models, tokens, usage — into one billing
 unit. Let's look at it.
 
-Audience question: When is a longer response worth the additional usage?
+Audience question [if time]: When is a longer response worth the additional
+usage?
 
-Response guidance: Optional. Accept answers tied to necessary evidence, genuine
+Response guidance: Accept answers tied to necessary evidence, genuine
 ambiguity, risk, or a complex comparison. Push back on any answer that treats
 length as a proxy for quality — that's the misconception this slide exists to
 break.
@@ -712,12 +718,12 @@ commit.
 Transition: That's the meter. The next decision is which model route the work
 actually needs.
 
-Audience question: Before your team scales a Copilot workflow, which budget or
-policy fact must be confirmed?
+Audience question [if time]: Before your team scales a Copilot workflow, which
+budget or policy fact must be confirmed?
 
-Response guidance: Optional. Invite answers about plan scope, organization
-budget, eligible features, usage ownership, or spending controls. Never ask
-anyone to disclose their account details or internal numbers in the room.
+Response guidance: Invite answers about plan scope, organization budget,
+eligible features, usage ownership, or spending controls. Never ask anyone to
+disclose their account details or internal numbers in the room.
 
 Payoff: Billing awareness becomes a pre-run control rather than a surprise
 after adoption.
@@ -755,12 +761,12 @@ generalizing from one sample.
 Transition: That's the decision. The next slide gives you a workload-first way
 to make it.
 
-Audience question: Which evidence would you compare before changing the model
-route for the next turn?
+Audience question [if time]: Which evidence would you compare before changing
+the model route for the next turn?
 
-Response guidance: Optional. Draw out task fit, result quality, latency,
-observed usage, cost indicators, and availability. Treat any single-metric
-answer as incomplete and ask what it would miss.
+Response guidance: Draw out task fit, result quality, latency, observed usage,
+cost indicators, and availability. Treat any single-metric answer as incomplete
+and ask what it would miss.
 
 Payoff: Routing gets tied to observed evidence, with the cache and Auto claims
 kept properly conditional.
@@ -808,12 +814,12 @@ picker and confirm what's in it.
 Transition: A routing choice only means something if you can inspect the
 evidence from where the work ran.
 
-Audience question: Which workload row best describes a task you expect to do
-this week?
+Audience question [if time]: Which workload row best describes a task you
+expect to do this week?
 
-Response guidance: Optional. Take two examples. Let a task span more than one
-row — that's realistic, not a wrong answer. Then ask what picker or
-availability check would confirm the final choice.
+Response guidance: Take two examples. Let a task span more than one row —
+that's realistic, not a wrong answer. Then ask what picker or availability
+check would confirm the final choice.
 
 Payoff: Workload-first selection gets practiced without turning a changing
 model list into a ranking.
@@ -858,13 +864,13 @@ you saw.
 Transition: That separation matters even more once evidence moves out into
 GitHub, cloud, and app workflows.
 
-Audience question: What is one fact you can observe in a harness, and what
-conclusion would that fact not prove by itself?
+Audience question [ask]: What is one fact you can observe in a harness, and
+what conclusion would that fact not prove by itself?
 
-Response guidance: Protect this one — the mission asks for exactly this
-pairing. Help participants phrase a narrow pair out loud, like "I observed this
-model name, but that doesn't prove it caused the result or the cost." The
-pairing is the skill; don't accept the observation without the limit.
+Response guidance: The mission asks for exactly this pairing. Help participants
+phrase a narrow pair out loud, like "I observed this model name, but that
+doesn't prove it caused the result or the cost." The pairing is the skill;
+don't accept the observation without the limit.
 
 Payoff: The evidence discipline the mission's "does not prove" statement
 depends on.
@@ -904,13 +910,13 @@ then pick the source that can answer it.
 Transition: You can find the evidence. Now let's go inside the bounded context
 that every single interaction has to manage.
 
-Audience question: Which evidence source would you use for a team budget
-question, and which would you use for a repository audit question?
+Audience question [if time]: Which evidence source would you use for a team
+budget question, and which would you use for a repository audit question?
 
-Response guidance: Optional. Steer budget questions toward billing or Copilot
-settings, and audit questions toward repository, branch, pull-request, or
-session artifacts. If someone conflates the two, name the difference plainly
-rather than letting it pass.
+Response guidance: Steer budget questions toward billing or Copilot settings,
+and audit questions toward repository, branch, pull-request, or session
+artifacts. If someone conflates the two, name the difference plainly rather
+than letting it pass.
 
 Payoff: Activity, billing, and repository evidence stop being interchangeable.
 
@@ -950,13 +956,13 @@ the response you're waiting on.
 Transition: Capacity tells you the limit. Packing decides whether the useful
 signal survives inside it.
 
-Audience question: Which context category is easiest to forget when you
-estimate how much room a task needs?
+Audience question [if time]: Which context category is easiest to forget when
+you estimate how much room a task needs?
 
-Response guidance: Optional. Surface instructions, tool definitions and
-results, conversation history, and output headroom — output headroom is the one
-that usually goes unsaid. Remind the group that `/context` is CLI-specific, not
-a universal control.
+Response guidance: Surface instructions, tool definitions and results,
+conversation history, and output headroom — output headroom is the one that
+usually goes unsaid. Remind the group that `/context` is CLI-specific, not a
+universal control.
 
 Payoff: Context reads as competing categories rather than an unlimited pile of
 files.
@@ -997,13 +1003,13 @@ every other surface you work to that surface's own current documented behavior.
 Transition: Even a well-packed session drifts over time. Next we need signals
 you can actually see.
 
-Audience question: For a current task, what would you deliberately include and
-what would you explicitly leave out?
+Audience question [if time]: For a current task, what would you deliberately
+include and what would you explicitly leave out?
 
-Response guidance: Protect this one — the exclusion half is the part people
-skip. Ask for one include and one exclude, each tied to a decision. Reinforce
-that the exclusions, stale logs and unrelated files, are part of the evidence
-record and not just leftovers.
+Response guidance: The exclusion half is the part people skip. Ask for one
+include and one exclude, each tied to a decision. Reinforce that the
+exclusions, stale logs and unrelated files, are part of the evidence record and
+not just leftovers.
 
 Payoff: Context curation becomes an explicit, reviewable choice rather than an
 invisible one.
@@ -1045,13 +1051,12 @@ becomes a wide one.
 Transition: Once trust is gone, piling on more instructions is weaker than
 resetting and re-anchoring.
 
-Audience question: Which drift signal have you seen first in a long AI-assisted
-session?
+Audience question [if time]: Which drift signal have you seen first in a long
+AI-assisted session?
 
-Response guidance: Optional. Invite brief, non-confidential examples and map
-each one back to contradiction, repetition, ignored constraints, stale
-references, or lost focus. Keep examples generic — no customer or employer
-detail.
+Response guidance: Invite brief, non-confidential examples and map each one
+back to contradiction, repetition, ignored constraints, stale references, or
+lost focus. Keep examples generic — no customer or employer detail.
 
 Payoff: Observable stop signals replace vaguely blaming the model or pressing
 on regardless.
@@ -1095,13 +1100,13 @@ original objective, not against the conversation that drifted.
 Transition: The next slide puts all three together — packing, drift, recovery —
 in one lifecycle.
 
-Audience question: What is the minimum evidence you would carry into a fresh
-session so the task can continue safely?
+Audience question [if time]: What is the minimum evidence you would carry into
+a fresh session so the task can continue safely?
 
-Response guidance: Protect this one. Build the answer around current objective,
-repository state, essential references, constraints, open questions, and
-validation. If someone wants to bring the old conversation history along, ask
-what decision it would change.
+Response guidance: Build the answer around current objective, repository state,
+essential references, constraints, open questions, and validation. If someone
+wants to bring the old conversation history along, ask what decision it would
+change.
 
 Payoff: A concrete recovery packet instead of the vague instruction to start
 over.
@@ -1145,14 +1150,14 @@ not automatic recovery, and it's not a view into hidden model state.
 Transition: Recovery restores your focus. Least privilege limits what that
 focused task can actually touch.
 
-Audience question: At what visible signal should Mergewell have stopped adding
-context and begun recovery?
+Audience question [ask]: At what visible signal should Mergewell have stopped
+adding context and begun recovery?
 
-Response guidance: Protect this one — it's the payoff for five minutes of
-playback, so ask it after the video rather than before. Take one or two answers
-tied to the stale knot obscuring the request, the duplicate evidence, or a
-degrading focus signal. If someone answers "when it got full," correct it
-gently: fullness was never the trigger.
+Response guidance: This is the payoff for five minutes of playback, so ask it
+after the video rather than before. Take one or two answers tied to the stale
+knot obscuring the request, the duplicate evidence, or a degrading focus
+signal. If someone answers "when it got full," correct it gently: fullness was
+never the trigger.
 
 Payoff: The room names the causal stop point in a full pack-to-recovery
 sequence instead of remembering isolated tips.
@@ -1192,13 +1197,13 @@ sense, because the damage was bounded by design.
 Transition: Surfaces, context, evidence, permissions. You've got what you need.
 The mission's next.
 
-Audience question: For a one-file change, which permission or tool would you
-explicitly withhold?
+Audience question [ask]: For a one-file change, which permission or tool would
+you explicitly withhold?
 
-Response guidance: Protect this one — it's the last rehearsal before mission
-play. Push participants to tie the withheld capability to the specific task.
-Reinforce concrete examples: repository-wide writes, package installation,
-network calls, secrets, destructive commands.
+Response guidance: This is the last rehearsal before mission play. Push
+participants to tie the withheld capability to the specific task. Reinforce
+concrete examples: repository-wide writes, package installation, network calls,
+secrets, destructive commands.
 
 Payoff: A concrete permission decision gets rehearsed immediately before the
 mission starts.
@@ -1246,15 +1251,15 @@ fills up. Nothing else leaves your machine. No evidence, no prompts, no code.
 Transition: Start the forty-five-minute clock now. When I call time, have that
 exported case file ready for Module 2.
 
-Audience question: Which gadget are you choosing, and what is the first piece
-of evidence you will record?
+Audience question [ask]: Which gadget are you choosing, and what is the first
+piece of evidence you will record?
 
-Response guidance: Protect this one — it commits people to a harness before
-they start. Take a quick show of hands by gadget and point each group to its
-matching route in Missions. If someone is blocked on setup, move them to the
-approved fallback; don't invent commands or policy answers to unblock them. If
-someone asks whether the leaderboard is required, say plainly that it is
-optional, alias-only, and changes nothing about completing the mission.
+Response guidance: This commits people to a harness before they start. Take a
+quick show of hands by gadget and point each group to its matching route in
+Missions. If someone is blocked on setup, move them to the approved fallback;
+don't invent commands or policy answers to unblock them. If someone asks
+whether the leaderboard is required, say plainly that it is optional,
+alias-only, and changes nothing about completing the mission.
 
 Payoff: Everyone starts with a declared harness and an evidence target, and the
 exported case file creates the handoff into Module 2.

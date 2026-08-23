@@ -60,11 +60,11 @@
   3 diff/check review + 2 debrief/restore = 20` minutes. The producer must
   script the human checkpoints and fallback without changing visible slide
   text or expanding product claims.
-- Every visible slide requires exactly one immediately following
-  source-mapped speaker-notes HTML comment with these sections in order:
-  `Timebox:`, `Talk track:`, `Transition:`, `Audience question:`,
-  `Response guidance:`, `Payoff:`, and `Sources:`.
-- Each `Timebox:` must equal that row's authoritative `Minutes` value,
-  including zero-minute slides. Every slide requires a natural,
-  slide-specific audience question, response guidance, and payoff.
+- Speaker notes are agent-authored supporting material. Write them naturally
+  for each slide, using the row's sources and timing as guidance; no fixed
+  headings, ordering, HTML-comment structure, or other note template is
+  required. Each visible slide still carries exactly one speaker-notes HTML
+  comment immediately after it, mapped to that row's sources.
+- The `Minutes` column and the timing arithmetic above remain authoritative for
+  the schedule, whether or not a note states a timebox.
 - All labels, commands, numbers, rates, model names, caveats, and decisions remain native HTML.
