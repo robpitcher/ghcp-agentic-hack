@@ -280,10 +280,10 @@ layout: two-panel
 
 - Use **@ mentions** to ground context — issues, PRs, repos, files, and more
 - Use **slash commands** to avoid writing complex prompts for common scenarios:
-  - `/clear` — Clear conversation
-  - `/delete` — Delete a conversation
-  - `/new` — Start a new conversation
-  - `/rename` — Rename a conversation
+  - `/new` — Scaffold code for a new file or project
+  - `/explain` — Explain how code in the active editor works
+  - `/fix` — Propose a fix for problems in selected code
+  - `/tests` — Generate unit tests for selected code
 - **Match the interaction:** completions preserve momentum; inline chat handles scoped transformations
 
 ::visual::
@@ -298,12 +298,13 @@ Timebox: 2 minutes
 Talk track: The value of Chat in VS Code is proximity. Explanation, editing,
 and review all stay right next to the code. At-mentions ground the context —
 issues, pull requests, repositories, files. Slash commands save you writing a
-paragraph when a word will do, and look at the four on screen: clear, delete,
-new, rename. Not one of them is about code. They all manage the conversation
-itself, which tells you where long sessions actually go wrong. One caution
-before anyone writes these down: what's available depends on your installed
-release and your extensions, so demo only what this environment really exposes.
-Don't teach a command that isn't there. Then match the tool to the moment.
+paragraph when a word will do, and look at the four on screen: explain, fix,
+tests, and help. These commands are task-shaped shortcuts for
+common coding workflows, so learners can ask less and still get precise help.
+One caution before anyone writes these down: what's available depends on your
+installed release and your extensions, so demo only what this environment
+really exposes. Don't teach a command that isn't there. Then match the tool to
+the moment.
 Completions keep your momentum going. Inline chat is for a deliberate, scoped
 transformation — not a general conversation.
 
@@ -972,6 +973,7 @@ Sources: content/research/foundations-content-verification.md FND-12; content/mo
 
 ---
 layout: two-panel
+hide: true
 ---
 
 ::title::
@@ -1066,6 +1068,7 @@ Sources: content/modules/01-foundations/copilot-dev-foundations-workshop-part-2.
 
 ---
 layout: two-panel
+hide: true
 ---
 
 ::title::
@@ -1116,6 +1119,7 @@ Sources: content/modules/01-foundations/copilot-dev-foundations-workshop-part-2.
 
 ---
 layout: single-panel
+hide: true
 ---
 
 ::title::
